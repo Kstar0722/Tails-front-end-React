@@ -180,6 +180,16 @@ config.plugins.push(new HtmlWebpackPlugin({
   },
 }))
 
+// Preimported modules
+// ------------------------------------
+config.plugins.push(new webpack.ProvidePlugin({
+  'React': 'react',
+  'Redux': 'redux',
+  'ReactDOM': 'react-dom',
+  'ReactRedux': 'react-redux',
+  'PropTypes': 'prop-types'
+}))
+
 // Development Tools
 // ------------------------------------
 if (__DEV__) {
