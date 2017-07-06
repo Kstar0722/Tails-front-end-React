@@ -3,19 +3,27 @@ $textOrange: #ff6f51;
 
 section#header {
 	background: #fff;
-	height: 100px;
+	min-height: 100px;
+	padding: 10px 0px;
 	.header-content {
 		#logo {
 			flex: 1;
+			@media(max-width: 1000px) {
+				text-align: center;
+			}
 		}
-		nav {
-			flex: 1;
+		nav.hide-on-mobile {
+			@media(max-width: 1000px) {
+				display: none
+			}
+			flex: 2;
 			ul {
 				list-style-type: none;
 				margin: 0;
 				padding: 0;
 				li {
 					text-align: center;
+					margin: 10px 5px;
 					a {
 						color: $textGray;
 						font-size: 18px;
@@ -28,6 +36,37 @@ section#header {
 							color: $textOrange;
 							padding: 10px 25px;
 						}
+					}
+				}
+			}
+		}
+	}
+	nav.mobile-nav {
+		display: none;
+		width: 100%;
+		margin-bottom: 10px;
+		@media(max-width: 1000px) {
+			display: block;
+		}
+		ul {
+			list-style-type: none;
+			margin: 0;
+			padding: 0;
+			li {
+				text-align: center;
+				margin: 10px 5px;
+				width:100%;
+				a {
+					color: $textGray;
+					font-size: 18px;
+					text-decoration: none;
+				}
+				&.sign-in {
+					a {
+						border: 2px solid $textOrange;
+						border-radius: 25px;
+						color: $textOrange;
+						padding: 10px 25px;
 					}
 				}
 			}

@@ -8,15 +8,27 @@ section#banner {
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
+	.container {
+		@media(max-width: 400px) {
+			padding: 0 !important;
+		}
+	}
 	.banner-content {
 		text-align: center;
 		margin-top: -100px;
+		@media (max-width: 800px) {
+			margin-top: 0px;
+			padding: 150px 10px;
+		}
 		p.title {
 			color: white;
 			font-size: 65px;
 			font-weight: 700;
 			text-align: center;	
 			margin-bottom: 50px;
+			@media(max-width: 800px) {
+				font-size: 40px;
+			}
 			span.little-italic {
 				font-weight: 200;
 				font-style: italic;
@@ -37,10 +49,16 @@ section#banner {
 			width: 50%;
 			min-width: 300px;
 			margin: 50px auto;
+			@media(max-width: 800px) {
+				font-size: 16px;
+			}
 		}
 		.button-wrap {
 			* {
 				margin: 0px 20px;
+				@media (max-width: 800px) {
+					margin: 20px;
+				}
 			}
 		}
 	}
