@@ -1,0 +1,47 @@
+$yellowBar: #f0db87;
+
+section#banner {
+	min-height: 800px;
+	background-size: cover;
+	background-repeat: no-repeat;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	.banner-content {
+		text-align: center;
+		margin-top: -100px;
+		p.title {
+			color: white;
+			font-size: 65px;
+			font-weight: 700;
+			text-align: center;	
+			margin-bottom: 50px;
+			span.little-italic {
+				font-weight: 200;
+				font-style: italic;
+			}
+		}
+		.yellow-bar {
+			width: 100px;
+			height: 9px;
+			background-color: $yellowBar;
+			margin: 0 auto;
+		}
+		p.motto {
+			opacity: 0.9;
+			color: white;
+			font-family: "PT Serif";
+			font-size: 26px;
+			font-weight: 400;
+			width: 50%;
+			min-width: 300px;
+			margin: 50px auto;
+		}
+		.button-wrap {
+			* {
+				margin: 0px 20px;
+			}
+		}
+	}
+}

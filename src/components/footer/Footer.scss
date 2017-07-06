@@ -1,0 +1,36 @@
+$footerBackground: #444141;
+$textBlue: #0FCBF0;
+
+section#footer {
+	background: $footerBackground;
+	height: 100px;
+	.footer-content {
+		#image-logo {
+			flex: 1;
+		}
+		nav {
+			flex: 1;
+			ul {
+				list-style-type: none;
+				margin: 0;
+				padding: 0;
+				li {
+					text-align: center;
+					a {
+						font-size: 18px;
+						text-decoration: none;
+						color: white;
+					}
+					&.sign-in {
+						a {
+							border: 2px solid $textBlue;
+							border-radius: 25px;
+							color: $textBlue;
+							padding: 10px 25px;
+						}
+					}
+				}
+			}
+		}
+	}
+}

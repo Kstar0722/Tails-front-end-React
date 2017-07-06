@@ -1,0 +1,36 @@
+$textGray: #7c6e6a;
+$textOrange: #ff6f51;
+
+section#header {
+	background: #fff;
+	height: 100px;
+	.header-content {
+		#logo {
+			flex: 1;
+		}
+		nav {
+			flex: 1;
+			ul {
+				list-style-type: none;
+				margin: 0;
+				padding: 0;
+				li {
+					text-align: center;
+					a {
+						color: $textGray;
+						font-size: 18px;
+						text-decoration: none;
+					}
+					&.sign-in {
+						a {
+							border: 2px solid $textOrange;
+							border-radius: 25px;
+							color: $textOrange;
+							padding: 10px 25px;
+						}
+					}
+				}
+			}
+		}
+	}
+}

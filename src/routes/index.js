@@ -1,5 +1,5 @@
 // We only need to import the modules necessary for initial render
-import PageLayout from '../layouts/PageLayout/PageLayout'
+import NormalLayout from '../layouts/Unauthorized/NormalLayout'
 import Home from './Home'
 
 
@@ -9,7 +9,7 @@ import * as urlGenerator from './urlgenerator'
 
 export const createRoutes = (store) => ({
   path        : '/',
-  component   : PageLayout,
+  component   : NormalLayout,
   indexRoute  : Home,
   childRoutes : [
     
