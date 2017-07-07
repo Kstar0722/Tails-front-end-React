@@ -1,9 +1,6 @@
 // We only need to import the modules necessary for initial render
-import NormalLayout from '../layouts/Unauthorized/NormalLayout'
+import NormalLayout from '../layouts/Main/NormalLayout'
 import Home from './Home'
-
-// Authorized Layout
-import AuthorizedLayout from '../layouts/Authorized/AuthorizedLayout'
 
 // The container for the unauthorized pages
 import NoAuth from './NoAuth'
@@ -22,7 +19,7 @@ export const createRoutes = (store) => ({
     indexRoute  : Home,
     childRoutes : [
         NoAuth,
-        Auth, // The authorized container will redirect to login if a page is accessed without authentication
+        Auth, // Theses will redirect to login if need be
     ]
 })
 
