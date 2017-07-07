@@ -11,7 +11,8 @@ section#home-wrap {
 			top: -100px;
 			background: #fff;
 			box-shadow: 0px 0px 42px -8px rgba(0,0,0,0.75);
-			margin: 0px 10% auto;
+			margin: 0px 15% auto;
+			z-index: 99999;
 			@media(max-width: 400px) {
 				margin: 0 auto;
 			}
@@ -77,6 +78,7 @@ section#home-wrap {
 		}
 		.big-text {
 			text-align: center;
+			position: relative;
 			@media(max-width: 800px) {
 				padding: 10px;
 			}
@@ -103,10 +105,26 @@ section#home-wrap {
 				position: relative;
 				z-index: 999999;
 			}
+			img.hoof {
+				position: absolute;
+				@media(max-width: 800px) {
+					display: none;
+				}
+				&.left {
+					top: -200px;
+					left: 50px;
+				}
+				&.right {
+					top: 200px;
+					right: 50px;
+					transform: scaleX(-1);
+				}
+			}	
 		}
 		.trailer-wrap {
 			width: 100%;
 			position: relative;
+			padding: 0px 10px;
 			.circle-wrap {
 				max-width: 1000px;
 				position: relative;

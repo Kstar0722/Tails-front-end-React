@@ -7,6 +7,8 @@ import trailer from '../assets/trailer.png'
 import drivers from '../assets/drivers.png'
 import jockies from '../assets/jockies.png'
 
+import hoof from '../assets/hoof.png'
+
 class HomeView extends React.Component {
 	constructor(props) {
 		super(props)
@@ -43,6 +45,8 @@ class HomeView extends React.Component {
 							Optio doloremque corporis eius. Natus quibusdam impedit cumque voluptatibus in non quo! 
 							Consectetur, sit itaque cumque illo modi voluptate ipsa temporibus perspiciatis.</p>
 							<button className="solid-button orange">Get Started</button>
+							<img src={hoof} alt="" className="hoof left"/>
+							<img src={hoof} alt="" className="hoof right"/>
 						</div>
 						<div className="trailer-wrap d-flex flex-column align-items-center justify-content-start">
 							<img src={trailer} alt=""/>

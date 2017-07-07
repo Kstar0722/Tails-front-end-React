@@ -2,6 +2,14 @@
 import NormalLayout from '../layouts/Unauthorized/NormalLayout'
 import Home from './Home'
 
+// Authorized Layout
+import AuthorizedLayout from '../layouts/Authorized/AuthorizedLayout'
+
+// The container for the unauthorized pages
+import NoAuth from './NoAuth'
+
+// The container for the authorized pages -- Will be in the Authorized Layout
+import Auth from './Auth'
 
 import * as urlGenerator from './urlgenerator'
 /*  Note: Instead of using JSX, we recommend using react-router
@@ -12,9 +20,26 @@ export const createRoutes = (store) => ({
   component   : NormalLayout,
   indexRoute  : Home,
   childRoutes : [
-    
+    NoAuth,
   ]
 })
+
+// -------------------------------------------
+// This is the create 
+// routes for the authorized
+// container
+// -------------------------------------------
+
+// export const createRoutes = (store) => ({
+//   path        : '/',
+//   component   : AuthorizedLayout,
+//   indexRoute  : Home,
+//   childRoutes : [
+//     Auth,
+//   ]
+// })
+
+// -------------------------------------------
 
 /*  Note: childRoutes can be chunked or otherwise loaded programmatically
     using getChildRoutes with the following signature:
