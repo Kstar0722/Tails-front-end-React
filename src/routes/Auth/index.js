@@ -1,9 +1,13 @@
-import Auth from './Auth'
+import AuthorizedContainer from 'containers/AuthorizedContainer'
 
+import Mock from './MockBackend/Mock'
 
 export default {
-	component: Auth,
+	component: AuthorizedContainer,
 	childRoutes: [
-		
+		{
+			path: '/mock',
+			component: Mock
+		}
 	]
 }

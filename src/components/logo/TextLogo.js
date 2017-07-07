@@ -1,20 +1,22 @@
 import './Logo.scss'
 
-import { withRouter } from 'react-router'
+import { browserHistory } from 'react-router'
 
 class TextLogo extends React.Component {
 	constructor(props) {
-		super(props)
+		super(props);
+
+		this.toHome = this.toHome.bind(this);
 	}
 
 	toHome() {
-		this.props.router.push('/');
+		browserHistory.push('/');
 	}
 
 	render() {
 		return (
 			<div id="logo">
-				<p onClick={this.toHome.bind(this)}><span>Tails</span>Transport</p>
+				<p onClick={this.toHome}><span>Tails</span>Transport</p>
 			</div>
 		)
 	}
