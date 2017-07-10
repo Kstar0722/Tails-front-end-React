@@ -136,10 +136,10 @@ config.module.rules.push({
 })
 config.plugins.push(extractStyles)
 
-// Images
+// Images -- Altered to allow for mp4 files
 // ------------------------------------
 config.module.rules.push({
-  test    : /\.(png|jpg|gif)$/,
+  test    : /\.(png|jpg|gif|mp4)$/,
   loader  : 'url-loader',
   options : {
     limit : 8192,

@@ -29,12 +29,12 @@ button.solid-button {
 	&.blue {
 		background-color: #15d6f3;
 		background-image: linear-gradient(to top, rgba(0, 0, 0, 0.25) 0%, rgba(255, 255, 255, 0.25) 100%);
-		box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.33);
+		// box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.33);
 	}
 	&.orange {
 		background-color: #ff7355;
 		background-image: linear-gradient(to top, rgba(0, 0, 0, 0.04) 0%, rgba(255, 255, 255, 0.04) 100%);
-		box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.33);
+		// box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.33);
 	}
 	border-radius: 40px;
 	color: #fff;
@@ -42,6 +42,11 @@ button.solid-button {
 	padding: 20px 30px;
 	min-width: 247px;
 	border: none;
+	box-shadow: inset 0 5px 0 rgba(255,255,255,0.21);
+	transition: all .3s ease;
+	&:hover {
+		box-shadow: inset 0 100px 0 rgba(255,255,255,0.21);
+	}
 }
 
 button.border-button {
@@ -50,6 +55,11 @@ button.border-button {
 	border-radius: 40px;
 	min-width: 247px;
 	background: none;
+	// box-shadow: inset 0 0px 0 rgba(0,0,0,0.05);
+	// transition: all .3s ease;
+	// &:hover {
+	// 	box-shadow: inset 0 100px 0 rgba(0,0,0,0.05);
+	// }
 	&.orange {
 		color: #ff7959;
 		border: 2px solid #ff7959;
@@ -63,3 +73,13 @@ button.border-button {
 		}
 	}
 }
+
+// .hover-slide {
+// 	box-shadow: inset 0 0px 0 rgba(0,0,0,0.05);
+// 	transition: all .3s ease;
+// 	&:hover {
+// 		box-shadow: inset 0 100px 0 rgba(0,0,0,0.05);
+// 	}
+// }
+
+

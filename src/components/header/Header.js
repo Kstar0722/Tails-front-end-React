@@ -20,7 +20,7 @@ class Header extends React.Component {
 								<li><Link to='/how-it-works'>How it Works</Link></li>
 								<li><Link to='/faq'>FAQ</Link></li>
 								<li><Link to='/support'>Support</Link></li>
-								<li className="sign-in"><Link to="/sign-in">Sign In</Link></li>
+								<li className="sign-in"><Link className="hover-slide" to="/sign-in">Sign In</Link></li>
 							</ul>
 						</nav>
 					</div>

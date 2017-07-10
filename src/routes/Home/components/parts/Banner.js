@@ -2,6 +2,8 @@ import './Banner.scss'
 
 import horsey from 'assets/horse-banner.png'
 
+import BannerVid from 'assets/stock-semi.mp4'
+
 class Banner extends React.Component {
 	constructor(props) {
 		super(props)
@@ -9,7 +11,9 @@ class Banner extends React.Component {
 
 	render() {
 		return (
-			<section id="banner" style={{ "backgroundImage": 'linear-gradient(rgba(0, 0, 0, .6), rgba(0,0,0,.3), rgba(0,0,0,.5)), url(' + horsey + ')' }}>
+			<section id="banner" >
+				<video src={BannerVid} className="banner-video" type="video/mp4" autoPlay muted loop playsInline></video>
+				<div className="vignette"></div>
 				<div className="container">
 					<div className="banner-content">
 						<p className="title">Animal Transport <span className="little-italic">for all</span></p>
@@ -17,7 +21,6 @@ class Banner extends React.Component {
 						<p className="motto">We make transporting livestock cheap and easy by helping people directly connect with trailer owners.</p>
 						<div className="button-wrap d-flex flex-row flex-wrap justify-content-center align-items-center">
 							<button className="solid-button blue">Get Started</button>
-							<button className="border-button white"><i className="fa fa-play" aria-hidden="true"></i>Watch Video</button>
 						</div>
 					</div>
 				</div>

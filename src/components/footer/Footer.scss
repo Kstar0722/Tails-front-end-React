@@ -6,8 +6,11 @@ section#footer {
 	min-height: 100px;
 	padding: 10px 0px;
 	.footer-content {
-		#image-logo {
+		#logo {
 			flex: 1;
+			p {
+				color: white;
+			}
 			@media (max-width: 1000px) {
 				justify-content: center !important;
 			}
@@ -28,7 +31,7 @@ section#footer {
 						text-decoration: none;
 						color: white;
 					}
-					&.sign-in {
+					&.sign-up {
 						a {
 							border: 2px solid $textBlue;
 							border-radius: 25px;
@@ -60,7 +63,7 @@ section#footer {
 					font-size: 18px;
 					text-decoration: none;
 				}
-				&.sign-in {
+				&.sign-up {
 					a {
 						border: 2px solid $textBlue;
 						border-radius: 25px;

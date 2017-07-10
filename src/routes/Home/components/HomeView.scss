@@ -165,6 +165,7 @@ section#home-wrap {
 				max-width: 100%;
 				position: relative;
 				z-index: 9999;
+				top: 15px;
 			}
 		}
 		.quarters-wrap {
@@ -206,7 +207,8 @@ section#home-wrap {
 						}
 					}
 					&.img-right {
-						background-position: 910px;
+						background-position: 1015px;
+						background-size: 2000px;
 					}
 				}
 			}
