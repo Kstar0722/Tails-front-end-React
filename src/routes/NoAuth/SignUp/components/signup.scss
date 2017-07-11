@@ -1,0 +1,168 @@
+#signup-process {
+	background: #e6e6e6;
+	color: #6c5c58;
+	padding-top: 100px;
+	padding-bottom: 180px;
+	min-height: 100vh;
+	font-family: "PT Sans";
+	.container {
+		width: 715px;
+		margin: 0 auto;
+		.step-1 {
+			text-align: center;
+		}
+		.step-title {
+			h1 {
+				font-size: 38px;
+				text-transform: uppercase;
+			}
+		}
+		.step-description {
+			p {
+				color: #252525;
+				font-size: 18px;
+				font-weight: 400;
+			}
+		}
+		.buttons-wrap {
+			button {
+				width: 50%;
+				height: 116px;
+				max-width: 360px;
+				border: none;
+				background-color: #c4bebc;
+				color: #f4f4f4;
+				font-family: "PT Sans";
+				font-size: 33px;
+				font-weight: 500;
+				border-radius: 5px 0px 0px 5px;
+				&:nth-child(2) {
+					border-radius: 0 5px 5px 0px;
+				}
+				&:hover, &.active {
+					background-color: #ff5f46;
+				}
+			}
+		}
+	}
+	@mixin float-label-container {
+	  display: block;
+	  position: relative;
+	}
+
+	@mixin float-label {
+	  label, > span {
+	    position: absolute;
+	    left: 0;
+	    top: 0;
+	    cursor: text;
+	    font-size: 75%;
+	    opacity: 1;
+	    transition: all .2s;
+	    @content;
+	  }
+	}
+
+	@mixin float-label-input {
+	  &::placeholder {
+	    opacity: 1;
+	    transition: all .2s;
+	  }
+	  &:placeholder-shown:not(:focus)::placeholder {
+	      opacity: 0;
+	  }
+	}
+
+	@mixin float-label-scaled {
+	  &:placeholder-shown:not(:focus) + * {
+	      font-size: 150%;
+	      opacity: .5;
+	      @content;
+	  }
+	}
+
+	.has-float-label {
+	  @include float-label-container;
+
+	  @include float-label;
+
+	  select {
+	    -webkit-appearance: none;
+	       -moz-appearance: none;
+	            appearance: none;
+	  }
+
+	  input, select {
+	    @include float-label-input;
+	    font-size: inherit;
+	    padding-top: 1em;
+	    margin-bottom: 2px;
+	    border: 0;
+	    border-radius: 0;
+	    border-bottom: 2px solid rgba(0,0,0,.1);
+
+	    @include float-label-scaled {
+	      top: .25em;
+	    }
+
+	    &:focus {
+	      outline: none;
+	      border-color: rgba(0,0,0,.5);
+	    }
+	  }
+
+	  select {
+	    padding-right: 1em;
+	    background: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cpath fill='%23333' d='M2 0L0 2h4zm0 5L0 3h4z'/%3E%3C/svg%3E") no-repeat right .5em bottom .25em;
+	    background-size: 8px 10px;
+	  }
+	}
+
+	// Custom styling
+
+	* {
+	  box-sizing: border-box;
+	}
+	body {
+	  position: relative;
+	  max-width: 20rem;
+	  background: #eee;
+	  margin: 2rem auto;
+	}
+	form {
+	  padding: 1.5rem;
+	}
+	input, select {
+	  width: 100%;
+	  margin-bottom: .5rem;
+	  background: transparent;
+	}
+	button {
+	  background: #333;
+	  color: white;
+	  border: 0;
+	  padding: .5em 1em;
+	  margin-top: 1rem;
+	}
+	a {
+	  display: block;
+	  padding: 10px;
+	  position: absolute;
+	  z-index: -1;
+	  top: 1rem;
+	  left: 100%;
+	  margin-left: -65px;
+	  transition: all .2s;
+	}
+	a:hover {
+	  margin-left: 0;
+	}
+	.input-group {
+	  display: table;
+	  width: 100%;
+	}
+	.input-group > * {
+	  display: table-cell;
+	  width: 50%;
+	}
+}

@@ -4,6 +4,7 @@ import FAQ from './FAQ/FAQ'
 import HowItWorks from './HowItWorks/HowItWorks'
 import Login from './Login/Login'
 import Support from './Support/Support'
+import signup from './SignUp'
 
 export default {
 	component: NoAuth,
@@ -27,6 +28,7 @@ export default {
 		{
 			path: '/support',
 			component: Support
-		}
+		},
+		signup
 	]
 }
