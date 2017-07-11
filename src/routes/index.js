@@ -19,7 +19,7 @@ export const createRoutes = (store) => ({
     indexRoute  : Home,
     childRoutes : [
         NoAuth,
-        Auth, // Theses will redirect to login if need be
+        Auth, // These will redirect to login if need be
     ]
 })
 

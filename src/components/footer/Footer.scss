@@ -10,9 +10,9 @@ section#footer {
 			flex: 1;
 			p {
 				color: white;
-			}
-			@media (max-width: 1000px) {
-				justify-content: center !important;
+				@media (max-width: 1000px) {
+					text-align: center !important;
+				}
 			}
 		}
 		nav.hide-on-mobile {
