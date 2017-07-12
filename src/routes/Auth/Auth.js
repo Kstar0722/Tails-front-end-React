@@ -13,7 +13,7 @@ class Auth extends React.Component {
 	// Functions to check authentication - Set to false right now, 
 	// to test if the container works as planned
 	getAuthToken() {
-		return false;
+		return true;
 	}
 
 	render() {

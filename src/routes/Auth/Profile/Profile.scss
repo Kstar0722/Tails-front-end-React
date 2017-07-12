@@ -1,0 +1,92 @@
+$tableBorder: #dedfe6;
+
+section#profile {
+	background-color: #e6e6e6;
+	.banner-wrap {
+		min-height: 175px;
+		background-size: cover;
+		background-position: center;
+		padding: 15px 0px;
+		.banner-content {
+			@media(max-width: 800px) {
+				justify-content: center !important;
+				.avatar-wrap {
+					width: 100%;
+					bottom: 0;
+					justify-content: center !important;
+					text-align: center;
+					margin-bottom: 20px;
+					h2 {
+						width: 100%;
+					}
+					img {
+						margin-right: 0px;
+						margin-bottom: 20px;
+					}
+				}
+			}
+		}
+		.avatar-wrap {
+			position: relative;
+			bottom: -90px;
+		}
+	}
+	.page-content {
+		min-height: 500px;
+		padding: 100px 0px;
+		.block-section {
+			width: 100%;
+			margin: 20px 0px;
+			p.title {
+				color: #141414;
+				font-size: 22px;
+				font-weight: bold;
+			}
+			.table-wrap {
+				background-color: #fff;
+				overflow-x: scroll;
+				table.bids, table.listings{
+					width: 100%;
+					font-family: 'Lato', sans-serif;
+					border-collapse: collapse;
+					border: 1px solid $tableBorder;
+					min-width: 1000px;
+					th, tr, td {
+						border: 1px solid $tableBorder;
+					}
+					tbody {
+						tr {
+							&:first-child {
+								background-color: #fff !important;
+							}
+							&:nth-child(odd) {
+								background-color: rgba(0, 0, 0, 0.03);
+							}
+							th {
+								padding: 20px;
+								color: #cfcfcf;
+								font-size: 14px;
+								text-transform: uppercase;
+								text-align: center;
+								&:first-child {
+									width: 45%;
+									text-align: left;
+								}
+							}
+							td {
+								padding: 20px;
+								color: #6c6e7a;
+								font-size: 16px;
+								text-align: center;
+								&:first-child {
+									width: 45%;
+									text-align: left;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

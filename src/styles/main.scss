@@ -21,8 +21,15 @@ body {
   box-sizing: inherit;
 }
 
+// ------------------------------------------------------------
+// Button styling
+// ------------------------------------------------------------
 button {
 	cursor: pointer;
+	font-family: 'Montserrat', sans-serif;
+	&:focus {
+		outline: none;
+	}
 }
 
 button.solid-button {
@@ -73,6 +80,26 @@ button.border-button {
 		}
 	}
 }
+
+button.block-btn {
+	color: white;
+	font-size: 16px;
+	padding: 10px 30px;
+	box-shadow: inset 0 0px 0 rgba(255,255,255,0.21);
+	transition: all .3s ease;
+	&:hover {
+		box-shadow: inset 0 100px 0 rgba(255,255,255,0.21);
+	}
+	&.orange {
+		background-color: #ff7355;
+		border: none;
+	}
+}
+
+// ------------------------------------------------------------
+// End button styling
+// ------------------------------------------------------------
+
 
 // .hover-slide {
 // 	box-shadow: inset 0 0px 0 rgba(0,0,0,0.05);
