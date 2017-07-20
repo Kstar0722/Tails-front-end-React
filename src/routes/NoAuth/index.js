@@ -6,6 +6,8 @@ import Login from './Login/Login'
 import Support from './Support/Support'
 import signup from './SignUp'
 
+import NewPage from './NewPage'
+
 export default {
 	component: NoAuth,
 	childRoutes: [
@@ -29,6 +31,7 @@ export default {
 			path: '/support',
 			component: Support
 		},
-		signup
+		signup,
+		NewPage
 	]
 }

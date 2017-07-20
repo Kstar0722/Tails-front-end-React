@@ -1,0 +1,97 @@
+Instructions to create a Route for a new page.
+
+1) Create new folder named after the Route you wish to create in the correct directory inside of 'src/routes'
+	- If the page is a front facing (unauthorized) it will go inside of the 'NoAuth' folder. If the page is back facing (authorized) it will go inside of the 'Auth' folder
+
+2) Inside of the new folder -> 'src/routes/NoAuth/NewPage' create a folder called 'components' and a file called index.js. 
+	- Inside of the 'components' folder create a 'NewPage.js' and a 'NewPage.scss'
+	- The index.js file will import a component from the components folder and export the correct path for that component. 
+
+	---- index.js ----
+	"
+		import NewPage from './components/NewPage'
+
+		export default {
+			path: '/new-page',
+			component: NewPage
+		}
+	"
+
+3) Create the react component inside of the '/components/NewPage.js' file
+	
+	---- NewPage.js ----
+	"
+		import './NewPage.scss'
+
+		class NewPage extends React.Component {
+
+			constructor(props) {
+				super(props)
+			}
+
+			render() {
+				return (
+					<h1>NewPage</h1>
+					// Any HTML content will go here
+				)
+			}
+		}
+
+		export default NewPage
+	"
+
+	- any css can go inside of NewPage.scss
+
+
+4) The path will need to be imported to 'Auth/index.js' or 'NoAuth/index.js'
+
+	---- NoAuth/index.js ----
+	"
+		import NoAuth from './NoAuth'
+		import BrowseJobs from './BrowseJobs/BrowseJobs'
+		import FAQ from './FAQ/FAQ'
+		import HowItWorks from './HowItWorks/HowItWorks'
+		import Login from './Login/Login'
+		import Support from './Support/Support'
+		import signup from './SignUp'
+
+		// Our New Page
+		import NewPage from './NewPage'
+
+		export default {
+			component: NoAuth,
+			childRoutes: [
+				{
+					path: '/browse-jobs',
+					component: BrowseJobs
+				},
+				{
+					path: '/faq',
+					component: FAQ
+				},
+				{
+					path: '/how-it-works',
+					component: HowItWorks
+				},
+				{
+					path: '/sign-in',
+					component: Login
+				},
+				{
+					path: '/support',
+					component: Support
+				},
+				signup,
+
+				NewPage // Our new page
+
+			]
+		}
+	"
+
+
+
+
+
+
+
