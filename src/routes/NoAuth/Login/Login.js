@@ -36,7 +36,7 @@ class Login extends Component {
 		console.log(values)
 		// dispatch(login(values.email, values.password))
 	}
-
+	
   	render() {
   		const {handleSubmit, fields: {email, password}, submitting, token, loginActive} = this.props
   		const styles = this.getStyles()
@@ -46,7 +46,7 @@ class Login extends Component {
 					<div className="login-box">
 						<div className="top-wrap">
 							<p>Login</p>
-							<a className="close-login-box" onClick={this.props.closeLoginBox}>x</a>
+							<Link to="/" className="btn">X</Link>
 						</div>
 						<div className="form-wrap">
 							<form onSubmit={handleSubmit(this.validateAndSignInUser)}>
