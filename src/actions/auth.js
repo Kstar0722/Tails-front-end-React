@@ -3,7 +3,7 @@ import async from 'async'
 import {checkHttpStatus, parseJSON} from '../http.js'
 import config from '../config.js'
 import { browserHistory } from 'react-router'
-import { dashboardUrl } from '../routes/urlGenerators'
+// import { dashboardUrl } from '../routes/urlGenerators'
 
 const LOGIN_REQUEST = 'LOGIN_REQUEST'
 const LOGIN_SUCCESS = 'LOGIN_SUCCESS'

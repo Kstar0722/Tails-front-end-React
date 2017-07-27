@@ -41,10 +41,6 @@ class Login extends Component {
 			<section id="login-wrap">
 				<div className="container">
 					<div className="login-box">
-						<div className="top-wrap">
-							<p>Login</p>
-							<a className="close-login-box" onClick={this.props.closeLoginBox}>x</a>
-						</div>
 						<div className="form-wrap">
 							<form onSubmit={handleSubmit(this.validateAndSignInUser)}>
 								<Field
