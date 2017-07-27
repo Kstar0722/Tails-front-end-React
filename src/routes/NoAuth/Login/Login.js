@@ -1,3 +1,5 @@
+import './Login.scss'
+
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import { Field, reduxForm } from 'redux-form'
@@ -22,7 +24,7 @@ class Login extends Component {
     getStyles() {
 		return {
 			input: {
-				width: '50%'
+				width: '100%'
 			},
 			button: {
 				width: '100%'
@@ -38,25 +40,28 @@ class Login extends Component {
   	render() {
   		const {handleSubmit, fields: {email, password}, submitting, token, loginActive} = this.props
   		const styles = this.getStyles()
-  		console.log(email, password)
 		return (
 			<section id="login-wrap">
 				<div className="container">
 					<div className="login-box">
+						<div className="top-wrap">
+							<p>Login</p>
+							<a className="close-login-box" onClick={this.props.closeLoginBox}>x</a>
+						</div>
 						<div className="form-wrap">
 							<form onSubmit={handleSubmit(this.validateAndSignInUser)}>
 								<Field
 									name="email"
 									type="email"
 									component={renderField}
-									label=""
+									label="Email"
 									placeholder="Email"
 									style={styles.input}/>
 								<Field 
 									name="password"
 									type="password"
 									component={renderField}
-									label=""
+									label="Password"
 									placeholder="Password"
 									style={styles.input}/>
 								<div style={styles.button}>
