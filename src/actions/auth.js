@@ -53,7 +53,6 @@ export function login(email, password) {
         return fetch(config.endpoints.url + config.endpoints.login, {
             method: 'post',
             headers: {
-                'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({email, password})

@@ -22,7 +22,7 @@ class Login extends Component {
     getStyles() {
 		return {
 			input: {
-				width: '100%'
+				width: '50%'
 			},
 			button: {
 				width: '100%'
@@ -31,12 +31,14 @@ class Login extends Component {
 	}
 
 	validateAndSignInUser(values, dispatch) {
-		dispatch(login(values.email, values.password))
+		console.log(values)
+		// dispatch(login(values.email, values.password))
 	}
 
   	render() {
   		const {handleSubmit, fields: {email, password}, submitting, token, loginActive} = this.props
   		const styles = this.getStyles()
+  		console.log(email, password)
 		return (
 			<section id="login-wrap">
 				<div className="container">
@@ -68,9 +70,6 @@ class Login extends Component {
 								<label htmlFor=""><input type="checkbox"/>Remember Me</label>
 								<button className="forgot-password" onClick={this.props.toForgot}>Forgot your password?</button>
 							</form>
-						</div>
-						<div className="bottom-wrap" style={{height: "35px"}}>
-								
 						</div>
 					</div>
 				</div>
