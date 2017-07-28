@@ -8,6 +8,9 @@ import { browserHistory } from 'react-router'
 const LOGIN_REQUEST = 'LOGIN_REQUEST'
 const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
 const LOGIN_FAILURE = 'LOGIN_FAILURE'
+const SIGNUP_REQUEST = 'SIGNUP_REQUEST'
+const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS'
+const SIGNUP_FAILURE = 'SIGNUP_FAILURE'
 
 export function loginRequest() {
     return {
@@ -29,6 +32,26 @@ export function loginFailure(error) {
     }
 }
 
+export function signupRequest() {
+    return {
+        type: SIGNUP_REQUEST
+    }
+}
+
+export function signupSuccess(res) {
+    return {
+        type: SIGNUP_SUCCESS,
+        userInfo: JSON.stringify(res)
+    }
+}
+
+export function signupFailure(error) {
+    return {
+        type: SIGNUP_FAILURE,
+        status: error.response
+    }
+}
+
 export function login(email, password) {
     return function(dispatch) {
         dispatch(loginRequest())
@@ -46,6 +69,34 @@ export function login(email, password) {
         })
         .catch(error =>{
             dispatch(loginFailure(error))
+        })
+    }
+}
+
+export function register(firstName, lastName, email, password) {
+    return function(dispatch) {
+        dispatch(signupRequest())
+        let body = {
+            "first_name" : firstName,
+            "last_name": lastName,
+            "email": email,
+            "password": password
+        }
+        console.log(JSON.stringify(body))
+        return fetch(config.endpoints.url + config.endpoints.signup, {
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(body)
+        })
+        .then(checkHttpStatus)
+        .then(parseJSON)
+        .then(res => {
+            console.log("signup success")
+        })
+        .catch(error =>{
+            dispatch(signupFailure(error))
         })
     }
 }
