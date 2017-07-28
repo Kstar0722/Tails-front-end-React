@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 import { Field, reduxForm } from 'redux-form'
 import { Link } from 'react-router'
 import {register} from '../../../../actions/auth'
-import renderField, { minLength } from '../../../../components/renderField'
+import renderField, { validateEmail, minLength } from '../../../../components/renderField'
 const fields = ['firstName', 'lastName', 'email', 'password']
 
 function validate(values) {
@@ -93,6 +93,7 @@ class signup extends Component {
 									component={renderField}
 									label="Email"
 									placeholder="Email"
+									validate={[validateEmail]}
 									style={styles.input}/>
 								<Field 
 									name="password"

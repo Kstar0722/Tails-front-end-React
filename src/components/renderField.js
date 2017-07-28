@@ -5,6 +5,10 @@ export const minLength = min => value =>
         ? `Must be ${min} characters or more`
         : undefined);
 
+export const validateEmail = value =>
+    (value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)
+        ? 'Invalid email address'
+        : undefined);
 
 const renderField = ({ input, label, type, style, placeholder, meta:{touched, error, invalid, warning}}) => (
     <div className="form-group" style={style} >
