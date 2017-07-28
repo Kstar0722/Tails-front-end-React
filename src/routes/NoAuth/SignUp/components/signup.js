@@ -4,7 +4,7 @@ import { Field, reduxForm } from 'redux-form'
 import { Link } from 'react-router'
 
 import renderField from '../../../../components/renderField'
-const fields = ['email', 'password']
+const fields = ['firstName', 'lastName', 'email', 'password']
 
 class signup extends Component {
 	constructor(props) {
@@ -23,12 +23,13 @@ class signup extends Component {
 		}
 	}
 
-	validateAndSignInUser(values, dispatch) {
-		dispatch(login(values.email, values.password))
+	onSignUpUser(values, dispatch) {
+		console.log(values)
+		// dispatch(login(values.email, values.password))
 	}
 
 	render() {
-		const {handleSubmit, fields: {email, password}, submitting, token, loginActive} = this.props
+		const {handleSubmit, fields: {firstName, lastName, email, password}, submitting, token, loginActive} = this.props
   		const styles = this.getStyles()
 		return (
 			<section id="login-wrap">
@@ -39,7 +40,7 @@ class signup extends Component {
 							<Link to="/" className="btn">X</Link>
 						</div>
 						<div className="form-wrap">
-							<form onSubmit={handleSubmit(this.validateAndSignInUser)}>
+							<form onSubmit={handleSubmit(this.onSignUpUser)}>
 								<Field
 									name="firstName"
 									type="name"
