@@ -60,7 +60,8 @@ export function login(email, password) {
         .then(checkHttpStatus)
         .then(parseJSON)
         .then(res => {
-            dispatch(getUserInfo(res))
+            // dispatch(getUserInfo(res))
+            console.log("login success")
         })
         .catch(error =>{
             dispatch(loginFailure(error))
