@@ -6,7 +6,7 @@ import { Field, reduxForm } from 'redux-form'
 import { Link } from 'react-router'
 import renderField from '../../../components/renderField'
 import {login} from '../../../actions/auth'
-export const fields = ['email', 'password']
+const fields = ['email', 'password']
 
 class Login extends Component {
 	
@@ -71,8 +71,6 @@ class Login extends Component {
 										Login
 									</button>
 								</div>
-								<label htmlFor=""><input type="checkbox"/>Remember Me</label>
-								<button className="forgot-password" onClick={this.props.toForgot}>Forgot your password?</button>
 							</form>
 						</div>
 					</div>

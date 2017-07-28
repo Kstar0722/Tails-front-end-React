@@ -1,55 +1,98 @@
-import './signup.scss'
+import '../../Login/Login.scss'
+import React, {Component} from 'react';
+import { Field, reduxForm } from 'redux-form'
+import { Link } from 'react-router'
 
-class signup extends React.Component {
+import renderField from '../../../../components/renderField'
+const fields = ['email', 'password']
+
+class signup extends Component {
 	constructor(props) {
 		super(props);
 		
 	}
+
+	getStyles() {
+		return {
+			input: {
+				width: '100%'
+			},
+			button: {
+				width: '100%'
+			}
+		}
+	}
+
+	validateAndSignInUser(values, dispatch) {
+		dispatch(login(values.email, values.password))
+	}
+
 	render() {
+		const {handleSubmit, fields: {email, password}, submitting, token, loginActive} = this.props
+  		const styles = this.getStyles()
 		return (
-			<section id="signup-process">
+			<section id="login-wrap">
 				<div className="container">
-					<div className="step-1">
-						<div className="step-title">
-							<h1>Sign Up</h1>
+					<div className="login-box">
+						<div className="top-wrap">
+							<p>Sign Up</p>
+							<Link to="/" className="btn">X</Link>
 						</div>
-						<div className="step-description">
-							<p>I want to...</p>
+						<div className="form-wrap">
+							<form onSubmit={handleSubmit(this.validateAndSignInUser)}>
+								<Field
+									name="firstName"
+									type="name"
+									component={renderField}
+									label="First Name"
+									placeholder="First Name"
+									style={styles.input}/>
+								<Field
+									name="lastName"
+									type="name"
+									component={renderField}
+									label="Last Name"
+									placeholder="Last Name"
+									style={styles.input}/>
+								<Field
+									name="email"
+									type="email"
+									component={renderField}
+									label="Email"
+									placeholder="Email"
+									style={styles.input}/>
+								<Field 
+									name="password"
+									type="password"
+									component={renderField}
+									label="Password"
+									placeholder="Password"
+									style={styles.input}/>
+								<Field 
+									name="confirmpassword"
+									type="password"
+									component={renderField}
+									label="Confirm Password"
+									placeholder="Confirm Password"
+									style={styles.input}/>
+								<div style={styles.button}>
+									<button
+										type="submit"
+										className="btn btn-success"
+										disabled={submitting}>
+										Sign Up
+									</button>
+								</div>
+							</form>
 						</div>
-						<div className="buttons-wrap">
-							<button className="orange">Ship</button>
-							<button>Be a Carrier</button>
-						</div>
-					</div>
-					<div className="step-2">
-						<form>
-							<label className="has-float-label">
-								<input type="name" placeholder="Your Name"/>
-								<span>Your Name</span>
-							</label>
-
-							<label className="has-float-label">
-								<input type="email" placeholder="email@example.com"/>
-								<span>Your Email</span>
-							</label>
-
-							<label className="has-float-label">
-								<input type="password" placeholder="••••••••"/>
-								<span>Your Password</span>
-							</label>
-
-							<label className="has-float-label">
-								<input type="password" placeholder="••••••••"/>
-								<span>Confirm Password</span>
-							</label>
-
-							<button>Sign up</button>
-						</form>
 					</div>
 				</div>
-			</section>
+			</section>	
 		)
 	}
 }
 
-export default signup;
+export default reduxForm({
+	form: 'signup',
+	fields,
+})(signup)
