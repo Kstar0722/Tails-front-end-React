@@ -33,8 +33,7 @@ class Login extends Component {
 	}
 
 	validateAndSignInUser(values, dispatch) {
-		console.log(values)
-		// dispatch(login(values.email, values.password))
+		dispatch(login(values.email, values.password))
 	}
 	
   	render() {
