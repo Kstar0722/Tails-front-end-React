@@ -54,7 +54,6 @@ class signup extends Component {
 	}
 
 	onSignUpUser(values, dispatch) {
-		console.log(values)
 		dispatch(register(values.firstName, values.lastName, values.email, values.password))
 	}
 

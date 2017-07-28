@@ -76,19 +76,17 @@ export function login(email, password) {
 export function register(firstName, lastName, email, password) {
     return function(dispatch) {
         dispatch(signupRequest())
-        let body = {
-            "first_name" : firstName,
-            "last_name": lastName,
-            "email": email,
-            "password": password
-        }
-        console.log(JSON.stringify(body))
         return fetch(config.endpoints.url + config.endpoints.signup, {
             method: 'post',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(body)
+            body: JSON.stringify({
+                first_name: firstName,
+                last_name: lastName,
+                email: email,
+                password: password
+            })
         })
         .then(checkHttpStatus)
         .then(parseJSON)
