@@ -3,6 +3,7 @@ import BrowseJobs from './BrowseJobs/BrowseJobs'
 import FAQ from './FAQ/FAQ'
 import HowItWorks from './HowItWorks/HowItWorks'
 import Login from './Login/Login'
+import ForgotPassword from './ForgotPassword/ForgotPassword'
 import Support from './Support/Support'
 import signup from './SignUp'
 
@@ -26,6 +27,10 @@ export default {
 		{
 			path: '/sign-in',
 			component: Login
+		},
+		{
+			path: '/forgot-password',
+			component: ForgotPassword
 		},
 		{
 			path: '/support',
