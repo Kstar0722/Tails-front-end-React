@@ -47,7 +47,7 @@ class ForgotPassword extends Component {
 							<Link to="/" className="btn">X</Link>
 						</div>
 						<div className="label-wrap">
-							<p>Login</p>
+							<p>Forgot Password</p>
 						</div>
 						<div className="form-wrap">
 							<form onSubmit={handleSubmit(this.validateAndSignInUser)}>
@@ -58,24 +58,13 @@ class ForgotPassword extends Component {
 									label="Email"
 									placeholder="Email"
 									style={styles.input}/>
-								<Field 
-									name="password"
-									type="password"
-									component={renderField}
-									label="Password"
-									placeholder="Password"
-									style={styles.input}/>
 								<div style={styles.button}>
 									<button
 										type="submit"
 										className="btn btn-success"
 										disabled={submitting}>
-										Login
+										Send
 									</button>
-								</div>
-								<div className="forgot-container">
-									<button className="forgot-password" onClick={this.props.toForgot}>Forgot password</button>
-									<button className="forgot-password" onClick={this.props.toForgot}>Sign Up</button>
 								</div>
 							</form>
 						</div>
