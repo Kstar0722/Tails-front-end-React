@@ -36,6 +36,14 @@ class Login extends Component {
 		dispatch(login(values.email, values.password))
 	}
 	
+	forgotPassword() {
+		
+	}
+
+	goSignUp() {
+		
+	}
+
   	render() {
   		const {handleSubmit, fields: {email, password}, submitting, token, loginActive} = this.props
   		const styles = this.getStyles()
@@ -50,7 +58,7 @@ class Login extends Component {
 							<p>Login</p>
 						</div>
 						<div className="form-wrap">
-							<form onSubmit={handleSubmit(this.validateAndSignInUser)}>
+							<form onSubmit={handleSubmit(this.validateAndSignInUser.bind(this))}>
 								<Field
 									name="email"
 									type="email"
@@ -74,8 +82,8 @@ class Login extends Component {
 									</button>
 								</div>
 								<div className="forgot-container">
-									<button className="forgot-password" onClick={this.props.toForgot}>Forgot password</button>
-									<button className="forgot-password" onClick={this.props.toForgot}>Sign Up</button>
+									<button className="forgot-password" onClick={this.forgotPassword.bind(this)}>Forgot password</button>
+									<button className="forgot-password" onClick={this.goSignUp.bind(this)}>Sign Up</button>
 								</div>
 							</form>
 						</div>
