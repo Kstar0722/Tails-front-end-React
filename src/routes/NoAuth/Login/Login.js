@@ -73,6 +73,10 @@ class Login extends Component {
 										Login
 									</button>
 								</div>
+								<div className="forgot-container">
+									<button className="forgot-password" onClick={this.props.toForgot}>Forgot password</button>
+									<button className="forgot-password" onClick={this.props.toForgot}>Sign Up</button>
+								</div>
 							</form>
 						</div>
 					</div>
