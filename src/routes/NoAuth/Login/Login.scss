@@ -13,18 +13,10 @@ section#login-wrap {
 		background-color: #fff;
 		width: 400px;
 		margin: 0 auto;
-		.top-wrap {
+		.close-wrap {
 			display: flex;
-			flex-direction: row;
-			justify-content: space-between;
+			justify-content: flex-end;
 			align-items: center;
-			padding: 15px;
-			border-bottom: #e6e6e6 1px solid;
-			p {
-				margin:0;
-				font-size: 22px;
-			    color: #4c4c4c;
-			}
 			a {
 				font-size: 25px;
 				text-decoration: none;
@@ -32,6 +24,19 @@ section#login-wrap {
 				&:hover {
 					cursor: pointer;
 				}
+			}
+		}
+		.label-wrap {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			padding: 5px;
+			border-bottom: #e6e6e6 1px solid;
+			p {
+				margin:0;
+				font-size: 22px;
+			    color: #4c4c4c;
+			    font-weight: bold;
 			}
 		}
 		.form-wrap {

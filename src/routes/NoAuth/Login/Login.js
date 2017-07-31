@@ -43,9 +43,11 @@ class Login extends Component {
 			<section id="login-wrap">
 				<div className="container">
 					<div className="login-box">
-						<div className="top-wrap">
-							<p>Login</p>
+						<div className="close-wrap">
 							<Link to="/" className="btn">X</Link>
+						</div>
+						<div className="label-wrap">
+							<p>Login</p>
 						</div>
 						<div className="form-wrap">
 							<form onSubmit={handleSubmit(this.validateAndSignInUser)}>
