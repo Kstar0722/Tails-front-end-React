@@ -1,4 +1,4 @@
-section#login-wrap {
+section#signup-wrap {
 	height: 100%;
 	width: 100%;
 	z-index: 999;
@@ -13,7 +13,7 @@ section#login-wrap {
 		background-color: #fff;
 		width: 400px;
 		margin: 0 auto;
-		.close-wrap {
+		.close-wrap-signup {
 			display: flex;
 			justify-content: flex-end;
 			align-items: center;
@@ -26,11 +26,11 @@ section#login-wrap {
 				}
 			}
 		}
-		.label-wrap {
+		.label-wrap-signup {
 			display: flex;
 			justify-content: center;
 			align-items: center;
-			padding: 5px;
+			padding-bottom: 15px;
 			border-bottom: #e6e6e6 1px solid;
 			p {
 				margin:0;

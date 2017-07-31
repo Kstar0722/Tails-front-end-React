@@ -61,13 +61,13 @@ class signup extends Component {
 		const {handleSubmit, fields: {firstName, lastName, email, password}, submitting, token, loginActive} = this.props
   		const styles = this.getStyles()
 		return (
-			<section id="login-wrap">
+			<section id="signup-wrap">
 				<div className="container">
 					<div className="login-box">
-						<div className="close-wrap">
+						<div className="close-wrap-signup">
 							<Link to="/" className="btn">X</Link>
 						</div>
-						<div className="label-wrap">
+						<div className="label-wrap-signup">
 							<p>Sign Up</p>
 						</div>
 						<div className="form-wrap">
