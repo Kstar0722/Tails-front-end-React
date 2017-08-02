@@ -21,8 +21,10 @@
   "license": "MIT",
   "dependencies": {
     "bootstrap": "^4.0.0-alpha",
+    "classnames": "^2.2.5",
     "compression": "^1.6.2",
     "express": "^4.14.0",
+    "moment": "^2.18.1",
     "object-assign": "^4.1.1",
     "promise": "^7.1.1",
     "prop-types": "^15.5.10",
