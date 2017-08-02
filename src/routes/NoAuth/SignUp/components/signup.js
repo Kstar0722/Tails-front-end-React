@@ -4,6 +4,7 @@ import { Field, reduxForm } from 'redux-form'
 import { Link } from 'react-router'
 import {register} from '../../../../actions/auth'
 import renderField, { validateEmail, minLength } from '../../../../components/renderField'
+import classNames from 'classnames'
 const fields = ['firstName', 'lastName', 'email', 'password']
 
 function validate(values) {
@@ -39,7 +40,12 @@ function validate(values) {
 class signup extends Component {
 	constructor(props) {
 		super(props);
-		
+		this.state = {
+			showForm: true,
+			btn_ship: false,
+			btn_carrier: false
+		}
+		this.showForm = this.showForm.bind(this)
 	}
 
 	getStyles() {
@@ -53,6 +59,18 @@ class signup extends Component {
 		}
 	}
 
+	showForm(btn){
+		let state = {showForm: false, }
+		if(btn === 'btn_ship'){
+			state.btn_ship = true
+			state.btn_carrier = false
+		} else {
+			state.btn_ship = false
+			state.btn_carrier = true
+		}
+		this.setState(state)
+	}
+
 	onSignUpUser(values, dispatch) {
 		dispatch(register(values.firstName, values.lastName, values.email, values.password))
 	}
@@ -63,29 +81,23 @@ class signup extends Component {
 		return (
 			<section id="signup-wrap">
 				<div className="container">
-					<div className="login-box">
-						<div className="close-wrap-signup">
-							<Link to="/" className="btn">X</Link>
-						</div>
+					<div className="signup-box">
 						<div className="label-wrap-signup">
-							<p>Sign Up</p>
+							<h2>Sign Up</h2>
+							<p>I want to ...</p>
 						</div>
-						<div className="form-wrap">
+						<div className="btn-group" role="group" aria-label="...">
+							<button type="button" className={classNames("btn btn-ship", { active: this.state.btn_ship })} onClick={this.showForm.bind(this, 'btn_ship')}>Ship</button>
+							<button type="button" className={classNames("btn btn-carrier", { active: this.state.btn_carrier })} onClick={this.showForm.bind(this, 'btn_carrier')}>Be a Carrier</button>
+						</div>
+						<div className={classNames('form-wrap', { hidden: this.state.showForm })}>
 							<form onSubmit={handleSubmit(this.onSignUpUser)}>
 								<Field
 									name="firstName"
 									type="name"
 									component={renderField}
-									label="First Name"
-									placeholder="First Name"
-									validate={[minLength(3)]}
-									style={styles.input}/>
-								<Field
-									name="lastName"
-									type="name"
-									component={renderField}
-									label="Last Name"
-									placeholder="Last Name"
+									label="Your Name"
+									placeholder="Your Name"
 									validate={[minLength(3)]}
 									style={styles.input}/>
 								<Field
@@ -93,7 +105,7 @@ class signup extends Component {
 									type="email"
 									component={renderField}
 									label="Email"
-									placeholder="Email"
+									placeholder="Your Email"
 									validate={[validateEmail]}
 									style={styles.input}/>
 								<Field 
@@ -101,7 +113,7 @@ class signup extends Component {
 									type="password"
 									component={renderField}
 									label="Password"
-									placeholder="Password"
+									placeholder="Your Password"
 									style={styles.input}/>
 								<Field 
 									name="confirmpassword"
@@ -113,7 +125,7 @@ class signup extends Component {
 								<div style={styles.button}>
 									<button
 										type="submit"
-										className="btn btn-success"
+										className="btn btn-success btn-submit"
 										disabled={submitting}>
 										Sign Up
 									</button>

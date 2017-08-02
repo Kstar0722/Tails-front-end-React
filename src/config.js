@@ -8,6 +8,7 @@ export default {
         userInfo: '/api/users/',
         changePass: '/api/users/',
         uerFood: '/api/user_diary_settings',
-        getCountry: '/api/locations'
+        getCountry: '/api/locations',
+        listings: '/listings'
     }
 }

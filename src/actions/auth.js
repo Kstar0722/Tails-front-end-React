@@ -4,6 +4,7 @@ import {checkHttpStatus, parseJSON} from '../http.js'
 import config from '../config.js'
 import { browserHistory } from 'react-router'
 // import { dashboardUrl } from '../routes/urlGenerators'
+import user from 'auth/user'
 
 const LOGIN_REQUEST = 'LOGIN_REQUEST'
 const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
@@ -19,9 +20,10 @@ export function loginRequest() {
 }
 
 export function loginSuccess(res) {
+    user.authorize(res.access_token, res.user.id)
     return {
         type: LOGIN_SUCCESS,
-        userInfo: JSON.stringify(res)
+        userId: res.user.id
     }
 }
 
@@ -39,6 +41,7 @@ export function signupRequest() {
 }
 
 export function signupSuccess(res) {
+    user.authorize(res.access_token, res.user.id)
     return {
         type: SIGNUP_SUCCESS,
         userInfo: JSON.stringify(res)
@@ -65,6 +68,8 @@ export function login(email, password) {
         .then(checkHttpStatus)
         .then(parseJSON)
         .then(res => {
+            dispatch(loginSuccess(res))
+            browserHistory.push('/profile')
             console.log("login success")
         })
         .catch(error =>{
@@ -73,7 +78,7 @@ export function login(email, password) {
     }
 }
 
-export function register(firstName, lastName, email, password) {
+export function register(firstName = ' ', lastName = 'dev', email, password) {
     return function(dispatch) {
         dispatch(signupRequest())
         return fetch(config.endpoints.url + config.endpoints.signup, {
@@ -91,6 +96,8 @@ export function register(firstName, lastName, email, password) {
         .then(checkHttpStatus)
         .then(parseJSON)
         .then(res => {
+            dispatch(signupSuccess(res))
+            browserHistory.push('/profile')
             console.log("signup success")
         })
         .catch(error =>{
