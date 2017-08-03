@@ -18,7 +18,7 @@ class Login extends Component {
 		super(props)
 		this.state = {
 			modal: false,
-			auth: false
+			auth: user.id ? true : false
 		}
 
     	this.toggle = this.toggle.bind(this)

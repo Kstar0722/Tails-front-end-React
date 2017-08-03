@@ -1,15 +1,20 @@
 import './Profile.scss'
 
 import StockBanner from 'assets/stock-banner.png'
-
+import { Link } from 'react-router';
 import Avatar from 'components/Avatar'
 import ListingsContainer from './listings/ListingsContainer'
 import BidsContainer from './bids/BidsContainer'
+import { browserHistory } from 'react-router'
 
 class Profile extends React.Component {
 	
 	constructor(props) {
 		super(props)
+	}
+
+	toEdit(){
+		browserHistory.push('/profile/edit')
 	}
 
 	render() {
@@ -21,7 +26,7 @@ class Profile extends React.Component {
 							
 							<Avatar type="large"/>
 
-							<button className="edit-profile block-btn orange">Edit Profile</button>
+							<button onClick={this.toEdit} className="btn edit-profile block-btn orange">Edit Profile</button>
 
 						</div>
 					</div>

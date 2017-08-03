@@ -19,7 +19,7 @@ class Listings extends React.Component {
 		const listings = []
 
 		this.props.listings.data.map((listing, i) => {
-			listings.push(this.renderListings(listing.title, moment(new Date(listing.created_at)).format('L'), "Listing " + i, listing.status, {delete: this.delete.bind(this, listing.id)}));
+			listings.push(this.renderListings(listing.title, moment(new Date(listing.created_at)).format('MM/DD/YYYY'), listing.bids_count, listing.status, {delete: this.delete.bind(this, listing.id)}));
 		})
 
 		return(

@@ -1,5 +1,5 @@
 import './Bids.scss'
-
+import moment from 'moment'
 import BidItem from './components/BidItem'
 
 class Bids extends React.Component {
@@ -7,14 +7,19 @@ class Bids extends React.Component {
 		super(props)
 	}
 
+
+	componentWillMount() {
+		console.log('get listing')
+		this.props.getBids()
+	}
 	// Return the bids
 	getBids() {
 		// for now, I'm just going to loop through and return 3
 		const bids = []
 
-		for (let i=0; i<3; i++) {
-			bids[i] = this.renderBids("Title", "Date", "Bid " + i, "Status")
-		}
+		this.props.bids.data.map((bid, i) => {
+			bids.push(this.renderBids(bid.listing.title, moment(new Date(bid.created_at)).format('MM/DD/YYYY'), '-', '-'))
+		})
 
 		return(
 			bids

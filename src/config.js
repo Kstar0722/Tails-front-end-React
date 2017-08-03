@@ -9,6 +9,8 @@ export default {
         changePass: '/api/users/',
         uerFood: '/api/user_diary_settings',
         getCountry: '/api/locations',
-        listings: '/listings'
+        listings: '/listings',
+        profile: '/users',
+        bids: '/bids'
     }
 }
