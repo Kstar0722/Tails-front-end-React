@@ -62,6 +62,7 @@ section#header {
 					text-decoration: none;
 				}
 				&.sign-in {
+					cursor: pointer;
 					a {
 						border: 2px solid $textOrange;
 						border-radius: 25px;

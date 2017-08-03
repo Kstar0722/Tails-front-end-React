@@ -7,8 +7,8 @@ import Footer from 'components/footer/Footer'
 
 export const PageLayout = ({ children }) => (
   <div className='root'>
-	<Header />
-	    {children}
+	  <Header />
+	    {children}  
     <Footer />
   </div>
 )
