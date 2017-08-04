@@ -23,6 +23,10 @@ export function getProfile() {
 }
 
 export function updateProfile(data) {
+    data.password = data.password_reset;
+    delete data.confirm_password;
+    delete data.password_reset;
+    
     return function(dispatch) {
         return fetch(config.endpoints.url + config.endpoints.profile + '/', {
             method: 'put',
@@ -30,7 +34,7 @@ export function updateProfile(data) {
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + user.token
             },
-             body: JSON.stringify({first_name: data.first_name, last_name: data.last_name, email: data.email})
+             body: JSON.stringify(data)
         })
         .then(checkHttpStatus)
         .then(parseJSON)

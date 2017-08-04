@@ -4,14 +4,22 @@ import { connect } from 'react-redux'
 import {validationFields} from 'lib/helper'
 import renderField from 'components/fieldForm'
 import {updateProfile} from 'actions/profile'
+import editImage from './EditImage/EditImage'
 
 const validate = values => {
+	let errors = {}
   let fields = [
     {name: 'first_name', rules: ['required']},
     {name: 'last_name', rules: ['required']},
     {name: 'email', rules: ['required', 'email']}
   ];
-  return validationFields(fields, values);
+	errors = validationFields(fields, values);
+	if(values.password){
+		if(values.password_reset !== values.confirm_password)
+			errors.confirm_password = 'Password do not match';
+	}
+	console.log('error',errors)
+	return errors;
 };
 
 class EditForm extends React.Component {
@@ -32,7 +40,7 @@ class EditForm extends React.Component {
 				<div className="row">
 					
 					<div className="col-6">
-						
+						 <Field name="avatar" component={editImage}/>       
 					</div>
 					<div className="col-6">
 						<Field name="first_name" type="text" component={renderField} label="First Name"/>
