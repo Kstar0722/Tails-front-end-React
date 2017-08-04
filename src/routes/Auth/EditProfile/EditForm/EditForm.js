@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import {validationFields} from 'lib/helper'
 import renderField from 'components/fieldForm'
 import {updateProfile} from 'actions/profile'
+import EditAvatar from './EditImage/EditAvatar'
 import editImage from './EditImage/EditImage'
 
 const validate = values => {
@@ -34,30 +35,27 @@ class EditForm extends React.Component {
 	}
 
 	render() {
-		const {handleSubmit, submitting} = this.props
+		const {handleSubmit, submitting, profileUpdate} = this.props
 		return (
 			<form onSubmit={handleSubmit(this.submit.bind(this))} className="form-profile">
 				<div className="row">
 					
 					<div className="col-6">
-						 <Field name="avatar" component={editImage}/>       
+						<div className="row">
+						 <Field name="avatar_new" image={profileUpdate.avatar} component={EditAvatar} label={"Profile Image"}/>       
+						 <Field name="cover_photo_new" image={profileUpdate.cover_photo} component={editImage} label={"Cover Photo"}/> 
+						</div>       
 					</div>
 					<div className="col-6">
 						<Field name="first_name" type="text" component={renderField} label="First Name"/>
 						<Field name="last_name" type="text" component={renderField} label="Last Name"/>
 						<Field name="email" type="text" component={renderField} label="Email"/>
-					</div>
-				</div>
-				<div className="row">
-					<div className="col-6">
 						<Field name="password_reset" type="password" component={renderField} label="Password"/>
-					</div>
-					<div className="col-6">
 						<Field name="confirm_password" type="password" component={renderField} label="Confirm Password"/>
 					</div>
 				</div>
-				<div className="row">	
-					<div className="col-12 justify-content-md-center">
+				<div className="row justify-content-center">	
+					<div className="col-12 ">
 						<button type="submit" className="btn btn-primary" disabled={submitting}>Save</button>
 					</div>
 				</div>
@@ -74,7 +72,8 @@ EditForm = reduxForm({
 
 EditForm = connect(
   state => ({
-    initialValues: state.profile.data
+		initialValues: state.profile.data,
+		profileUpdate: state.profile.data
   }),
   {updateProfile}
 )(EditForm)

@@ -1,7 +1,7 @@
 import './EditImage.scss'
 import AvatarEditor from 'react-avatar-editor'
 
-class EditImage extends React.Component {
+class EditAvatar extends React.Component {
 	constructor(props) {
         super(props)
         this.state = {
@@ -40,13 +40,12 @@ class EditImage extends React.Component {
 	render() {
 		return (
 			<div className="row avatar-edit">
-                
-                <div className="col-12">
+                <div className="col justify-content-center align-self-center">
                 <AvatarEditor
                     ref={this.setEditorRef}
                     image={this.state.image}
+                    width={175}
                     height={175}
-                    style={{width: "100%"}}
                     border={0}
                     color={[255, 255, 255, 0.6]} // RGBA
                     scale={this.state.scale}
@@ -68,8 +67,7 @@ class EditImage extends React.Component {
                             onChange={this.handleNewImage}
                         />
                     </label>
-                </div>
-                <div className="col justify-content-center align-self-center">
+
                     <input
                         name='scale'
                         type='range'
@@ -86,4 +84,4 @@ class EditImage extends React.Component {
 	}
 }
 
-export default EditImage
+export default EditAvatar

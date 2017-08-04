@@ -24,8 +24,12 @@ export function getProfile() {
 
 export function updateProfile(data) {
     data.password = data.password_reset;
+    data.avatar = data.avatar_new;
+    data.cover_photo = data.cover_photo_new;
     delete data.confirm_password;
     delete data.password_reset;
+    delete data.cover_photo_new;
+    delete data.avatar_new;
     
     return function(dispatch) {
         return fetch(config.endpoints.url + config.endpoints.profile + '/', {
