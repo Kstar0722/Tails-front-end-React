@@ -7,7 +7,6 @@ class Bids extends React.Component {
 		super(props)
 	}
 
-
 	componentWillMount() {
 		console.log('get listing')
 		this.props.getBids()
@@ -18,7 +17,7 @@ class Bids extends React.Component {
 		const bids = []
 
 		this.props.bids.data.map((bid, i) => {
-			bids.push(this.renderBids(bid.listing.title, moment(new Date(bid.created_at)).format('MM/DD/YYYY'), this.props.listings[bid.id].bids_count, bid.status))
+			bids.push(this.renderBids(bid.listing.title, moment(new Date(bid.created_at)).format('MM/DD/YYYY'), (this.props.listings[bid.listing_id]) ? this.props.listings[bid.listing_id].bids_count : '-', bid.status))
 		})
 
 		return(
