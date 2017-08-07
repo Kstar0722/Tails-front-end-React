@@ -14,7 +14,12 @@ const SIGNUP_FAILURE = 'SIGNUP_FAILURE'
 // ------------------------------------
 const ACTION_HANDLERS = {
   [LOGIN_SUCCESS]: (state, action) => Object.assign({}, state, {
+    authorized: true,
     userId: action.userId
+  }),
+  ['LOGOUT']: (state, action) => Object.assign({}, state, {
+    authorized: false,
+    userId: null
   }),
 }
 
@@ -22,6 +27,7 @@ const ACTION_HANDLERS = {
 // Reducer
 // ------------------------------------
 const initialState = {
+  authorized: false,
   userId: null
 }
 

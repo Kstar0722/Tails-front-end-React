@@ -1,11 +1,15 @@
 import './EditImage.scss'
 import AvatarEditor from 'react-avatar-editor'
+import DefaultAvatar from 'assets/default_avatar.png'
 
 class EditAvatar extends React.Component {
 	constructor(props) {
         super(props)
+
+        
+
         this.state = {
-            image: './assets/default_avatar.png',
+            image: DefaultAvatar,
             scale: 1
         }
         this.onLoad = this.onLoad.bind(this);
@@ -35,6 +39,15 @@ class EditAvatar extends React.Component {
         this.onSave()
     }
 
+    componentWillMount() {
+        // let image = new Image();
+        // image.setAttribute('crossOrigin', 'anonymous');
+        // image.src = this.props.image ? this.props.image : DefaultAvatar;
+		// this.setState({
+        //     image 
+        // })
+	}
+
     setEditorRef = (editor) => this.editor = editor
 
 	render() {
@@ -43,13 +56,14 @@ class EditAvatar extends React.Component {
                 <div className="col justify-content-center align-self-center">
                 <AvatarEditor
                     ref={this.setEditorRef}
-                    image={this.state.image}
+                    image={this.props.image ? this.props.image : this.state.image}
                     width={175}
                     height={175}
                     border={0}
                     color={[255, 255, 255, 0.6]} // RGBA
                     scale={this.state.scale}
                     rotate={0}
+                    crossOrigin="anonymous"
                     borderRadius={100}
                     disableDrop={true}
                     onImageReady={this.onLoad}							

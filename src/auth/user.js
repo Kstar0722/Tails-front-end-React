@@ -12,7 +12,7 @@ export default {
   },
 
   get authorized () {
-    return window.localStorage.getItem('authToken') && window.localStorage.getItem('userId')
+    return (window.localStorage.getItem('authToken') && window.localStorage.getItem('userId')) ? true : false
   },
 
   get token () {

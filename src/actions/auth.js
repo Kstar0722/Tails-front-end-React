@@ -78,6 +78,14 @@ export function login(email, password) {
     }
 }
 
+export function logout() {
+    return function(dispatch) {
+        dispatch({
+            type: 'LOGOUT'
+        })
+    }
+}
+
 export function register(firstName = ' ', lastName = 'dev', email, password) {
     return function(dispatch) {
         dispatch(signupRequest())

@@ -5,7 +5,7 @@ import {connect} from 'react-redux'
 import { Field, reduxForm } from 'redux-form'
 import { Link } from 'react-router'
 import renderField from '../../../components/renderField'
-import {login} from '../../../actions/auth'
+import {login, logout} from '../../../actions/auth'
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap'
 import user from 'auth/user'
 import { browserHistory } from 'react-router'
@@ -18,7 +18,7 @@ class Login extends Component {
 		super(props)
 		this.state = {
 			modal: false,
-			auth: user.id ? true : false
+			auth: user.authorized
 		}
 
     	this.toggle = this.toggle.bind(this)
@@ -43,8 +43,8 @@ class Login extends Component {
 	validateAndSignInUser(values, dispatch) {
 		dispatch(login(values.email, values.password))
 		this.setState({
-			modal: false,
-			auth: true
+			modal: !this.props.auth.authorized,
+			auth: user.authorized
 		});
 	}
 	
@@ -64,6 +64,7 @@ class Login extends Component {
 
 	logout() {
 		user.logout()
+		this.props.dispatch(logout())
 		this.setState({
 			modal: false,
 			auth: false
@@ -74,8 +75,7 @@ class Login extends Component {
   	render() {
   		const {handleSubmit, fields: {email, password}, submitting, token, loginActive} = this.props
 		const styles = this.getStyles()
-		console.log('user', user.authorized)
-		if(!this.state.auth){
+		if(!this.props.auth.authorized){
 			return (
 				<li className="sign-in" onClick={this.toggle}>
 					<a>Sign In</a>
@@ -146,7 +146,16 @@ Login.propTypes = {
   contentClassName: PropTypes.string,
 }
 
-export default reduxForm({
+Login = connect(
+  state => ({
+	auth: state.auth
+  }),
+  {}
+)(Login)
+
+Login = reduxForm({
 	form: 'login',
 	fields,
 })(Login)
+
+export default Login
