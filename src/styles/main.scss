@@ -94,8 +94,17 @@ button.block-btn {
 		background-color: #ff7355;
 		border: none;
 	}
+	&.blue {
+		background-color: #092b4f;
+		border: none;
+	}
 }
 
+.root{
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+}
 // ------------------------------------------------------------
 // End button styling
 // ------------------------------------------------------------

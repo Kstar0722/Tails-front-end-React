@@ -1,5 +1,6 @@
 $textGray: #7c6e6a;
 $textOrange: #ff6f51;
+$textBlue: #176ce8;
 
 section#header {
 	background: #fff;
@@ -30,10 +31,11 @@ section#header {
 						text-decoration: none;
 					}
 					&.sign-in {
+						cursor: pointer;
 						a {
-							border: 2px solid $textOrange;
+							border: 2px solid $textBlue;
 							border-radius: 25px;
-							color: $textOrange;
+							color: $textBlue;
 							padding: 10px 25px;
 						}
 					}
@@ -64,9 +66,9 @@ section#header {
 				&.sign-in {
 					cursor: pointer;
 					a {
-						border: 2px solid $textOrange;
+						border: 2px solid $textBlue;
 						border-radius: 25px;
-						color: $textOrange;
+						color: $textBlue;
 						padding: 10px 25px;
 					}
 				}

@@ -2,7 +2,8 @@
 // ------------------------------------
 const ACTION_HANDLERS = {
   GET_BIDS: (state, action) => Object.assign({}, state, {
-    data: action.bids
+    data: action.bids,
+    listings: action.listings
   })
 }
 
@@ -12,7 +13,8 @@ const ACTION_HANDLERS = {
 const initialState = {
   data: {
     data: []
-  }
+  },
+  listings: {}
 }
 
 export default function userGetReducer (state = initialState, action) {

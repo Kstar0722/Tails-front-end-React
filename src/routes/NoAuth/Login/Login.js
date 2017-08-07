@@ -88,6 +88,7 @@ class Login extends Component {
 										name="email"
 										type="email"
 										component={renderField}
+										dispayLabel={true}
 										label="Email"
 										placeholder="Email"
 										style={styles.input}/>
@@ -95,6 +96,7 @@ class Login extends Component {
 										name="password"
 										type="password"
 										component={renderField}
+										dispayLabel={true}
 										label="Password"
 										placeholder="Password"
 										style={styles.input}/>

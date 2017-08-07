@@ -6,7 +6,8 @@ const mapDispatchToProps = (dispatch) => ({
 })
 
 const mapStateToProps = (state) => ({
-    bids : state.bid.data
+    bids : state.bid.data,
+    listings: state.bid.listings
 })
 
 export default ReactRedux.connect(mapStateToProps, mapDispatchToProps)(Bids)

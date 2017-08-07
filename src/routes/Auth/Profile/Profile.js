@@ -26,7 +26,7 @@ class Profile extends React.Component {
 							
 							<Avatar type="large"/>
 
-							<button onClick={this.toEdit} className="btn edit-profile block-btn orange">Edit Profile</button>
+							<button onClick={this.toEdit} className="btn edit-profile block-btn blue">Edit Profile</button>
 
 						</div>
 					</div>

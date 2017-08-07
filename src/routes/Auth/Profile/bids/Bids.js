@@ -18,7 +18,7 @@ class Bids extends React.Component {
 		const bids = []
 
 		this.props.bids.data.map((bid, i) => {
-			bids.push(this.renderBids(bid.listing.title, moment(new Date(bid.created_at)).format('MM/DD/YYYY'), '-', '-'))
+			bids.push(this.renderBids(bid.listing.title, moment(new Date(bid.created_at)).format('MM/DD/YYYY'), this.props.listings[bid.id].bids_count, bid.status))
 		})
 
 		return(
