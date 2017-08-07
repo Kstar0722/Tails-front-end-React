@@ -10,16 +10,17 @@ export const validateEmail = value =>
         ? 'Invalid email address'
         : undefined);
 
-const renderField = ({ input, label, type, style, placeholder, meta:{touched, error, invalid, warning}}) => (
-    <div className="form-group" style={style} >
-        <div className="form-item">
-            {/* <label>{label}</label> */}
-            <input {...input} className={`form-control ${touched && invalid ? 'has-error': ''}`} placeholder={placeholder} type={type}/>
-        </div>
+const renderField = ({ id, className, input, label, type, style, placeholder, dispayLabel = false, meta:{touched, error, invalid, warning}}) => (
+    <div className={`form-group ${className ? className: ''}`} style={style} >
+        {dispayLabel ? <label className="label-control control-label" htmlFor={id || `input_${input.name}`}>{label}</label> : <br/>}
+        <input {...input} id={id || `input_${input.name}`} className={`form-control ${touched && invalid ? 'has-error': ''}`} placeholder={placeholder} type={type}/>
         <div className="help-block">
             {touched && ((error && <span>{error}</span>) || (warning && <span>{warning}</span>))}
         </div>
     </div>
 )
+//<div className="form-item">
+    //<input {...input} id={id || `input_${input.name}`} className={`form-control ${touched && invalid ? 'has-error': ''}`} placeholder={placeholder} type={type}/>
+//</div>
 
 export default renderField;

@@ -93,29 +93,33 @@ class signup extends Component {
 						<div className={classNames('form-wrap', { hidden: this.state.showForm })}>
 							<form onSubmit={handleSubmit(this.onSignUpUser)}>
 								<Field
+									className="form-group label-floating is-empty is-focused"
 									name="firstName"
 									type="name"
 									component={renderField}
 									label="Your Name"
-									placeholder="Your Name"
+									dispayLabel={true}
+									placeholder1="Your Name"
 									validate={[minLength(3)]}
 									style={styles.input}/>
 								<Field
+									className="form-group label-floating is-empty"
 									name="email"
 									type="email"
 									component={renderField}
 									label="Email"
-									placeholder="Your Email"
+									dispayLabel={true}
+									placeholder1="Your Email"
 									validate={[validateEmail]}
 									style={styles.input}/>
-								<Field 
+								<Field
 									name="password"
 									type="password"
 									component={renderField}
 									label="Password"
 									placeholder="Your Password"
 									style={styles.input}/>
-								<Field 
+								<Field
 									name="confirmpassword"
 									type="password"
 									component={renderField}
@@ -134,7 +138,7 @@ class signup extends Component {
 						</div>
 					</div>
 				</div>
-			</section>	
+			</section>
 		)
 	}
 }
