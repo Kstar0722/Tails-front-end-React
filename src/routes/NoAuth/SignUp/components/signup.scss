@@ -1,12 +1,17 @@
+@import url(https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700,700italic);
+
 section#signup-wrap {
 	background-color: #e6e6e6;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	.signup-box {
-		width: 450px;
+		width: 712px;
 		margin: 0 auto;
 		padding: 20px;
+		.hidden{
+			display: none
+		}
 		h2{
 			text-align: center
 		}
@@ -16,11 +21,15 @@ section#signup-wrap {
 		.btn-group{
 			width: 100%;
 			button{
-				height: 40px;
+				font-family:  'PT Sans', sans-serif;
+				font-size: 33px;
+				color: #686868;
+				height: 116px;
 				width: 50%;
 				background-color: #c4bebc;
 				&:hover, &:active{
-					background-color: #092b4f
+					background-color: #092b4f;
+					color: white
 				}
 			}
 			button.active{
@@ -29,6 +38,10 @@ section#signup-wrap {
 			}
 		}
 		.btn-submit{
+			font-family:  'PT Sans', sans-serif;
+			font-size: 30px;
+			height: 76px;
+			margin: 20px 0 10px 0;
 			width: 100%;
 			background-color: #092b4f;
 			border-color: #092b4f;
@@ -37,16 +50,16 @@ section#signup-wrap {
 
 		}
 	}
-	/*
+
 	.form-control,
 	.form-group .form-control {
 	  border: 0;
-	  background-image: -webkit-gradient(linear, left top, left bottom, from(#009688), to(#009688)), -webkit-gradient(linear, left top, left bottom, from(#D2D2D2), to(#D2D2D2));
-	  background-image: -webkit-linear-gradient(#009688, #009688), -webkit-linear-gradient(#D2D2D2, #D2D2D2);
-	  background-image: -o-linear-gradient(#009688, #009688), -o-linear-gradient(#D2D2D2, #D2D2D2);
-	  background-image: linear-gradient(#009688, #009688), linear-gradient(#D2D2D2, #D2D2D2);
-	  -webkit-background-size: 0 2px, 100% 1px;
-	          background-size: 0 2px, 100% 1px;
+	  background-image: -webkit-gradient(linear, left top, left bottom, from(#009688), to(#009688)), -webkit-gradient(linear, left top, left bottom, from(#686868), to(#686868));
+	  background-image: -webkit-linear-gradient(#009688, #009688), -webkit-linear-gradient(#686868, #686868);
+	  background-image: -o-linear-gradient(#009688, #009688), -o-linear-gradient(#686868, #686868);
+	  background-image: linear-gradient(#009688, #009688), linear-gradient(#686868, #686868);
+	  -webkit-background-size: 0 2px, 100% 2px;
+	          background-size: 0 2px, 100% 2px;
 	  background-repeat: no-repeat;
 	  background-position: center bottom, center -webkit-calc(100% - 1px);
 	  background-position: center bottom, center calc(100% - 1px);
@@ -61,10 +74,10 @@ section#signup-wrap {
 	}
 	.form-group.is-focused .form-control {
 	  outline: none;
-	  background-image: -webkit-gradient(linear, left top, left bottom, from(#009688), to(#009688)), -webkit-gradient(linear, left top, left bottom, from(#D2D2D2), to(#D2D2D2));
-	  background-image: -webkit-linear-gradient(#009688, #009688), -webkit-linear-gradient(#D2D2D2, #D2D2D2);
-	  background-image: -o-linear-gradient(#009688, #009688), -o-linear-gradient(#D2D2D2, #D2D2D2);
-	  background-image: linear-gradient(#009688, #009688), linear-gradient(#D2D2D2, #D2D2D2);
+	  background-image: -webkit-gradient(linear, left top, left bottom, from(#009688), to(#009688)), -webkit-gradient(linear, left top, left bottom, from(#686868), to(#686868));
+	  background-image: -webkit-linear-gradient(#009688, #009688), -webkit-linear-gradient(#686868, #686868);
+	  background-image: -o-linear-gradient(#009688, #009688), -o-linear-gradient(#686868, #686868);
+	  background-image: linear-gradient(#009688, #009688), linear-gradient(#686868, #686868);
 	  -webkit-background-size: 100% 2px, 100% 1px;
 	          background-size: 100% 2px, 100% 1px;
 	  -webkit-box-shadow: none;
@@ -83,7 +96,7 @@ section#signup-wrap {
 	}
 
 	.form-group .checkbox label, .form-group .radio label, .form-group label {
-	    color: #bdbdbd;
+	    color: #686868;
 	    font-size: 16px;
 	    font-weight: 400;
 	    line-height: 1.42857;
@@ -151,5 +164,16 @@ section#signup-wrap {
 		font-size: 12px;
 		margin-top: 0;
 	}
-*/
+
+	.form-group.has-error label.control-label, .form-group.has-error .help-block{
+		color: #f44336
+	}
+
+	.form-group.has-error.is-focused .form-control{
+		background-image: -webkit-linear-gradient(#f44336, #f44336), -webkit-linear-gradient(#D2D2D2, #D2D2D2);
+		background-image: -moz-linear-gradient(#f44336, #f44336), -moz-linear-gradient(#D2D2D2, #D2D2D2);
+		background-image: -o-linear-gradient(#f44336, #f44336), -o-linear-gradient(#D2D2D2, #D2D2D2);
+		background-image: linear-gradient(#f44336, #f44336), linear-gradient(#D2D2D2, #D2D2D2);
+	}
+
 }
