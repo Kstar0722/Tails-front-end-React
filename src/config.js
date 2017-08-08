@@ -1,7 +1,6 @@
 export default {
     endpoints: {
-        // url: 'http://tails-api-dev.gpd2yfmmj5.us-west-2.elasticbeanstalk.com',
-       url: 'http://localhost:3001',
+        url: process.env.TAILS_API_URL || (process.env.NODE_ENV == 'production') ? 'http://tails-api-dev.gpd2yfmmj5.us-west-2.elasticbeanstalk.com' : 'http://localhost:3001',
         login: '/auth/signin',
         signup: '/auth/signup',
         forgot: '/api/auth/forgot_password',
