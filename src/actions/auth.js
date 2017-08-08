@@ -86,7 +86,12 @@ export function logout() {
     }
 }
 
-export function register(firstName = ' ', lastName = 'dev', email, password) {
+export function register(username, email, password, purpose) {
+    let _username = '' + username.trim();
+    username = username.trim().split(' ');
+    let firstName = '' + username[0];
+    let lastName = _username.slice(-1*firstName.length).trim();
+    
     return function(dispatch) {
         dispatch(signupRequest())
         return fetch(config.endpoints.url + config.endpoints.signup, {
@@ -98,7 +103,8 @@ export function register(firstName = ' ', lastName = 'dev', email, password) {
                 first_name: firstName,
                 last_name: lastName,
                 email: email,
-                password: password
+                password: password,
+                purpose: purpose
             })
         })
         .then(checkHttpStatus)

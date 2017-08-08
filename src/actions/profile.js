@@ -15,14 +15,17 @@ export function getProfile() {
         .then(parseJSON)
         .then(res => {
             dispatch({ type: 'GET_PROFILE', profile: res })
+            dispatch({ type: 'LOGIN_SUCCESS', userId: user.id })
         })
         .catch(error =>{
+            console.log('err', error)
             dispatch({ type: 'ERROR_PROFILE', error })
         })
     }
 }
 
-export function updateProfile(data) {
+export function updateProfile(_data) {
+    let data = Object.assign({}, _data);
     data.password = data.password_reset;
     data.avatar = data.avatar_new;
     data.cover_photo = data.cover_photo_new;
@@ -30,6 +33,15 @@ export function updateProfile(data) {
     delete data.password_reset;
     delete data.cover_photo_new;
     delete data.avatar_new;
+    data.purpose = "";
+    if (data.be_a_cerrier)
+        data.purpose = 'be_a_cerrier/'
+
+    if (data.ship)
+        data.purpose += 'ship'
+
+    delete data.ship;
+    delete data.be_a_cerrier;
     
     return function(dispatch) {
         return fetch(config.endpoints.url + config.endpoints.profile + '/', {

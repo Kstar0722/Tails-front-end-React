@@ -5,21 +5,16 @@ import imgAnimal from 'assets/animal-not-active.png'
 import imgAnimalActive from 'assets/animal.png'
 import React, {Component} from 'react';
 import { Field, reduxForm } from 'redux-form'
-import { Link } from 'react-router'
+import { Link, browserHistory } from 'react-router'
 import {register} from '../../../../actions/auth'
 import renderField, { validateEmail, minLength } from '../../../../components/renderField'
 import classNames from 'classnames'
-const fields = ['firstName', 'lastName', 'email', 'password']
 
 function validate(values) {
 	var errors = {}
 	var hasErrors = false
-	if(!values.firstName || values.firstName.trim() === '') {
-		errors.firstName = 'Enter First Name'
-		hasErrors = true
-	}
-	if(!values.lastName || values.lastName.trim() === '') {
-		errors.lastName = 'Enter Last Name'
+	if(!values.username || values.username.trim() === '') {
+		errors.username = 'Enter Your Name'
 		hasErrors = true
 	}
 	if(!values.password || values.password.trim() === '') {
@@ -80,10 +75,11 @@ class signup extends Component {
 	}
 
 	onSignUpUser(values, dispatch) {
-		dispatch(register(values.firstName, values.lastName, values.email, values.password))
+		dispatch(register(values.username, values.email, values.password, values.purpose))
 	}
 
 	render() {
+		console.log('browserHistory ', browserHistory )
 		const {handleSubmit, submitting, token, loginActive} = this.props
   		const styles = this.getStyles()
 		return (
@@ -106,7 +102,7 @@ class signup extends Component {
 							<form onSubmit={handleSubmit(this.onSignUpUser)}>
 								<Field
 									className="form-group label-floating is-empty"
-									name="firstName"
+									name="username"
 									type="name"
 									component={renderField}
 									label="Your Name"

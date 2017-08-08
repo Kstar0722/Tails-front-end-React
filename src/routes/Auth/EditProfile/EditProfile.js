@@ -25,7 +25,7 @@ class EditProfile extends React.Component {
 
 			<section id="profile">
 				<div className="container">
-					<h1>Setting</h1>
+					<h1 className="profile-setting">Setting</h1>
 					<div className="profile-edit">
 						<Nav tabs>
 						<NavItem>

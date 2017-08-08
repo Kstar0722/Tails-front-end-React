@@ -3,6 +3,7 @@ import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 import {validationFields} from 'lib/helper'
 import renderField from 'components/fieldForm'
+import checkboxField from 'components/checkboxField'
 import {updateProfile} from 'actions/profile'
 import EditAvatar from './EditImage/EditAvatar'
 import editImage from './EditImage/EditImage'
@@ -39,7 +40,6 @@ class EditForm extends React.Component {
 		return (
 			<form onSubmit={handleSubmit(this.submit.bind(this))} className="form-profile">
 				<div className="row">
-					
 					<div className="col-6">
 						<div className="row">
 						 <Field name="avatar_new" image={profileUpdate.avatar} component={EditAvatar} label={"Profile Image"}/>       
@@ -52,12 +52,20 @@ class EditForm extends React.Component {
 						<Field name="email" type="text" component={renderField} label="Email"/>
 						<Field name="password_reset" type="password" component={renderField} label="Password"/>
 						<Field name="confirm_password" type="password" component={renderField} label="Confirm Password"/>
+						<label>Primery account type</label>
+						<div className="row">
+							<div className="col-6">
+								<Field name="be_a_cerrier" component={checkboxField} label="I need things shipped"/>
+							</div>
+							<div className="col-6">
+								<Field name="ship" component={checkboxField} label="I want to ship"/>
+							</div>
+						</div>
+						
 					</div>
 				</div>
 				<div className="row justify-content-center">	
-					<div className="col-12 ">
-						<button type="submit" className="btn btn-primary" disabled={submitting}>Save</button>
-					</div>
+					<button type="submit" className="btn btn-primary save-profile" disabled={submitting}>Save</button>
 				</div>
 			</form>
 		)

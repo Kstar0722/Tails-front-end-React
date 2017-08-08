@@ -1,5 +1,5 @@
 import './Profile.scss'
-
+import { connect } from 'react-redux'
 import StockBanner from 'assets/stock-banner.png'
 import { Link } from 'react-router';
 import Avatar from 'components/Avatar'
@@ -11,16 +11,26 @@ class Profile extends React.Component {
 	
 	constructor(props) {
 		super(props)
+		this.state = {
+			cover_photo: StockBanner
+		}
 	}
 
 	toEdit(){
 		browserHistory.push('/profile/edit')
 	}
 
+	componentWillMount() {
+        if(this.props.profile.cover_photo)
+            this.setState({
+                cover_photo: this.props.profile.cover_photo
+            })
+	}
+
 	render() {
 		return (
 			<section id="profile">
-				<div className="banner-wrap" style={{backgroundImage: 'url('+StockBanner+')'}}>
+				<div className="banner-wrap" style={{backgroundImage: 'url('+ this.state.cover_photo +')'}}>
 					<div className="container">
 						<div className="banner-content d-flex flex-row flex-wrap justify-content-between align-items-baseline">
 							
@@ -35,11 +45,15 @@ class Profile extends React.Component {
 					<div className="page-content d-flex flex-column align-items-start justify-content-center">
 						<div className="block-section my-listings">
 							<p className="title">My Listings</p>
-							<div className="table-wrap">
-								
-								<ListingsContainer />
-
-							</div>
+							{(this.props.listings.data.length > 0) ? 
+								<div className="table-wrap">
+									<ListingsContainer />
+								</div> : 
+								<div className="row not-listings justify-content-center align-self-center">
+									<h1>You have no listings yet...</h1>
+									<button className="btn btn-create-listing">Create Listing</button>
+								</div>
+							}
 						</div>
 						<div className="block-section my-bids">
 							<p className="title">My Bids</p>
@@ -55,5 +69,13 @@ class Profile extends React.Component {
 		)
 	}
 }
+
+Profile = connect(
+  state => ({
+	profile: state.profile.data,
+	listings: state.listing.data
+  }),
+  {}
+)(Profile)
 
 export default Profile

@@ -1,12 +1,41 @@
-.avatar-edit{
+.image-edit{
+	width: 100%;
 	height: 100%;
 	.new_file{
 		border-radius: 0;
 		background-color: #176ce8; 
 	}
+
+	p{
+		width: 164px;
+		text-align: center;
+	}
+
+	label{
+		padding: 10px 5px;
+	}
+
+	.cover-photo{
+		height: 175px;
+		background-repeat: no-repeat;
+		width: 100%;
+		margin: 10px 0;
+		background-size: initial;
+		background-position: center;
+	}
+
+	.not-cover-photo{
+		min-height: 200px;
+		p{
+			width: 100%;
+			font-size: 35px;
+			padding: 50px 0;
+			color: #565656;
+		}
+	}
 	input[type=range] {
 		-webkit-appearance: none;
-		width: 100%;
+		width: 164px;
 		margin: 11px 0;
 	}
 	input[type=range]:focus {

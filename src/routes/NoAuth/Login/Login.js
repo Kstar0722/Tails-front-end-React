@@ -6,7 +6,7 @@ import { Field, reduxForm } from 'redux-form'
 import { Link } from 'react-router'
 import renderField from '../../../components/renderField'
 import {login, logout} from '../../../actions/auth'
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap'
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Dropdown, DropdownToggle, DropdownMenu, DropdownItem  } from 'reactstrap'
 import user from 'auth/user'
 import { browserHistory } from 'react-router'
 
@@ -18,11 +18,12 @@ class Login extends Component {
 		super(props)
 		this.state = {
 			modal: false,
-			auth: user.authorized
+			auth: user.authorized,
+			dropdownOpen: false
 		}
 
     	this.toggle = this.toggle.bind(this)
-    	this.logout = this.logout.bind(this)
+		this.logout = this.logout.bind(this)
 	}
 
 	componentWillMount() {
@@ -53,12 +54,15 @@ class Login extends Component {
 	}
 
 	goSignUp() {
-		
+		this.setState({
+			modal: false
+		});
+		browserHistory.push('/sign-up');
 	}
 
-	toggle() {
+	toggle(type) {
 		this.setState({
-			modal: !this.state.modal
+			[type]: !this.state[type]
 		});
 	}
 
@@ -77,10 +81,10 @@ class Login extends Component {
 		const styles = this.getStyles()
 		if(!this.props.auth.authorized){
 			return (
-				<li className="sign-in" onClick={this.toggle}>
+				<li className="sign-in" onClick={this.toggle.bind(this, 'modal')}>
 					<a>Sign In</a>
-					<Modal isOpen={this.state.modal} toggle={this.toggle} className={'modal-sign-in'}>
-						<ModalHeader toggle={this.toggle}>Login</ModalHeader>
+					<Modal isOpen={this.state.modal} toggle={this.toggle.bind(this, 'modal')} className={'modal-sign-in'}>
+						<ModalHeader toggle={this.toggle.bind(this, 'modal')}>Login</ModalHeader>
 						<ModalBody>
 							<div className="form-wrap">
 								<form onSubmit={handleSubmit(this.validateAndSignInUser.bind(this))}>
@@ -119,7 +123,22 @@ class Login extends Component {
 				</li>
 			);
 		} else {
-			return <li className="sign-in" onClick={this.logout}><a>Logout</a></li>
+			return <li>
+				<Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle.bind(this, 'dropdownOpen')}>
+					<div
+						data-toggle="dropdown"
+						aria-haspopup="true"
+						aria-expanded={this.state.dropdownOpen}
+						className="menu-profile"
+					>
+					 {this.props.profile.avatar ? <img src={this.props.profile.avatar} width="60" className="rounded-circle"/> : null}
+					 {this.props.profile.first_name} {this.props.profile.last_name}
+					</div>
+					<DropdownMenu right>
+						<DropdownItem>Logout</DropdownItem>
+					</DropdownMenu>
+				</Dropdown>
+			</li>
 		}
   	}
 }
@@ -150,7 +169,8 @@ Login.propTypes = {
 
 Login = connect(
   state => ({
-	auth: state.auth
+	auth: state.auth,
+	profile: state.profile.data
   }),
   {}
 )(Login)
