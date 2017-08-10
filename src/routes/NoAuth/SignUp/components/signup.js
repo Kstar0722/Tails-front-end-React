@@ -79,7 +79,6 @@ class signup extends Component {
 	}
 
 	render() {
-		console.log('browserHistory ', browserHistory )
 		const {handleSubmit, submitting, token, loginActive} = this.props
   		const styles = this.getStyles()
 		return (

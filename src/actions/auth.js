@@ -5,6 +5,7 @@ import config from '../config.js'
 import { browserHistory } from 'react-router'
 // import { dashboardUrl } from '../routes/urlGenerators'
 import user from 'auth/user'
+import Notifications from 'react-notification-system-redux'
 
 const LOGIN_REQUEST = 'LOGIN_REQUEST'
 const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
@@ -29,8 +30,11 @@ export function loginSuccess(res) {
 
 export function loginFailure(error) {
     return {
-        type: LOGIN_FAILURE,
-        status: error.response
+        type: 'GET_NOTIFICATION',
+        notification: [{
+            type: 'danger',
+            message: 'Incorrect credentials'
+        }]
     }
 }
 
@@ -50,8 +54,11 @@ export function signupSuccess(res) {
 
 export function signupFailure(error) {
     return {
-        type: SIGNUP_FAILURE,
-        status: error.response
+        type: 'GET_NOTIFICATION',
+        notification: [{
+            type: 'danger',
+            message: 'Incorrect credentials'
+        }]
     }
 }
 
@@ -73,7 +80,12 @@ export function login(email, password) {
             console.log("login success")
         })
         .catch(error =>{
-            dispatch(loginFailure(error))
+           dispatch(Notifications.error({
+                title: '',
+                message: 'Incorrect credentials',
+                position: 'br',
+                autoDismiss: 3,
+           }));
         })
     }
 }
@@ -115,7 +127,12 @@ export function register(username, email, password, purpose) {
             console.log("signup success")
         })
         .catch(error =>{
-            dispatch(signupFailure(error))
+            dispatch(Notifications.error({
+                title: '',
+                message: 'Incorrect credentials',
+                position: 'br',
+                autoDismiss: 3,
+           }));
         })
     }
 }
