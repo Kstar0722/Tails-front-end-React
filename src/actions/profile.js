@@ -1,6 +1,7 @@
 import config from '../config.js'
 import { checkHttpStatus, parseJSON } from '../http.js'
 import user from 'auth/user'
+import Notifications from 'react-notification-system-redux'
 
 export function getProfile() {
     return function(dispatch) {
@@ -56,9 +57,21 @@ export function updateProfile(_data) {
         .then(parseJSON)
         .then(res => {
             dispatch({ type: 'GET_PROFILE', profile: res })
+            dispatch(Notifications.success({
+                title: '',
+                message: 'Profile saved',
+                position: 'br',
+                autoDismiss: 0,
+           }));
         })
         .catch(error =>{
             dispatch({ type: 'ERROR_PROFILE', error })
+            dispatch(Notifications.error({
+                title: '',
+                message: 'Incorrect credentials',
+                position: 'br',
+                autoDismiss: 3,
+           }));
         })
     }
 }

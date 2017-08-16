@@ -5,10 +5,12 @@ import authReducer from './auth'
 import profileReducer from './profile'
 import bidReducer from './bid'
 import { reducer as formReducer } from 'redux-form'
+import {reducer as notifications} from 'react-notification-system-redux'
 
 export const makeRootReducer = (asyncReducers) => {
   return combineReducers({
-  	form: formReducer,
+    form: formReducer,
+    notifications,
     location: locationReducer,
     auth: authReducer,
     listing: listinghReducer,
