@@ -1,9 +1,25 @@
 .form-profile{
 	padding: 20px;
+	.form-group{
+		label{
+			width: 100%;
+		}
+	}
 	.save-profile{
 		width: 495px;
 		height: 61px;
 		background-color: #092b4f;
 		margin: 60px 0 0 0
+	}
+	.facebook-connect{
+		width: 235px;
+		height: 37px;
+		background-color: #3b5998;
+		text-align: left;
+		font-size: 14px;
+		span{
+			font-size: 20px;
+		}
+		// margin: 60px 0 0 0
 	}
 }

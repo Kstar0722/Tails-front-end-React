@@ -7,6 +7,7 @@ import checkboxField from 'components/checkboxField'
 import {updateProfile} from 'actions/profile'
 import EditAvatar from './EditImage/EditAvatar'
 import editImage from './EditImage/EditImage'
+import config from 'config'
 
 const validate = values => {
 	let errors = {}
@@ -52,6 +53,14 @@ class EditForm extends React.Component {
 						<Field name="email" type="text" component={renderField} label="Email"/>
 						<Field name="password_reset" type="password" component={renderField} label="Password"/>
 						<Field name="confirm_password" type="password" component={renderField} label="Confirm Password"/>
+						<div className="form-group">
+							<label>Connect your Facebook.com Account</label>
+							{this.props.initialValues.facebook_id ? 
+							<a href={'https://www.facebook.com/' + this.props.initialValues.facebook_id} className="facebook-account">Account Facebook</a> :
+							<a className='btn btn-primary facebook-connect' href={config.endpoints.url + '/auth/facebook?token=' + window.localStorage.getItem('authToken')}>
+								<i className="fa fa-facebook" aria-hidden="true"></i> Connect Facebook
+							</a>}
+						</div>
 						<label>Primery account type</label>
 						<div className="row">
 							<div className="col-6">

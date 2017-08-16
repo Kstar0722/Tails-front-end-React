@@ -132,7 +132,7 @@ class Login extends Component {
 						className="menu-profile"
 					>
 					 {this.props.profile.avatar ? <img src={this.props.profile.avatar} width="60" className="rounded-circle"/> : null}
-					 {this.props.profile.first_name} {this.props.profile.last_name}
+					 <Link to='/profile'>{this.props.profile.first_name} {this.props.profile.last_name}</Link>
 					</div>
 					<DropdownMenu right>
 						<DropdownItem>Logout</DropdownItem>
