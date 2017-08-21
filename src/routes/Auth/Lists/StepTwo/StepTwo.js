@@ -2,6 +2,9 @@ import { connect } from 'react-redux'
 import Dropzone from 'react-dropzone'
 import StepHistory from '../StepHistory'
 import NextStep from '../NextStep'
+import { FaPlus, FaPencil } from 'react-icons/lib/fa'
+import uploadBtnImage from 'assets/upload.png'
+import cameraImage from 'assets/camera.png'
 import '../lists.scss'
 
 class StepTwo extends React.Component {
@@ -13,7 +16,9 @@ class StepTwo extends React.Component {
             breed_animal: "",
             height_animal: "",
             weight_animal: "",
-            notes_animal: ""
+            notes_animal: "",
+            files: [],
+            showPreview: true
         }        
     }
 
@@ -21,8 +26,15 @@ class StepTwo extends React.Component {
         this.setState({[field]: value.target.value})
     }
 
+    onDrop(files) {
+        console.log(files)
+        this.setState({
+            files
+        });
+    }
+
 	render() {
-        const { breed_animal, height_animal, weight_animal, notes_animal } = this.state
+        const { breed_animal, height_animal, weight_animal, notes_animal , showPreview} = this.state
         console.log(this.state)
 		return (
 			<div className="create-list">
@@ -36,12 +48,12 @@ class StepTwo extends React.Component {
                             <div className="left-side-bar">
                                 <ul>
                                     <li className="animal-name">
-                                        Lucy
+                                        Lucy <FaPencil/>
                                     </li>
                                     <li className="animal-name">
-                                        Animal2
+                                        Animal2 <FaPencil/>
                                     </li>                                    
-                                    <button className="btn btn-add-animal">New Animal</button>
+                                    <button className="btn btn-add-animal"><FaPlus/> New Animal</button>
                                     
                                 </ul>
                             </div>
@@ -84,9 +96,20 @@ class StepTwo extends React.Component {
                                 </div>
                                 <div className="form-group">
                                     <label>Images of this Animal</label>
-                                    <input type="file" name="animal_image" />
+                                    <Dropzone onDrop={this.onDrop.bind(this)} className="file-drag-drop">
+                                        <img src={uploadBtnImage}/>
+                                        <div>
+                                            <p className="file-upload-title">drag & drop <br/> Image or.</p>                                        
+                                            <button className="btn btn-file-upload">Choose files</button>
+                                        </div>
+                                        <img src={cameraImage}/>
+                                    </Dropzone>
                                 </div>
                             </div>
+                        </div>
+                        <div className="footer">
+                            <button className="btn btn-prev">prev</button>
+                            <button className="btn btn-next">next</button>
                         </div>
                     </div>                
                 </div> 

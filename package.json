@@ -36,6 +36,7 @@
     "react-dnd": "^2.4.0",
     "react-dom": "^15.5.4",
     "react-dropzone": "^4.1.0",
+    "react-icons": "^2.2.5",
     "react-notification-system": "^0.2.15",
     "react-notification-system-redux": "^1.1.4",
     "react-redux": "^5.0.4",
