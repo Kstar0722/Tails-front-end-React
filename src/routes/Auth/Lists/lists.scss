@@ -1,0 +1,86 @@
+.create-list {
+    background: #e6e6e6;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 100px;
+    top: 120px;
+    .step-one {
+        background: #ffffff;
+        margin-top: 60px;
+        padding: 30px;
+        .comment {
+            font-size: 30px;
+            color: #333;
+            text-align: center;
+        }
+        .animal-list {
+            margin-top: 60px;
+            .animal-item {
+                text-align: center;
+                .animal-image {
+                    width: 50px;
+                    height: 50px;
+                    border-radius: 50%;
+                    border: 1px solid #092b4f;
+                    &:hover {
+                        cursor: pointer;
+                    }
+                }
+                .select-animal-image {
+                    width: 50px;
+                    height: 50px;
+                    border-radius: 50%;
+                    border: 1px solid #092b4f;
+                    background: #092b4f;
+                    &:hover {
+                        cursor: pointer;
+                    }
+                }
+                .animal-name {
+                    color: #092b4f;
+                    font-size: 14px;
+                }
+            }
+        }
+    }
+    
+    .step-history {
+        padding-top: 50px;
+        display: flex;
+        justify-content: center;
+        .step-item {
+            display: flex;
+            align-items: center;
+            .circle {
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                background: #092b4f;
+                color: #ffffff;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .line {
+                width: 150px;
+                color: #092b4f;
+                background: #092b4f;
+                height: 3px;
+            }
+        }
+    }
+    .btn-next-step {
+        text-align: center;
+        padding: 30px;
+        margin-top: 40px;
+        .btn-next {
+            width: 240px;
+            height: 50px;
+            background: #092b4f;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 24px;
+        }
+    }
+}

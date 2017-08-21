@@ -51,7 +51,7 @@ class Profile extends React.Component {
 								</div> : 
 								<div className="row not-listings justify-content-center align-self-center">
 									<h1>You have no listings yet...</h1>
-									<button className="btn btn-create-listing">Create Listing</button>
+									<Link className="btn btn-create-listing" to="/step-one">Create Listing</Link>
 								</div>
 							}
 						</div>

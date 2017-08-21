@@ -1,11 +1,12 @@
 import { combineReducers } from 'redux'
+import { reducer as formReducer } from 'redux-form'
+import { reducer as notifications } from 'react-notification-system-redux'
 import locationReducer from './location'
 import listinghReducer from './listing'
 import authReducer from './auth'
 import profileReducer from './profile'
 import bidReducer from './bid'
-import { reducer as formReducer } from 'redux-form'
-import {reducer as notifications} from 'react-notification-system-redux'
+import animalIdsReducer from './animals'
 
 export const makeRootReducer = (asyncReducers) => {
   return combineReducers({
@@ -16,6 +17,7 @@ export const makeRootReducer = (asyncReducers) => {
     listing: listinghReducer,
     profile: profileReducer,
     bid: bidReducer,
+    animalIdsReducer,
     ...asyncReducers
   })
 }

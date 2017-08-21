@@ -32,6 +32,7 @@
     "react-addons-css-transition-group": "^15.6.0",
     "react-addons-transition-group": "^15.6.0",
     "react-avatar-editor": "^10.1.0",
+    "react-bs-notifier": "^4.3.2",
     "react-dom": "^15.5.4",
     "react-notification-system": "^0.2.15",
     "react-notification-system-redux": "^1.1.4",
