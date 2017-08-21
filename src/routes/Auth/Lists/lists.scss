@@ -187,6 +187,9 @@
                 text-transform: uppercase;
                 color: #adaead;
                 font-size: 35px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
             }
             .btn-next {
                 background: #082543;
@@ -197,6 +200,9 @@
                 text-transform: uppercase;
                 color: #ffffff;
                 font-size: 35px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
             }
         }
     }

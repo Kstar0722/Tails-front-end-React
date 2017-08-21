@@ -1,4 +1,5 @@
 import { connect } from 'react-redux'
+import { Link } from 'react-router';
 import Dropzone from 'react-dropzone'
 import StepHistory from '../StepHistory'
 import NextStep from '../NextStep'
@@ -108,8 +109,8 @@ class StepTwo extends React.Component {
                             </div>
                         </div>
                         <div className="footer">
-                            <button className="btn btn-prev">prev</button>
-                            <button className="btn btn-next">next</button>
+                            <Link className="btn btn-prev" to="/step-one">prev</Link>
+                            <Link className="btn btn-next" to="/step-three">next</Link>
                         </div>
                     </div>                
                 </div> 
