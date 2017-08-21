@@ -1,6 +1,6 @@
 .create-list {
     background: #e6e6e6;
-    position: absolute;
+  //  position: absolute;
     left: 0;
     right: 0;
     bottom: 100px;
@@ -69,6 +69,15 @@
                 height: 3px;
             }
         }
+        .step-two-circle {
+            background: transparent !important;
+            border: 2px solid #092b4f !important;
+            color: #092b4f !important;
+        }
+        .step-two-circle-three-btn {
+            border: 2px solid #ffffff;
+            background: #26d4ff !important;
+        }
     }
     .btn-next-step {
         text-align: center;
@@ -81,6 +90,65 @@
             color: #ffffff;
             text-decoration: none;
             font-size: 24px;
+        }
+    }
+    .step-two {
+        padding: 30px;
+        .comment {
+            color: #092b4f;
+            font-size: 30px;
+            text-align: center;
+        }
+        .dashboard {
+            background: #ffffff;
+            border-radius: 5px;
+            display: flex;
+            .left-side-bar {
+                width: 250px;
+                ul {
+                    padding: 0;
+                    li {
+                        list-style: none;
+                        color: #91aec9;
+                        height: 70px;
+                        font-size: 21px;
+                        display: flex;
+                        align-items: center;
+                        padding-left: 30px;
+                        border-bottom: 1px solid #e1e5ea;
+                    }
+                    .btn-add-animal {
+                        text-transform: uppercase;
+                        background: transparent;
+                        border: 1px solid #91aec9;
+                        color: #91aec9;
+                        text-align: center;
+                        margin: 0 auto;
+                        width: 200px;
+                        height: 70px;
+                        border-radius: 40px;
+                        margin-left: 25px;
+                        margin-top: 30px;
+                    }                    
+                    li.animal-name:hover, li.animal-name:active {
+                        color: #ffffff;
+                        background: linear-gradient(to right, #4b709f, #4e73a1, #547ca7, #5b86ae, #5e8ab1, #608eb3, #6493b7);
+                        cursor: pointer;
+                    }
+                }
+            }
+            .main-body {
+                width: calc(100% - 250px);
+                padding: 50px;
+                background: linear-gradient(to right, #f4f4f4 1%, #f5f5f5 2%, #f6f6f6 3%, #f7f7f7 4%, #f8f8f8 5%, #f9f9f9 6%, #fcfcfc 7%, #ffffff);
+                color: #b1babf;
+                label {
+                    font-size: 20px;
+                }
+                input{
+                    height: 60px;
+                }
+            }
         }
     }
 }

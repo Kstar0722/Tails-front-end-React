@@ -9,15 +9,15 @@ export default class StepHistory extends React.Component {
         return (
             <div className="step-history">
                 <div className="step-item">
-                    <div className={currentState == 'stepTwo' ? "step-two-circle" : "circle"}>1</div>
-                    <div className={currentState == 'stepTwo' ? "step-two-circle" : "line"}></div>
+                    <div className={currentState == 'stepTwo' ? "step-two-circle circle" : "circle"}>1</div>
+                    <div className={currentState == 'stepTwo' ? "step-two-line line" : "line"}></div>
                 </div>
                 <div className="step-item">
-                    <div className={currentState == 'stepTwo' ? "step-two-circle" : "circle"}>2</div>
-                    <div className={currentState == 'stepTwo' ? "step-two-circle" : "line"}></div>
+                    <div className={currentState == 'stepTwo' ? "step-two-circle circle" : "circle"}>2</div>
+                    <div className={currentState == 'stepTwo' ? "step-two-line line" : "line"}></div>
                 </div>
                 <div className="step-item">
-                    <div className={currentState == 'stepTwo' ? "step-two-circle" : "circle"}>3</div>
+                    <div className={currentState == 'stepTwo' ? "step-two-circle-three-btn circle" : "circle"}>3</div>
                 </div>
             </div>         
         )
