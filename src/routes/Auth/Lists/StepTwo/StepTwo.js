@@ -35,8 +35,8 @@ class StepTwo extends React.Component {
     }
 
 	render() {
-        const { breed_animal, height_animal, weight_animal, notes_animal , showPreview} = this.state
-        console.log(this.state)
+        const { breed_animal, height_animal, weight_animal, notes_animal , showPreview } = this.state
+        
 		return (
 			<div className="create-list">
                 <div className="container">
@@ -45,8 +45,8 @@ class StepTwo extends React.Component {
                         <div className="comment">
                             Tell us a little about your animals            
                         </div>
-                        <div className="dashboard">
-                            <div className="left-side-bar">
+                        <div className="dashboard row">
+                            <div className="left-side-bar col-sm-4 col-12">
                                 <ul>
                                     <li className="animal-name">
                                         Lucy <FaPencil/>
@@ -58,10 +58,11 @@ class StepTwo extends React.Component {
                                     
                                 </ul>
                             </div>
-                            <div className="main-body">
+                            <div className="main-body col-sm-8 col-12">
                                 <div className="form-group">
                                     <label>Breed of Animal</label>
-                                    <input type="text" 
+                                    <input 
+                                        type="text" 
                                         className="form-control"
                                         name="breed_animal"
                                         value={breed_animal}
@@ -69,17 +70,19 @@ class StepTwo extends React.Component {
                                 </div>
                                 <div className="form-group">
                                     <div className="row">
-                                        <div className="col-sm-6">
+                                        <div className="col-sm-6 col-12">
                                             <label>Height of Animal</label>
-                                            <input type="number"
+                                            <input 
+                                                type="number"
                                                 className="form-control"
                                                 name="height_animal"
                                                 value={height_animal}
                                                 onChange={this.setAnimalProperty.bind(this, "height_animal")} />
                                         </div>
-                                        <div className="col-sm-6">
+                                        <div className="col-sm-6 col-12">
                                             <label>Weight of Animal</label>
-                                            <input type="number"
+                                            <input
+                                                type="number"
                                                 className="form-control"
                                                 name="weight_animal"
                                                 value={weight_animal}
@@ -89,7 +92,8 @@ class StepTwo extends React.Component {
                                 </div>
                                 <div className="form-group">
                                     <label>Special Notes for Animal</label>
-                                    <textarea rows="3"
+                                    <textarea
+                                        rows="3"
                                         className="form-control"
                                         name="notes_animal"
                                         value={notes_animal}

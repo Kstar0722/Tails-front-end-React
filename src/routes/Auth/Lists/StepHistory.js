@@ -13,10 +13,10 @@ export default class StepHistory extends React.Component {
                     <div className={currentState == 'stepTwo' ? "step-two-line line" : "line"}></div>
                 </div>
                 <div className="step-item">
-                    <div className={currentState == 'stepTwo' ? "step-two-circle circle" : "circle"}>2</div>
-                    <div className={currentState == 'stepTwo' ? "step-two-line line" : "line"}></div>
+                    <div className={currentState == 'stepTwo' ? "step-two-circle circle" : "circle"}>2</div>                    
                 </div>
-                <div className="step-item">
+                <div className="step-item step-last">
+                    <div className={currentState == 'stepTwo' ? "step-two-line line" : "line"}></div>
                     <div className={currentState == 'stepTwo' ? "step-two-circle-three-btn circle" : "circle"}>3</div>
                 </div>
             </div>         
