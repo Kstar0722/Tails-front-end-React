@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 import Dropzone from 'react-dropzone'
 import StepHistory from '../StepHistory'
 import NextStep from '../NextStep'
+import ModalAnimals from '../ModalAnimals'
 import { FaPlus, FaPencil } from 'react-icons/lib/fa'
 import uploadBtnImage from 'assets/upload.png'
 import cameraImage from 'assets/camera.png'
@@ -19,7 +20,9 @@ class StepTwo extends React.Component {
             weight_animal: "",
             notes_animal: "",
             files: [],
-            showPreview: true
+            impagePreview: null,
+            showPreview: true,
+            isOpen: false
         }        
     }
 
@@ -29,18 +32,37 @@ class StepTwo extends React.Component {
 
     onDrop(files) {
         console.log(files)
-        this.setState({
-            files
-        });
+        this.setState({ files });
+        this.setState({ impagePreview: files[0].preview})
+    }
+
+    toggleModal(){
+        this.setState({ isOpen: !this.state.isOpen });  
     }
 
 	render() {
-        const { breed_animal, height_animal, weight_animal, notes_animal , showPreview } = this.state
+        const { 
+            breed_animal, 
+            height_animal, 
+            weight_animal, 
+            notes_animal, 
+            showPreview, 
+            isOpen, 
+            impagePreview
+        } = this.state
         
 		return (
 			<div className="create-list">
                 <div className="container">
                     <StepHistory currentState="stepTwo"/>
+                    <ModalAnimals 
+                        show={isOpen}
+                        onClose={this.toggleModal.bind(this)} />
+                    {
+                        isOpen
+                            ? <div className="overlay-section" onClick={this.toggleModal.bind(this)}></div>
+                            : null
+                    }
                     <div className="step-two">
                         <div className="comment">
                             Tell us a little about your animals            
@@ -54,7 +76,10 @@ class StepTwo extends React.Component {
                                     <li className="animal-name">
                                         Animal2 <FaPencil/>
                                     </li>                                    
-                                    <button className="btn btn-add-animal"><FaPlus/> New Animal</button>
+                                    <button
+                                        className="btn btn-add-animal"
+                                        onClick={this.toggleModal.bind(this)}
+                                    ><FaPlus/> New Animal</button>
                                     
                                 </ul>
                             </div>
@@ -102,12 +127,18 @@ class StepTwo extends React.Component {
                                 <div className="form-group">
                                     <label>Images of this Animal</label>
                                     <Dropzone onDrop={this.onDrop.bind(this)} className="file-drag-drop">
-                                        <img src={uploadBtnImage}/>
-                                        <div>
-                                            <p className="file-upload-title">drag & drop <br/> Image or.</p>                                        
-                                            <button className="btn btn-file-upload">Choose files</button>
-                                        </div>
-                                        <img src={cameraImage}/>
+                                        {
+                                            impagePreview
+                                                ? <img src={impagePreview} className="image-preview"/>
+                                                : <div className="upload-section">
+                                                    <img src={uploadBtnImage} className="upload-icon"/>
+                                                        <div>
+                                                            <p className="file-upload-title">drag & drop <br/> Image or.</p>                                        
+                                                            <button className="btn btn-file-upload">Choose files</button>
+                                                        </div>
+                                                    <img src={cameraImage} className="upload-icon"/>
+                                                </div>
+                                        }
                                     </Dropzone>
                                 </div>
                             </div>
