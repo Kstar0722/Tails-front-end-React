@@ -3,7 +3,9 @@ import { getAnimalsIds, selectAnimal } from './Actions/getAnimals'
 import StepHistory from '../StepHistory'
 import NextStep from '../NextStep'
 import '../lists.scss'
-
+import animal_image  from 'assets/animal.png'
+import dog_image  from 'assets/dog.png'
+import pig_image  from 'assets/pig.png'
 class StepOne extends React.Component {
     
     constructor(props) {
@@ -31,8 +33,7 @@ class StepOne extends React.Component {
 
     render() {
         const { animalIds } = this.props
-        const { isSelected } = this.state
-        const imageUrl = 'https://s3-us-west-2.amazonaws.com/tails-images/befeadd4cc282b9e6c6fcc7ebddc393e0daae84c.jpg?1502913370653'
+        const { isSelected } = this.state        
         return (
             <div className="create-list">
                 <div className="container">
@@ -45,25 +46,25 @@ class StepOne extends React.Component {
                             <div className="row">
                                 <div className="col-sm-3">
                                     <div className="animal-item">
-                                        <img src={imageUrl} className={ isSelected ? "select-animal-image" : "animal-image" } onClick={()=>this.selectImg()}/>
+                                        <img src={dog_image} className={ isSelected ? "select-animal-image" : "animal-image" } onClick={()=>this.selectImg()}/>
                                         <div className="animal-name">Dog</div>
                                     </div>
                                 </div>
                                 <div className="col-sm-3">
                                     <div className="animal-item">
-                                        <img src={imageUrl}  className={ isSelected ? "select-animal-image" : "animal-image" } onClick={()=>this.selectImg()}/>
+                                        <img src={pig_image}  className={ isSelected ? "select-animal-image" : "animal-image" } onClick={()=>this.selectImg()}/>
+                                        <div className="animal-name">Pig</div>
+                                    </div>
+                                </div>
+                                <div className="col-sm-3">
+                                    <div className="animal-item">
+                                        <img src={animal_image}  className={ isSelected ? "select-animal-image" : "animal-image" } onClick={()=>this.selectImg()}/>
                                         <div className="animal-name">Dog</div>
                                     </div>
                                 </div>
                                 <div className="col-sm-3">
                                     <div className="animal-item">
-                                        <img src={imageUrl}  className={ isSelected ? "select-animal-image" : "animal-image" } onClick={()=>this.selectImg()}/>
-                                        <div className="animal-name">Dog</div>
-                                    </div>
-                                </div>
-                                <div className="col-sm-3">
-                                    <div className="animal-item">
-                                        <img src={imageUrl}  className={ isSelected ? "select-animal-image" : "animal-image" } onClick={()=>this.selectImg()}/>
+                                        <img src={animal_image}  className={ isSelected ? "select-animal-image" : "animal-image" } onClick={()=>this.selectImg()}/>
                                         <div className="animal-name">Dog</div>
                                     </div>
                                 </div>

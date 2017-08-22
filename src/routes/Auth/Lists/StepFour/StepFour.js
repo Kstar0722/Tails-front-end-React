@@ -69,7 +69,7 @@ export default class StepFour extends React.Component {
                                     onChange={this.setValue.bind(this, 'summary')} />
                             </div>                            
                         </div>
-                        <NextStep nextStep="/step-four"/>
+                        <NextStep nextStep="/profile"/>
                     </div>
                 </div>
             </div>
