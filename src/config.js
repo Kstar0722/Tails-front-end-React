@@ -12,6 +12,7 @@ export default {
         listings: '/listings',
         profile: '/users',
         bids: '/bids',
-        listings_animals: '/listing_animals'
+        listings_animals: '/listing_animals',
+        animal_image: '/animal_images'
     }
 }
