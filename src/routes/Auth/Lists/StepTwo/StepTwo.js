@@ -1,10 +1,11 @@
 import { connect } from 'react-redux'
-import { Link } from 'react-router';
+import { Link } from 'react-router'
 import Dropzone from 'react-dropzone'
+import _ from 'lodash'
+import { FaPlus, FaPencil } from 'react-icons/lib/fa'
 import StepHistory from '../StepHistory'
 import NextStep from '../NextStep'
 import ModalAnimals from '../ModalAnimals'
-import { FaPlus, FaPencil } from 'react-icons/lib/fa'
 import uploadBtnImage from 'assets/upload.png'
 import cameraImage from 'assets/camera.png'
 import '../lists.scss'
@@ -15,15 +16,29 @@ class StepTwo extends React.Component {
         super(props)
 
         this.state = {
-            breed_animal: "",
-            height_animal: "",
-            weight_animal: "",
-            notes_animal: "",
+            animal_types: [],
+            animal_breed: "",
+            animal_height: "",
+            animal_weight: "",
+            animal_notes: "",
+            animal_name: "",
             files: [],
             impagePreview: null,
             showPreview: true,
             isOpen: false
         }        
+    }
+
+    componentWillMount() {
+        const { animalInfos } = this.props
+        const selectedAnimals = animalInfos.selectedAnimals
+        this.setState({ animal_breed: selectedAnimals.breed })
+        this.setState({ animal_height: selectedAnimals.height })
+        this.setState({ animal_weight: selectedAnimals.weight })
+        this.setState({ animal_notes: selectedAnimals.special_notes })
+        this.setState({ animal_name: selectedAnimals.name })
+        this.setState({ animal_types: animalInfos.data }) 
+        this.setState({ impagePreview: selectedAnimals.data[0].url })
     }
 
     setAnimalProperty(field, value) {
@@ -41,21 +56,23 @@ class StepTwo extends React.Component {
     }
 
 	render() {
-        const { 
-            breed_animal, 
-            height_animal, 
-            weight_animal, 
-            notes_animal, 
+        const {
+            animal_types,
+            animal_name,
+            animal_breed, 
+            animal_height, 
+            animal_weight, 
+            animal_notes, 
             showPreview, 
             isOpen, 
             impagePreview
         } = this.state
-        
 		return (
 			<div className="create-list">
                 <div className="container">
                     <StepHistory currentState="stepTwo"/>
                     <ModalAnimals 
+                        animals={animal_types}
                         show={isOpen}
                         onClose={this.toggleModal.bind(this)} />
                     {
@@ -71,27 +88,30 @@ class StepTwo extends React.Component {
                             <div className="left-side-bar col-sm-4 col-12">
                                 <ul>
                                     <li className="animal-name">
-                                        Lucy <FaPencil/>
+                                        {animal_name} <FaPencil/>
                                     </li>
-                                    <li className="animal-name">
-                                        Animal2 <FaPencil/>
-                                    </li>                                    
-                                    <button
-                                        className="btn btn-add-animal"
-                                        onClick={this.toggleModal.bind(this)}
-                                    ><FaPlus/> New Animal</button>
-                                    
-                                </ul>
+                                    <div>
+                                        <button
+                                            className="btn btn-add-animal"
+                                            onClick={this.toggleModal.bind(this)}
+                                        ><FaPlus/> New Animal</button>
+                                    </div>                                   
+                                </ul>                                
                             </div>
                             <div className="main-body col-sm-8 col-12">
                                 <div className="form-group">
                                     <label>Breed of Animal</label>
-                                    <input 
-                                        type="text" 
+                                    <select
                                         className="form-control"
-                                        name="breed_animal"
-                                        value={breed_animal}
-                                        onChange={this.setAnimalProperty.bind(this, "breed_animal")}/>
+                                        name="animal_breed"
+                                        value={animal_breed}
+                                        onChange={this.setAnimalProperty.bind(this, "animal_breed")}>
+                                        {
+                                           _.map(animal_types, (item) => 
+                                                <option value={item.breed} key={item.id}>{item.breed}</option>
+                                            )
+                                        }
+                                    </select>
                                 </div>
                                 <div className="form-group">
                                     <div className="row">
@@ -100,18 +120,18 @@ class StepTwo extends React.Component {
                                             <input 
                                                 type="number"
                                                 className="form-control"
-                                                name="height_animal"
-                                                value={height_animal}
-                                                onChange={this.setAnimalProperty.bind(this, "height_animal")} />
+                                                name="animal_height"
+                                                value={animal_height}
+                                                onChange={this.setAnimalProperty.bind(this, "animal_height")} />
                                         </div>
                                         <div className="col-sm-6 col-12">
                                             <label>Weight of Animal</label>
                                             <input
                                                 type="number"
                                                 className="form-control"
-                                                name="weight_animal"
-                                                value={weight_animal}
-                                                onChange={this.setAnimalProperty.bind(this, "weight_animal")} />
+                                                name="animal_weight"
+                                                value={animal_weight}
+                                                onChange={this.setAnimalProperty.bind(this, "animal_weight")} />
                                         </div>
                                     </div>
                                 </div>
@@ -120,16 +140,16 @@ class StepTwo extends React.Component {
                                     <textarea
                                         rows="3"
                                         className="form-control"
-                                        name="notes_animal"
-                                        value={notes_animal}
-                                        onChange={this.setAnimalProperty.bind(this, "notes_animal")} />  
+                                        name="animal_notes"
+                                        value={animal_notes}
+                                        onChange={this.setAnimalProperty.bind(this, "animal_notes")} />  
                                 </div>
                                 <div className="form-group">
                                     <label>Images of this Animal</label>
-                                    <Dropzone onDrop={this.onDrop.bind(this)} className="file-drag-drop">
+                                    <Dropzone onDrop={this.onDrop.bind(this)} className={impagePreview ? "file-drag-drop no-dash" : "file-drag-drop"  }>
                                         {
                                             impagePreview
-                                                ? <img src={impagePreview} className="image-preview"/>
+                                                ? <img src={impagePreview} className="image-preview img-responsive img-thumbnail"/>
                                                 : <div className="upload-section">
                                                     <img src={uploadBtnImage} className="upload-icon"/>
                                                         <div>
@@ -154,4 +174,8 @@ class StepTwo extends React.Component {
 	}
 }
 
-export default StepTwo
+const mapStateToProps = state => ({
+    animalInfos: state.animalsReducer
+})
+  
+export default connect(mapStateToProps)(StepTwo)

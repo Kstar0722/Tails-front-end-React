@@ -1,9 +1,6 @@
 import { FaClose, FaPlus } from 'react-icons/lib/fa'
 import { connect } from 'react-redux'
 import './lists.scss'
-import animal_image  from 'assets/animal.png'
-import dog_image  from 'assets/dog.png'
-import pig_image  from 'assets/pig.png'
 
 export default class ModalAnimals extends React.Component {
     
@@ -11,21 +8,34 @@ export default class ModalAnimals extends React.Component {
         super(props)
 
         this.state = {
-            isSelected: false
+            isSelected: false,
+            selectedAnimal: []
         }
     }
 
-    selectImg() {
-        const { isSelected } = this.state
-        const id = 1
-        this.setState({isSelected: !isSelected})
-        //this.props.selectAnimal(1)
+    selectImg(val) {
+        const { isSelected, selectedAnimal } = this.state
+        const item = {
+            id: val.id,
+            value: !isSelected 
+        }
+        // this.props.selectAnimal(val)
+        const index = _.findIndex(selectedAnimal, item => item.id == val.id)
+        if(index == -1) {
+            selectedAnimal.push(item)
+           // this.props.selectAnimal(val)
+        } else {
+            selectedAnimal.splice(index, 1)
+        }
+        this.setState({ isSelected: !isSelected })
+        this.setState({ selectedAnimal })
+        this.props.onClose()
     }
 
     render() {
-        const { animalIds, show } = this.props
-        const { isSelected } = this.state  
-        
+        const { show, animals } = this.props
+        const { isSelected, selectedAnimal } = this.state  
+       
         if(!this.props.show) {
             return null;
         }
@@ -35,31 +45,24 @@ export default class ModalAnimals extends React.Component {
                 <FaClose onClick={this.props.onClose} className="btn-close" />
                 <div className="animal-list">
                     <div className="row">
-                        <div className="col-sm-3">
-                            <div className="animal-item">
-                                <img src={dog_image} className={ isSelected ? "select-animal-image" : "animal-image" } onClick={()=>this.selectImg()}/>
-                                <div className="animal-name">Dog</div>
-                            </div>
-                        </div>
-                        <div className="col-sm-3">
-                            <div className="animal-item">
-                                <img src={pig_image}  className={ isSelected ? "select-animal-image" : "animal-image" } onClick={()=>this.selectImg()}/>
-                                <div className="animal-name">Pig</div>
-                            </div>
-                        </div>
-                        <div className="col-sm-3">
-                            <div className="animal-item">
-                                <img src={animal_image}  className={ isSelected ? "select-animal-image" : "animal-image" } onClick={()=>this.selectImg()}/>
-                                <div className="animal-name">Dog</div>
-                            </div>
-                        </div>
-                        <div className="col-sm-3">
-                            <div className="animal-item">
-                                <img src={animal_image}  className={ isSelected ? "select-animal-image" : "animal-image" } onClick={()=>this.selectImg()}/>
-                                <div className="animal-name">Dog</div>
-                            </div>
-                        </div>
-                    </div>                        
+                        {
+                            animals.map((val, index) =>                                        
+                                <div className="col-sm-3" key={val.id}>
+                                    <div className="animal-item">
+                                        <img 
+                                            src={val.data[0].url}
+                                            className={
+                                                selectedAnimal.length > 0 && _.find(selectedAnimal, item => item.id == val.id && item.value == true)
+                                                ? "select-animal-image img-responsive"
+                                                : "animal-image img-responsive"                                          
+                                            }
+                                            onClick={()=>this.selectImg(val)}/>
+                                        <div className="animal-name">{val.name}</div>
+                                    </div>
+                                </div>
+                            )
+                        }
+                    </div>                 
                 </div>
             </div>             
                        

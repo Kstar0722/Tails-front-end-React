@@ -1,40 +1,49 @@
 import { connect } from 'react-redux'
 import StepHistory from '../StepHistory'
 import NextStep from '../NextStep'
+import { getListings } from '../Actions/listing'
 import '../lists.scss'
 
-export default class StepThree extends React.Component {
+class StepThree extends React.Component {
 
     constructor(props) {
         super(props)
 
         this.state = {
-            address: "",
-            state: -1,
-            city: "",
-            postCode: "",
-            address1: "",
-            state1: -1,
-            city1: "",
-            postCode1: ""
+            pick_up_address: "",
+            pick_up_state: -1,
+            pick_up_city: "",
+            pick_up_zip: "",
+            delivery_address: "",
+            delivery_state: -1,
+            delivery_city: "",
+            delivery_zip: ""
         }
     }
 
+    componentWillMount() {
+        const { animalInfos } = this.props
+        this.props.getListings(animalInfos.selectedAnimals.listing_id)
+    }
+
+    componentDidMount() {
+        const { listing } = this.props
+        console.log(listing)
+    }
     setValue = (field, value) => {
-        console.log(field)
-        console.log(value)
+        this.setState({[field]: value.target.value})
     }
 
     render() {
         const {
-            address,
-            state,
-            city,
-            postCode,
-            address1,
-            state1,
-            city1,
-            postCode1
+            pick_up_address,
+            pick_up_state,
+            pick_up_city,
+            pick_up_zip,
+            delivery_address,
+            delivery_state,
+            delivery_city,
+            delivery_zip
         } = this.state
 
         return (
@@ -51,9 +60,9 @@ export default class StepThree extends React.Component {
                                 <input
                                     type="text"
                                     className="form-control"
-                                    name="address"
-                                    value={address}
-                                    onChange={this .setValue.bind(this, 'address')}/>
+                                    name="pick_up_address"
+                                    value={pick_up_address}
+                                    onChange={this .setValue.bind(this, 'pick_up_address')}/>
                             </div>
                             <div className="form-group">
                                 <div className="row">
@@ -61,10 +70,9 @@ export default class StepThree extends React.Component {
                                         <label>Pick up State</label>
                                         <select
                                             className="form-control"
-                                            id="state"
-                                            name="state"
-                                            value={state}
-                                            onChange={this.setValue.bind(this, 'state')}>
+                                            name="pick_up_state"
+                                            value={pick_up_state}
+                                            onChange={this.setValue.bind(this, 'pick_up_state')}>
                                             <option value="-1">-- Please Select --</option>
                                         </select>
                                     </div>
@@ -73,18 +81,18 @@ export default class StepThree extends React.Component {
                                         <input
                                             type="text"
                                             className="form-control"
-                                            name="city"
-                                            value={city}
-                                            onChange={this.setValue.bind(this, 'city')}/>
+                                            name="pick_up_city"
+                                            value={pick_up_city}
+                                            onChange={this.setValue.bind(this, 'pick_up_city')}/>
                                     </div>
                                     <div className="col-sm-4 col-12">
                                         <label>Pick up Zip</label>
                                         <input
                                             type="text"
                                             className="form-control"
-                                            name="postCode"
-                                            value={postCode}
-                                            onChange={this.setValue.bind(this, 'postCode')}/>
+                                            name="pick_up_zip"
+                                            value={pick_up_zip}
+                                            onChange={this.setValue.bind(this, 'pick_up_zip')}/>
                                     </div>
                                 </div>
                             </div>
@@ -93,9 +101,9 @@ export default class StepThree extends React.Component {
                                 <input
                                     type="text"
                                     className="form-control"
-                                    name="address1"
-                                    value={address1}
-                                    onChange={this.setValue.bind(this, 'address1')}/>
+                                    name="delivery_address"
+                                    value={delivery_address}
+                                    onChange={this.setValue.bind(this, 'delivery_address')}/>
                             </div>
                             <div className="form-group">
                                 <div className="row">
@@ -103,10 +111,9 @@ export default class StepThree extends React.Component {
                                         <label>Destination State</label>
                                         <select
                                             className="form-control"
-                                            id="state1"
-                                            name="state1"
-                                            value={state1}
-                                            onChange={this.setValue.bind(this, 'state1')}>
+                                            name="delivery_state"
+                                            value={delivery_state}
+                                            onChange={this.setValue.bind(this, 'delivery_state')}>
                                             <option value="-1">-- Please Select --</option>
                                         </select>
                                     </div>
@@ -115,18 +122,18 @@ export default class StepThree extends React.Component {
                                         <input
                                             type="text"
                                             className="form-control"
-                                            name="city1"
-                                            value={city1}
-                                            onChange={this.setValue.bind(this, 'city1')}/>
+                                            name="delivery_city"
+                                            value={delivery_city}
+                                            onChange={this.setValue.bind(this, 'delivery_city')}/>
                                     </div>
                                     <div className="col-sm-4 col-12">
                                         <label>Destination Zip</label>
                                         <input
                                             type="text"
                                             className="form-control"
-                                            name="postCode1"
-                                            value={postCode1}
-                                            onChange={this.setValue.bind(this, 'postCode1')}/>
+                                            name="delivery_zip"
+                                            value={delivery_zip}
+                                            onChange={this.setValue.bind(this, 'delivery_zip')}/>
                                     </div>
                                 </div>
                             </div>
@@ -139,3 +146,14 @@ export default class StepThree extends React.Component {
         )
     }
 }
+
+const mapStateToProps = state => ({
+    animalInfos: state.animalsReducer,
+    listing: state.listing
+})
+
+const mapDispatchToProps = dispatch => ({
+    getListings: (id) => dispatch(getListings(id))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(StepThree)

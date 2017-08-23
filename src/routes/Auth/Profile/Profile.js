@@ -28,6 +28,7 @@ class Profile extends React.Component {
 	}
 
 	render() {
+		console.log(this.props.listings)
 		return (
 			<section id="profile">
 				<div className="banner-wrap" style={{backgroundImage: 'url('+ this.state.cover_photo +')'}}>
@@ -45,7 +46,8 @@ class Profile extends React.Component {
 					<div className="page-content d-flex flex-column align-items-start justify-content-center">
 						<div className="block-section my-listings">
 							<p className="title">My Listings</p>
-							{(this.props.listings.data.length > 0) ? 
+							{
+								this.props.listings.length > 0 ? 
 								<div className="table-wrap">
 									<ListingsContainer />
 								</div> : 
