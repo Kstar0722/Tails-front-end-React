@@ -6,25 +6,29 @@ import ListingItem from './components/ListingItem'
 class Listings extends React.Component {
 	constructor(props) {
 		super(props)
+
+		this.state = {
+			listingDatas: []
+		}
 	}
 
 	componentWillMount() {
-		console.log('get listing')
-		this.props.getListings()
+		const { listings } = this.props
 	}
 
-	// Return the Listings
-	getListings() {
-		// for now, I'm just going to loop through and return 3
+	getListings() {		
 		const listings = []
-
 		this.props.listings.data.map((listing, i) => {
-			listings.push(this.renderListings(listing.title, moment(new Date(listing.created_at)).format('MM/DD/YYYY'), listing.bids_count, listing.status, {delete: this.delete.bind(this, listing.id)}));
+			listings.push(this.renderListings(
+				listing.id,
+				listing.title,
+				listing.budget,
+				moment(new Date(listing.created_at)).format('MM/DD/YYYY'),
+				{delete: this.delete.bind(this, listing.id)}
+			));
 		})
 
-		return(
-			listings
-		)
+		return listings
 	}
 
 	delete(id){
@@ -32,13 +36,13 @@ class Listings extends React.Component {
 	}
 
 	// This will be called for each listing based on how many there are
-	renderListings(title, date, bid, status, optionActions) {
+	renderListings(id, title, budget, date, optionActions) {
 		return (
 			<ListingItem
+				id={id}
 				title={title}
+				budget={budget}
 				dateCreated={date}
-				totalBids={bid}
-				status={status}
 				optionActions={optionActions}
 			/>
 		)
@@ -47,15 +51,16 @@ class Listings extends React.Component {
 
 	render() {
 		return (
-			<table className="listings">
-				<tbody>
+			<table className="listings table table-bordered table-striped">
+				<thead>
 					<tr>
 						<th>Title</th>
-						<th>Date Created</th>
-						<th>Total Bids</th>
-						<th>Status</th>
+						<th>Budget</th>
+						<th>Date</th>
 						<th>Action</th>
-					</tr>
+					</tr>					
+				</thead>
+				<tbody>
 					{this.getListings()}
 				</tbody>
 			</table>

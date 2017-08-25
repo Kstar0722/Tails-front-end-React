@@ -8,30 +8,29 @@ class Bids extends React.Component {
 	}
 
 	componentWillMount() {
-		console.log('get listing')
 		this.props.getBids()
 	}
-	// Return the bids
+
 	getBids() {
-		// for now, I'm just going to loop through and return 3
 		const bids = []
-
+		console.log(this.props.bids)
 		this.props.bids.data.map((bid, i) => {
-			bids.push(this.renderBids(bid.listing.title, moment(new Date(bid.created_at)).format('MM/DD/YYYY'), (this.props.listings[bid.listing_id]) ? this.props.listings[bid.listing_id].bids_count : '-', bid.status))
+			bids.push(this.renderBids(
+				bid.id,
+				bid.listing.title,
+				moment(new Date(bid.created_at)).format('MM/DD/YYYY'),
+				bid.status
+			))
 		})
-
-		return(
-			bids
-		)
+		return bids
 	}
 
-	// This will be called for each bid based on how many there are
-	renderBids(title, date, bid, status) {
+	renderBids(id, title, date, status) {
 		return (
 			<BidItem
+				id={id}
 				title={title}
 				dateBidded={date}
-				totalBids={bid}
 				status={status}
 			/>
 		)
@@ -39,12 +38,11 @@ class Bids extends React.Component {
 
 	render() {
 		return (
-			<table className="bids">
+			<table className="bids table table-bordered table-striped">
 				<tbody>
 					<tr>
 						<th>Title</th>
 						<th>Date Bidded</th>
-						<th>Total Bids</th>
 						<th>Status</th>
 						<th>Action</th>
 					</tr>

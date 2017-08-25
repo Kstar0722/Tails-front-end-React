@@ -14,10 +14,10 @@ export function getListings() {
         .then(checkHttpStatus)
         .then(parseJSON)
         .then(res => {
-            dispatch({ type: 'GET_LISTINGS', listings: res })
+            dispatch({ type: 'GET_LISTINGS_SUCCESS', data: res })
         })
         .catch(error =>{
-            dispatch({ type: 'ERROR_LISTING', error })
+            dispatch({ type: 'GET_LISTINGS_FAILURE', error })
         })
     }
 }
