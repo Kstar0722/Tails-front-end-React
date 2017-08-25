@@ -3,7 +3,7 @@ import StepHistory from '../StepHistory'
 import NextStep from '../NextStep'
 import '../lists.scss'
 
-export default class StepFour extends React.Component {
+class StepFour extends React.Component {
 
     constructor(props) {
         super(props)
@@ -11,20 +11,33 @@ export default class StepFour extends React.Component {
         this.state = {
             title: "",
             budget: "",
-            summary: ""
+            summary: "",
+            disabled: true
         }
     }
 
     setValue = (field, value) => {
-        console.log(field)
-        console.log(value)
+        this.setState({ [field]: value.target.value})
+        if(!_.isNil(this.state.title) && !_.isNil(this.state.budget) &&!_.isNil(this.state.summary)) {
+            this.setState({ disabled: false })
+        }
+
+    }
+
+    componentWillMount() {
+        const { listing } = this.props
+        this.setState({ title: listing.data.title})
+        this.setState({ budget: listing.data.budget})
+        if(!_.isNil(listing.data.other_notes))
+            this.setState({ summary: listing.data.other_notes})
     }
 
     render() {
         const {
             title,
             budget,
-            summary
+            summary,
+            disabled
         } = this.state
 
         return (
@@ -55,6 +68,10 @@ export default class StepFour extends React.Component {
                                             value={budget}
                                             onChange={this.setValue.bind(this, 'budget')}>
                                             <option value="-1">-- Please Select --</option>
+                                            <option value="20.00"> 20 </option>
+                                            <option value="30.00"> 30 </option>
+                                            <option value="40.00"> 40 </option>
+                                            <option value="200.00"> 200 </option>
                                         </select>
                                     </div>
                                 </div>
@@ -69,11 +86,17 @@ export default class StepFour extends React.Component {
                                     onChange={this.setValue.bind(this, 'summary')} />
                             </div>                            
                         </div>
-                        <NextStep nextStep="/profile"/>
+                        <NextStep nextStep="/profile" disabled={disabled}/>
                     </div>
                 </div>
             </div>
-
         )
     }
 }
+
+const mapStateToProps = state => ({
+    animalInfos: state.animalsReducer,
+    listing: state.listing
+})
+
+export default connect(mapStateToProps)(StepFour)
