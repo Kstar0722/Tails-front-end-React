@@ -49,7 +49,7 @@ class Profile extends React.Component {
 						<div className="page-content d-flex flex-column align-items-start justify-content-center">
 							<div className="block-section my-listings">
 								<p className="title">My Listings</p>
-								{
+								{/*
 									listings.data.data.length > 0 
 									? <div className="table-responsive">
 										<ListingsContainer />
@@ -58,7 +58,12 @@ class Profile extends React.Component {
 										<h1>You have no listings yet...</h1>
 										<Link className="btn btn-create-listing" to="/step-one">Create Listing</Link>
 									</div>
-								}
+								*/}
+								
+								<div className="row not-listings justify-content-center align-self-center">
+									<h1>You have no listings yet...</h1>
+									<Link className="btn btn-create-listing" to="/step-one">Create Listing</Link>
+								</div>
 							</div>
 							<div className="block-section my-bids">
 								<p className="title">My Bids</p>

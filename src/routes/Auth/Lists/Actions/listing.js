@@ -58,3 +58,25 @@ export function deleteListing(id) {
         })
     }
 }
+
+export function createListings(value) {
+    console.log(value)
+    return function(dispatch) {
+        return fetch(config.endpoints.url + config.endpoints.listings, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + user.token
+            },
+            body: JSON.stringify(value)
+        })
+        .then(checkHttpStatus)
+        .then(parseJSON)
+        .then(res => {
+            console.log(res)
+        })
+        .catch(error =>{
+            console.log(error)
+        })
+    }
+}

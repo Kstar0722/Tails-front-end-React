@@ -7,7 +7,7 @@ import authReducer from './auth'
 import profileReducer from './profile'
 import bidGetReducer from './bid'
 import animalsReducer from './animals'
-
+import animalShipReducer from './animalShip'
 export const makeRootReducer = (asyncReducers) => {
   return combineReducers({
     form: formReducer,
@@ -18,6 +18,7 @@ export const makeRootReducer = (asyncReducers) => {
     profile: profileReducer,
     bid: bidGetReducer,
     animalsReducer,
+    animalShipReducer,
     ...asyncReducers
   })
 }

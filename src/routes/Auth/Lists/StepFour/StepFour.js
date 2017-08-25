@@ -1,6 +1,7 @@
 import { connect } from 'react-redux'
 import StepHistory from '../StepHistory'
 import NextStep from '../NextStep'
+import { createListings } from '../Actions/listing'
 import '../lists.scss'
 
 class StepFour extends React.Component {
@@ -24,12 +25,22 @@ class StepFour extends React.Component {
 
     }
 
-    componentWillMount() {
-        const { listing } = this.props
-        this.setState({ title: listing.data.title})
-        this.setState({ budget: listing.data.budget})
-        if(!_.isNil(listing.data.other_notes))
-            this.setState({ summary: listing.data.other_notes})
+    saveAll = () => {
+        const { animalShipReducer, animalInfos } = this.props
+        const value = {
+            title: this.state.title,
+            pick_up_address: animalShipReducer.shipInfo.pick_up_address,
+            pick_up_city: animalShipReducer.shipInfo.pick_up_city,
+            pick_up_state: animalShipReducer.shipInfo.pick_up_state,
+            pick_up_zip: animalShipReducer.shipInfo.pick_up_zip,           
+            delivery_address: animalShipReducer.shipInfo.delivery_address,
+            delivery_city: animalShipReducer.shipInfo.delivery_city,
+            delivery_state: animalShipReducer.shipInfo.delivery_state,
+            delivery_zip: animalShipReducer.shipInfo.delivery_zip,            
+            other_notes: this.state.summary,        
+            budget: this.state.budget
+        }
+        this.props.createListings(value)
     }
 
     render() {
@@ -71,7 +82,7 @@ class StepFour extends React.Component {
                                             <option value="20.00"> 20 </option>
                                             <option value="30.00"> 30 </option>
                                             <option value="40.00"> 40 </option>
-                                            <option value="200.00"> 200 </option>
+                                            <option value="200.00"> 50 </option>
                                         </select>
                                     </div>
                                 </div>
@@ -86,7 +97,10 @@ class StepFour extends React.Component {
                                     onChange={this.setValue.bind(this, 'summary')} />
                             </div>                            
                         </div>
-                        <NextStep nextStep="/profile" disabled={disabled}/>
+                        <button 
+                            className="btn btn-next"
+                            onClick={() => this.saveAll()}
+                        >Next</button>
                     </div>
                 </div>
             </div>
@@ -96,7 +110,12 @@ class StepFour extends React.Component {
 
 const mapStateToProps = state => ({
     animalInfos: state.animalsReducer,
-    listing: state.listing
+    listing: state.listing,
+    animalShipReducer: state.animalShipReducer
 })
 
-export default connect(mapStateToProps)(StepFour)
+const mapDispatchToProps = dispatch => ({
+    createListings: (value) => dispatch(createListings(value))
+})
+  
+export default connect(mapStateToProps, mapDispatchToProps)(StepFour)

@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import StepHistory from '../StepHistory'
 import NextStep from '../NextStep'
-import { getListings } from '../Actions/listing'
+import { setAnimalShipInfo } from './Actions/shipInfo'
 import '../lists.scss'
 
 class StepThree extends React.Component {
@@ -21,17 +21,9 @@ class StepThree extends React.Component {
         }
     }
 
-    componentWillMount() {
-        const { animalInfos } = this.props
-        this.props.getListings(animalInfos.selectedAnimals.listing_id)
-    }
-
-    componentDidMount() {
-        const { listing } = this.props
-        console.log(listing)
-    }
     setValue = (field, value) => {
         this.setState({[field]: value.target.value})
+        this.props.setAnimalShipInfo(field, value.target.value)
     }
 
     render() {
@@ -153,7 +145,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    getListings: (id) => dispatch(getListings(id))
+    setAnimalShipInfo: (field, value) => dispatch(setAnimalShipInfo(field, value))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(StepThree)
