@@ -4,7 +4,8 @@ import user from 'auth/user'
 
 const GET_LISTINGS_SUCCESS = 'GET_LISTINGS_SUCCESS'
 const GET_LISTINGS_FAILURE = 'GET_LISTINGS_FAILURE'
-
+const CREATE_LISTINGS_SUCCESS = 'CREATE_LISTINGS_SUCCESS'
+const CREATE_LISTINGS_FAILURE = 'CREATE_LISTINGS_FAILURE'
 export function getListingsSuccess(res) {
     return {
         type: GET_LISTINGS_SUCCESS,
@@ -15,6 +16,20 @@ export function getListingsSuccess(res) {
 export function getListingsFailure(error) {
     return {
         type: GET_LISTINGS_FAILURE,
+        error: error
+    }
+}
+
+export function createListingsSuccess(res) {
+    return {
+        type: CREATE_LISTINGS_SUCCESS,
+        data: res
+    }
+}
+
+export function createListingsFailure(error) {
+    return {
+        type: CREATE_LISTINGS_FAILURE,
         error: error
     }
 }
@@ -60,7 +75,6 @@ export function deleteListing(id) {
 }
 
 export function createListings(value) {
-    console.log(value)
     return function(dispatch) {
         return fetch(config.endpoints.url + config.endpoints.listings, {
             method: 'POST',
@@ -73,10 +87,10 @@ export function createListings(value) {
         .then(checkHttpStatus)
         .then(parseJSON)
         .then(res => {
-            console.log(res)
+            dispatch(createListingsSuccess(res))
         })
         .catch(error =>{
-            console.log(error)
+            dispatch(createListingsFailure(error))
         })
     }
 }
