@@ -28,6 +28,7 @@ class Bids extends React.Component {
 	renderBids(id, title, date, status) {
 		return (
 			<BidItem
+				key={id}
 				id={id}
 				title={title}
 				dateBidded={date}

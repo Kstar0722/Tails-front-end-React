@@ -39,6 +39,7 @@ class Listings extends React.Component {
 	renderListings(id, title, budget, date, optionActions) {
 		return (
 			<ListingItem
+				key={id}
 				id={id}
 				title={title}
 				budget={budget}
