@@ -57,7 +57,7 @@ class StepOne extends React.Component {
             return (
                 <div className="create-list">
                     <div className="container">
-                        <StepHistory />
+                        <StepHistory currentState="stepOne"/>
                         <div className="step-one">
                             <div className="comment">
                                 What kind of animals do you need shipped ?                

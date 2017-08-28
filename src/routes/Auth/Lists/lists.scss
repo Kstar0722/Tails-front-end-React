@@ -80,18 +80,21 @@
                 }
             }
         }
-        .step-last {
-            .circle {
-                background: #27d5ff !important;
-            }
-            .line {
-                background: #27d5ff !important;
-            }
+        // .step-last {
+        //     .circle {
+        //         background: #27d5ff !important;
+        //     }
+        //     .line {
+        //         background: #27d5ff !important;
+        //     }
+        // }
+        .step-active-circle {
+            background: #26d4ff !important;
+            border: 2px solid #26d4ff !important;
+            color: #ffffff !important;
         }
-        .step-two-circle {
-            background: transparent !important;
-            border: 2px solid #092b4f !important;
-            color: #092b4f !important;
+        .step-active-line {
+            background: #26d4ff !important;
         }
         .step-two-circle-three-btn {
             border: 2px solid #ffffff;
@@ -281,12 +284,19 @@
         .main-content {
             margin-top: 60px;
         }
-        .btn-next {
-            background: #082543;
-            width: 500px;
-            height: 60px;
-            color: #ffffff;
-            font-size: 35px;
+        .btn-section {
+            text-align: center;
+            .btn-next {
+                background: #082543;
+                width: 500px;
+                height: 60px;
+                color: #ffffff;
+                font-size: 35px;
+            }
+            .disabled {
+                pointer-events: none;
+                cursor: default;
+            }
         }
     }
     @media(max-width: 767px) {

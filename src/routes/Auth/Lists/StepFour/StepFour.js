@@ -11,7 +11,7 @@ class StepFour extends React.Component {
 
         this.state = {
             title: "",
-            budget: "",
+            budget: -1,
             summary: "",
             disabled: true
         }
@@ -19,10 +19,26 @@ class StepFour extends React.Component {
 
     setValue = (field, value) => {
         this.setState({ [field]: value.target.value})
-        if(!_.isNil(this.state.title) && !_.isNil(this.state.budget) &&!_.isNil(this.state.summary)) {
-            this.setState({ disabled: false })
-        }
+        const self = this
+        setTimeout(function(){
+            self.validate()
+        }, 100)
+    }
+    
+    validate() {
+        const {
+            title,
+            budget,
+            summary
+        } = this.state
 
+        if( title == "" || 
+            budget == -1 ||
+            summary == "" ) {
+            this.setState({ disabled: true})
+        } else {
+            this.setState({ disabled: false})
+        }
     }
 
     saveAll = () => {
@@ -97,10 +113,14 @@ class StepFour extends React.Component {
                                     onChange={this.setValue.bind(this, 'summary')} />
                             </div>                            
                         </div>
-                        <button 
-                            className="btn btn-next"
-                            onClick={() => this.saveAll()}
-                        >Next</button>
+                        <div className="btn-section">
+                            <button                            
+                                className={disabled ? "btn btn-next disabled" : "btn btn-next"  }
+                                onClick={() => this.saveAll()}
+                                disabled={disabled}
+                            >Next</button>
+                        </div>
+                        
                     </div>
                 </div>
             </div>

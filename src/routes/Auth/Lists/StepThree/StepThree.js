@@ -17,13 +17,44 @@ class StepThree extends React.Component {
             delivery_address: "",
             delivery_state: -1,
             delivery_city: "",
-            delivery_zip: ""
+            delivery_zip: "",
+            disabled: true
         }
     }
 
     setValue = (field, value) => {
         this.setState({[field]: value.target.value})
         this.props.setAnimalShipInfo(field, value.target.value)
+        const self = this
+        setTimeout(function(){
+            self.validate()
+        }, 100)
+    }
+
+    validate() {
+        const {
+            pick_up_address,
+            pick_up_state,
+            pick_up_city,
+            pick_up_zip,
+            delivery_address,
+            delivery_state,
+            delivery_city,
+            delivery_zip
+        } = this.state
+        
+        if( pick_up_address == "" || 
+            pick_up_state == -1 ||
+            pick_up_city == "" ||
+            pick_up_zip == "" ||
+            delivery_address == "" ||
+            delivery_state == -1 ||
+            delivery_city == "" ||
+            delivery_zip == "" ) {
+            this.setState({ disabled: true})
+        } else {
+            this.setState({ disabled: false})
+        }
     }
 
     render() {
@@ -35,9 +66,10 @@ class StepThree extends React.Component {
             delivery_address,
             delivery_state,
             delivery_city,
-            delivery_zip
+            delivery_zip,
+            disabled
         } = this.state
-
+       
         return (
             <div className="create-list">
                 <div className="container">
@@ -66,6 +98,9 @@ class StepThree extends React.Component {
                                             value={pick_up_state}
                                             onChange={this.setValue.bind(this, 'pick_up_state')}>
                                             <option value="-1">-- Please Select --</option>
+                                            <option value="cal">California</option>
+                                            <option value="la">Los Angeles</option>
+                                            <option value="ny">New York</option>
                                         </select>
                                     </div>
                                     <div className="col-sm-4 col-12">
@@ -107,6 +142,9 @@ class StepThree extends React.Component {
                                             value={delivery_state}
                                             onChange={this.setValue.bind(this, 'delivery_state')}>
                                             <option value="-1">-- Please Select --</option>
+                                            <option value="cal">California</option>
+                                            <option value="la">Los Angeles</option>
+                                            <option value="ny">New York</option>
                                         </select>
                                     </div>
                                     <div className="col-sm-4 col-12">
@@ -130,7 +168,7 @@ class StepThree extends React.Component {
                                 </div>
                             </div>
                         </div>
-                        <NextStep nextStep="/step-four"/>
+                        <NextStep nextStep="/step-four" disabled={disabled}/>
                     </div>
                 </div>
             </div>

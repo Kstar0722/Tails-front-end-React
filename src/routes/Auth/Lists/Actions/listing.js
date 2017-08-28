@@ -1,6 +1,7 @@
 import config from 'config.js'
 import { checkHttpStatus, parseJSON } from 'http.js'
 import user from 'auth/user'
+import { browserHistory } from 'react-router'
 
 const GET_LISTINGS_SUCCESS = 'GET_LISTINGS_SUCCESS'
 const GET_LISTINGS_FAILURE = 'GET_LISTINGS_FAILURE'
@@ -87,7 +88,9 @@ export function createListings(value) {
         .then(checkHttpStatus)
         .then(parseJSON)
         .then(res => {
+            console.log(res)
             dispatch(createListingsSuccess(res))
+            browserHistory.push('/profile')
         })
         .catch(error =>{
             dispatch(createListingsFailure(error))
