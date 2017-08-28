@@ -69,7 +69,6 @@ export function getAnimalImage(listings) {
     }    
 }
 export function selectAnimal(value, flag) {
-    console.log(flag)
     return {
         type: SELECTED_ANIMALS,
         data: value,

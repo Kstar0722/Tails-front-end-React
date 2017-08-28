@@ -12,9 +12,8 @@ class StepOne extends React.Component {
         super(props)
 
         this.state = {
-            selectedAnimal: [],
             disabled: true
-        }
+        }        
     }
 
     componentWillMount() {
@@ -22,29 +21,29 @@ class StepOne extends React.Component {
     }
 
     componentDidMount() {
-        const { animalInfos, selectedAnimal } = this.props
-        //this.setState({ selectedAnimal: animalInfos.selectedAnimals})
+        this.checkSelectedAnimals() 
+    }
+
+    checkSelectedAnimals() {
+        const { animalInfos } = this.props
+        if(animalInfos.selectedAnimals.length > 0) {
+            console.log(animalInfos.selectedAnimals.length)
+            this.setState({ disabled: false })
+        }
     }
 
     selectImg(val) {
-        const { selectedAnimal, disabled } = this.state
-        const item = {
-            id: val.id,
-            value: true
-        }
-        //this.props.selectAnimal(val)
-        const index = _.findIndex(selectedAnimal, item => item.id == val.id)
+        const { disabled } = this.state
+        const { animalInfos } = this.props
+        const index = _.findIndex(animalInfos.selectedAnimals, item => item.id == val.id)
         if(index == -1) {
-            selectedAnimal.push(item)
             this.setState({ disabled: false })
             this.props.selectAnimal(val, true)
         } else {
-            selectedAnimal.splice(index, 1)
             this.props.selectAnimal(val, false)
         }
 
-        this.setState({ selectedAnimal })
-        if(selectedAnimal.length == 0) {
+        if(animalInfos.selectedAnimals.length == 0) {
             this.setState({ disabled: true })
         }
     }
@@ -52,6 +51,7 @@ class StepOne extends React.Component {
     render() {
         const { animalInfos } = this.props
         const { selectedAnimal, disabled } = this.state
+        console.log(disabled)
         if(animalInfos.loaded) {
             return (
                 <div className="create-list">
@@ -70,7 +70,7 @@ class StepOne extends React.Component {
                                                     <img 
                                                         src={val.data[0].url}
                                                         className={
-                                                            selectedAnimal.length > 0 && _.find(selectedAnimal, item => item.id == val.id && item.value == true)
+                                                            animalInfos.selectedAnimals.length > 0 && _.find(animalInfos.selectedAnimals, item => item.id == val.id)
                                                             ? "select-animal-image img-responsive"
                                                             : "animal-image img-responsive"                                          
                                                         }

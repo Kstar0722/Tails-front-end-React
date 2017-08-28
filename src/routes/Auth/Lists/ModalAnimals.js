@@ -7,40 +7,25 @@ class ModalAnimals extends React.Component {
     
     constructor(props) {
         super(props)
-
-        this.state = {
-            isSelected: false,
-            selectedAnimal: []
-        }
     }
 
     componentWillMount() {
         const { animalInfos } = this.props
-        animalInfos.selectedAnimals
     }
 
     selectImg(val) {
-        const { selectedAnimal, disabled } = this.state
-        const item = {
-            id: val.id,
-            value: true
-        }
-        const index = _.findIndex(selectedAnimal, item => item.id == val.id)
+        const { animalInfos } = this.props
+        const index = _.findIndex(animalInfos.selectedAnimals, item => item.id == val.id)
         if(index == -1) {
-            selectedAnimal.push(item)
             this.props.selectAnimal(val, true)
         } else {
-            selectedAnimal.splice(index, 1)
             this.props.selectAnimal(val, false)
         }
-
-        this.setState({ selectedAnimal })
         this.props.onClose()
     }
 
     render() {
         const { show, animals, animalInfos } = this.props
-        const { isSelected, selectedAnimal } = this.state  
        
         if(!this.props.show) {
             return null;
