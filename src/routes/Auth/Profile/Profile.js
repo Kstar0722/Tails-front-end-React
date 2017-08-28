@@ -36,12 +36,9 @@ class Profile extends React.Component {
 				<section id="profile">
 					<div className="banner-wrap" style={{backgroundImage: 'url('+ this.state.cover_photo +')'}}>
 						<div className="container">
-							<div className="banner-content d-flex flex-row flex-wrap justify-content-between align-items-baseline">
-								
-								<Avatar type="large"/>
-	
-								<button onClick={this.toEdit} className="btn edit-profile block-btn blue">Edit Profile</button>
-	
+							<div className="banner-content d-flex flex-row flex-wrap justify-content-between align-items-baseline">								
+								<Avatar type="large"/>	
+								<button onClick={this.toEdit} className="btn edit-profile block-btn blue">Edit Profile</button>	
 							</div>
 						</div>
 					</div>
@@ -49,21 +46,28 @@ class Profile extends React.Component {
 						<div className="page-content d-flex flex-column align-items-start justify-content-center">
 							<div className="block-section my-listings">
 								<p className="title">My Listings</p>
-								{/*
+								{
 									listings.data.data.length > 0 
-									? <div className="table-responsive">
-										<ListingsContainer />
-									</div>
+									? <div>
+										<div className="table-responsive">
+											<ListingsContainer />
+										</div>
+										<div className="row not-listings justify-content-center align-self-center">
+											<Link className="btn btn-create-listing" to="/step-one">Create Listing</Link>
+										</div>
+									</div>									
 									: <div className="row not-listings justify-content-center align-self-center">
 										<h1>You have no listings yet...</h1>
 										<Link className="btn btn-create-listing" to="/step-one">Create Listing</Link>
 									</div>
+								}
+								{/*
+									<div className="row not-listings justify-content-center align-self-center">
+										<Link className="btn btn-create-listing" to="/step-one">Create Listing</Link>
+									</div>
 								*/}
-								
-								<div className="row not-listings justify-content-center align-self-center">
-									<h1>You have no listings yet...</h1>
-									<Link className="btn btn-create-listing" to="/step-one">Create Listing</Link>
-								</div>
+									
+														
 							</div>
 							<div className="block-section my-bids">
 								<p className="title">My Bids</p>

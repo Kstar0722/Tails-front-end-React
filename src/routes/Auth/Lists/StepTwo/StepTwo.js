@@ -25,20 +25,26 @@ class StepTwo extends React.Component {
             files: [],
             impagePreview: null,
             showPreview: true,
-            isOpen: false
-        }        
+            isOpen: false,
+            selectedAnimals: []
+        }
+        
+        this.selectAnimal = this.selectAnimal.bind(this)
     }
 
     componentWillMount() {
         const { animalInfos } = this.props
         const selectedAnimals = animalInfos.selectedAnimals
-        this.setState({ animal_breed: selectedAnimals.breed })
-        this.setState({ animal_height: selectedAnimals.height })
-        this.setState({ animal_weight: selectedAnimals.weight })
-        this.setState({ animal_notes: selectedAnimals.special_notes })
-        this.setState({ animal_name: selectedAnimals.name })
+        console.log(selectedAnimals)
+        this.setState({ selectedAnimals })
         this.setState({ animal_types: animalInfos.data }) 
-        this.setState({ impagePreview: selectedAnimals.data[0].url })
+        const currentAnimal = selectedAnimals[0]
+        this.setState({ animal_breed: currentAnimal.breed })
+        this.setState({ animal_height: currentAnimal.height })
+        this.setState({ animal_weight: currentAnimal.weight })
+        this.setState({ animal_notes: currentAnimal.special_notes })
+        this.setState({ animal_name: currentAnimal.name })
+        this.setState({ impagePreview: currentAnimal.data[0].url })
     }
 
     setAnimalProperty(field, value) {
@@ -55,6 +61,16 @@ class StepTwo extends React.Component {
         this.setState({ isOpen: !this.state.isOpen });  
     }
 
+    selectAnimal(val) {
+        console.log(val)
+        this.setState({ animal_breed: val.breed })
+        this.setState({ animal_height: val.height })
+        this.setState({ animal_weight: val.weight })
+        this.setState({ animal_notes: val.special_notes })
+        this.setState({ animal_name: val.name })
+        this.setState({ impagePreview: val.data[0].url })
+    }
+
 	render() {
         const {
             animal_types,
@@ -65,7 +81,8 @@ class StepTwo extends React.Component {
             animal_notes, 
             showPreview, 
             isOpen, 
-            impagePreview
+            impagePreview,
+            selectedAnimals
         } = this.state
 		return (
 			<div className="create-list">
@@ -87,9 +104,18 @@ class StepTwo extends React.Component {
                         <div className="dashboard row">
                             <div className="left-side-bar col-sm-4 col-12">
                                 <ul>
-                                    <li className="animal-name">
-                                        {animal_name} <FaPencil/>
-                                    </li>
+                                    {
+                                        selectedAnimals.length > 0
+                                        ? selectedAnimals.map((value) =>
+                                                <li 
+                                                    className="animal-name"
+                                                    key={value.id}
+                                                    onClick={this.selectAnimal.bind(this, value)}>
+                                                    {value.name} <FaPencil/>
+                                                </li>                                        
+                                            )
+                                        : null
+                                    }
                                     <div>
                                         <button
                                             className="btn btn-add-animal"

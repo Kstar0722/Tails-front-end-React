@@ -12,7 +12,6 @@ class StepOne extends React.Component {
         super(props)
 
         this.state = {
-            isSelected: false,
             selectedAnimal: [],
             disabled: true
         }
@@ -28,21 +27,22 @@ class StepOne extends React.Component {
     }
 
     selectImg(val) {
-        const { isSelected, selectedAnimal, disabled } = this.state
+        const { selectedAnimal, disabled } = this.state
         const item = {
             id: val.id,
-            value: !isSelected 
+            value: true
         }
-        this.props.selectAnimal(val)
+        //this.props.selectAnimal(val)
         const index = _.findIndex(selectedAnimal, item => item.id == val.id)
         if(index == -1) {
             selectedAnimal.push(item)
             this.setState({ disabled: false })
-            //this.props.selectAnimal(val)
+            this.props.selectAnimal(val, true)
         } else {
             selectedAnimal.splice(index, 1)
+            this.props.selectAnimal(val, false)
         }
-        this.setState({ isSelected: !isSelected })
+
         this.setState({ selectedAnimal })
         if(selectedAnimal.length == 0) {
             this.setState({ disabled: true })
@@ -51,8 +51,7 @@ class StepOne extends React.Component {
 
     render() {
         const { animalInfos } = this.props
-        const { selectedAnimal, isSelected, disabled } = this.state
-        console.log(selectedAnimal)
+        const { selectedAnimal, disabled } = this.state
         if(animalInfos.loaded) {
             return (
                 <div className="create-list">
@@ -102,7 +101,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     getAnimalsIds: () => dispatch(getAnimalsIds()),
-    selectAnimal: (value) => dispatch(selectAnimal(value))
+    selectAnimal: (value, flag) => dispatch(selectAnimal(value, flag))
 })
   
 export default connect(mapStateToProps, mapDispatchToProps)(StepOne)

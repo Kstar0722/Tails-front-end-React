@@ -42,7 +42,7 @@ class StepThree extends React.Component {
             delivery_city,
             delivery_zip
         } = this.state
-        
+
         if( pick_up_address == "" || 
             pick_up_state == -1 ||
             pick_up_city == "" ||
@@ -86,7 +86,7 @@ class StepThree extends React.Component {
                                     className="form-control"
                                     name="pick_up_address"
                                     value={pick_up_address}
-                                    onChange={this .setValue.bind(this, 'pick_up_address')}/>
+                                    onChange={this.setValue.bind(this, 'pick_up_address')}/>
                             </div>
                             <div className="form-group">
                                 <div className="row">

@@ -19,9 +19,20 @@ const ACTION_HANDLERS = {
     loading: true,
     loaded: false
   }),
-  [SELECTED_ANIMALS]: (state, action) => Object.assign({}, state, {
-    selectedAnimals: action.data
-  })
+  [SELECTED_ANIMALS]: (state, action) => {
+    const flag = action.flag
+    let selectedAnimals = state.selectedAnimals
+    if(flag == true)
+      selectedAnimals.push(action.data)
+    else {
+      const index = _.findIndex(selectedAnimals, item => item.id == action.data.id)
+      selectedAnimals.splice(index, 1)
+    }
+    
+    return Object.assign({}, state, {
+      selectedAnimals
+  });
+  }
 }
 
 // ------------------------------------

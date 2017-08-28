@@ -1,8 +1,9 @@
 import { FaClose, FaPlus } from 'react-icons/lib/fa'
 import { connect } from 'react-redux'
+import { selectAnimal } from './StepOne/Actions/getAnimals'
 import './lists.scss'
 
-export default class ModalAnimals extends React.Component {
+class ModalAnimals extends React.Component {
     
     constructor(props) {
         super(props)
@@ -13,27 +14,32 @@ export default class ModalAnimals extends React.Component {
         }
     }
 
+    componentWillMount() {
+        const { animalInfos } = this.props
+        animalInfos.selectedAnimals
+    }
+
     selectImg(val) {
-        const { isSelected, selectedAnimal } = this.state
+        const { selectedAnimal, disabled } = this.state
         const item = {
             id: val.id,
-            value: !isSelected 
+            value: true
         }
-        // this.props.selectAnimal(val)
         const index = _.findIndex(selectedAnimal, item => item.id == val.id)
         if(index == -1) {
             selectedAnimal.push(item)
-           // this.props.selectAnimal(val)
+            this.props.selectAnimal(val, true)
         } else {
             selectedAnimal.splice(index, 1)
+            this.props.selectAnimal(val, false)
         }
-        this.setState({ isSelected: !isSelected })
+
         this.setState({ selectedAnimal })
         this.props.onClose()
     }
 
     render() {
-        const { show, animals } = this.props
+        const { show, animals, animalInfos } = this.props
         const { isSelected, selectedAnimal } = this.state  
        
         if(!this.props.show) {
@@ -52,7 +58,7 @@ export default class ModalAnimals extends React.Component {
                                         <img 
                                             src={val.data[0].url}
                                             className={
-                                                selectedAnimal.length > 0 && _.find(selectedAnimal, item => item.id == val.id && item.value == true)
+                                                animalInfos.selectedAnimals.length > 0 && _.find(animalInfos.selectedAnimals, item => item.id == val.id)
                                                 ? "select-animal-image img-responsive"
                                                 : "animal-image img-responsive"                                          
                                             }
@@ -69,3 +75,13 @@ export default class ModalAnimals extends React.Component {
         )
     }
 }
+
+const mapStateToProps = state => ({
+    animalInfos: state.animalsReducer
+})
+
+const mapDispatchToProps = dispatch => ({
+    selectAnimal: (value, flag) => dispatch(selectAnimal(value, flag))
+})
+  
+export default connect(mapStateToProps, mapDispatchToProps)(ModalAnimals)
