@@ -22,6 +22,7 @@ class StepTwo extends React.Component {
             animal_weight: "",
             animal_notes: "",
             animal_name: "",
+            animal_breed1: "test1",
             files: [],
             impagePreview: null,
             showPreview: true,
@@ -82,7 +83,8 @@ class StepTwo extends React.Component {
             showPreview, 
             isOpen, 
             impagePreview,
-            selectedAnimals
+            selectedAnimals,
+            animal_breed1
         } = this.state
 		return (
 			<div className="create-list">
@@ -126,18 +128,35 @@ class StepTwo extends React.Component {
                             </div>
                             <div className="main-body col-sm-8 col-12">
                                 <div className="form-group">
-                                    <label>Breed of Animal</label>
-                                    <select
-                                        className="form-control"
-                                        name="animal_breed"
-                                        value={animal_breed}
-                                        onChange={this.setAnimalProperty.bind(this, "animal_breed")}>
-                                        {
-                                           _.map(animal_types, (item) => 
-                                                <option value={item.breed} key={item.id}>{item.breed}</option>
-                                            )
-                                        }
-                                    </select>
+                                    <div className="row">
+                                        <div className="col-sm-6 col-12">
+                                            <label>Animal Type</label>
+                                            <select
+                                                className="form-control"
+                                                name="animal_breed"
+                                                value={animal_breed}
+                                                onChange={this.setAnimalProperty.bind(this, "animal_breed")}>
+                                                {
+                                                _.map(animal_types, (item) => 
+                                                        <option value={item.breed} key={item.id}>{item.breed}</option>
+                                                    )
+                                                }
+                                            </select>
+                                        </div>
+                                        <div className="col-sm-6 col-12">
+                                        <label>Breed of Animal</label>
+                                        <select
+                                            className="form-control"
+                                            name="animal_breed1"
+                                            value={animal_breed1}
+                                            onChange={this.setAnimalProperty.bind(this, "animal_breed1")}>
+                                            <option value="test1">TEST1</option>
+                                            <option value="test2">TEST2</option>
+                                            <option value="test3">TEST3</option>
+                                        </select>
+                                    </div>
+                                    </div>
+                                    
                                 </div>
                                 <div className="form-group">
                                     <div className="row">
