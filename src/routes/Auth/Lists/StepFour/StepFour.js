@@ -11,7 +11,7 @@ class StepFour extends React.Component {
 
         this.state = {
             title: "",
-            budget: -1,
+            budget: "",
             summary: "",
             disabled: true
         }
@@ -33,7 +33,7 @@ class StepFour extends React.Component {
         } = this.state
 
         if( title == "" || 
-            budget == -1 ||
+            budget == "" ||
             summary == "" ) {
             this.setState({ disabled: true})
         } else {
@@ -89,17 +89,12 @@ class StepFour extends React.Component {
                                     </div>
                                     <div className="col-md-4 col-12">
                                         <label>Budget</label>
-                                        <select
+                                        <input
+                                            type="text"
                                             className="form-control"
                                             name="budget"
                                             value={budget}
-                                            onChange={this.setValue.bind(this, 'budget')}>
-                                            <option value="-1">-- Please Select --</option>
-                                            <option value="20.00"> 20 </option>
-                                            <option value="30.00"> 30 </option>
-                                            <option value="40.00"> 40 </option>
-                                            <option value="200.00"> 50 </option>
-                                        </select>
+                                            onChange={this.setValue.bind(this, 'budget')}/>
                                     </div>
                                 </div>
                             </div>
