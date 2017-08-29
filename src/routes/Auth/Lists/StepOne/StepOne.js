@@ -27,7 +27,6 @@ class StepOne extends React.Component {
     checkSelectedAnimals() {
         const { animalInfos } = this.props
         if(animalInfos.selectedAnimals.length > 0) {
-            console.log(animalInfos.selectedAnimals.length)
             this.setState({ disabled: false })
         }
     }
