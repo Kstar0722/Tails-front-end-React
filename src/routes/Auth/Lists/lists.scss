@@ -11,6 +11,7 @@
     .step-one {
         background: #ffffff;
         margin-top: 60px;
+        margin-bottom: 60px;
         padding: 30px;
         font-family: 'PT Sans';
         .comment {
@@ -309,13 +310,34 @@
             margin-top: 60px;
         }
         .btn-section {
-            text-align: center;
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+            .btn-prev {
+                background: transparent;
+                width: 205px;
+                height: 80px;
+                border-radius: 50px;
+                border: 1px solid #e0dbdd;
+                text-transform: uppercase;
+                color: #adaead;
+                font-size: 35px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
             .btn-next {
                 background: #082543;
-                width: 500px;
-                height: 60px;
+                width: 315px;
+                height: 80px;
+                border-radius: 50px;
+                border: 1px solid #e0dbdd;
+                text-transform: uppercase;
                 color: #ffffff;
                 font-size: 35px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
             }
             .disabled {
                 pointer-events: none;

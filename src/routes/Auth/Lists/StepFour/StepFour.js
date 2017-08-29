@@ -1,4 +1,5 @@
 import { connect } from 'react-redux'
+import { Link } from 'react-router'
 import StepHistory from '../StepHistory'
 import NextStep from '../NextStep'
 import { createListings } from '../Actions/listing'
@@ -109,6 +110,7 @@ class StepFour extends React.Component {
                             </div>                            
                         </div>
                         <div className="btn-section">
+                            <Link className="btn btn-prev" to="/step-three">prev</Link>
                             <button                            
                                 className={disabled ? "btn btn-next disabled" : "btn btn-next"  }
                                 onClick={() => this.saveAll()}
