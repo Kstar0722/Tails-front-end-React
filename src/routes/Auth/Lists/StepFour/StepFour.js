@@ -31,7 +31,7 @@ class StepFour extends React.Component {
             budget,
             summary
         } = this.state
-
+ 
         if( title == "" || 
             budget == "" ||
             summary == "" ) {
