@@ -4,7 +4,7 @@ import { getAnimalsIds, selectAnimal } from './Actions/getAnimals'
 import StepHistory from '../StepHistory'
 import NextStep from '../NextStep'
 import '../lists.scss'
-
+var Isvg = require('react-inlinesvg')
 
 class StepOne extends React.Component {
     
@@ -50,7 +50,7 @@ class StepOne extends React.Component {
     render() {
         const { animalInfos } = this.props
         const { selectedAnimal, disabled } = this.state
-        console.log(disabled)
+        
         if(animalInfos.loaded) {
             return (
                 <div className="create-list">
@@ -67,13 +67,13 @@ class StepOne extends React.Component {
                                             <div 
                                                 className={
                                                     animalInfos.selectedAnimals.length > 0 && _.find(animalInfos.selectedAnimals, item => item.id == val.id)
-                                                    ? "select-animal-image animal-image img-responsive"
-                                                    : "animal-image img-responsive"                                          
-                                                }>
-                                                <svg 
+                                                    ? "select-animal-image animal-image"
+                                                    : "animal-image"                                          
+                                                }
+                                                onClick={()=>this.selectImg(val)}>
+                                                <Isvg 
                                                     src={val.data[0].url}
-                                                    className="img-responsive"
-                                                    onClick={()=>this.selectImg(val)}/>                                                
+                                                    className="img-responsive"/>                                                
                                             </div>
                                             <div className="animal-name">{val.name}</div>
                                         </div>

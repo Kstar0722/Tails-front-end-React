@@ -38,20 +38,21 @@
                     }
                     &:active  {
                         background:#092b4f;
-                    } 
-                    .img-responsive path {
-                        fill: red;
                     }
                     .img-responsive {
-                        fill: red;
+                        fill: #092b4f;
                     }
                 }                   
                 .select-animal-image {
                     background:#092b4f !important;
+                    .img-responsive {
+                        fill: #ffffff !important;
+                    }
                 }
                 .animal-name {
                     color: #092b4f;
-                    font-size: 14px;
+                    font-size: 16px;
+                    font-weight: bold;
                 }
             }
         }
@@ -390,6 +391,7 @@
         }      
     }
     .modal {
+        overflow-y: auto;
         background: #ffffff;
         border-radius: 5px;
         max-width: 500px;

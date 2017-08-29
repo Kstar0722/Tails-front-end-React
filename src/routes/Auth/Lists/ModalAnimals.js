@@ -2,6 +2,7 @@ import { FaClose, FaPlus } from 'react-icons/lib/fa'
 import { connect } from 'react-redux'
 import { selectAnimal } from './StepOne/Actions/getAnimals'
 import './lists.scss'
+var Isvg = require('react-inlinesvg')
 
 class ModalAnimals extends React.Component {
     
@@ -34,26 +35,25 @@ class ModalAnimals extends React.Component {
         return (
             <div className="step-one modal">
                 <FaClose onClick={this.props.onClose} className="btn-close" />
-                <div className="animal-list">
-                    <div className="row">
-                        {
-                            animals.map((val, index) =>                                        
-                                <div className="col-sm-3" key={val.id}>
-                                    <div className="animal-item">
-                                        <img 
-                                            src={val.data[0].url}
-                                            className={
-                                                animalInfos.selectedAnimals.length > 0 && _.find(animalInfos.selectedAnimals, item => item.id == val.id)
-                                                ? "select-animal-image img-responsive"
-                                                : "animal-image img-responsive"                                          
-                                            }
-                                            onClick={()=>this.selectImg(val)}/>
-                                        <div className="animal-name">{val.name}</div>
-                                    </div>
+                <div className="animal-list row">
+                    {
+                        animals.map((val, index) =>                                        
+                            <div className="animal-item col-sm-4" key={val.id}>
+                                <div  
+                                    className={
+                                        animalInfos.selectedAnimals.length > 0 && _.find(animalInfos.selectedAnimals, item => item.id == val.id)
+                                        ? "select-animal-image animal-image"
+                                        : "animal-image"                                          
+                                    }
+                                    onClick={()=>this.selectImg(val)}>
+                                    <Isvg 
+                                        src={val.data[0].url}
+                                        className="img-responsive"/>                                   
                                 </div>
-                            )
-                        }
-                    </div>                 
+                                <div className="animal-name">{val.name}</div>
+                            </div>
+                        )
+                    }               
                 </div>
             </div>             
                        

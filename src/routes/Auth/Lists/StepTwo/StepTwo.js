@@ -9,6 +9,7 @@ import ModalAnimals from '../ModalAnimals'
 import uploadBtnImage from 'assets/upload.png'
 import cameraImage from 'assets/camera.png'
 import '../lists.scss'
+var Isvg = require('react-inlinesvg')
 
 class StepTwo extends React.Component {
 	
