@@ -21,29 +21,33 @@
         }
         .animal-list {
             margin-top: 60px;
+            justify-content: center;
             .animal-item {
-                text-align: center;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
                 .animal-image {
-                    width: 50px;
-                    height: 50px;
+                    border: 2px solid #092b4f;
                     border-radius: 50%;
-                    border: 1px solid #092b4f;
+                    padding: 25px;
+                    width: 110px;
+                    height: 110px;                    
                     &:hover {
-                        cursor: pointer;
-                        border: 2px solid #27d5ff;
+                        cursor: pointer;                        
                     }
                     &:active  {
-                        border: 2px solid #27d5ff;
+                        background:#092b4f;
+                    } 
+                    .img-responsive path {
+                        fill: red;
                     }
-                }
+                    .img-responsive {
+                        fill: red;
+                    }
+                }                   
                 .select-animal-image {
-                    width: 50px;
-                    height: 50px;
-                    border-radius: 50%;
-                    border: 3px solid #27d5ff;
-                    &:hover {
-                        cursor: pointer;
-                    }
+                    background:#092b4f !important;
                 }
                 .animal-name {
                     color: #092b4f;

@@ -59,27 +59,26 @@ class StepOne extends React.Component {
                         <div className="step-one">
                             <div className="comment">
                                 What kind of animals do you need shipped ?                
-                            </div>
-                            <div className="animal-list">
-                                <div className="row">
-                                    {
-                                        animalInfos.data.map((val, index) =>                                        
-                                            <div className="col-sm-3" key={val.id}>
-                                                <div className="animal-item">
-                                                    <img 
-                                                        src={val.data[0].url}
-                                                        className={
-                                                            animalInfos.selectedAnimals.length > 0 && _.find(animalInfos.selectedAnimals, item => item.id == val.id)
-                                                            ? "select-animal-image img-responsive"
-                                                            : "animal-image img-responsive"                                          
-                                                        }
-                                                        onClick={()=>this.selectImg(val)}/>
-                                                    <div className="animal-name">{val.name}</div>
-                                                </div>
+                            </div>                           
+                            <div className="animal-list row">
+                                {
+                                    animalInfos.data.map((val, index) =>                                        
+                                        <div className="animal-item col-sm-2" key={val.id}>
+                                            <div 
+                                                className={
+                                                    animalInfos.selectedAnimals.length > 0 && _.find(animalInfos.selectedAnimals, item => item.id == val.id)
+                                                    ? "select-animal-image animal-image img-responsive"
+                                                    : "animal-image img-responsive"                                          
+                                                }>
+                                                <svg 
+                                                    src={val.data[0].url}
+                                                    className="img-responsive"
+                                                    onClick={()=>this.selectImg(val)}/>                                                
                                             </div>
-                                        )
-                                    }
-                                </div>                        
+                                            <div className="animal-name">{val.name}</div>
+                                        </div>
+                                    )
+                                }
                             </div>
                             <NextStep nextStep="/step-two" disabled={disabled}/>
                         </div>                
