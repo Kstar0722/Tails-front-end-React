@@ -99,7 +99,6 @@ class StepThree extends React.Component {
                                             onChange={this.setValue.bind(this, 'pick_up_state')}>
                                             <option value="-1">-- Please Select --</option>
                                             <option value="cal">California</option>
-                                            <option value="la">Los Angeles</option>
                                             <option value="ny">New York</option>
                                         </select>
                                     </div>
@@ -143,7 +142,6 @@ class StepThree extends React.Component {
                                             onChange={this.setValue.bind(this, 'delivery_state')}>
                                             <option value="-1">-- Please Select --</option>
                                             <option value="cal">California</option>
-                                            <option value="la">Los Angeles</option>
                                             <option value="ny">New York</option>
                                         </select>
                                     </div>
