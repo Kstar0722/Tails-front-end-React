@@ -1,4 +1,5 @@
 import { connect } from 'react-redux'
+import { Link } from 'react-router'
 import StepHistory from '../StepHistory'
 import NextStep from '../NextStep'
 import { setAnimalShipInfo } from './Actions/shipInfo'
@@ -166,7 +167,14 @@ class StepThree extends React.Component {
                                 </div>
                             </div>
                         </div>
-                        <NextStep nextStep="/step-four" disabled={disabled}/>
+                        <div className="footer">
+                            <Link className="btn btn-prev" to="/step-two">prev</Link>
+                            <Link className= {disabled ? "btn btn-next disabled" : "btn btn-next"} to="/step-four">next</Link>
+                        </div>
+                        {/*<div className="footer">
+                            <NextStep nextStep="/step-two"/>
+                            <NextStep nextStep="/step-four" disabled={disabled}/>
+                            </div>*/}
                     </div>
                 </div>
             </div>
