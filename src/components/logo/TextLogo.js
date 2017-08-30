@@ -1,5 +1,5 @@
 import './Logo.scss'
-import logoImage from 'assets/Logo.png'
+import logoImage from 'assets/logo.svg'
 
 import { browserHistory } from 'react-router'
 
