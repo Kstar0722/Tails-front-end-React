@@ -143,7 +143,11 @@ class StepTwo extends React.Component {
                                         selectedAnimals.length > 0
                                         ? selectedAnimals.map((value) =>
                                                 <li 
-                                                    className="animal-name"
+                                                    className= {
+                                                        value.id == animal_id 
+                                                        ? "selected-animal animal-name"
+                                                        : "animal-name"
+                                                    }  
                                                     key={value.id}
                                                     onClick={this.currentSelectedAnimal.bind(this, value)}>
                                                     {value.name} <FaPencil/>
