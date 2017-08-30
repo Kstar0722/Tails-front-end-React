@@ -3,6 +3,7 @@ import { Link } from 'react-router'
 import Dropzone from 'react-dropzone'
 import _ from 'lodash'
 import { FaPlus, FaPencil } from 'react-icons/lib/fa'
+import Measure from 'react-measure'
 import StepHistory from '../StepHistory'
 import NextStep from '../NextStep'
 import ModalAnimals from '../ModalAnimals'
@@ -23,12 +24,16 @@ class StepTwo extends React.Component {
             animal_weight: "",
             animal_notes: "",
             animal_name: "",
-            animal_breed1: "test1",
+            animal_breed: "test1",
             files: [],
             impagePreview: null,
             showPreview: true,
             isOpen: false,
-            selectedAnimals: []
+            selectedAnimals: [],
+            dimensions: {
+                width: -1,
+                height: -1
+            }
         }
         
         this.selectAnimal = this.selectAnimal.bind(this)
@@ -41,12 +46,22 @@ class StepTwo extends React.Component {
         this.setState({ selectedAnimals })
         this.setState({ animal_types: animalInfos.data }) 
         const currentAnimal = selectedAnimals[0]
-        this.setState({ animal_breed: currentAnimal.breed })
+        this.setState({ animal_type: currentAnimal.breed })
         this.setState({ animal_height: currentAnimal.height })
         this.setState({ animal_weight: currentAnimal.weight })
         this.setState({ animal_notes: currentAnimal.special_notes })
         this.setState({ animal_name: currentAnimal.name })
         this.setState({ impagePreview: currentAnimal.data[0].url })
+    }
+
+    componentDidMount() {
+        const { impagePreview } = this.state
+        let img = new Image();
+        img.src = impagePreview;
+        this.setState({dimensions: {
+            width: img.width,
+            height: img.height
+        }})
     }
 
     setAnimalProperty(field, value) {
@@ -65,7 +80,7 @@ class StepTwo extends React.Component {
 
     selectAnimal(val) {
         console.log(val)
-        this.setState({ animal_breed: val.breed })
+        this.setState({ animal_type: val.breed })
         this.setState({ animal_height: val.height })
         this.setState({ animal_weight: val.weight })
         this.setState({ animal_notes: val.special_notes })
@@ -77,7 +92,7 @@ class StepTwo extends React.Component {
         const {
             animal_types,
             animal_name,
-            animal_breed, 
+            animal_type, 
             animal_height, 
             animal_weight, 
             animal_notes, 
@@ -85,8 +100,10 @@ class StepTwo extends React.Component {
             isOpen, 
             impagePreview,
             selectedAnimals,
-            animal_breed1
+            animal_breed,
+            dimensions
         } = this.state
+        
 		return (
 			<div className="create-list">
                 <div className="container">
@@ -134,9 +151,9 @@ class StepTwo extends React.Component {
                                             <label>Animal Type</label>
                                             <select
                                                 className="form-control"
-                                                name="animal_breed"
-                                                value={animal_breed}
-                                                onChange={this.setAnimalProperty.bind(this, "animal_breed")}>
+                                                name="animal_type"
+                                                value={animal_type}
+                                                onChange={this.setAnimalProperty.bind(this, "animal_type")}>
                                                 {
                                                 _.map(animal_types, (item) => 
                                                         <option value={item.breed} key={item.id}>{item.breed}</option>
@@ -148,9 +165,9 @@ class StepTwo extends React.Component {
                                         <label>Breed of Animal</label>
                                         <select
                                             className="form-control"
-                                            name="animal_breed1"
-                                            value={animal_breed1}
-                                            onChange={this.setAnimalProperty.bind(this, "animal_breed1")}>
+                                            name="animal_breed"
+                                            value={animal_breed}
+                                            onChange={this.setAnimalProperty.bind(this, "animal_breed")}>
                                             <option value="test1">TEST1</option>
                                             <option value="test2">TEST2</option>
                                             <option value="test3">TEST3</option>
@@ -195,7 +212,11 @@ class StepTwo extends React.Component {
                                     <Dropzone onDrop={this.onDrop.bind(this)} className={impagePreview ? "file-drag-drop no-dash" : "file-drag-drop"  }>
                                         {
                                             impagePreview
-                                                ? <img src={impagePreview} className="image-preview img-responsive img-thumbnail"/>
+                                                ? <img 
+                                                    src={impagePreview}
+                                                    className="image-preview img-responsive img-thumbnail"
+                                                    width={dimensions.width}
+                                                    height={dimensions.height}/>
                                                 : <div className="upload-section">
                                                     <img src={uploadBtnImage} className="upload-icon"/>
                                                         <div>
