@@ -42,7 +42,6 @@ class StepTwo extends React.Component {
     componentWillMount() {
         const { animalInfos } = this.props
         const selectedAnimals = animalInfos.selectedAnimals
-        console.log(selectedAnimals)
         this.setState({ selectedAnimals })
         this.setState({ animal_types: animalInfos.data }) 
         const currentAnimal = selectedAnimals[0]
@@ -52,6 +51,7 @@ class StepTwo extends React.Component {
         this.setState({ animal_notes: currentAnimal.special_notes })
         this.setState({ animal_name: currentAnimal.name })
         this.setState({ impagePreview: currentAnimal.data[0].url })
+        this.getImageSize(currentAnimal.data[0].url)        
     }
 
     componentDidMount() {
@@ -59,6 +59,15 @@ class StepTwo extends React.Component {
         let img = new Image();
         img.src = impagePreview;
         this.setState({dimensions: {
+            width: img.width,
+            height: img.height
+        }})
+    }
+
+    getImageSize(image) {
+        let img = new Image();
+        img.src = image;
+        img.onload = () => this.setState({dimensions: {
             width: img.width,
             height: img.height
         }})
@@ -79,13 +88,13 @@ class StepTwo extends React.Component {
     }
 
     selectAnimal(val) {
-        console.log(val)
         this.setState({ animal_type: val.breed })
         this.setState({ animal_height: val.height })
         this.setState({ animal_weight: val.weight })
         this.setState({ animal_notes: val.special_notes })
         this.setState({ animal_name: val.name })
         this.setState({ impagePreview: val.data[0].url })
+        this.getImageSize(val.data[0].url)
     }
 
 	render() {
@@ -103,7 +112,7 @@ class StepTwo extends React.Component {
             animal_breed,
             dimensions
         } = this.state
-        
+
 		return (
 			<div className="create-list">
                 <div className="container">

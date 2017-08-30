@@ -61,8 +61,8 @@ class StepOne extends React.Component {
                                 What kind of animals do you need shipped ?                
                             </div>                           
                             <div className="animal-list row">
-                                {
-                                    animalInfos.data.map((val, index) =>                                        
+                                {                                    
+                                    _.orderBy(animalInfos.data, 'name').map((val, index) =>                                        
                                         <div className="animal-item col-sm-2" key={val.id}>
                                             <div 
                                                 className={

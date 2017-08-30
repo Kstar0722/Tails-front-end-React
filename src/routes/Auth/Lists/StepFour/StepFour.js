@@ -71,7 +71,7 @@ class StepFour extends React.Component {
         return (
             <div className="create-list">
                 <div className="container">
-                    <StepHistory currentState="stetFour"/>
+                    <StepHistory currentState="stepFour"/>
                     <div className="step-four">
                         <div className="comment">
                             Tell us a little more about your listing
