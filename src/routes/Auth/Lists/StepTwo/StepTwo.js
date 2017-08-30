@@ -18,12 +18,13 @@ class StepTwo extends React.Component {
         super(props)
 
         this.state = {
+            animal_id: -1,
             animal_types: [],
-            animal_breed: "",
-            animal_height: "",
-            animal_weight: "",
-            animal_notes: "",
-            animal_name: "",
+            breed: "",
+            height: "",
+            weight: "",
+            special_notes: "",
+            name: "",
             animal_breed: "test1",
             files: [],
             impagePreview: null,
@@ -35,8 +36,6 @@ class StepTwo extends React.Component {
                 height: -1
             }
         }
-        
-        this.selectAnimal = this.selectAnimal.bind(this)
     }
 
     componentWillMount() {
@@ -45,11 +44,12 @@ class StepTwo extends React.Component {
         this.setState({ selectedAnimals })
         this.setState({ animal_types: animalInfos.data }) 
         const currentAnimal = selectedAnimals[0]
-        this.setState({ animal_type: currentAnimal.breed })
-        this.setState({ animal_height: currentAnimal.height })
-        this.setState({ animal_weight: currentAnimal.weight })
-        this.setState({ animal_notes: currentAnimal.special_notes })
-        this.setState({ animal_name: currentAnimal.name })
+        this.setState({ animal_id: currentAnimal.id })
+        this.setState({ breed: currentAnimal.breed })
+        this.setState({ height: currentAnimal.height })
+        this.setState({ weight: currentAnimal.weight })
+        this.setState({ special_notes: currentAnimal.special_notes })
+        this.setState({ name: currentAnimal.name })
         this.setState({ impagePreview: currentAnimal.data[0].url })
         this.getImageSize(currentAnimal.data[0].url)        
     }
@@ -74,7 +74,11 @@ class StepTwo extends React.Component {
     }
 
     setAnimalProperty(field, value) {
+        const { selectedAnimals, animal_id } = this.state
+        let currentAnimal = _.find(selectedAnimals, item => item.id == animal_id)
         this.setState({[field]: value.target.value})
+        currentAnimal[field] = value.target.value
+        console.log(currentAnimal)
     }
 
     onDrop(files) {
@@ -87,24 +91,26 @@ class StepTwo extends React.Component {
         this.setState({ isOpen: !this.state.isOpen });  
     }
 
-    selectAnimal(val) {
-        this.setState({ animal_type: val.breed })
-        this.setState({ animal_height: val.height })
-        this.setState({ animal_weight: val.weight })
-        this.setState({ animal_notes: val.special_notes })
-        this.setState({ animal_name: val.name })
+    currentSelectedAnimal(val) {
+        this.setState({ animal_id: val.id })
+        this.setState({ breed: val.breed })
+        this.setState({ height: val.height })
+        this.setState({ weight: val.weight })
+        this.setState({ special_notes: val.special_notes })
+        this.setState({ name: val.name })
         this.setState({ impagePreview: val.data[0].url })
         this.getImageSize(val.data[0].url)
     }
 
 	render() {
         const {
+            animal_id,
             animal_types,
-            animal_name,
-            animal_type, 
-            animal_height, 
-            animal_weight, 
-            animal_notes, 
+            name,
+            breed, 
+            height, 
+            weight, 
+            special_notes, 
             showPreview, 
             isOpen, 
             impagePreview,
@@ -112,7 +118,7 @@ class StepTwo extends React.Component {
             animal_breed,
             dimensions
         } = this.state
-
+        
 		return (
 			<div className="create-list">
                 <div className="container">
@@ -139,7 +145,7 @@ class StepTwo extends React.Component {
                                                 <li 
                                                     className="animal-name"
                                                     key={value.id}
-                                                    onClick={this.selectAnimal.bind(this, value)}>
+                                                    onClick={this.currentSelectedAnimal.bind(this, value)}>
                                                     {value.name} <FaPencil/>
                                                 </li>                                        
                                             )
@@ -160,9 +166,9 @@ class StepTwo extends React.Component {
                                             <label>Animal Type</label>
                                             <select
                                                 className="form-control"
-                                                name="animal_type"
-                                                value={animal_type}
-                                                onChange={this.setAnimalProperty.bind(this, "animal_type")}>
+                                                name="breed"
+                                                value={breed}
+                                                onChange={this.setAnimalProperty.bind(this, "breed")}>
                                                 {
                                                 _.map(animal_types, (item) => 
                                                         <option value={item.breed} key={item.id}>{item.breed}</option>
@@ -192,18 +198,18 @@ class StepTwo extends React.Component {
                                             <input 
                                                 type="number"
                                                 className="form-control"
-                                                name="animal_height"
-                                                value={animal_height}
-                                                onChange={this.setAnimalProperty.bind(this, "animal_height")} />
+                                                name="height"
+                                                value={height}
+                                                onChange={this.setAnimalProperty.bind(this, "height")} />
                                         </div>
                                         <div className="col-sm-6 col-12">
                                             <label>Weight of Animal</label>
                                             <input
                                                 type="number"
                                                 className="form-control"
-                                                name="animal_weight"
-                                                value={animal_weight}
-                                                onChange={this.setAnimalProperty.bind(this, "animal_weight")} />
+                                                name="weight"
+                                                value={weight}
+                                                onChange={this.setAnimalProperty.bind(this, "weight")} />
                                         </div>
                                     </div>
                                 </div>
@@ -212,9 +218,9 @@ class StepTwo extends React.Component {
                                     <textarea
                                         rows="3"
                                         className="form-control"
-                                        name="animal_notes"
-                                        value={animal_notes}
-                                        onChange={this.setAnimalProperty.bind(this, "animal_notes")} />  
+                                        name="special_notes"
+                                        value={special_notes}
+                                        onChange={this.setAnimalProperty.bind(this, "special_notes")} />  
                                 </div>
                                 <div className="form-group">
                                     <label>Images of this Animal</label>
