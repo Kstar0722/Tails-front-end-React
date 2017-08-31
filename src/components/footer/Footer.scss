@@ -1,6 +1,6 @@
-$footerBackground: #444141;
+$footerBackground: #ffffff;
 $textBlue: #0FCBF0;
-
+$textGray: #7c6e6a;
 section#footer {
 	background: $footerBackground;
 	min-height: 100px;
@@ -30,7 +30,7 @@ section#footer {
 					a {
 						font-size: 18px;
 						text-decoration: none;
-						color: white;
+						color: $textGray;
 					}
 					&.sign-up {
 						a {
