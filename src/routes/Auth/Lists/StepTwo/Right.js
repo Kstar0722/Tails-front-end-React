@@ -60,7 +60,7 @@ export default class Right extends React.Component {
                 <div className="form-group">
                     <div className="row">
                         <div className="col-sm-6 col-12">
-                            <label>Height of Animal(Cm)</label>
+                            <label>Height of Animal(Feet)</label>
                             <input 
                                 type="number"
                                 className="form-control"
@@ -69,33 +69,13 @@ export default class Right extends React.Component {
                                 onChange={this.setAnimalProperty.bind(this, "height")} />
                         </div>
                         <div className="col-sm-6 col-12">
-                            <label>Height of Animal(Feet)</label>
-                            <input 
-                                type="number"
-                                className="form-control"
-                                name="feet"
-                                value={(height * 0.032).toFixed(2)}
-                                readOnly />
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="col-sm-6 col-12">
-                            <label>Weight of Animal(Kg)</label>
+                            <label>Weight of Animal(Lbs)</label>
                             <input
                                 type="number"
                                 className="form-control"
                                 name="weight"
                                 value={weight}
                                 onChange={this.setAnimalProperty.bind(this, "weight")} />
-                        </div>
-                        <div className="col-sm-6 col-12">
-                            <label>Weight of Animal(Lbs)</label>
-                            <input
-                                type="number"
-                                className="form-control"
-                                name="lbs"
-                                value={(weight * 2.2046).toFixed(2)}
-                                readOnly />
                         </div>
                     </div>
                 </div>
