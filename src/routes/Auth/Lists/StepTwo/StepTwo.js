@@ -46,9 +46,6 @@ class StepTwo extends React.Component {
         const currentAnimal = selectedAnimals[0]
         this.setState({ animal_id: currentAnimal.id })
         this.setState({ breed: currentAnimal.breed })
-        this.setState({ height: currentAnimal.height })
-        this.setState({ weight: currentAnimal.weight })
-        this.setState({ special_notes: currentAnimal.special_notes })
         this.setState({ name: currentAnimal.name })
         this.setState({ impagePreview: currentAnimal.data[0].url })
         this.getImageSize(currentAnimal.data[0].url)        
@@ -233,9 +230,7 @@ class StepTwo extends React.Component {
                                             impagePreview
                                                 ? <img 
                                                     src={impagePreview}
-                                                    className="image-preview img-responsive img-thumbnail"
-                                                    width={dimensions.width}
-                                                    height={dimensions.height}/>
+                                                    className="image-preview img-responsive img-thumbnail"/>
                                                 : <div className="upload-section">
                                                     <img src={uploadBtnImage} className="upload-icon"/>
                                                         <div>

@@ -30,7 +30,7 @@ class Profile extends React.Component {
 
 	render() {
 		const { listings } = this.props
-		console.log(listings)
+		
 		if(listings.loaded) {
 			return ( 
 				<section id="profile">

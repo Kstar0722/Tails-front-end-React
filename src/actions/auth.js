@@ -77,7 +77,6 @@ export function login(email, password) {
         .then(res => {
             dispatch(loginSuccess(res))
             browserHistory.push('/profile')
-            console.log("login success")
         })
         .catch(error =>{
            dispatch(Notifications.error({

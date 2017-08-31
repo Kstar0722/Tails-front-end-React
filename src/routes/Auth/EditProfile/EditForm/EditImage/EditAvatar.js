@@ -7,13 +7,15 @@ class EditAvatar extends React.Component {
         super(props)
         this.state = {
             image: DefaultAvatar,
-            scale: 1
+            scale: 1,
+            originalImage: DefaultAvatar
         }
         this.onLoad = this.onLoad.bind(this);
     }
     
     handleNewImage = (e) => {
         this.setState({ image: e.target.files[0] })
+        this.setState({ originalImage: e.target.files[0] })
         const file = e.target.files[0]
         let reader = new FileReader()
         reader.onload = function(base64) {

@@ -11,11 +11,11 @@ import config from 'config'
 
 const validate = values => {
 	let errors = {}
-  let fields = [
-    {name: 'first_name', rules: ['required']},
-    {name: 'last_name', rules: ['required']},
-    {name: 'email', rules: ['required', 'email']}
-  ];
+	let fields = [
+		{name: 'first_name', rules: ['required']},
+		{name: 'last_name', rules: ['required']},
+		{name: 'email', rules: ['required', 'email']}
+	];
 	errors = validationFields(fields, values);
 	if(values.password){
 		if(values.password_reset !== values.confirm_password)
@@ -30,14 +30,14 @@ class EditForm extends React.Component {
 		super(props)
 	}
 
-
 	submit(values){
-		console.log(values)
+		console.log("values===========>", values)
 		this.props.updateProfile(values)
 	}
 
 	render() {
 		const {handleSubmit, submitting, profileUpdate} = this.props
+		console.log("profileUpdate============>", profileUpdate)
 		return (
 			<form onSubmit={handleSubmit(this.submit.bind(this))} className="form-profile">
 				<div className="row">
@@ -81,17 +81,17 @@ class EditForm extends React.Component {
 }
 
 EditForm = reduxForm({
-  form: 'editProfile',
-  enableReinitialize: true,
-  validate,
+	form: 'editProfile',
+	enableReinitialize: true,
+	validate,
 })(EditForm)
 
 EditForm = connect(
-  state => ({
-		initialValues: state.profile.data,
-		profileUpdate: state.profile.data
-  }),
-  {updateProfile}
+	state => ({
+			initialValues: state.profile.data,
+			profileUpdate: state.profile.data
+	}),
+	{updateProfile}
 )(EditForm)
 
 export default EditForm
