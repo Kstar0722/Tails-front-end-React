@@ -7,6 +7,8 @@ import Measure from 'react-measure'
 import StepHistory from '../StepHistory'
 import NextStep from '../NextStep'
 import ModalAnimals from '../ModalAnimals'
+import Left from './Left'
+import Right from './Right'
 import uploadBtnImage from 'assets/upload.png'
 import cameraImage from 'assets/camera.png'
 import '../lists.scss'
@@ -28,7 +30,6 @@ class StepTwo extends React.Component {
             animal_breed: "test1",
             files: [],
             impagePreview: null,
-            showPreview: true,
             isOpen: false,
             selectedAnimals: [],
             dimensions: {
@@ -72,10 +73,9 @@ class StepTwo extends React.Component {
 
     setAnimalProperty(field, value) {
         const { selectedAnimals, animal_id } = this.state
-        let currentAnimal = _.find(selectedAnimals, item => item.id == animal_id)
         this.setState({[field]: value.target.value})
+        let currentAnimal = _.find(selectedAnimals, item => item.id == animal_id)
         currentAnimal[field] = value.target.value
-        console.log(currentAnimal)
     }
 
     onDrop(files) {
@@ -89,6 +89,7 @@ class StepTwo extends React.Component {
     }
 
     currentSelectedAnimal(val) {
+        console.log(val)
         this.setState({ animal_id: val.id })
         this.setState({ breed: val.breed })
         this.setState({ height: val.height })
@@ -107,8 +108,7 @@ class StepTwo extends React.Component {
             breed, 
             height, 
             weight, 
-            special_notes, 
-            showPreview, 
+            special_notes,
             isOpen, 
             impagePreview,
             selectedAnimals,
@@ -135,114 +135,23 @@ class StepTwo extends React.Component {
                         </div>
                         <div className="dashboard row">
                             <div className="left-side-bar col-sm-4 col-12">
-                                <ul>
-                                    {
-                                        selectedAnimals.length > 0
-                                        ? selectedAnimals.map((value) =>
-                                                <li 
-                                                    className= {
-                                                        value.id == animal_id 
-                                                        ? "selected-animal animal-name"
-                                                        : "animal-name"
-                                                    }  
-                                                    key={value.id}
-                                                    onClick={this.currentSelectedAnimal.bind(this, value)}>
-                                                    {value.name} <FaPencil/>
-                                                </li>                                        
-                                            )
-                                        : null
-                                    }
-                                    <div>
-                                        <button
-                                            className="btn btn-add-animal"
-                                            onClick={this.toggleModal.bind(this)}
-                                        ><FaPlus/> New Animal</button>
-                                    </div>                                   
-                                </ul>                                
+                                <Left 
+                                    selectedAnimals={selectedAnimals}
+                                    currentSelectedAnimal={this.currentSelectedAnimal.bind(this)}
+                                    toggleModal={this.toggleModal.bind(this)}
+                                    animal_id={animal_id}  />                           
                             </div>
-                            <div className="main-body col-sm-8 col-12">
-                                <div className="form-group">
-                                    <div className="row">
-                                        <div className="col-sm-6 col-12">
-                                            <label>Animal Type</label>
-                                            <select
-                                                className="form-control"
-                                                name="breed"
-                                                value={breed}
-                                                onChange={this.setAnimalProperty.bind(this, "breed")}>
-                                                {
-                                                _.map(animal_types, (item) => 
-                                                        <option value={item.breed} key={item.id}>{item.breed}</option>
-                                                    )
-                                                }
-                                            </select>
-                                        </div>
-                                        <div className="col-sm-6 col-12">
-                                        <label>Breed of Animal</label>
-                                        <select
-                                            className="form-control"
-                                            name="animal_breed"
-                                            value={animal_breed}
-                                            onChange={this.setAnimalProperty.bind(this, "animal_breed")}>
-                                            <option value="test1">TEST1</option>
-                                            <option value="test2">TEST2</option>
-                                            <option value="test3">TEST3</option>
-                                        </select>
-                                    </div>
-                                    </div>
-                                    
-                                </div>
-                                <div className="form-group">
-                                    <div className="row">
-                                        <div className="col-sm-6 col-12">
-                                            <label>Height of Animal</label>
-                                            <input 
-                                                type="number"
-                                                className="form-control"
-                                                name="height"
-                                                value={height}
-                                                onChange={this.setAnimalProperty.bind(this, "height")} />
-                                        </div>
-                                        <div className="col-sm-6 col-12">
-                                            <label>Weight of Animal</label>
-                                            <input
-                                                type="number"
-                                                className="form-control"
-                                                name="weight"
-                                                value={weight}
-                                                onChange={this.setAnimalProperty.bind(this, "weight")} />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="form-group">
-                                    <label>Special Notes for Animal</label>
-                                    <textarea
-                                        rows="3"
-                                        className="form-control"
-                                        name="special_notes"
-                                        value={special_notes}
-                                        onChange={this.setAnimalProperty.bind(this, "special_notes")} />  
-                                </div>
-                                <div className="form-group">
-                                    <label>Images of this Animal</label>
-                                    <Dropzone onDrop={this.onDrop.bind(this)} className={impagePreview ? "file-drag-drop no-dash" : "file-drag-drop"  }>
-                                        {
-                                            impagePreview
-                                                ? <img 
-                                                    src={impagePreview}
-                                                    className="image-preview img-responsive img-thumbnail"/>
-                                                : <div className="upload-section">
-                                                    <img src={uploadBtnImage} className="upload-icon"/>
-                                                        <div>
-                                                            <p className="file-upload-title">drag & drop <br/> Image or.</p>                                        
-                                                            <button className="btn btn-file-upload">Choose files</button>
-                                                        </div>
-                                                    <img src={cameraImage} className="upload-icon"/>
-                                                </div>
-                                        }
-                                    </Dropzone>
-                                </div>
-                            </div>
+                            <Right 
+                                animal_types={animal_types}
+                                name={name}
+                                breed={breed}
+                                height={height}
+                                weight={weight}
+                                special_notes={special_notes}
+                                impagePreview={impagePreview}
+                                setAnimalProperty={this.setAnimalProperty.bind(this)}
+                                onDrop={this.onDrop.bind(this)}
+                            />
                         </div>
                         <div className="footer">
                             <Link className="btn btn-prev" to="/step-one">prev</Link>
