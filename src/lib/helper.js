@@ -1,6 +1,6 @@
 export function validationFields(fields, values){
   let errors = {};
-  console.log('sdsd')
+  console.log('helper')
   if (Array.isArray(fields)){
     fields.map(field => {
       if (Array.isArray(field.rules)){

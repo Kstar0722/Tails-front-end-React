@@ -14,6 +14,12 @@ class EditAvatar extends React.Component {
     
     handleNewImage = (e) => {
         this.setState({ image: e.target.files[0] })
+        const file = e.target.files[0]
+        let reader = new FileReader()
+        reader.onload = function(base64) {
+            localStorage["file"] = base64
+        }
+        reader.readAsDataURL(file)
         // this.onSave();
 	}
 	
@@ -46,13 +52,20 @@ class EditAvatar extends React.Component {
 
     componentWillMount() {
         if(this.props.image)
-            this.setState({
-                image: this.props.image
-            })
+            this.setState({ image: this.props.image })
+
+        this.getPhoto()
 	}
 
     setEditorRef = (editor) => this.editor = editor
 
+    getPhoto() {
+        var base64 = localStorage["file"]
+        const base64Parts = base64.split(",")
+        const fileFormat = base64Parts[0].split(";")[1]
+        const fileContent = base64Parts[1]
+        const file = new File([fileContent], "file name here", {type: fileFormat})        
+    }
 	render() {
 		return (
 			<div className="row image-edit">

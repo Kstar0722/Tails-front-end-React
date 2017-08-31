@@ -6,7 +6,7 @@ import renderField from 'components/fieldForm'
 import checkboxField from 'components/checkboxField'
 import {updateProfile} from 'actions/profile'
 import EditAvatar from './EditImage/EditAvatar'
-import editImage from './EditImage/EditImage'
+import EditImage from './EditImage/EditImage'
 import config from 'config'
 
 const validate = values => {
@@ -44,7 +44,7 @@ class EditForm extends React.Component {
 					<div className="col-6">
 						<div className="row">
 						 <Field name="avatar_new" image={profileUpdate.avatar} component={EditAvatar} label={"Profile Image"}/>       
-						 <Field name="cover_photo_new" image={profileUpdate.cover_photo} component={editImage} label={"Cover Photo"}/> 
+						 <Field name="cover_photo_new" image={profileUpdate.cover_photo} component={EditImage} label={"Cover Photo"}/> 
 						</div>       
 					</div>
 					<div className="col-6">
@@ -69,8 +69,7 @@ class EditForm extends React.Component {
 							<div className="col-6">
 								<Field name="ship" component={checkboxField} label="I want to ship"/>
 							</div>
-						</div>
-						
+						</div>						
 					</div>
 				</div>
 				<div className="row justify-content-center">	
