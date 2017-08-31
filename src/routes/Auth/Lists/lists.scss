@@ -31,8 +31,9 @@
                     border: 2px solid #092b4f;
                     border-radius: 50%;
                     padding: 25px;
-                    width: 110px;
-                    height: 110px;                    
+                    max-width: 110px;
+                    max-height: 110px;
+                    width: 100%;                 
                     &:hover {
                         cursor: pointer;                        
                     }
@@ -76,13 +77,13 @@
                 justify-content: center;
             }
             .line {
-                width: 150px;
+                width: 120px;
                 background: #092b4f;
                 height: 3px;
             }
             @media (max-width: 575px) {
                 .line {
-                    width: 70px;
+                    width: 25px;
                 }
             }
         }

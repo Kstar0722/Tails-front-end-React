@@ -63,7 +63,7 @@ class StepOne extends React.Component {
                             <div className="animal-list row">
                                 {                                    
                                     _.orderBy(animalInfos.data, 'name').map((val, index) =>                                        
-                                        <div className="animal-item col-sm-2" key={val.id}>
+                                        <div className="animal-item col-md-2 col-sm-4" key={val.id}>
                                             <div 
                                                 className={
                                                     animalInfos.selectedAnimals.length > 0 && _.find(animalInfos.selectedAnimals, item => item.id == val.id)
