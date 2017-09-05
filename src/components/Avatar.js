@@ -17,8 +17,9 @@ class Avatar extends React.Component {
 		if (this.props.type == "large") {
 			return (
 				<div className="avatar-wrap d-flex flex-row flex-wrap justify-content-between align-items-center">
-					<img src="https://placeholdit.co//i/175x175?" />
-					<h2>{this.state.fName} {this.state.lName}</h2>
+					<img src={this.props.profile.avatar ? this.props.profile.avatar : "https://placeholdit.co//i/175x175?"} />
+                    <h2>{this.props.profile.first_name} {this.props.profile.last_name}</h2>
+
 				</div>
 			)
 		}
@@ -28,4 +29,4 @@ class Avatar extends React.Component {
 	}
 }
 
-export default Avatar
+export default ReactRedux.connect((state) => { return {profile: state.profile.data}}, {})(Avatar)
