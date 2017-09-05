@@ -16,12 +16,13 @@ class ModalAnimals extends React.Component {
 
     selectImg(val) {
         const { animalInfos } = this.props
-        const index = _.findIndex(animalInfos.selectedAnimals, item => item.id == val.id)
-        if(index == -1) {
-            this.props.selectAnimal(val, true)
-        } else {
-            this.props.selectAnimal(val, false)
-        }
+        this.props.selectAnimal(val, true)
+        // const index = _.findIndex(animalInfos.selectedAnimals, item => item.id == val.id)
+        // if(index == -1) {
+        //     this.props.selectAnimal(val, true)
+        // } else {
+        //     this.props.selectAnimal(val, false)
+        // }
         this.props.onClose()
     }
 

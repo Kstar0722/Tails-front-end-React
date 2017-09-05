@@ -37,7 +37,9 @@ export default class Right extends React.Component {
                                 onChange={this.setAnimalProperty.bind(this, "breed")}>
                                 {
                                 _.map(animal_types, (item) => 
-                                        <option value={item.breed} key={item.id}>{item.breed}</option>
+                                        <option 
+                                           // key={item.id}
+                                            value={item.breed}>{item.breed}</option>
                                     )
                                 }
                             </select>

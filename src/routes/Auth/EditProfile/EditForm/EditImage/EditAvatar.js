@@ -55,8 +55,10 @@ class EditAvatar extends React.Component {
     componentWillMount() {
         if(this.props.image)
             this.setState({ image: this.props.image })
-
-        this.getPhoto()
+        if(this.props.originalImage) {
+            this.setState({ originalImage: this.props.originalImage })
+        }
+       // this.getPhoto()
 	}
 
     setEditorRef = (editor) => this.editor = editor
@@ -76,7 +78,7 @@ class EditAvatar extends React.Component {
                     <div className="row justify-content-center align-self-center">
                         <AvatarEditor
                             ref={this.setEditorRef}
-                            image={this.state.image}
+                            image={this.state.originalImage}
                             width={175}
                             height={175}
                             border={0}

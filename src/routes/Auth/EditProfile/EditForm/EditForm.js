@@ -43,8 +43,17 @@ class EditForm extends React.Component {
 				<div className="row">
 					<div className="col-6">
 						<div className="row">
-						 <Field name="avatar_new" image={profileUpdate.avatar} component={EditAvatar} label={"Profile Image"}/>       
-						 <Field name="cover_photo_new" image={profileUpdate.cover_photo} component={EditImage} label={"Cover Photo"}/> 
+						<Field 
+							name="avatar_new"
+							image={profileUpdate.avatar}
+							originalImage={profileUpdate.avatar_original}
+							component={EditAvatar}
+							label={"Profile Image"}/>       
+						<Field 
+							name="cover_photo_new"
+							image={profileUpdate.cover_photo}
+							component={EditImage}
+							label={"Cover Photo"}/> 
 						</div>       
 					</div>
 					<div className="col-6">

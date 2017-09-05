@@ -16,18 +16,20 @@ export default class Left extends React.Component {
 
 	render() {
         const { selectedAnimals, animal_id } = this.props
+        console.log(selectedAnimals)
 		return (                           
             <ul>
                 {
                     selectedAnimals.length > 0
                     ? selectedAnimals.map((value) =>
                             <li 
-                                className= {
-                                    value.id == animal_id 
-                                    ? "selected-animal animal-name"
-                                    : "animal-name"
-                                }  
-                                key={value.id}
+                                className="animal-name"
+                                // className= {
+                                //     value.id == animal_id 
+                                //     ? "selected-animal animal-name"
+                                //     : "animal-name"
+                                // }  
+                                //key={value.id}
                                 onClick={this.currentSelectedAnimal.bind(this, value)}>
                                 {value.name} <FaPencil/>
                             </li>                                        
