@@ -5,11 +5,22 @@ import DefaultAvatar from 'assets/default_avatar.png'
 class EditAvatar extends React.Component {
 	constructor(props) {
         super(props)
-        this.state = {
-            image: DefaultAvatar,
-            scale: 1,
-            originalImage: DefaultAvatar
+        if(this.props.image){
+            this.state = {
+                image: DefaultAvatar,
+                scale: 1,
+                originalImage: this.props.image
+            }
+
+        }else{
+            this.state = {
+                image: DefaultAvatar,
+                scale: 1,
+                originalImage: DefaultAvatar
+            }
         }
+       
+
         this.onLoad = this.onLoad.bind(this);
     }
     
