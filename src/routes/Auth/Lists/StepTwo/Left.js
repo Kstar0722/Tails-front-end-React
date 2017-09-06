@@ -1,5 +1,4 @@
 import { FaPlus, FaPencil } from 'react-icons/lib/fa'
-
 export default class Left extends React.Component {
 	
 	constructor(props) {
@@ -12,6 +11,13 @@ export default class Left extends React.Component {
 
     toggleModal(){
         this.props.toggleModal()
+    }
+    deleteRow(value){
+        
+    }
+    currentDeletedAnimal(value)
+    {
+        
     }
 
 	render() {
@@ -31,8 +37,9 @@ export default class Left extends React.Component {
                                 // }  
                                 //key={value.id}
                                 onClick={this.currentSelectedAnimal.bind(this, value)}>
+                                <button type="button" className="close" onClick={this.currentDeletedAnimal.bind(this, value)}>X</button>
                                 {value.name} <FaPencil/>
-                            </li>                                        
+                            </li>                         
                         )
                     : null
                 }
@@ -47,3 +54,4 @@ export default class Left extends React.Component {
 		)
 	}
 }
+

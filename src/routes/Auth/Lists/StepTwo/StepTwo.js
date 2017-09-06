@@ -51,7 +51,6 @@ class StepTwo extends React.Component {
         this.setState({ impagePreview: currentAnimal.data[0].url })
         this.getImageSize(currentAnimal.data[0].url)        
     }
-
     componentDidMount() {
         const { impagePreview } = this.state
         let img = new Image();
@@ -85,6 +84,7 @@ class StepTwo extends React.Component {
     }
 
     toggleModal(){
+
         this.setState({ isOpen: !this.state.isOpen });  
     }
 
@@ -99,7 +99,10 @@ class StepTwo extends React.Component {
         this.setState({ impagePreview: val.data[0].url })
         this.getImageSize(val.data[0].url)
     }
-
+    currentDeletedAnimal(val)
+    {
+        // this.props.animalInfos.selectedAnimals = this.state.selectedAnimals
+    }
 	render() {
         const {
             animal_id,
@@ -139,6 +142,7 @@ class StepTwo extends React.Component {
                                     selectedAnimals={selectedAnimals}
                                     currentSelectedAnimal={this.currentSelectedAnimal.bind(this)}
                                     toggleModal={this.toggleModal.bind(this)}
+                                    currentDeletedAnimal={this.currentDeletedAnimal.bind(this)}
                                     animal_id={animal_id}  />                           
                             </div>
                             <Right 

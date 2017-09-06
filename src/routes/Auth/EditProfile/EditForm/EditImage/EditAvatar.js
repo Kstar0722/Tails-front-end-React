@@ -5,22 +5,11 @@ import DefaultAvatar from 'assets/default_avatar.png'
 class EditAvatar extends React.Component {
 	constructor(props) {
         super(props)
-        if(this.props.image){
-            this.state = {
-                image: DefaultAvatar,
-                scale: 1,
-                originalImage: this.props.image
-            }
-
-        }else{
-            this.state = {
+          this.state = {
                 image: DefaultAvatar,
                 scale: 1,
                 originalImage: DefaultAvatar
             }
-        }
-       
-
         this.onLoad = this.onLoad.bind(this);
     }
     
@@ -89,7 +78,7 @@ class EditAvatar extends React.Component {
                     <div className="row justify-content-center align-self-center">
                         <AvatarEditor
                             ref={this.setEditorRef}
-                            image={this.state.originalImage}
+                            image={this.props.image ? this.props.image : this.state.originalImage}
                             width={175}
                             height={175}
                             border={0}

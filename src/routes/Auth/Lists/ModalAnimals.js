@@ -13,7 +13,6 @@ class ModalAnimals extends React.Component {
     componentWillMount() {
         const { animalInfos } = this.props
     }
-
     selectImg(val) {
         const { animalInfos } = this.props
         this.props.selectAnimal(val, true)
@@ -40,12 +39,7 @@ class ModalAnimals extends React.Component {
                     {
                         animals.map((val, index) =>                                        
                             <div className="animal-item col-sm-4" key={val.id}>
-                                <div  
-                                    className={
-                                        animalInfos.selectedAnimals.length > 0 && _.find(animalInfos.selectedAnimals, item => item.id == val.id)
-                                        ? "select-animal-image animal-image"
-                                        : "animal-image"                                          
-                                    }
+                                <div  className="animal-image"
                                     onClick={()=>this.selectImg(val)}>
                                     <Isvg 
                                         src={val.data[0].url}
