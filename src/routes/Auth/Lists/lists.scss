@@ -139,16 +139,34 @@
                 ul {
                     padding: 0;
                     li {
+
+                        list-style: none;
+                        width: 100%;
+                        
+                        height: 70px;
+                        font-size: 21px;
+                        display: flex;
+                        align-items: center;
+                        padding-left: 30px;
+                        justify-content: space-between;
+                        padding-right: 30px;
+                    }
+                    .animal-item{
+                        padding: 0px;
                         list-style: none;
                         color: #91aec9;
                         height: 70px;
                         font-size: 21px;
                         display: flex;
                         align-items: center;
-                        padding-left: 30px;
                         border-bottom: 1px solid #e1e5ea;
                         justify-content: space-between;
-                        padding-right: 30px;
+                        
+                    }
+                    .close{
+                        float: left;
+                        
+                        margin-left: 25px;
                     }
                     div {
                         padding-top: 30px;
@@ -164,7 +182,7 @@
                             border-radius: 40px;                           
                         }  
                     }                  
-                    li.animal-name:hover, li.animal-name:active {
+                    .animal-item:hover, .animal-item:active {
                         color: #ffffff;
                         background: linear-gradient(to right, #4b709f, #4e73a1, #547ca7, #5b86ae, #5e8ab1, #608eb3, #6493b7);
                         cursor: pointer;

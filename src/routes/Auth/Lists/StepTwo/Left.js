@@ -1,5 +1,7 @@
 import { FaPlus, FaPencil } from 'react-icons/lib/fa'
-export default class Left extends React.Component {
+import { connect } from 'react-redux'
+import { selectAnimal } from '../StepOne/Actions/getAnimals'
+class Left extends React.Component {
 	
 	constructor(props) {
         super(props)
@@ -12,34 +14,28 @@ export default class Left extends React.Component {
     toggleModal(){
         this.props.toggleModal()
     }
-    deleteRow(value){
-        
-    }
     currentDeletedAnimal(value)
     {
-        
+        this.props.selectAnimal(value, false)
     }
 
 	render() {
         const { selectedAnimals, animal_id } = this.props
-        console.log(selectedAnimals)
-		return (                           
+        return (                           
             <ul>
                 {
                     selectedAnimals.length > 0
                     ? selectedAnimals.map((value) =>
-                            <li 
-                                className="animal-name"
-                                // className= {
-                                //     value.id == animal_id 
-                                //     ? "selected-animal animal-name"
-                                //     : "animal-name"
-                                // }  
-                                //key={value.id}
-                                onClick={this.currentSelectedAnimal.bind(this, value)}>
+                            <div className = "animal-item">
                                 <button type="button" className="close" onClick={this.currentDeletedAnimal.bind(this, value)}>X</button>
+                                <li key={value.animal_id}
+                                className="animal-name"
+                                onClick={this.currentSelectedAnimal.bind(this, value)}>
+                                
                                 {value.name} <FaPencil/>
-                            </li>                         
+                            </li>     
+                            </div>
+                                               
                         )
                     : null
                 }
@@ -55,3 +51,12 @@ export default class Left extends React.Component {
 	}
 }
 
+const mapStateToProps = state => ({
+    animalInfos: state.animalsReducer
+})
+
+const mapDispatchToProps = dispatch => ({
+    selectAnimal: (value, flag) => dispatch(selectAnimal(value, flag))
+})
+  
+export default connect(mapStateToProps, mapDispatchToProps)(Left)

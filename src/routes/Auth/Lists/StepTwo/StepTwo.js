@@ -89,7 +89,6 @@ class StepTwo extends React.Component {
     }
 
     currentSelectedAnimal(val) {
-        console.log(val)
         this.setState({ animal_id: val.id })
         this.setState({ breed: val.breed })
         this.setState({ height: val.height })
@@ -99,10 +98,7 @@ class StepTwo extends React.Component {
         this.setState({ impagePreview: val.data[0].url })
         this.getImageSize(val.data[0].url)
     }
-    currentDeletedAnimal(val)
-    {
-        // this.props.animalInfos.selectedAnimals = this.state.selectedAnimals
-    }
+
 	render() {
         const {
             animal_id,
@@ -142,7 +138,6 @@ class StepTwo extends React.Component {
                                     selectedAnimals={selectedAnimals}
                                     currentSelectedAnimal={this.currentSelectedAnimal.bind(this)}
                                     toggleModal={this.toggleModal.bind(this)}
-                                    currentDeletedAnimal={this.currentDeletedAnimal.bind(this)}
                                     animal_id={animal_id}  />                           
                             </div>
                             <Right 
