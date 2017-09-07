@@ -11,7 +11,7 @@ class EditImage extends React.Component {
         }
         this.onLoad = this.onLoad.bind(this);
     }
-    
+
     handleNewImage = (e) => {
         let file = e.target.files[0];
         let _this = this;
@@ -22,7 +22,7 @@ class EditImage extends React.Component {
         }
         reader.readAsDataURL(file)
 	}
-	
+
 	handleScale = (e) => {
         const scale = parseFloat(e.target.value)
         this.setState({ scale })
@@ -61,29 +61,37 @@ class EditImage extends React.Component {
 
 	render() {
 		return (
-			<div className="row image-edit">
-                
-                <div className="col-12">
-                    <label>Cover Photo</label>
-                    {this.state.image == '' ?
-                        <div className="row justify-content-center align-self-center not-cover-photo"><p>Cover photo</p></div> : 
-                        <div className="cover-photo" style={{backgroundImage: "url(" + this.state.image + ")"}}></div>
-                    }
-                </div>
-                <div className="col-12">
-                    <div className="row justify-content-center">
-                        <label className="btn btn-primary new_file"> 
-                            Upload New images
-                            <input
-                                style={{display: 'none'}}
-                                name='newImage'
-                                type='file'
-                                onChange={this.handleNewImage}
-                            />
-                        </label>
-                    </div>
-                </div>
-            </div>
+			<div className="col-12">
+				<div className="row image-edit">
+					<div className="col-12">
+						<div className="row">
+							<div className="col-12">
+								<label>Cover Photo</label>
+								{this.state.image == '' ?
+								<div className="row justify-content-center align-self-center not-cover-photo"><p>Cover photo</p></div> :
+								<div className="cover-photo" style={{backgroundImage: "url(" + this.state.image + ")"}}></div>
+								}
+							</div>
+						</div>
+
+						<div className="row">
+							<div className="col-12">
+								<div className="row justify-content-center">
+									<label className="btn btn-primary new_file">
+									Upload New images
+									<input
+									style={{display: 'none'}}
+									name='newImage'
+									type='file'
+									onChange={this.handleNewImage}
+									/>
+									</label>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		)
 	}
 }
