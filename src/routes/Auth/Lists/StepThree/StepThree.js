@@ -3,6 +3,8 @@ import { Link } from 'react-router'
 import StepHistory from '../StepHistory'
 import NextStep from '../NextStep'
 import { setAnimalShipInfo } from './Actions/shipInfo'
+import PlacesAutocomplete from 'react-places-autocomplete'
+import { geocodeByAddress, geocodeByPlaceId } from 'react-places-autocomplete'
 import '../lists.scss'
 
 class StepThree extends React.Component {
@@ -21,6 +23,8 @@ class StepThree extends React.Component {
             delivery_zip: "",
             disabled: true
         }
+
+        this.onChange = (pick_up_address) => this.setState({ pick_up_address })
     }
 
     setValue = (field, value) => {
@@ -71,6 +75,15 @@ class StepThree extends React.Component {
             disabled
         } = this.state
 
+        const inputProps = {
+          value: this.state.pick_up_address,
+          onChange: this.onChange,
+        }
+
+        const cssClasses = {
+          input: 'form-control'
+        }
+
         return (
             <div className="create-list">
                 <div className="container">
@@ -82,12 +95,11 @@ class StepThree extends React.Component {
                         <div className="main-content">
                             <div className="form-group">
                                 <label>Pick up Address</label>
-                                <input
-                                    type="text"
-                                    className="form-control"
-                                    name="pick_up_address"
-                                    value={pick_up_address}
-                                    onChange={this.setValue.bind(this, 'pick_up_address')}/>
+                                <PlacesAutocomplete
+                                  inputProps={inputProps}
+                                  classNames={cssClasses}
+                                  name="pick_up_address"
+                                />
                             </div>
                             <div className="form-group">
                                 <div className="row">
