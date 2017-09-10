@@ -3,6 +3,8 @@ import { Link } from 'react-router'
 import StepHistory from '../StepHistory'
 import NextStep from '../NextStep'
 import { setAnimalShipInfo } from './Actions/shipInfo'
+import PlacesAutocomplete from 'react-places-autocomplete'
+import { geocodeByAddress, geocodeByPlaceId } from 'react-places-autocomplete'
 import '../lists.scss'
 import { browserHistory } from 'react-router'
 class StepThree extends React.Component {
@@ -36,6 +38,16 @@ class StepThree extends React.Component {
             disabled: true
             }
         }
+
+        this.onChange = (pick_up_address) => {
+            console.log(pick_up_address)
+            this.setState({["pick_up_address"]: pick_up_address })
+            this.props.setAnimalShipInfo("pick_up_address", pick_up_address)
+            const self = this
+            setTimeout(function(){
+                self.validate()
+            }, 100)
+        }
     }
     gotoFourStep(){
         if(document.getElementById("btn-next").className == "btn btn-next disabled")
@@ -48,8 +60,8 @@ class StepThree extends React.Component {
 		});
     }
     setValue = (field, value) => {
-        console.log(field)
-        console.log(value)
+        console.log([field])
+        console.log(value.target.value)
         this.setState({[field]: value.target.value})
         this.props.setAnimalShipInfo(field, value.target.value)
         const self = this
@@ -72,7 +84,7 @@ class StepThree extends React.Component {
             delivery_zip
         } = this.state
 
-        if( pick_up_address == "" || 
+        if( pick_up_address == "" ||
             pick_up_state == -1 ||
             pick_up_city == "" ||
             pick_up_zip == "" ||
@@ -98,7 +110,16 @@ class StepThree extends React.Component {
             delivery_zip,
             disabled
         } = this.state
-       
+
+        const inputProps = {
+          value: this.state.pick_up_address,
+          onChange: this.onChange,
+        }
+
+        const cssClasses = {
+          input: 'form-control'
+        }
+
         return (
             <div className="create-list">
                 <div className="container">
@@ -110,14 +131,13 @@ class StepThree extends React.Component {
                         <div className="main-content">
                             <div className="form-group">
                                 <label>Pick up Address</label>
-                                <input
-                                    id = "pick-address"
-                                    type="text"
-                                    className="form-control"
-                                    name="pick_up_address"
-                                    value={pick_up_address}
-                                    onChange={this.setValue.bind(this, 'pick_up_address')}
-                                    />
+
+                                <PlacesAutocomplete
+                                  inputProps={inputProps}
+                                  classNames={cssClasses}
+                                  name="pick_up_address"
+                                />
+
                             </div>
                             <div className="form-group">
                                 <div className="row">
@@ -129,8 +149,57 @@ class StepThree extends React.Component {
                                             value={pick_up_state}
                                             onChange={this.setValue.bind(this, 'pick_up_state')}>
                                             <option value="-1">-- Please Select --</option>
-                                            <option value="cal">California</option>
-                                            <option value="ny">New York</option>
+                                          	<option value="AL">Alabama</option>
+                                          	<option value="AK">Alaska</option>
+                                          	<option value="AZ">Arizona</option>
+                                          	<option value="AR">Arkansas</option>
+                                          	<option value="CA">California</option>
+                                          	<option value="CO">Colorado</option>
+                                          	<option value="CT">Connecticut</option>
+                                          	<option value="DE">Delaware</option>
+                                          	<option value="DC">District Of Columbia</option>
+                                          	<option value="FL">Florida</option>
+                                          	<option value="GA">Georgia</option>
+                                          	<option value="HI">Hawaii</option>
+                                          	<option value="ID">Idaho</option>
+                                          	<option value="IL">Illinois</option>
+                                          	<option value="IN">Indiana</option>
+                                          	<option value="IA">Iowa</option>
+                                          	<option value="KS">Kansas</option>
+                                          	<option value="KY">Kentucky</option>
+                                          	<option value="LA">Louisiana</option>
+                                          	<option value="ME">Maine</option>
+                                          	<option value="MD">Maryland</option>
+                                          	<option value="MA">Massachusetts</option>
+                                          	<option value="MI">Michigan</option>
+                                          	<option value="MN">Minnesota</option>
+                                          	<option value="MS">Mississippi</option>
+                                          	<option value="MO">Missouri</option>
+                                          	<option value="MT">Montana</option>
+                                          	<option value="NE">Nebraska</option>
+                                          	<option value="NV">Nevada</option>
+                                          	<option value="NH">New Hampshire</option>
+                                          	<option value="NJ">New Jersey</option>
+                                          	<option value="NM">New Mexico</option>
+                                          	<option value="NY">New York</option>
+                                          	<option value="NC">North Carolina</option>
+                                          	<option value="ND">North Dakota</option>
+                                          	<option value="OH">Ohio</option>
+                                          	<option value="OK">Oklahoma</option>
+                                          	<option value="OR">Oregon</option>
+                                          	<option value="PA">Pennsylvania</option>
+                                          	<option value="RI">Rhode Island</option>
+                                          	<option value="SC">South Carolina</option>
+                                          	<option value="SD">South Dakota</option>
+                                          	<option value="TN">Tennessee</option>
+                                          	<option value="TX">Texas</option>
+                                          	<option value="UT">Utah</option>
+                                          	<option value="VT">Vermont</option>
+                                          	<option value="VA">Virginia</option>
+                                          	<option value="WA">Washington</option>
+                                          	<option value="WV">West Virginia</option>
+                                          	<option value="WI">Wisconsin</option>
+                                          	<option value="WY">Wyoming</option>
                                         </select>
                                     </div>
                                     <div className="col-sm-4 col-12">
@@ -172,8 +241,57 @@ class StepThree extends React.Component {
                                             value={delivery_state}
                                             onChange={this.setValue.bind(this, 'delivery_state')}>
                                             <option value="-1">-- Please Select --</option>
-                                            <option value="cal">California</option>
-                                            <option value="ny">New York</option>
+                                          	<option value="AL">Alabama</option>
+                                          	<option value="AK">Alaska</option>
+                                          	<option value="AZ">Arizona</option>
+                                          	<option value="AR">Arkansas</option>
+                                          	<option value="CA">California</option>
+                                          	<option value="CO">Colorado</option>
+                                          	<option value="CT">Connecticut</option>
+                                          	<option value="DE">Delaware</option>
+                                          	<option value="DC">District Of Columbia</option>
+                                          	<option value="FL">Florida</option>
+                                          	<option value="GA">Georgia</option>
+                                          	<option value="HI">Hawaii</option>
+                                          	<option value="ID">Idaho</option>
+                                          	<option value="IL">Illinois</option>
+                                          	<option value="IN">Indiana</option>
+                                          	<option value="IA">Iowa</option>
+                                          	<option value="KS">Kansas</option>
+                                          	<option value="KY">Kentucky</option>
+                                          	<option value="LA">Louisiana</option>
+                                          	<option value="ME">Maine</option>
+                                          	<option value="MD">Maryland</option>
+                                          	<option value="MA">Massachusetts</option>
+                                          	<option value="MI">Michigan</option>
+                                          	<option value="MN">Minnesota</option>
+                                          	<option value="MS">Mississippi</option>
+                                          	<option value="MO">Missouri</option>
+                                          	<option value="MT">Montana</option>
+                                          	<option value="NE">Nebraska</option>
+                                          	<option value="NV">Nevada</option>
+                                          	<option value="NH">New Hampshire</option>
+                                          	<option value="NJ">New Jersey</option>
+                                          	<option value="NM">New Mexico</option>
+                                          	<option value="NY">New York</option>
+                                          	<option value="NC">North Carolina</option>
+                                          	<option value="ND">North Dakota</option>
+                                          	<option value="OH">Ohio</option>
+                                          	<option value="OK">Oklahoma</option>
+                                          	<option value="OR">Oregon</option>
+                                          	<option value="PA">Pennsylvania</option>
+                                          	<option value="RI">Rhode Island</option>
+                                          	<option value="SC">South Carolina</option>
+                                          	<option value="SD">South Dakota</option>
+                                          	<option value="TN">Tennessee</option>
+                                          	<option value="TX">Texas</option>
+                                          	<option value="UT">Utah</option>
+                                          	<option value="VT">Vermont</option>
+                                          	<option value="VA">Virginia</option>
+                                          	<option value="WA">Washington</option>
+                                          	<option value="WV">West Virginia</option>
+                                          	<option value="WI">Wisconsin</option>
+                                          	<option value="WY">Wyoming</option>
                                         </select>
                                     </div>
                                     <div className="col-sm-4 col-12">
