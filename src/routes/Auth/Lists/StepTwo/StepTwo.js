@@ -18,7 +18,7 @@ class StepTwo extends React.Component {
 	
 	constructor(props) {
         super(props)
-
+        console.log(this.props.animalInfos.selectedAnimals[0].data[0].url)
         this.state = {
             animal_id: -1,
             animal_types: [],
@@ -48,7 +48,7 @@ class StepTwo extends React.Component {
         this.setState({ animal_id: currentAnimal.id })
         this.setState({ breed: currentAnimal.breed })
         this.setState({ name: currentAnimal.name })
-        this.setState({ impagePreview: currentAnimal.data[0].url })
+        this.setState({ impagePreview: "" })
         this.getImageSize(currentAnimal.data[0].url)        
     }
     componentDidMount() {
@@ -95,7 +95,7 @@ class StepTwo extends React.Component {
         this.setState({ weight: val.weight })
         this.setState({ special_notes: val.special_notes })
         this.setState({ name: val.name })
-        this.setState({ impagePreview: val.data[0].url })
+        this.setState({ impagePreview: ""})
         this.getImageSize(val.data[0].url)
     }
 

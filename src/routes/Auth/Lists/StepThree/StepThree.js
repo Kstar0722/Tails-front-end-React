@@ -4,13 +4,15 @@ import StepHistory from '../StepHistory'
 import NextStep from '../NextStep'
 import { setAnimalShipInfo } from './Actions/shipInfo'
 import '../lists.scss'
-
+import { browserHistory } from 'react-router'
 class StepThree extends React.Component {
 
     constructor(props) {
         super(props)
-
-        this.state = {
+        var updateVal = this.props.location.state
+        if(updateVal == undefined)
+        {
+            this.state = {
             pick_up_address: "",
             pick_up_state: -1,
             pick_up_city: "",
@@ -20,10 +22,34 @@ class StepThree extends React.Component {
             delivery_city: "",
             delivery_zip: "",
             disabled: true
+            }
+        }else{
+            this.state = {
+            pick_up_address: updateVal.pick_up_address,
+            pick_up_state: updateVal.pick_up_state,
+            pick_up_city: updateVal.pick_up_city,
+            pick_up_zip: updateVal.pick_up_zip,
+            delivery_address: updateVal.delivery_address,
+            delivery_state: updateVal.delivery_state,
+            delivery_city: updateVal.delivery_city,
+            delivery_zip: updateVal.delivery_zip,
+            disabled: true
+            }
         }
     }
-
+    gotoFourStep(){
+        if(document.getElementById("btn-next").className == "btn btn-next disabled")
+        {
+            return
+        }
+        browserHistory.push({
+			pathname: '/step-four',
+			state: this.props.location.state
+		});
+    }
     setValue = (field, value) => {
+        console.log(field)
+        console.log(value)
         this.setState({[field]: value.target.value})
         this.props.setAnimalShipInfo(field, value.target.value)
         const self = this
@@ -31,6 +57,8 @@ class StepThree extends React.Component {
             self.validate()
         }, 100)
     }
+
+
 
     validate() {
         const {
@@ -83,11 +111,13 @@ class StepThree extends React.Component {
                             <div className="form-group">
                                 <label>Pick up Address</label>
                                 <input
+                                    id = "pick-address"
                                     type="text"
                                     className="form-control"
                                     name="pick_up_address"
                                     value={pick_up_address}
-                                    onChange={this.setValue.bind(this, 'pick_up_address')}/>
+                                    onChange={this.setValue.bind(this, 'pick_up_address')}
+                                    />
                             </div>
                             <div className="form-group">
                                 <div className="row">
@@ -169,7 +199,7 @@ class StepThree extends React.Component {
                         </div>
                         <div className="footer">
                             <Link className="btn btn-prev" to="/step-two">prev</Link>
-                            <Link className= {disabled ? "btn btn-next disabled" : "btn btn-next"} to="/step-four">next</Link>
+                            <button id = "btn-next" className= {disabled ? "btn btn-next disabled" : "btn btn-next"} onClick = {this.gotoFourStep.bind(this)}>next</button>
                         </div>
                         {/*<div className="footer">
                             <NextStep nextStep="/step-two"/>

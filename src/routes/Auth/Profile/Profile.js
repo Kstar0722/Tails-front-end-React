@@ -27,7 +27,7 @@ class Profile extends React.Component {
                 cover_photo: this.props.profile.cover_photo
             })
 	}
-
+	
 	render() {
 		const { listings } = this.props
 		

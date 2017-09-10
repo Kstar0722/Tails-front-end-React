@@ -71,6 +71,7 @@ class EditAvatar extends React.Component {
         const file = new File([fileContent], "file name here", {type: fileFormat})        
     }
 	render() {
+        
 		return (
 			<div className="row image-edit">
                 <div className="col justify-content-center align-self-center">

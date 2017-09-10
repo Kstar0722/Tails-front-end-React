@@ -7,6 +7,7 @@ import StepOne from './Lists/StepOne/StepOne'
 import StepTwo from './Lists/StepTwo/StepTwo'
 import StepThree from './Lists/StepThree/StepThree'
 import StepFour from './Lists/StepFour/StepFour'
+import ReviewItem from './profile/listings/ReviewItem'
 
 export default {
 	component: AuthorizedContainer,
@@ -34,6 +35,10 @@ export default {
 		{
 			path: '/step-four',
 			component: StepFour
+		},
+		{
+			path: '/profile/item-review',
+			component: ReviewItem
 		}
 	]
 }

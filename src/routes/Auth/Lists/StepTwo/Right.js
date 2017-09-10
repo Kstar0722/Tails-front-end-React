@@ -23,7 +23,6 @@ export default class Right extends React.Component {
             impagePreview,
             animal_breed
         } = this.props
-        
 		return (
             <div className="main-body col-sm-8 col-12">
                 <div className="form-group">

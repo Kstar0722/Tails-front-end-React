@@ -6,7 +6,8 @@ const mapDispatchToProps = (dispatch) => ({
 })
 
 const mapStateToProps = (state) => ({
-    listings: state.listing.data
+    listings: state.listing.data,
+    viewitem: state.params
 })
 
 export default ReactRedux.connect(mapStateToProps, mapDispatchToProps)(Listings)

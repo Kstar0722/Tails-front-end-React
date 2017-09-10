@@ -1,7 +1,7 @@
 import config from '../config.js'
 import { checkHttpStatus, parseJSON } from '../http.js'
 import user from 'auth/user'
-
+import { browserHistory } from 'react-router'
 export function getListings() {
     return function(dispatch) {
         return fetch(config.endpoints.url + config.endpoints.listings, {
@@ -35,9 +35,12 @@ export function deleteListing(id) {
         .then(parseJSON)
         .then(res => {
             dispatch({ type: 'DELETE_LISTING', id })
+            window.location.reload()
         })
         .catch(error =>{
             dispatch({ type: 'ERROR_LISTING', error })
+            
+            
         })
     }
 }

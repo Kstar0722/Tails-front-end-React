@@ -2,19 +2,30 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import StepHistory from '../StepHistory'
 import NextStep from '../NextStep'
-import { createListings } from '../Actions/listing'
+import { createListings, updateListings } from '../Actions/listing'
 import '../lists.scss'
 
 class StepFour extends React.Component {
 
     constructor(props) {
         super(props)
+        var updateVal = this.props.location.state
 
-        this.state = {
+        if(updateVal == undefined)
+        {
+            this.state = {
             title: "",
             budget: "",
             summary: "",
             disabled: true
+            }
+        }else{
+            this.state = {
+                title: updateVal.title,
+                budget: updateVal.budget,
+                summary: updateVal.other_notes,
+                disabled: false
+            }
         }
     }
 
@@ -36,7 +47,7 @@ class StepFour extends React.Component {
         if( title == "" || 
             budget == "" ||
             summary == "" ) {
-            this.setState({ disabled: true})
+            this.setState({ disabled: false})
         } else {
             this.setState({ disabled: false})
         }
@@ -57,7 +68,14 @@ class StepFour extends React.Component {
             other_notes: this.state.summary,        
             budget: this.state.budget
         }
-        this.props.createListings(value)
+        if(this.props.location.state == undefined)
+        {
+            this.props.createListings(value)
+        }else{
+            var id = this.props.location.state.id
+            this.props.updateListings(id, value)
+        }
+        
     }
 
     render() {
@@ -132,7 +150,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    createListings: (value) => dispatch(createListings(value))
+    createListings: (value) => dispatch(createListings(value)),
+    updateListings: (id, value) => dispatch(updateListings(id ,value))
 })
   
 export default connect(mapStateToProps, mapDispatchToProps)(StepFour)

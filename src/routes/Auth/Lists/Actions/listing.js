@@ -54,7 +54,28 @@ export function getListings(id) {
         })
     }
 }
-
+export function updateListings(id, value){
+   return function(dispatch) {
+        return fetch(config.endpoints.url + config.endpoints.listings + '/' + id, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + user.token
+            },
+            body: JSON.stringify(value)
+        })
+        .then(checkHttpStatus)
+        .then(parseJSON)
+        .then(res => {
+            console.log(res)
+            dispatch(createListingsSuccess(res))
+            browserHistory.push('/profile')
+        })
+        .catch(error =>{
+            dispatch(createListingsFailure(error))
+        })
+    }
+}
 export function deleteListing(id) {
     return function(dispatch) {
         return fetch(config.endpoints.url + config.endpoints.listings + '/' + id, {
