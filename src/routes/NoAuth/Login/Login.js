@@ -24,6 +24,8 @@ class Login extends Component {
 
     	this.toggle = this.toggle.bind(this)
 		this.logout = this.logout.bind(this)
+		console.log("--------------------------------------")
+		console.log(this.props.auth.authorized)
 	}
 
 	componentWillMount() {
@@ -79,7 +81,7 @@ class Login extends Component {
   	render() {
   		const {handleSubmit, fields: {email, password}, submitting, token, loginActive} = this.props
 		const styles = this.getStyles()
-		if(!this.props.auth.authorized){
+		if(!this.state.auth || this.props.profile.id == undefined){
 			return (
 				<li className="sign-in" onClick={this.toggle.bind(this, 'modal')}>
 					<a>Sign In</a>
@@ -131,7 +133,7 @@ class Login extends Component {
 						aria-expanded={this.state.dropdownOpen}
 						className="menu-profile"
 					>
-					 {this.props.profile.avatar ? <img src={this.props.profile.avatar} width="60" className="rounded-circle"/> : null}
+					 <img src={this.props.profile.avatar ? this.props.profile.avatar :"" }  width="60" className="rounded-circle"/>
 					 <Link to='/profile'>{this.props.profile.first_name} {this.props.profile.last_name}</Link>
 					</div>
 					<DropdownMenu right>

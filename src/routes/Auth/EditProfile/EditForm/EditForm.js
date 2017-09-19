@@ -37,11 +37,11 @@ class EditForm extends React.Component {
 
 	render() {
 		const {handleSubmit, submitting, profileUpdate} = this.props
-		console.log("profileUpdate============>", profileUpdate)
+		console.log("profileUpdate==========dddddddd==>", this.props)
 		return (
 			<form onSubmit={handleSubmit(this.submit.bind(this))} className="form-profile">
 				<div className="row">
-					<div className="col-6">
+					<div className="col justify-content-center align-self-center">
 						<div className="row">
 						<Field 
 							name="avatar_new"
@@ -56,7 +56,7 @@ class EditForm extends React.Component {
 							label={"Cover Photo"}/> 
 						</div>       
 					</div>
-					<div className="col-6">
+					<div className="col justify-content-center align-self-center">
 						<Field name="first_name" type="text" component={renderField} label="First Name"/>
 						<Field name="last_name" type="text" component={renderField} label="Last Name"/>
 						<Field name="email" type="text" component={renderField} label="Email"/>

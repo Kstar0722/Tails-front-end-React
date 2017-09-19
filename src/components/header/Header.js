@@ -2,7 +2,8 @@ import './Header.scss'
 import TextLogo from 'components/logo/TextLogo'
 import ImgLogo from 'components/logo/ImageLogo'
 import Login from 'routes/NoAuth/Login/Login'
-
+import { getListings } from 'actions/listing'
+import { connect } from 'react-redux'
 import { Link } from 'react-router'
 
 class Header extends React.Component {
@@ -40,5 +41,13 @@ class Header extends React.Component {
 		)
 	}
 }
+const mapStateToProps = state => ({
+    profile: state.profile.data,
+	listings: state.listing
+})
 
-export default Header
+const mapDispatchToProps = dispatch => ({
+    getListings: () => dispatch(getListings())
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header)
