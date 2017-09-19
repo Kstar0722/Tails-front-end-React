@@ -1,0 +1,77 @@
+#main-banner {
+    background-image: url('./listings-banner.jpg');   
+}
+
+.list-item {
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.08);
+    background-color: #ffffff;
+    border-radius: 8px;
+    font-family: "PT Sans";
+    .top-part {
+        padding-left: 29px;
+        padding-right: 29px;
+        padding-top: 40px;
+        padding-bottom: 42px;
+        h3 {
+            color: #2b2f33;
+            font-size: 30px;
+            font-weight: 400;
+            line-height: 20px;
+            letter-spacing: -0.75px;
+            margin: 0px;
+        }
+
+        .image-holder {
+
+        }
+
+        .right-content-holder {
+            letter-spacing: -0.18px;
+            line-height: 20px;
+            font-size: 18px;
+            font-weight: 400;
+            .bid-count {
+                color: #19b9df;
+            }
+
+            .age-of-post {
+                color: #2b2f33;
+            }
+
+            .top-destination {
+                color: #727579;
+                font-size: 20px;
+                font-weight: 100;
+                letter-spacing: -0.2px;
+                margin-top: 25px;
+                margin-bottom: 25px;
+            }
+
+            .listing-excerpt {
+                p {
+                    opacity: 0.8;
+                    color: #636a71;
+                    font-size: 16px;
+                    margin: 0px;
+                }
+            }
+        }
+    }
+
+    .bottom-details {
+        box-shadow: 0 1px 10px rgba(57, 63, 101, 0.1), inset 0 1px 0 rgba(0, 0, 0, 0.05), 0 0 4px rgba(255, 255, 255, 0.15);
+        background-color: #f3f3f3;
+        border-bottom-left-radius: 8px;
+        border-bottom-right-radius: 8px;
+        padding: 20px;
+        font-family: "PT Sans";
+        .bottom-detail {
+            opacity: 0.7;
+            color: #2b2f33;
+            font-size: 18px;
+            font-weight: 400;
+            line-height: 20px;
+        }
+        // background-image: linear-gradient(to top, rgba(0, 0, 0, 0.2) 0%, rgba(255, 255, 255, 0.2) 100%);
+    }
+}
