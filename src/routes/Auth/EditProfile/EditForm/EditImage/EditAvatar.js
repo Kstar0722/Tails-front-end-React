@@ -80,7 +80,7 @@ class EditAvatar extends React.Component {
 						<div className="justify-content-left align-self-center">
 						<AvatarEditor
 							ref={this.setEditorRef}
-							image={this.props.image ? this.props.image : this.state.originalImage}
+							image={this.state.image ? this.state.image : this.state.originalImage}
 							width={175}
 							height={175}
 							border={0}
@@ -96,7 +96,7 @@ class EditAvatar extends React.Component {
 						/>
 						</div>
 					</div>
-					<div className="col justify-content-center align-self-center">
+					<div className="col justify-content-left align-self-center">
 						<div className="row justify-content-center align-self-center">
 							<label className="btn btn-primary new_file">
 								Upload New images

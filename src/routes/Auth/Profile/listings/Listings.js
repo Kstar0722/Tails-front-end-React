@@ -11,7 +11,6 @@ class Listings extends React.Component {
 		this.state = {
 			listingDatas: []
 		}
-		console.log(this.props)
 	}
 
 	componentWillMount() {
