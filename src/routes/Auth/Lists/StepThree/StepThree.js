@@ -35,14 +35,36 @@ class StepThree extends React.Component {
             delivery_state: updateVal.delivery_state,
             delivery_city: updateVal.delivery_city,
             delivery_zip: updateVal.delivery_zip,
-            disabled: true
+            disabled: false
             }
         }
 
-        this.onChange = (pick_up_address) => {
-            console.log(pick_up_address)
+        this.onPickChange = (pick_up_address) => {
+            
+            if(pick_up_address.split(", ").length == 4)
+                {
+                    this.setState({
+                        pick_up_city: pick_up_address.split(", ")[1],
+                        pick_up_state: pick_up_address.split(", ")[2]
+                    })
+                }
             this.setState({["pick_up_address"]: pick_up_address })
-            this.props.setAnimalShipInfo("pick_up_address", pick_up_address)
+            const self = this
+            setTimeout(function(){
+                self.validate()
+            }, 100)
+        }
+        this.onDeliveryChange = (delivery_address) => {
+            
+            if(delivery_address.split(", ").length == 4)
+            {
+                
+                this.setState({
+                    delivery_city: delivery_address.split(", ")[1],
+                    delivery_state: delivery_address.split(", ")[2]
+                })
+            }
+            this.setState({["delivery_address"]: delivery_address })
             const self = this
             setTimeout(function(){
                 self.validate()
@@ -50,6 +72,16 @@ class StepThree extends React.Component {
         }
     }
     gotoFourStep(){
+        this.props.setAnimalShipInfo("pick_up_address", this.state.pick_up_address)
+        this.props.setAnimalShipInfo("pick_up_state", this.state.pick_up_state)
+        this.props.setAnimalShipInfo("pick_up_city", this.state.pick_up_city)
+        this.props.setAnimalShipInfo("pick_up_zip", this.state.pick_up_zip)
+
+        this.props.setAnimalShipInfo("delivery_address", this.state.delivery_address)
+        this.props.setAnimalShipInfo("delivery_state", this.state.delivery_state)
+        this.props.setAnimalShipInfo("delivery_city", this.state.delivery_city)
+        this.props.setAnimalShipInfo("delivery_zip", this.state.delivery_zip)
+
         if(document.getElementById("btn-next").className == "btn btn-next disabled")
         {
             return
@@ -63,7 +95,6 @@ class StepThree extends React.Component {
         console.log([field])
         console.log(value.target.value)
         this.setState({[field]: value.target.value})
-        this.props.setAnimalShipInfo(field, value.target.value)
         const self = this
         setTimeout(function(){
             self.validate()
@@ -113,13 +144,17 @@ class StepThree extends React.Component {
 
         const inputProps = {
           value: this.state.pick_up_address,
-          onChange: this.onChange,
+          onChange: this.onPickChange,
         }
-
+        const inputProps1 = {
+            value: this.state.delivery_address,
+            onChange: this.onDeliveryChange,
+            
+        }
         const cssClasses = {
           input: 'form-control'
         }
-
+        
         return (
             <div className="create-list">
                 <div className="container">
@@ -128,6 +163,7 @@ class StepThree extends React.Component {
                         <div className="comment">
                             Where is it coming from and Where is it going ?
                         </div>
+                        
                         <div className="main-content">
                             <div className="form-group">
                                 <label>Pick up Address</label>
@@ -139,6 +175,7 @@ class StepThree extends React.Component {
                                 />
 
                             </div>
+                            
                             <div className="form-group">
                                 <div className="row">
                                     <div className="col-sm-4 col-12">
@@ -224,12 +261,11 @@ class StepThree extends React.Component {
                             </div>
                             <div className="form-group">
                                 <label>Destination Address</label>
-                                <input
-                                    type="text"
-                                    className="form-control"
-                                    name="delivery_address"
-                                    value={delivery_address}
-                                    onChange={this.setValue.bind(this, 'delivery_address')}/>
+                                 <PlacesAutocomplete
+                                  inputProps={inputProps1}
+                                  classNames={cssClasses}
+                                  name="delivery_address"
+                                />
                             </div>
                             <div className="form-group">
                                 <div className="row">

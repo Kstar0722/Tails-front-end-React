@@ -22,3 +22,82 @@ td {
 		}
 	}
 }
+
+
+.ReactModal__Content{
+	border-radius: 5px;
+	top: 200px !important;
+    left: 35% !important;
+    right: 35% !important;
+	bottom: unset !important;
+	padding: 0px !important;
+	@media (max-width:1250px)
+	{
+		top: 200px !important;
+		left: 30% !important;
+		right: 30% !important;
+		bottom: unset !important;
+		padding: 0px !important;
+	}
+	@media (max-width:950px)
+	{
+		top: 200px !important;
+		left: 25% !important;
+		right: 25% !important;
+		bottom: unset !important;
+		padding: 0px !important;
+	}
+	@media (max-width:770px)
+	{
+		top: 200px !important;
+		left: 20% !important;
+		right: 20% !important;
+		bottom: unset !important;
+		padding: 0px !important;
+	}
+	@media (max-width:620px)
+	{
+		top: 0px !important;
+		left: 100px !important;
+		right: 100px !important;
+		bottom: unset !important;
+		padding: 0px !important;
+	}
+	@media (max-width:445px)
+	{
+		top: 0px !important;
+		left: 50px !important;
+		right: 50px !important;
+		bottom: unset !important;
+		padding: 0px !important;
+	}
+	#modal{
+
+		#heading-modal{
+			padding: 20px;
+			background-color: rgba(45,172,209,.85);
+			
+			p{
+				margin: 0px;
+			}
+		}
+		#body-modal{
+			padding: 20px;	
+			p{
+				margin: 0px;
+			}
+		}
+		#btn-modal{
+			float: right;
+			margin-right: 20px;
+			margin-bottom: 20px;
+			button{
+				width: 80px;
+				height: 30px;
+			}
+			#btn-cancel{
+				margin-left: 20px;
+			}
+		}
+	}
+}
