@@ -11,8 +11,12 @@ class AllListings extends React.Component {
             <main>
                 <section id="main-banner">
                     <div className="container text-center">
-                        <h1>Current <span>Listings</span></h1>
-                        <p>Check back often, our users are always adding new listings</p>
+                        <div className="row">
+                            <div className="col-md-12">
+                                <h1>Current <span>Listings</span></h1>
+                                <p>Check back often, our users are always adding new listings</p>
+                            </div>
+                        </div>
                     </div>
                 </section>
 
