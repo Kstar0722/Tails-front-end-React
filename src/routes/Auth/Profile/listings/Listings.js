@@ -1,15 +1,21 @@
 
+import './Listings.scss'
 import moment from 'moment'
 import { browserHistory } from 'react-router'
 import ListingItem from './components/ListingItem'
+import Modal from 'react-modal'
+
 // import ReviewItem from "./ReviewItem"
 // import StepThree 
+
+let deletedID;
 
 class Listings extends React.Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			listingDatas: []
+			listingDatas: [],
+			deleteModal: false,
 		}
 	}
 
@@ -62,9 +68,21 @@ class Listings extends React.Component {
 		});
 	}
 	delete(id){
-		this.props.deleteListing(id);
+		this.setState({
+			deleteModal: true
+		})
+		deletedID = id
 	}
-
+	deleteItemFlagFun(flag)
+	{
+		this.setState({
+			deleteModal:false,
+		})
+		if(flag)
+		{
+			this.props.deleteListing(deletedID);
+		}
+	}
 
 	// This will be called for each listing based on how many there are
 	renderListings(id, title, budget, date, optionActions, showActions, editStapActions) {
@@ -81,9 +99,27 @@ class Listings extends React.Component {
 			/>
 		)
 	}
-
 	render() {
 		return (
+			this.state.deleteModal?
+			<Modal isOpen={this.state.deleteModal}>
+				<div id="modal">
+					<div id ="heading-modal">
+						<button type="button" onClick={this.deleteItemFlagFun.bind(this, false)} className="close">X</button>
+						<p id="headtitle">Tails Transport</p>
+						
+					</div>	
+					<div id="body-modal">
+						<p id="body-text">Are you sure you want to delete this item?</p>
+					</div>
+					<div id="btn-modal">
+						<button id="btn-ok" onClick={this.deleteItemFlagFun.bind(this, true)}  >OK</button>
+						<button id="btn-cancel" onClick={this.deleteItemFlagFun.bind(this, false)} >Cancel</button>
+					</div>
+				</div>
+				
+			</Modal>:
+			
 			<table className="listings table table-bordered table-striped">
 				<thead>
 					<tr>
@@ -97,6 +133,7 @@ class Listings extends React.Component {
 					{this.getListings()}
 				</tbody>
 			</table>
+			
 		)
 	}
 }

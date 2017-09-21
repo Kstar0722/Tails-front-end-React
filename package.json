@@ -40,6 +40,7 @@
     "react-icons": "^2.2.5",
     "react-inlinesvg": "^0.6.2",
     "react-measure": "^2.0.2",
+    "react-modal": "^2.3.2",
     "react-notification-system": "^0.2.15",
     "react-notification-system-redux": "^1.1.4",
     "react-places-autocomplete": "^5.4.3",
