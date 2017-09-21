@@ -16,7 +16,7 @@ class EditAvatar extends React.Component {
     handleNewImage = (e) => {
         this.setState({ image: e.target.files[0] })
         this.setState({ originalImage: e.target.files[0] })
-        const file = e.target.files[0]
+		const file = e.target.files[0]
         let reader = new FileReader()
         reader.onload = function(base64) {
             localStorage["file"] = base64

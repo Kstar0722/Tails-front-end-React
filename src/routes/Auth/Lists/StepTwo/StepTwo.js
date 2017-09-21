@@ -29,7 +29,7 @@ class StepTwo extends React.Component {
             name: "",
             animal_breed: "test1",
             files: [],
-            impagePreview: null,
+            impagePreview: [],
             isOpen: false,
             selectedAnimals: [],
             dimensions: {
@@ -48,7 +48,7 @@ class StepTwo extends React.Component {
         this.setState({ animal_id: currentAnimal.id })
         this.setState({ breed: currentAnimal.breed })
         this.setState({ name: currentAnimal.name })
-        this.setState({ impagePreview: "" })
+        this.setState({ impagePreview: [] })
         this.getImageSize(currentAnimal.data[0].url)        
     }
     componentDidMount() {
@@ -78,11 +78,26 @@ class StepTwo extends React.Component {
     }
 
     onDrop(files) {
-        console.log(files)
         this.setState({ files });
-        this.setState({ impagePreview: files[0].preview})
+        var impagePreview = this.state.impagePreview.slice()
+        impagePreview.push(files[0].preview)
+        this.setState({ impagePreview: impagePreview })
     }
-
+    animalImageDel(val)
+    {
+        let imageTemp = [];
+        for(let i = 0 ; i < this.state.impagePreview.length; i ++)
+        {
+            if(i == val)
+            {
+                continue;
+            }
+            imageTemp.push(this.state.impagePreview[i])
+        }
+        this.setState({
+            impagePreview: imageTemp
+        })
+    }
     toggleModal(){
 
         this.setState({ isOpen: !this.state.isOpen });  
@@ -95,7 +110,7 @@ class StepTwo extends React.Component {
         this.setState({ weight: val.weight })
         this.setState({ special_notes: val.special_notes })
         this.setState({ name: val.name })
-        this.setState({ impagePreview: ""})
+        this.setState({ impagePreview: []})
         this.getImageSize(val.data[0].url)
     }
 
@@ -138,7 +153,8 @@ class StepTwo extends React.Component {
                                     selectedAnimals={selectedAnimals}
                                     currentSelectedAnimal={this.currentSelectedAnimal.bind(this)}
                                     toggleModal={this.toggleModal.bind(this)}
-                                    animal_id={animal_id}  />                           
+                                    animal_id={animal_id}
+                                      />                           
                             </div>
                             <Right 
                                 animal_types={animal_types}
@@ -147,8 +163,9 @@ class StepTwo extends React.Component {
                                 height={height}
                                 weight={weight}
                                 special_notes={special_notes}
-                                impagePreview={impagePreview}
+                                impagePreview={impagePreview}        
                                 setAnimalProperty={this.setAnimalProperty.bind(this)}
+                                animalImageDel={this.animalImageDel.bind(this)}
                                 onDrop={this.onDrop.bind(this)}
                             />
                         </div>

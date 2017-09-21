@@ -45,7 +45,8 @@ class StepThree extends React.Component {
                 {
                     this.setState({
                         pick_up_city: pick_up_address.split(", ")[1],
-                        pick_up_state: pick_up_address.split(", ")[2]
+                        pick_up_state: pick_up_address.split(", ")[2],
+                        pick_up_address: pick_up_address.split(", ")[0]
                     })
                 }
             this.setState({["pick_up_address"]: pick_up_address })
@@ -61,7 +62,8 @@ class StepThree extends React.Component {
                 
                 this.setState({
                     delivery_city: delivery_address.split(", ")[1],
-                    delivery_state: delivery_address.split(", ")[2]
+                    delivery_state: delivery_address.split(", ")[2],
+                    delivery_address: delivery_address.split(", ")[0]
                 })
             }
             this.setState({["delivery_address"]: delivery_address })

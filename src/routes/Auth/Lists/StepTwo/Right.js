@@ -91,6 +91,7 @@ export default class Right extends React.Component {
                 </div>
                 <FileUpload
                     onDrop={this.props.onDrop}
+                    animalImageDel={this.props.animalImageDel}
                     impagePreview={impagePreview} />
             </div>
 		)

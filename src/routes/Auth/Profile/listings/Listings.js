@@ -1,5 +1,3 @@
-
-import './Listings.scss'
 import moment from 'moment'
 import { browserHistory } from 'react-router'
 import ListingItem from './components/ListingItem'
@@ -24,6 +22,8 @@ class Listings extends React.Component {
 	}
 
 	getListings() {		
+		console.log("dddddddddddddddddddddd")
+		console.log(this.props.listings.data)
 		const listings = []
 		this.props.listings.data.map((listing, i) => {
 			listings.push(this.renderListings(
@@ -60,6 +60,8 @@ class Listings extends React.Component {
 
 	review(id)
 	{
+		console.log("view id =============================>")
+		console.log(id)
 		var index = this.getIndex(id, this.props.listings.data, "id")
 		var val = this.props.listings.data[index]
 		browserHistory.push({
@@ -80,6 +82,8 @@ class Listings extends React.Component {
 		})
 		if(flag)
 		{
+			console.log("deletedID=========================================>")
+			console.log(deletedID)
 			this.props.deleteListing(deletedID);
 		}
 	}
@@ -99,6 +103,7 @@ class Listings extends React.Component {
 			/>
 		)
 	}
+
 	render() {
 		return (
 			this.state.deleteModal?

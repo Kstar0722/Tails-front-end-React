@@ -79,6 +79,11 @@ td {
 			
 			p{
 				margin: 0px;
+				color: #fff;
+			}
+			.close{
+				color: #fff;
+				opacity: 1;
 			}
 		}
 		#body-modal{
@@ -91,13 +96,22 @@ td {
 			float: right;
 			margin-right: 20px;
 			margin-bottom: 20px;
+			:hover{
+				opacity: 0.8
+			}
 			button{
-				width: 80px;
-				height: 30px;
+				width: 90px;
+				height: 35px;
+				background: #092b4f;
+				color: #fff;
+				border-radius: 5px;
+				border: 1px;
+
 			}
 			#btn-cancel{
 				margin-left: 20px;
 			}
 		}
+		
 	}
 }

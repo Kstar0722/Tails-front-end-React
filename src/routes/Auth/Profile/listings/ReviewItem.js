@@ -7,6 +7,7 @@ class ReviewItem extends React.Component {
     
     constructor(props) {
         super(props)
+        console.log(this.props)
         this.state = this.props.location.state;
     }
     

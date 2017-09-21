@@ -101,8 +101,9 @@ export function register(username, email, password, purpose) {
     let _username = '' + username.trim();
     username = username.trim().split(' ');
     let firstName = '' + username[0];
-    let lastName = _username.slice(-1*firstName.length).trim();
-    
+    // let lastName = _username.slice(-1*firstName.length).trim();
+    let lastName = '' + username[1];
+
     return function(dispatch) {
         dispatch(signupRequest())
         return fetch(config.endpoints.url + config.endpoints.signup, {
