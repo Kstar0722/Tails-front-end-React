@@ -448,6 +448,52 @@
 
             li {
                 margin: 0 10px 10px 0;
+                
+                label {
+                    font-size: 14px;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 767px) {
+    #filters {
+        .input-group {
+            .select {
+                width: calc(50% - 23px);
+            }
+
+            em {
+                width: 46px;
+            }
+        }
+    }
+}
+
+@media (max-width: 479px) {
+    .list-item {
+        .top-part {
+            flex-wrap: wrap;
+
+            .image-holder {
+                margin-bottom: 20px;
+            }
+
+            .right-content-holder {
+                width: 100%;
+            }
+        }
+    }
+
+    #filters {
+        .input-group {
+            .select {
+                width: calc(50% - 18px);
+            }
+
+            em {
+                width: 36px;
             }
         }
     }
