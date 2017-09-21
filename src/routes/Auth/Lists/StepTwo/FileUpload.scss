@@ -11,13 +11,14 @@
             // width: 130px !important;
         }
         .close{
+            width: 30px;
+            height: 30px;
             color: #fff;
             position: absolute;
             top: -3%;
             left: 72%;
             font-size: initial;
             background-color: #da373b;
-            padding: 10px;
             border-radius: 50%;
             opacity: 1;
         }

@@ -102,8 +102,18 @@ class StepThree extends React.Component {
             self.validate()
         }, 100)
     }
-
-
+    cityMethod(e) {
+        const re = /[a-zA-z:]+/g;
+        if (!re.test(e.key)) {
+            e.preventDefault();
+        }
+    }
+    postalCodeMethod(e) {
+        const re = /[0-9:]+/g;
+        if (!re.test(e.key)) {
+            e.preventDefault();
+        }
+    }
 
     validate() {
         const {
@@ -248,6 +258,7 @@ class StepThree extends React.Component {
                                             className="form-control"
                                             name="pick_up_city"
                                             value={pick_up_city}
+                                            onKeyPress={(e) => this.cityMethod(e)}
                                             onChange={this.setValue.bind(this, 'pick_up_city')}/>
                                     </div>
                                     <div className="col-sm-4 col-12">
@@ -257,6 +268,7 @@ class StepThree extends React.Component {
                                             className="form-control"
                                             name="pick_up_zip"
                                             value={pick_up_zip}
+                                            onKeyPress={(e) => this.postalCodeMethod(e)}
                                             onChange={this.setValue.bind(this, 'pick_up_zip')}/>
                                     </div>
                                 </div>
@@ -339,6 +351,7 @@ class StepThree extends React.Component {
                                             className="form-control"
                                             name="delivery_city"
                                             value={delivery_city}
+                                            onKeyPress={(e) => this.cityMethod(e)}
                                             onChange={this.setValue.bind(this, 'delivery_city')}/>
                                     </div>
                                     <div className="col-sm-4 col-12">
@@ -348,6 +361,7 @@ class StepThree extends React.Component {
                                             className="form-control"
                                             name="delivery_zip"
                                             value={delivery_zip}
+                                            onKeyPress={(e) => this.postalCodeMethod(e)}
                                             onChange={this.setValue.bind(this, 'delivery_zip')}/>
                                     </div>
                                 </div>

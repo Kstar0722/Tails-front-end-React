@@ -18,6 +18,7 @@ class StepTwo extends React.Component {
 	
 	constructor(props) {
         super(props)
+        console.log(this.props.animalInfos.selectedAnimals[0].data[0])
         console.log(this.props.animalInfos.selectedAnimals[0].data[0].url)
         this.state = {
             animal_id: -1,
