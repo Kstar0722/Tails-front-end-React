@@ -23,95 +23,65 @@ td {
 	}
 }
 
-
-.ReactModal__Content{
-	border-radius: 5px;
-	top: 200px !important;
-    left: 35% !important;
-    right: 35% !important;
-	bottom: unset !important;
-	padding: 0px !important;
-	@media (max-width:1250px)
-	{
-		top: 200px !important;
-		left: 30% !important;
-		right: 30% !important;
-		bottom: unset !important;
-		padding: 0px !important;
-	}
-	@media (max-width:950px)
-	{
-		top: 200px !important;
-		left: 25% !important;
-		right: 25% !important;
-		bottom: unset !important;
-		padding: 0px !important;
-	}
-	@media (max-width:770px)
-	{
-		top: 200px !important;
-		left: 20% !important;
-		right: 20% !important;
-		bottom: unset !important;
-		padding: 0px !important;
-	}
-	@media (max-width:620px)
-	{
-		top: 0px !important;
-		left: 100px !important;
-		right: 100px !important;
-		bottom: unset !important;
-		padding: 0px !important;
-	}
-	@media (max-width:445px)
-	{
-		top: 0px !important;
-		left: 50px !important;
-		right: 50px !important;
-		bottom: unset !important;
+.ReactModal__Overlay {
+	background-color: rgba(0,0,0,.7) !important;
+	.ReactModal__Content{
 		padding: 0px !important;
 	}
 	#modal{
-
+		@media (max-width:430px){
+			top : 0%;
+			width: 100%;
+			left: 0px
+		}
+		background-color: #fff;
+		width: 430px;
+		top: 30%;
+		position: absolute;
+		left: calc(50vw - 215px);
+		border-radius: 5px;
 		#heading-modal{
+
 			padding: 20px;
 			background-color: rgba(45,172,209,.85);
-			
-			p{
-				margin: 0px;
-				color: #fff;
-			}
-			.close{
-				color: #fff;
-				opacity: 1;
-			}
-		}
-		#body-modal{
-			padding: 20px;	
-			p{
-				margin: 0px;
-			}
-		}
-		#btn-modal{
-			float: right;
-			margin-right: 20px;
-			margin-bottom: 20px;
-			:hover{
-				opacity: 0.8
-			}
-			button{
-				width: 90px;
-				height: 35px;
-				background: #092b4f;
-				color: #fff;
-				border-radius: 5px;
-				border: 1px;
+		    border-radius: 5px;
 
+				p{
+					margin: 0px;
+					color: #fff;
+				}
+				.close{
+					color: #fff;
+					opacity: 1;
+				}
 			}
-			#btn-cancel{
-				margin-left: 20px;
+			#body-modal{
+				padding: 20px;	
+				p{
+					margin: 0px;
+				}
 			}
-		}
-		
+			#btn-modal{
+				text-align: right;
+				padding-right: 20px;
+				padding-bottom: 20px;
+				:hover{
+					opacity: 0.8
+				}
+				button{
+					width: 90px;
+					height: 35px;
+					background: #092b4f;
+					color: #fff;
+					border-radius: 5px;
+					border: 1px;
+				}
+				#btn-cancel{
+					margin-left: 20px;
+				}
+			
+			}
+
 	}
+
 }
