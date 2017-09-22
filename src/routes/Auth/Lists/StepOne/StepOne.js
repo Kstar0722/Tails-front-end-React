@@ -80,7 +80,7 @@ class StepOne extends React.Component {
                                     )
                                 }
                             </div>
-                            <NextStep nextStep="/step-two" disabled={disabled}/>
+                            <NextStep nextStep="/step-two?test" disabled={disabled}/>
                         </div>                
                     </div> 
                 </div>                           

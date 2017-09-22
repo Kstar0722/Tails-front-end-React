@@ -114,9 +114,6 @@ class StepThree extends React.Component {
                     disabled: false
                 })
             }
-            
-            
-            
           }else{
               if(index == 1)
                 {   

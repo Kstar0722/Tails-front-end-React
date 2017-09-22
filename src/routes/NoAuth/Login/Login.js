@@ -79,7 +79,7 @@ class Login extends Component {
 	}
 
   	render() {
-  		const {handleSubmit, fields: {email, password}, submitting, token, loginActive} = this.props
+  		const {handleSubmit, fields: {email, password}, submitting, token, loginActive} = this.props	
 		const styles = this.getStyles()
 		if(!this.state.auth || this.props.profile.id == undefined){
 			return (

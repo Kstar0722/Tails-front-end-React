@@ -15,7 +15,6 @@ class Profile extends React.Component {
 			cover_photo: StockBanner
 		}
 	}
-
 	toEdit(){
 		browserHistory.push('/profile/edit')
 	}
@@ -27,10 +26,8 @@ class Profile extends React.Component {
                 cover_photo: this.props.profile.cover_photo
             })
 	}
-	
 	render() {
-		const { listings } = this.props
-		
+		const { listings } = this.props		
 		if(listings.loaded) {
 			return ( 
 				<section id="profile">
@@ -60,14 +57,7 @@ class Profile extends React.Component {
 										<h1>You have no listings yet...</h1>
 										<Link className="btn btn-create-listing" to="/step-one">Create Listing</Link>
 									</div>
-								}
-								{/*
-									<div className="row not-listings justify-content-center align-self-center">
-										<Link className="btn btn-create-listing" to="/step-one">Create Listing</Link>
-									</div>
-								*/}
-									
-														
+								}													
 							</div>
 							<div className="block-section my-bids">
 								<p className="title">My Bids</p>
