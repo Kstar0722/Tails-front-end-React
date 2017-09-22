@@ -39,7 +39,6 @@ export function updateProfile(_data) {
 
     if (data.ship)
         data.purpose += 'ship'
-
     delete data.ship;
     delete data.be_a_cerrier;
     console.log("sendData=========>", data)

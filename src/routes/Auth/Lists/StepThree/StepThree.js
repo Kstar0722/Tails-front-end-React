@@ -7,6 +7,7 @@ import PlacesAutocomplete from 'react-places-autocomplete'
 import { geocodeByAddress, geocodeByPlaceId } from 'react-places-autocomplete'
 import '../lists.scss'
 import { browserHistory } from 'react-router'
+import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
 class StepThree extends React.Component {
 
     constructor(props) {
@@ -41,15 +42,12 @@ class StepThree extends React.Component {
 
         this.onPickChange = (pick_up_address) => {
             
-            if(pick_up_address.split(", ").length == 4)
-                {
-                    this.setState({
-                        pick_up_city: pick_up_address.split(", ")[1],
-                        pick_up_state: pick_up_address.split(", ")[2],
-                        pick_up_address: pick_up_address.split(", ")[0]
-                    })
-                }
-            this.setState({["pick_up_address"]: pick_up_address })
+            if(pick_up_address.split(", ").length >= 4)
+            {
+                this.fullAddressChange(pick_up_address, 1)
+            }else{
+                this.setState({["pick_up_address"]: pick_up_address })
+            }
             const self = this
             setTimeout(function(){
                 self.validate()
@@ -57,22 +55,91 @@ class StepThree extends React.Component {
         }
         this.onDeliveryChange = (delivery_address) => {
             
-            if(delivery_address.split(", ").length == 4)
+            if(delivery_address.split(", ").length >= 4)
             {
-                
-                this.setState({
-                    delivery_city: delivery_address.split(", ")[1],
-                    delivery_state: delivery_address.split(", ")[2],
-                    delivery_address: delivery_address.split(", ")[0]
-                })
+                this.fullAddressChange(delivery_address, 2)
+            }else{
+                this.setState({["delivery_address"]: delivery_address })
             }
-            this.setState({["delivery_address"]: delivery_address })
+            
             const self = this
             setTimeout(function(){
                 self.validate()
             }, 100)
         }
     }
+
+    fullAddressChange(address ,index) {
+      
+        let geocoder = new google.maps.Geocoder();
+        let self = this;
+         geocoder.geocode({'address': address}, function(results, status) {
+             console.log(results)
+          if (status === 'OK') {
+            let postal_code = "";
+            let streetNum = "";
+            let route = "";
+            let city = "";
+            let state = "";
+            let resultComponents = results[0].address_components;
+            console.log(resultComponents)
+            for (let i = 0; i < resultComponents.length; i++) {
+                if (resultComponents[i].types.indexOf('postal_code') > -1) {
+                   postal_code = resultComponents[i].long_name;
+                }else if (resultComponents[i].types.indexOf('street_number') > -1) {
+                   streetNum = resultComponents[i].long_name;
+                }else if (resultComponents[i].types.indexOf('route') > -1) {
+                   route = resultComponents[i].long_name;
+                }else if (resultComponents[i].types.indexOf('locality') > -1) {
+                   city = resultComponents[i].long_name;
+                }else if (resultComponents[i].types.indexOf('administrative_area_level_1') > -1) {
+                   state = resultComponents[i].short_name;
+                }
+            }
+            if (index == 1)
+            {
+                self.setState({
+                    pick_up_city: city,
+                    pick_up_state: state,
+                    pick_up_address: streetNum + " " + route,
+                    pick_up_zip: postal_code,
+                    disabled: false
+                })
+            }else{
+                self.setState({
+                    delivery_city: city,
+                    delivery_state: state,
+                    delivery_address: streetNum + " " + route,
+                    delivery_zip: postal_code,
+                    disabled: false
+                })
+            }
+            
+            
+            
+          }else{
+              if(index == 1)
+                {   
+                    self.setState({
+                        pick_up_city: "",
+                        pick_up_state: "",
+                        pick_up_zip: "",
+                        disabled: true
+                    })
+                }else{
+                     self.setState({
+                        delivery_city: "",
+                        delivery_state: "",
+                        delivery_zip: "",
+                        disabled: true
+                    })
+                }
+          
+          }
+        });
+        
+    }
+
     gotoFourStep(){
         this.props.setAnimalShipInfo("pick_up_address", this.state.pick_up_address)
         this.props.setAnimalShipInfo("pick_up_state", this.state.pick_up_state)

@@ -22,8 +22,9 @@ class EditProfile extends React.Component {
 
 	render() {
 		return (
-
+			
 			<section id="profile">
+				
 				<div className="container">
 					<h1 className="profile-setting">Setting</h1>
 					<div className="profile-edit">
@@ -50,6 +51,7 @@ class EditProfile extends React.Component {
 						</TabPane>
 						<TabPane tabId="2">
 							Billing setting
+							
 						</TabPane>
 						</TabContent>
 					</div>

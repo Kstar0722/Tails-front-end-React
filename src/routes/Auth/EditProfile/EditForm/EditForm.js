@@ -8,6 +8,9 @@ import {updateProfile} from 'actions/profile'
 import EditAvatar from './EditImage/EditAvatar'
 import EditImage from './EditImage/EditImage'
 import config from 'config'
+import ProWheel from 'components/ProWheel'
+
+
 
 const validate = values => {
 	let errors = {}
@@ -28,19 +31,35 @@ const validate = values => {
 class EditForm extends React.Component {
 	constructor(props) {
 		super(props)
+		this.state = {
+			saveWaitFlag : false
+		};
 	}
 
 	submit(values){
-		console.log("values===========>", values)
-		this.props.updateProfile(values)
+		
+		this.setState({
+			saveWaitFlag: true
+		})
+		let self = this;
+		var flag = this.props.updateProfile(values).then(function(){
+			self.setState({
+				saveWaitFlag: false
+			})
+		})
+	
+			
 	}
 
 	render() {
 		const {handleSubmit, submitting, profileUpdate} = this.props
+		console.log(this.state.saveWaitFlag)
 		console.log("profileUpdate==========dddddddd==>", this.props)
 		return (
+			this.state.saveWaitFlag ? <ProWheel/> :
 			<form onSubmit={handleSubmit(this.submit.bind(this))} className="form-profile">
 				<div className="row">
+					
 					<div className="col justify-content-center align-self-center">
 						<div className="row">
 						<Field 
