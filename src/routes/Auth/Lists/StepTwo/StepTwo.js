@@ -11,6 +11,7 @@ import Left from './Left'
 import Right from './Right'
 import uploadBtnImage from 'assets/upload.png'
 import cameraImage from 'assets/camera.png'
+import { browserHistory } from 'react-router'
 import '../lists.scss'
 var Isvg = require('react-inlinesvg')
 
@@ -36,14 +37,26 @@ class StepTwo extends React.Component {
                 height: -1
             }
         }
+    //this.props = this.props.location.state
+        console.log("lksjdflkasjdflkajslf;asfasdfasdf")
+        console.log(this.props)
     }
 
     componentWillMount() {
+        
         const { animalInfos } = this.props
         const selectedAnimals = animalInfos.selectedAnimals
         this.setState({ selectedAnimals })
         this.setState({ animal_types: animalInfos.data }) 
+        
         const currentAnimal = selectedAnimals[0]
+        if(currentAnimal == undefined)
+        {
+            browserHistory.push({
+                pathname: '/step-one',
+            });
+            return;
+        }
         this.setState({ animal_id: currentAnimal.id })
         this.setState({ breed: currentAnimal.breed })
         this.setState({ name: currentAnimal.name })

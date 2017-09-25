@@ -5,7 +5,8 @@ import {connect} from 'react-redux';
 import { Field, reduxForm } from 'redux-form'
 import { Link } from 'react-router'
 import renderField from '../../../components/renderField'
-import {login} from '../../../actions/auth'
+import {login, forgotpass} from 'actions/auth'
+
 const fields = ['email', 'password']
 
 class ForgotPassword extends Component {
@@ -32,8 +33,8 @@ class ForgotPassword extends Component {
 		}
 	}
 
-	validateAndSignInUser(values, dispatch) {
-		dispatch(login(values.email, values.password))
+	onForgotPassword(values, dispatch) {
+		dispatch(forgotpass(values.email))
 	}
 	
   	render() {
@@ -44,13 +45,13 @@ class ForgotPassword extends Component {
 				<div className="container">
 					<div className="login-box">
 						<div className="close-wrap">
-							<Link to="/" className="btn">X</Link>
+							<Link to="/" className="btn close">X</Link>
 						</div>
 						<div className="label-wrap">
 							<p>Forgot Password</p>
 						</div>
 						<div className="form-wrap">
-							<form onSubmit={handleSubmit(this.validateAndSignInUser)}>
+							<form onSubmit={handleSubmit(this.onForgotPassword)}>
 								<Field
 									name="email"
 									type="email"

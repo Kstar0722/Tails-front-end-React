@@ -6,8 +6,8 @@ import imgAnimalActive from 'assets/animal.png'
 import React, {Component} from 'react';
 import { Field, reduxForm } from 'redux-form'
 import { Link, browserHistory } from 'react-router'
-import {register} from '../../../../actions/auth'
-import renderField, { validateEmail, minLength } from '../../../../components/renderField'
+import {register} from 'actions/auth'
+import renderField, { validateEmail, minLength } from 'components/renderField'
 import classNames from 'classnames'
 
 function validate(values) {

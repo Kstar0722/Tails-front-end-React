@@ -62,6 +62,23 @@
 				}
 			}
 		}
+		.forgot-container{
+			text-align: center;
+			a{
+				cursor: pointer;
+				border: none;
+				background: none;
+				text-align: left;
+				font-size: 12px;
+				color: #3C3C3C;
+				align-self: flex-start;
+
+			
+			}
+			.sign-up{
+				margin-left: 10px;
+			}
+		}
 	}
 	.bottom-wrap {
 

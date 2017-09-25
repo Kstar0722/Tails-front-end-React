@@ -22,8 +22,6 @@ class Listings extends React.Component {
 	}
 
 	getListings() {		
-		console.log("dddddddddddddddddddddd")
-		console.log(this.props.listings.data)
 		const listings = []
 		this.props.listings.data.map((listing, i) => {
 			listings.push(this.renderListings(
@@ -51,7 +49,7 @@ class Listings extends React.Component {
 	editStep(id){
 		var index = this.getIndex(id, this.props.listings.data, "id")
 		var val = this.props.listings.data[index]
-
+		console.log(val)
 		browserHistory.push({
 			pathname: '/step-three',
 			state: val

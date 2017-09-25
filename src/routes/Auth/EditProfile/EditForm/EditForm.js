@@ -10,8 +10,6 @@ import EditImage from './EditImage/EditImage'
 import config from 'config'
 import ProWheel from 'components/ProWheel'
 
-
-
 const validate = values => {
 	let errors = {}
 	let fields = [
@@ -55,6 +53,9 @@ class EditForm extends React.Component {
 		const {handleSubmit, submitting, profileUpdate} = this.props
 		console.log(this.state.saveWaitFlag)
 		console.log("profileUpdate==========dddddddd==>", this.props)
+		localStorage.setItem("user_img", this.props.profileUpdate.avatar)
+		localStorage.setItem("first_name", this.props.profileUpdate.first_name)
+		localStorage.setItem("last_name", this.props.profileUpdate.last_name)
 		return (
 			this.state.saveWaitFlag ? <ProWheel/> :
 			<form onSubmit={handleSubmit(this.submit.bind(this))} className="form-profile">

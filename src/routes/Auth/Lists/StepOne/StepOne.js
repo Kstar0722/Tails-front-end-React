@@ -3,6 +3,7 @@ import _ from 'lodash'
 import { getAnimalsIds, selectAnimal } from './Actions/getAnimals'
 import StepHistory from '../StepHistory'
 import NextStep from '../NextStep'
+import { browserHistory } from 'react-router'
 import '../lists.scss'
 var Isvg = require('react-inlinesvg')
 
@@ -46,7 +47,14 @@ class StepOne extends React.Component {
             this.setState({ disabled: true })
         }
     }
-
+    nextStep = () =>{
+        
+        let ddd = {"ddd" : "aaaa"}
+        browserHistory.push({
+			pathname: '/step-two',
+			state: this.props
+		});
+    }
     render() {
         const { animalInfos } = this.props
         const { selectedAnimal, disabled } = this.state
@@ -80,7 +88,12 @@ class StepOne extends React.Component {
                                     )
                                 }
                             </div>
-                            <NextStep nextStep="/step-two?test" disabled={disabled}/>
+                            {/* <button                            
+                                className={disabled ? "btn btn-next disabled" : "btn btn-next"  }
+                                onClick={() => this.nextStep()}
+                                disabled={disabled}
+                            >Next</button> */}
+                            <NextStep nextStep="/step-two" disabled={disabled}/>
                         </div>                
                     </div> 
                 </div>                           
@@ -89,7 +102,6 @@ class StepOne extends React.Component {
         else {
             return null
         }     
-        
     }
 }
 

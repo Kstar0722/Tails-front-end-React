@@ -24,8 +24,6 @@ class Login extends Component {
 
     	this.toggle = this.toggle.bind(this)
 		this.logout = this.logout.bind(this)
-		console.log("--------------------------------------")
-		console.log(this.props.auth.authorized)
 	}
 
 	componentWillMount() {
@@ -51,11 +49,16 @@ class Login extends Component {
 		});
 	}
 	
-	forgotPassword() {
+	goForgotPassword() {
 		
+		this.setState({
+			modal: false
+		});
+		browserHistory.push('/forgot-password');
 	}
 
 	goSignUp() {
+		
 		this.setState({
 			modal: false
 		});
@@ -81,7 +84,11 @@ class Login extends Component {
   	render() {
   		const {handleSubmit, fields: {email, password}, submitting, token, loginActive} = this.props	
 		const styles = this.getStyles()
-		if(!this.state.auth || this.props.profile.id == undefined){
+		const userid = localStorage.getItem("userId");
+		const userimg = localStorage.getItem("user_img");
+		const first_name = localStorage.getItem("first_name");
+		const last_name = localStorage.getItem("last_name");
+		if(userid == undefined){
 			return (
 				<li className="sign-in" onClick={this.toggle.bind(this, 'modal')}>
 					<a>Sign In</a>
@@ -114,11 +121,12 @@ class Login extends Component {
 											Login
 										</button>
 									</div>
-									<div className="forgot-container">
-										<button className="forgot-password" onClick={this.forgotPassword.bind(this)}>Forgot password</button>
-										<button className="forgot-password" onClick={this.goSignUp.bind(this)}>Sign Up</button>
-									</div>
+									
 								</form>
+								<div className="forgot-container">
+									<a className="forgot-password" onClick={this.goForgotPassword.bind(this)}>Forgot password</a>
+									<a className="sign-up" onClick={this.goSignUp.bind(this)}>Sign Up</a>
+								</div>
 							</div> 
 						</ModalBody>
 					</Modal>
@@ -133,12 +141,15 @@ class Login extends Component {
 						aria-expanded={this.state.dropdownOpen}
 						className="menu-profile"
 					>
-					 <img src={this.props.profile.avatar ? this.props.profile.avatar :"" }  width="60" className="rounded-circle"/>
-					 <Link to='/profile'>{this.props.profile.first_name} {this.props.profile.last_name}</Link>
+					 <img src={this.props.profile.avatar ? this.props.profile.avatar : userimg }  width="60" className="rounded-circle"/>
+					 <Link to='/profile'>{this.props.profile.first_name ? this.props.profile.first_name : first_name} {this.props.profile.last_name ? this.props.profile.last_name : last_name}</Link>
+					 {/* <button onClick = {this.logout.bind(this)}>logout</button> */}
 					</div>
+{/* 					
 					<DropdownMenu right>
+						
 						<DropdownItem>Logout</DropdownItem>
-					</DropdownMenu>
+					</DropdownMenu> */}
 				</Dropdown>
 			</li>
 		}

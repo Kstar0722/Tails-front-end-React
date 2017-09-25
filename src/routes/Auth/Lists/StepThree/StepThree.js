@@ -152,9 +152,26 @@ class StepThree extends React.Component {
         {
             return
         }
+        
+        let sendVal = {
+            pick_up_address: this.state.pick_up_address,
+            pick_up_state: this.state.pick_up_state,
+            pick_up_city: this.state.pick_up_city,
+            pick_up_zip: this.state.pick_up_zip,
+            delivery_address: this.state.delivery_address,
+            delivery_state: this.state.delivery_state,
+            delivery_city: this.state.delivery_city,
+            delivery_zip: this.state.delivery_zip,
+            id: this.props.location.state == undefined ? "" : this.props.location.state.id,
+            budget: this.props.location.state == undefined ? "" : this.props.location.state.budget,
+            title: this.props.location.state == undefined ? "" : this.props.location.state.title,
+            other_notes: this.props.location.state == undefined ? "" : this.props.location.state.other_notes,
+            user_id: this.props.location.state == undefined ? "" : this.props.location.state.user_id
+        }
+        console.log(sendVal)
         browserHistory.push({
 			pathname: '/step-four',
-			state: this.props.location.state
+			state: sendVal
 		});
     }
     setValue = (field, value) => {

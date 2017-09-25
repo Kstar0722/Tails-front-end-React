@@ -14,17 +14,24 @@ class Profile extends React.Component {
 		this.state = {
 			cover_photo: StockBanner
 		}
+		if(this.props.profile.avatar != undefined)
+		{
+			localStorage.setItem("user_img", this.props.profile.avatar)
+			localStorage.setItem("first_name", this.props.profile.first_name)
+			localStorage.setItem("last_name", this.props.profile.last_name)
+		}
+
 	}
 	toEdit(){
 		browserHistory.push('/profile/edit')
 	}
-
 	componentWillMount() {
 		this.props.getListings()
         if(this.props.profile.cover_photo)
             this.setState({
                 cover_photo: this.props.profile.cover_photo
-            })
+			})
+		
 	}
 	render() {
 		const { listings } = this.props		
