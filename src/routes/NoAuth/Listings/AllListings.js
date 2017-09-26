@@ -10,6 +10,9 @@ import ListingSidebar from './Sidebar/ListingSidebar'
 class AllListings extends React.Component {
 	constructor(props) {
 		super(props)
+		this.state = {
+			getAllListings: []
+		}
 	}
 
 	componentWillMount() {
@@ -17,20 +20,35 @@ class AllListings extends React.Component {
 	}
 
 	getAllListings() {
-		const listings = []
-		console.log(this.props.listings)
-		this.props.listings.data.map((listing, i) => {
-			listings.push(this.renderAllListings(
-				listing.title
-			))
-		})
-		return listings
+		if (this.props.listings.hasOwnProperty('data')) {
+			const listings = []
+			console.log(this.props.listings)
+			this.props.listings.data.map((listing, i) => {
+				listings.push(this.renderAllListings(
+					listing.title,
+					listing.pick_up_city,
+					listing.pick_up_state,
+					listing.delivery_city,
+					listing.delivery_state,
+					listing.budget,
+					listing.other_notes
+				))
+			})
+
+			return listings
+		}
 	}
 
-	renderAllListings(title) {
+	renderAllListings(title, pick_up_city, pick_up_state, delivery_city, delivery_state, budget, other_notes) {
 		return (
 			<ListItem
 				title={title}
+				pick_up_city={pick_up_city}
+				pick_up_state={pick_up_state}
+				delivery_city={delivery_city}
+				delivery_state={delivery_state}
+				budget={budget}
+				other_notes={other_notes}
 			/>
 		)
 	}

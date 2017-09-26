@@ -8,7 +8,7 @@ class ListItem extends React.Component {
 	}
 
 	render() {
-        const { title } = this.props
+        const {title, pick_up_city, pick_up_state, delivery_city, delivery_state, budget, other_notes} = this.props
 		return (
             <div className="list-item">
                 <div className="top-part">
@@ -31,13 +31,13 @@ class ListItem extends React.Component {
 
                         <div className="row">
                             <div className="col-md-12 top-destination">
-                                <span className="start">Rochester, NY</span> <i className="btl bt-long-arrow-right"></i> <span className="finish">Kansas City, KA</span>
+                                <span className="start">{pick_up_city}, {pick_up_state}</span> <i className="btl bt-long-arrow-right"></i> <span className="finish">{delivery_city}, {delivery_state}</span>
                             </div>
                         </div>
 
                         <div className="row">
                             <div className="col-md-12 listing-excerpt">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est</p>
+                                <p>{other_notes}</p>
                             </div>
                         </div>
                     </div>
@@ -45,7 +45,7 @@ class ListItem extends React.Component {
 
                 <div className="bottom-details">
                     <div className="animal-tags bottom-detail">2 Cows, 1 Dog</div>
-                    <div className="budget-details bottom-detail">$0-$500</div>
+                    <div className="budget-details bottom-detail">${budget}</div>
                     <div className="date-details bottom-detail">Departing 8/31 - Arriving 9/31</div>
                 </div>
             </div>
