@@ -86,9 +86,44 @@
 }	
 
 li{
-	.menu-profile{
-		img{
-			margin: 0 7px;
-		}
+	
+	img{
+		margin-right: 10px !important;
 	}
+
+}
+.dropmenu{
+	cursor: pointer;
+	float: right;
+	margin-top: 13px;
+	margin-left: 10px;
+	img{
+		width: 30px;
+	}
+}
+.popover{
+	cursor: pointer;
+	font-size: 18px;
+	max-width: 300px !important;
+	top: 3% !important;
+	
+	.popover-content{
+		width: 275px !important;
+		li{
+			display: inherit;
+			padding: 10px;
+			border: 2px #fff solid;
+			a{
+				color: #7c6e6a;
+				text-decoration: none;
+			}
+			img{
+				width: 35px;
+				height: 35px;
+			}
+		}
+		li:hover{
+			border: 2px #28d6ff solid;
+		}
+	}	
 }

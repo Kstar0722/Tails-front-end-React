@@ -3,10 +3,12 @@ import './Login.scss'
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import { Field, reduxForm } from 'redux-form'
+import LogOutImg from 'assets/logout.png'
+import arrowDown from 'assets/arrow_down.png'
 import { Link } from 'react-router'
 import renderField from '../../../components/renderField'
 import {login, logout} from '../../../actions/auth'
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Dropdown, DropdownToggle, DropdownMenu, DropdownItem  } from 'reactstrap'
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Popover, PopoverTitle, PopoverContent  } from 'reactstrap'
 import user from 'auth/user'
 import { browserHistory } from 'react-router'
 
@@ -19,7 +21,7 @@ class Login extends Component {
 		this.state = {
 			modal: false,
 			auth: user.authorized,
-			dropdownOpen: false
+			popoverOpen: false
 		}
 
     	this.toggle = this.toggle.bind(this)
@@ -70,8 +72,16 @@ class Login extends Component {
 			[type]: !this.state[type]
 		});
 	}
-
+	goProfile(){
+		browserHistory.push('/profile');
+		this.setState({
+			popoverOpen: false
+		});
+	}
 	logout() {
+		this.setState({
+			popoverOpen: false
+		});
 		user.logout()
 		this.props.dispatch(logout())
 		this.setState({
@@ -134,23 +144,20 @@ class Login extends Component {
 			);
 		} else {
 			return <li>
-				<Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle.bind(this, 'dropdownOpen')}>
-					<div
-						data-toggle="dropdown"
-						aria-haspopup="true"
-						aria-expanded={this.state.dropdownOpen}
-						className="menu-profile"
-					>
-					 <img src={this.props.profile.avatar ? this.props.profile.avatar : userimg }  width="60" className="rounded-circle"/>
-					 <Link to='/profile'>{this.props.profile.first_name ? this.props.profile.first_name : first_name} {this.props.profile.last_name ? this.props.profile.last_name : last_name}</Link>
-					 {/* <button onClick = {this.logout.bind(this)}>logout</button> */}
-					</div>
-{/* 					
-					<DropdownMenu right>
-						
-						<DropdownItem>Logout</DropdownItem>
-					</DropdownMenu> */}
-				</Dropdown>
+				<img src={this.props.profile.avatar ? this.props.profile.avatar : userimg }  width="60" className="rounded-circle"/>
+				<Link to='/profile'>{this.props.profile.first_name ? this.props.profile.first_name : first_name} {this.props.profile.last_name ? this.props.profile.last_name : last_name}</Link>
+				<div className="dropmenu" >
+					<a id="Popover1" onClick={this.toggle.bind(this, 'popoverOpen')}><img src = {arrowDown}></img></a>
+					<Popover placement="bottom" isOpen={this.state.popoverOpen} target="Popover1" toggle={this.toggle.bind(this, 'popoverOpen')}>
+						<PopoverContent>
+							<li onClick={this.goProfile.bind(this)}>
+								<img src={this.props.profile.avatar ? this.props.profile.avatar : userimg }  width="60" className="rounded-circle"/>
+								<a>{this.props.profile.first_name ? this.props.profile.first_name : first_name} {this.props.profile.last_name ? this.props.profile.last_name : last_name}</a>
+							</li>
+							<li onClick={this.logout.bind(this)}><img src={LogOutImg}/><a>Log Out</a></li>
+						</PopoverContent>
+					</Popover>
+				</div>
 			</li>
 		}
   	}
