@@ -15,6 +15,9 @@
 
 	label{
 		padding: 10px 0px;
+		&.btn-primary {
+			padding: 10px;
+		}
 	}
 
 	.cover-photo{
