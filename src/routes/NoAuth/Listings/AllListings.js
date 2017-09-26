@@ -5,8 +5,7 @@ import CowImage from 'assets/cow.jpg'
 import DogImage from 'assets/dog.jpg'
 import ListItem from './ListItem/ListItem'
 import ListingSidebar from './Sidebar/ListingSidebar'
-import ListingContainer from './ListingsContainer'
-import {getListings} from 'actions/listing'
+
 
 class AllListings extends React.Component {
 	constructor(props) {
@@ -70,12 +69,4 @@ class AllListings extends React.Component {
 	}
 }
 
-const mapDispatchToProps = (dispatch) => ({
-	getAllListings: () => dispatch(getListings()),
-})
-
-const mapStateToProps = (state) => ({
-   listings: state.listing.data
-})
-
-export default ReactRedux.connect(mapStateToProps, mapDispatchToProps)(AllListings)
+export default AllListings
