@@ -25,7 +25,7 @@ class AllListings extends React.Component {
 				listing.title
 			))
 		})
-		return bids
+		return listings
 	}
 
 	renderAllListings(title) {
@@ -56,7 +56,7 @@ class AllListings extends React.Component {
                         <div className="row list-items">
                             <div className="col-md-8">
 								{this.getAllListings()}
-								<ListItem />
+								{/* <ListItem /> */}
                             </div>
 
                             <div className="col-md-4 sidebar">
