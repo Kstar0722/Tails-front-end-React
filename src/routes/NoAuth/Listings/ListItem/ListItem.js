@@ -8,6 +8,7 @@ class ListItem extends React.Component {
 	}
 
 	render() {
+        const { title } = this.props
 		return (
             <div className="list-item">
                 <div className="top-part">
@@ -21,7 +22,7 @@ class ListItem extends React.Component {
                     </div>
                     <div className="right-content-holder">
                         <div className="row">
-                            <div className="col-lg-7"><h3>3 Cows to Kansas</h3></div>
+                            <div className="col-lg-7"><h3>{title}</h3></div>
                             <div className="col-lg-5 item-meta">
                                 <div className="age-of-post pull-right"><span className="age">20</span> min</div>
                                 <div className="bid-count pull-right"><span className="count">13</span> bids</div>

@@ -1,9 +1,11 @@
 import './AllListings.scss'
+import moment from 'moment'
 import ListingBanner from 'assets/listings-banner.jpg'
 import CowImage from 'assets/cow.jpg'
 import DogImage from 'assets/dog.jpg'
 import ListItem from './ListItem/ListItem'
 import ListingSidebar from './Sidebar/ListingSidebar'
+import ListingContainer from './ListingsContainer'
 
 
 class AllListings extends React.Component {
@@ -11,37 +13,31 @@ class AllListings extends React.Component {
 		super(props)
 	}
 
-	getAllListings() {
-		const listings = []
-		this.props.listings.data.map((listing, i) => {
-			listings.push(this.renderAllListings(
-				listing.id,
-				listing.title,
-				listing.budget,
-				moment(new Date(listing.created_at)).format('MM/DD/YYYY')
-			));
-		})
-
-		return listings
-        console.log('test')
+	componentWillMount() {
+		this.props.getAllListings()
 	}
 
-	renderAllListings(id, title, budget, date, optionActions, showActions, editStapActions) {
+	getAllListings() {
+		const listings = []
+		console.log(this.props.listings)
+		this.props.listings.data.map((listing, i) => {
+			listings.push(this.renderAllListings(
+				listing.title
+			))
+		})
+		return bids
+	}
+
+	renderAllListings(title) {
 		return (
 			<ListItem
-				key={id}
-				id={id}
 				title={title}
-				budget={budget}
-				dateCreated={date}
-				optionActions={optionActions}
-				showActions = {showActions}
-				editStapActions = {editStapActions}
 			/>
 		)
 	}
 
 	render() {
+		const { listings } = this.props
 		return (
             <main>
                 <section id="main-banner">
@@ -59,7 +55,7 @@ class AllListings extends React.Component {
                     <div className="container">
                         <div className="row list-items">
                             <div className="col-md-8">
-								<getAllListings />
+								{this.getAllListings()}
 								<ListItem />
                             </div>
 
