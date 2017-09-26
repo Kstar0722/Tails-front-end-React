@@ -49,7 +49,6 @@ class StepOne extends React.Component {
     }
     nextStep = () =>{
         
-        let ddd = {"ddd" : "aaaa"}
         browserHistory.push({
 			pathname: '/step-two',
 			state: this.props

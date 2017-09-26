@@ -1,7 +1,7 @@
 .modal-sign-in {
 	.form-wrap {
 		background: #fbfbfb;
-		padding: 20px;
+		padding: 10px 10px 20px 10px;
 		form {
 			display: flex;
 			flex-direction: column;
@@ -10,6 +10,9 @@
 			p {
 				color: #333;
 				font-size: 13px;
+			}
+			.form-group {
+				margin-bottom: 0px;
 			}
 			input {
 				width: 100%;
@@ -73,7 +76,7 @@
 				color: #3C3C3C;
 				align-self: flex-start;
 
-			
+
 			}
 			.sign-up{
 				margin-left: 10px;
@@ -83,7 +86,7 @@
 	.bottom-wrap {
 
 	}
-}	
+}
 
 li{
 	
