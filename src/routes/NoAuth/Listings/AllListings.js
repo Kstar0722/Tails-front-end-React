@@ -26,6 +26,7 @@ class AllListings extends React.Component {
 			this.props.listings.data.map((listing, i) => {
 				listings.push(this.renderAllListings(
 					listing.title,
+					listing.created_at,
 					listing.pick_up_city,
 					listing.pick_up_state,
 					listing.delivery_city,
@@ -39,10 +40,11 @@ class AllListings extends React.Component {
 		}
 	}
 
-	renderAllListings(title, pick_up_city, pick_up_state, delivery_city, delivery_state, budget, other_notes) {
+	renderAllListings(title, created_at, pick_up_city, pick_up_state, delivery_city, delivery_state, budget, other_notes) {
 		return (
 			<ListItem
 				title={title}
+				created_at={created_at}
 				pick_up_city={pick_up_city}
 				pick_up_state={pick_up_state}
 				delivery_city={delivery_city}

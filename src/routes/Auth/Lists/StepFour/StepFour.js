@@ -43,10 +43,12 @@ class StepFour extends React.Component {
             pick_up_state: this.props.location.state.pick_up_state,
             pick_up_city: this.props.location.state.pick_up_city,
             pick_up_zip: this.props.location.state.pick_up_zip,
+            desired_pick_up_date: this.props.location.state.desired_pick_up_date,
             delivery_address:this.props.location.state.delivery_address,
             delivery_state: this.props.location.state.delivery_state,
             delivery_city: this.props.location.state.delivery_city,
             delivery_zip: this.props.location.state.delivery_zip,
+            desired_delivery_date: this.props.location.state.desired_delivery_date,    
             id: this.props.location.state.id,
             user_id:this.props.location.state.user_id,
             budget: this.state.budget,
@@ -77,16 +79,19 @@ class StepFour extends React.Component {
 
     saveAll = () => {
         const { animalShipReducer, animalInfos } = this.props
+
         const value = {
             title: this.state.title,
             pick_up_address: animalShipReducer.shipInfo.pick_up_address,
             pick_up_city: animalShipReducer.shipInfo.pick_up_city,
             pick_up_state: animalShipReducer.shipInfo.pick_up_state,
             pick_up_zip: animalShipReducer.shipInfo.pick_up_zip,           
+            // desired_pick_up_date: animalShipReducer.shipInfo.desired_pick_up_date,
             delivery_address: animalShipReducer.shipInfo.delivery_address,
             delivery_city: animalShipReducer.shipInfo.delivery_city,
             delivery_state: animalShipReducer.shipInfo.delivery_state,
-            delivery_zip: animalShipReducer.shipInfo.delivery_zip,            
+            delivery_zip: animalShipReducer.shipInfo.delivery_zip,        
+            // desired_delivery_date: animalShipReducer.shipInfo.desired_delivery_date,    
             other_notes: this.state.summary,        
             budget: this.state.budget
         }

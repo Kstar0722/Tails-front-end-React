@@ -8,6 +8,9 @@ import { geocodeByAddress, geocodeByPlaceId } from 'react-places-autocomplete'
 import '../lists.scss'
 import { browserHistory } from 'react-router'
 import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
+import DatePicker from 'react-datepicker';
+import moment from 'moment';
+import 'assets/DatePicker.scss'
 class StepThree extends React.Component {
 
     constructor(props) {
@@ -20,10 +23,12 @@ class StepThree extends React.Component {
             pick_up_state: -1,
             pick_up_city: "",
             pick_up_zip: "",
+            desired_pick_up_date: moment(),
             delivery_address: "",
             delivery_state: -1,
             delivery_city: "",
             delivery_zip: "",
+            desired_delivery_date: moment(),
             disabled: true
             }
         }else{
@@ -32,10 +37,12 @@ class StepThree extends React.Component {
             pick_up_state: updateVal.pick_up_state,
             pick_up_city: updateVal.pick_up_city,
             pick_up_zip: updateVal.pick_up_zip,
+            desired_pick_up_date: updateVal.desired_pick_up_date,
             delivery_address: updateVal.delivery_address,
             delivery_state: updateVal.delivery_state,
             delivery_city: updateVal.delivery_city,
             delivery_zip: updateVal.delivery_zip,
+            desired_delivery_date: updateVal.desired_pick_up_date,
             disabled: false
             }
         }
@@ -142,11 +149,12 @@ class StepThree extends React.Component {
         this.props.setAnimalShipInfo("pick_up_state", this.state.pick_up_state)
         this.props.setAnimalShipInfo("pick_up_city", this.state.pick_up_city)
         this.props.setAnimalShipInfo("pick_up_zip", this.state.pick_up_zip)
-
+        this.props.setAnimalShipInfo("desired_pick_up_date", this.state.desired_pick_up_date)
         this.props.setAnimalShipInfo("delivery_address", this.state.delivery_address)
         this.props.setAnimalShipInfo("delivery_state", this.state.delivery_state)
         this.props.setAnimalShipInfo("delivery_city", this.state.delivery_city)
         this.props.setAnimalShipInfo("delivery_zip", this.state.delivery_zip)
+        this.props.setAnimalShipInfo("desired_delivery_date", this.state.desired_delivery_date)
 
         if(document.getElementById("btn-next").className == "btn btn-next disabled")
         {
@@ -158,10 +166,12 @@ class StepThree extends React.Component {
             pick_up_state: this.state.pick_up_state,
             pick_up_city: this.state.pick_up_city,
             pick_up_zip: this.state.pick_up_zip,
+            desired_pick_up_date: this.state.desired_pick_up_date,
             delivery_address: this.state.delivery_address,
             delivery_state: this.state.delivery_state,
             delivery_city: this.state.delivery_city,
             delivery_zip: this.state.delivery_zip,
+            desired_delivery_date: this.state.desired_delivery_date,
             id: this.props.location.state == undefined ? "" : this.props.location.state.id,
             budget: this.props.location.state == undefined ? "" : this.props.location.state.budget,
             title: this.props.location.state == undefined ? "" : this.props.location.state.title,
@@ -183,6 +193,29 @@ class StepThree extends React.Component {
             self.validate()
         }, 100)
     }
+    onChangePickUpDate(date)
+    {
+        this.setState({
+            desired_pick_up_date: date
+        });
+
+        const self = this
+        setTimeout(function(){
+            self.validate()
+        }, 100)
+    }
+    onChangeDeliveryDate(date)
+    {
+        this.setState({
+            desired_delivery_date: date
+        });
+
+        const self = this
+        setTimeout(function(){
+            self.validate()
+        }, 100)
+    }
+    
     cityMethod(e) {
         const re = /[a-zA-z:]+/g;
         if (!re.test(e.key)) {
@@ -202,10 +235,12 @@ class StepThree extends React.Component {
             pick_up_state,
             pick_up_city,
             pick_up_zip,
+            desired_pick_up_date,
             delivery_address,
             delivery_state,
             delivery_city,
-            delivery_zip
+            delivery_zip,
+            desired_delivery_date,
         } = this.state
 
         if( pick_up_address == "" ||
@@ -229,9 +264,11 @@ class StepThree extends React.Component {
             pick_up_city,
             pick_up_zip,
             delivery_address,
+            desired_pick_up_date,
             delivery_state,
             delivery_city,
             delivery_zip,
+            desired_delivery_date,
             disabled
         } = this.state
 
@@ -258,6 +295,22 @@ class StepThree extends React.Component {
                         </div>
                         
                         <div className="main-content">
+                            <div className="form-group">
+                                <div className="row">
+                                    <div className="col-sm-6 col-12">
+                                        <DatePicker
+                                            selected={this.state.desired_pick_up_date}
+                                            onChange={this.onChangePickUpDate.bind(this)}
+                                        />
+                                    </div>
+                                    <div className="col-sm-6 col-12">
+                                        <DatePicker
+                                            selected={this.state.desired_delivery_date}
+                                            onChange={this.onChangeDeliveryDate.bind(this)}
+                                        />
+                                    </div>
+                                </div>
+                            </div>
                             <div className="form-group">
                                 <label>Pick up Address</label>
 
