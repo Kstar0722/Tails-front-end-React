@@ -11,7 +11,8 @@ class StepOne extends React.Component {
     
     constructor(props) {
         super(props)
-
+        console.log("fasdfsadfsadfsadfqetwfsafsd")
+        console.log(this.props)
         this.state = {
             disabled: true
         }        
@@ -33,8 +34,12 @@ class StepOne extends React.Component {
     }
 
     selectImg(val) {
+                
         const { disabled } = this.state
         const { animalInfos } = this.props
+        
+        val.impagePreview = []
+
         const index = _.findIndex(animalInfos.selectedAnimals, item => item.id == val.id)
         if(index == -1) {
             this.setState({ disabled: false })

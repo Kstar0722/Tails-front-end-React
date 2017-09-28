@@ -1,8 +1,8 @@
 import AllListings from './AllListings'
-import {getListings} from 'actions/listing'
+import {getAllListings} from 'actions/listing'
 
 const mapDispatchToProps = (dispatch) => ({
-     getAllListings: () => dispatch(getListings()),
+     getAllListings: () => dispatch(getAllListings()),
 })
 
 const mapStateToProps = (state) => ({

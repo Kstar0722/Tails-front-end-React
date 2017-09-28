@@ -23,15 +23,19 @@ export default class FileUpload extends React.Component {
         } = this.props
         console.log(impagePreview)
         let imagesShow = [];
-        for(let i = 0; i < impagePreview.length; i ++)
+        if(impagePreview != undefined)
+        {
+            for(let i = 0; i < impagePreview.length; i ++)
             {
                 imagesShow.push(<div className = "img-show col-sm-3"><button type="button" onClick={this.animalImageDel.bind(this, i)} className="close">X</button><img src={impagePreview[i]} className="image-preview img-responsive img-thumbnail"/></div>);
             }
+        }
+       
 		return (
             <div className="form-group">
                 <label>Images of this Animal</label>
                 <div className = "animal-img col-sm-12 row">{imagesShow}</div> 
-                <Dropzone onDrop={this.onDrop.bind(this)} className={impagePreview.length>0 ? "file-drag-drop no-dash" : "file-drag-drop"  }>
+                <Dropzone onDrop={this.onDrop.bind(this)} className={"file-drag-drop"}>
                     {
                         <div className="upload-section">
                             <img src={uploadBtnImage} className="upload-icon"/>

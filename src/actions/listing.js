@@ -4,7 +4,29 @@ import user from 'auth/user'
 import { browserHistory } from 'react-router'
 export function getListings() {
     return function(dispatch) {
-        return fetch(config.endpoints.url + config.endpoints.listings, {
+        const url = config.endpoints.url + config.endpoints.listings + '?filter[user_id]=' + user.id
+        return fetch(url, {
+            method: 'get',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + user.token
+            },
+        })
+        .then(checkHttpStatus)
+        .then(parseJSON)
+        .then(res => {
+            dispatch({ type: 'GET_LISTINGS_SUCCESS', data: res })
+        })
+        .catch(error =>{
+            dispatch({ type: 'GET_LISTINGS_FAILURE', error })
+        })
+    }
+}
+
+export function getAllListings() {
+    return function(dispatch) {
+        const url = config.endpoints.url + config.endpoints.listings
+        return fetch(url, {
             method: 'get',
             headers: {
                 'Content-Type': 'application/json',

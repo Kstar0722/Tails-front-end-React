@@ -14,6 +14,7 @@ class ModalAnimals extends React.Component {
         const { animalInfos } = this.props
     }
     selectImg(val) {
+        val.impagePreview = []
         const { animalInfos } = this.props
         this.props.selectAnimal(val, true)
         this.props.onClose()

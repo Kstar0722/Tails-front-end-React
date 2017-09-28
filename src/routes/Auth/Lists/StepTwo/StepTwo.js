@@ -38,8 +38,7 @@ class StepTwo extends React.Component {
             }
         }
     //this.props = this.props.location.state
-        console.log("lksjdflkasjdflkajslf;asfasdfasdf")
-        console.log(this.props)
+ 
     }
 
     componentWillMount() {
@@ -60,7 +59,7 @@ class StepTwo extends React.Component {
         this.setState({ animal_id: currentAnimal.id })
         this.setState({ breed: currentAnimal.breed })
         this.setState({ name: currentAnimal.name })
-        this.setState({ impagePreview: [] })
+        this.setState({ impagePreview: currentAnimal.impagePreview })
         this.getImageSize(currentAnimal.data[0].url)        
     }
     componentDidMount() {
@@ -83,6 +82,7 @@ class StepTwo extends React.Component {
     }
 
     setAnimalProperty(field, value) {
+        console.log(this.state)
         const { selectedAnimals, animal_id } = this.state
         this.setState({[field]: value.target.value})
         let currentAnimal = _.find(selectedAnimals, item => item.id == animal_id)
@@ -90,13 +90,27 @@ class StepTwo extends React.Component {
     }
 
     onDrop(files) {
+
         this.setState({ files });
+        
+        
         var impagePreview = this.state.impagePreview.slice()
-        impagePreview.push(files[0].preview)
-        this.setState({ impagePreview: impagePreview })
+
+
+        let _this = this;
+        let reader = new FileReader();
+        reader.onloadend = function() {
+            impagePreview.push(reader.result)
+            _this.setState({ impagePreview: impagePreview })
+        }
+        reader.readAsDataURL(files[0])
+        const { selectedAnimals, animal_id } = this.state
+        let currentAnimal = _.find(selectedAnimals, item => item.id == animal_id)
+        currentAnimal["impagePreview"] = impagePreview
     }
     animalImageDel(val)
     {
+        const { selectedAnimals, animal_id } = this.state
         let imageTemp = [];
         for(let i = 0 ; i < this.state.impagePreview.length; i ++)
         {
@@ -109,9 +123,11 @@ class StepTwo extends React.Component {
         this.setState({
             impagePreview: imageTemp
         })
+
+        let currentAnimal = _.find(selectedAnimals, item => item.id == animal_id)
+        currentAnimal["impagePreview"] = imageTemp
     }
     toggleModal(){
-
         this.setState({ isOpen: !this.state.isOpen });  
     }
 
@@ -122,7 +138,7 @@ class StepTwo extends React.Component {
         this.setState({ weight: val.weight })
         this.setState({ special_notes: val.special_notes })
         this.setState({ name: val.name })
-        this.setState({ impagePreview: []})
+        this.setState({ impagePreview: val.impagePreview})
         this.getImageSize(val.data[0].url)
     }
 

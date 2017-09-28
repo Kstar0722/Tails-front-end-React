@@ -97,6 +97,8 @@ export function deleteListing(id) {
 }
 
 export function createListings(value) {
+    console.log("dddddddddddddddddd")
+    console.log(value.listItems)
     return function(dispatch) {
         return fetch(config.endpoints.url + config.endpoints.listings, {
             method: 'POST',
@@ -104,17 +106,54 @@ export function createListings(value) {
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + user.token
             },
-            body: JSON.stringify(value)
+            body: JSON.stringify(value.listItems)
         })
         .then(checkHttpStatus)
         .then(parseJSON)
         .then(res => {
-            console.log(res)
-            dispatch(createListingsSuccess(res))
             browserHistory.push('/profile')
+            //dispatch( createAnimalInfo(res.id, value.animalList))
+            
         })
         .catch(error =>{
             dispatch(createListingsFailure(error))
         })
     }
+}
+export function createAnimalInfo(list_id, value)
+{
+    return function(dispatch){
+        for(let i = 0; i < value.length; i ++)
+        {
+            const animalInfoList = {
+                listing_id: list_id,
+                name: value[i].name,
+                breed: value[i].breed,
+                height: value[i].height,
+                weight: value[i].weight,
+                special_notes: value[i].special_notes
+            }
+            console.log(animalInfoList)
+            
+                return fetch(config.endpoints.url + config.endpoints.listings_animals, {
+                    method: 'post',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer ' + user.token
+                    },
+                    body: JSON/stringify(animalInfoList)
+                })
+                .then(checkHttpStatus)
+                .then(parseJSON)
+                .then(res => {
+                
+                    console.log("success")
+                    
+                })
+                .catch(error =>{
+                    dispatch(createListingsFailure(error))
+                })
+        }
+    }
+
 }

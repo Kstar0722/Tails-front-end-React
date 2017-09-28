@@ -14,9 +14,12 @@ class EditImage extends React.Component {
 
     handleNewImage = (e) => {
         let file = e.target.files[0];
+        console.log(file)
         let _this = this;
         let reader = new FileReader();
         reader.onloadend = function() {
+            console.log("dsfsdfsdfdsffffffffffffffffffffff")
+            console.log(reader.result)
             _this.setState({ image: reader.result })
             _this.props.input.onChange(reader.result)
         }
