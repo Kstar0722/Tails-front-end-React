@@ -2,17 +2,16 @@ import './ListItem.scss'
 import CowImage from 'assets/cow.jpg'
 import DogImage from 'assets/dog.jpg'
 import NumberFormat from 'react-number-format'
-const Timestamp = require('react-timestamp');
-
+import Timestamp from'react-timestamp';
+import moment from 'moment';
 class ListItem extends React.Component {
 	constructor(props) {
 		super(props)
 	}
-
+    
     render() {
-        const {title, created_at, pick_up_city, pick_up_state, delivery_city, delivery_state, budget, other_notes} = this.props
-        console.log("Dafdsafasdfasd")
-        console.log(created_at)
+        // console.log(this.props)
+        const {title, created_at, pick_up_city, pick_up_state, desired_pick_up_date, delivery_city, delivery_state, desired_delivery_date, budget, other_notes} = this.props
 		return (
             <div className="list-item">
                 <div className="top-part">
@@ -54,7 +53,7 @@ class ListItem extends React.Component {
                     <div className="budget-details bottom-detail">
                         <NumberFormat value={budget} displayType={'text'} thousandSeparator={true} prefix={'$'} />
                     </div>
-                    <div className="date-details bottom-detail">Departing 8/31 - Arriving 9/31</div>
+                    <div className="date-details bottom-detail">Departing {moment(desired_pick_up_date).month()+1} / {moment(desired_pick_up_date).date()} - Arriving {moment(desired_delivery_date).month()+1} / {moment(desired_delivery_date).date()}</div>
                 </div>
             </div>
 		)

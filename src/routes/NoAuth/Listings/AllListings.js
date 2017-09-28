@@ -22,15 +22,18 @@ class AllListings extends React.Component {
 	getAllListings() {
 		if (this.props.listings.hasOwnProperty('data')) {
 			const listings = []
-			console.log(this.props.listings)
+			console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
+			console.log(this.props)
 			this.props.listings.data.map((listing, i) => {
 				listings.push(this.renderAllListings(
 					listing.title,
 					listing.created_at,
 					listing.pick_up_city,
 					listing.pick_up_state,
+					listing.desired_pick_up_date,
 					listing.delivery_city,
 					listing.delivery_state,
+					listing.desired_delivery_date,
 					listing.budget,
 					listing.other_notes
 				))
@@ -40,15 +43,17 @@ class AllListings extends React.Component {
 		}
 	}
 
-	renderAllListings(title, created_at, pick_up_city, pick_up_state, delivery_city, delivery_state, budget, other_notes) {
+	renderAllListings(title, created_at, pick_up_city, pick_up_state, desired_pick_up_date, delivery_city, delivery_state, desired_delivery_date, budget, other_notes) {
 		return (
 			<ListItem
 				title={title}
 				created_at={created_at}
 				pick_up_city={pick_up_city}
 				pick_up_state={pick_up_state}
+				desired_pick_up_date={desired_pick_up_date}
 				delivery_city={delivery_city}
 				delivery_state={delivery_state}
+				desired_delivery_date = {desired_delivery_date}
 				budget={budget}
 				other_notes={other_notes}
 			/>

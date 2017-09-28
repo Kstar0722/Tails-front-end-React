@@ -15,36 +15,19 @@ class StepThree extends React.Component {
 
     constructor(props) {
         super(props)
-        var updateVal = this.props.location.state
-        if(updateVal == undefined)
-        {
-            this.state = {
-            pick_up_address: "",
-            pick_up_state: -1,
-            pick_up_city: "",
-            pick_up_zip: "",
-            desired_pick_up_date: moment(),
-            delivery_address: "",
-            delivery_state: -1,
-            delivery_city: "",
-            delivery_zip: "",
-            desired_delivery_date: moment(),
-            disabled: true
-            }
-        }else{
-            this.state = {
-            pick_up_address: updateVal.pick_up_address,
-            pick_up_state: updateVal.pick_up_state,
-            pick_up_city: updateVal.pick_up_city,
-            pick_up_zip: updateVal.pick_up_zip,
-            desired_pick_up_date: updateVal.desired_pick_up_date,
-            delivery_address: updateVal.delivery_address,
-            delivery_state: updateVal.delivery_state,
-            delivery_city: updateVal.delivery_city,
-            delivery_zip: updateVal.delivery_zip,
-            desired_delivery_date: updateVal.desired_pick_up_date,
-            disabled: false
-            }
+        let updateVal = this.props.location.state
+        this.state = {
+            pick_up_address: updateVal? updateVal.pick_up_address : "",
+            pick_up_state: updateVal ? updateVal.pick_up_state : -1,
+            pick_up_city: updateVal ? updateVal.pick_up_city : "",
+            pick_up_zip: updateVal ? updateVal.pick_up_zip : "",
+            desired_pick_up_date: updateVal ? moment(updateVal.desired_pick_up_date, 'YYYY-MM-DD') : moment(),
+            delivery_address: updateVal ? updateVal.delivery_address : "",
+            delivery_state: updateVal ? updateVal.delivery_state : -1,
+            delivery_city: updateVal ? updateVal.delivery_city : "",
+            delivery_zip: updateVal ? updateVal.delivery_zip : "",
+            desired_delivery_date: updateVal ? moment(updateVal.desired_delivery_date, 'YYYY-MM-DD') : moment(),
+            disabled: updateVal ? false : true
         }
 
         this.onPickChange = (pick_up_address) => {

@@ -40,17 +40,18 @@ class StepFour extends React.Component {
     }
     prevStep()
     {
+
         let sendVal = {
             pick_up_address: this.props.location.state.pick_up_address,
             pick_up_state: this.props.location.state.pick_up_state,
             pick_up_city: this.props.location.state.pick_up_city,
             pick_up_zip: this.props.location.state.pick_up_zip,
-           // desired_pick_up_date: this.props.location.state.desired_pick_up_date,
+            desired_pick_up_date: this.props.location.state.desired_pick_up_date,
             delivery_address:this.props.location.state.delivery_address,
             delivery_state: this.props.location.state.delivery_state,
             delivery_city: this.props.location.state.delivery_city,
             delivery_zip: this.props.location.state.delivery_zip,
-           // desired_delivery_date: this.props.location.state.desired_delivery_date,    
+            desired_delivery_date: this.props.location.state.desired_delivery_date,    
             id: this.props.location.state.id,
             user_id:this.props.location.state.user_id,
             budget: this.state.budget,
@@ -58,6 +59,7 @@ class StepFour extends React.Component {
             other_notes: this.state.summary
             
         }
+        console.log(sendVal)
         browserHistory.push({
 			pathname: '/step-three',
 			state: sendVal
