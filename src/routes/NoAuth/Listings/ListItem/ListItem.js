@@ -11,7 +11,7 @@ class ListItem extends React.Component {
     
     render() {
         // console.log(this.props)
-        const {title, created_at, pick_up_city, pick_up_state, desired_pick_up_date, delivery_city, delivery_state, desired_delivery_date, budget, other_notes} = this.props
+        const {title, created_at, pick_up_city, pick_up_state, desired_pick_up_date, delivery_city, delivery_state, desired_delivery_date, budget, other_notes, bids_count} = this.props
 		return (
             <div className="list-item">
                 <div className="top-part">
@@ -30,13 +30,13 @@ class ListItem extends React.Component {
                                 <div className="age-of-post pull-right"><span className="age">
                                         <Timestamp time={created_at} precision={1} />
                                     </span></div>
-                                <div className="bid-count pull-right"><span className="count">13</span> bids</div>
                             </div>
                         </div>
 
                         <div className="row">
                             <div className="col-md-12 top-destination">
                                 <span className="start">{pick_up_city}, {pick_up_state}</span> <i className="btl bt-long-arrow-right"></i> <span className="finish">{delivery_city}, {delivery_state}</span>
+                                <div className="bid-count pull-right"><span className="count">{bids_count}</span> bids</div>
                             </div>
                         </div>
 

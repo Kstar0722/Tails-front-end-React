@@ -35,7 +35,8 @@ class AllListings extends React.Component {
 					listing.delivery_state,
 					listing.desired_delivery_date,
 					listing.budget,
-					listing.other_notes
+					listing.other_notes,
+					listing.bids_count
 				))
 			})
 
@@ -43,7 +44,7 @@ class AllListings extends React.Component {
 		}
 	}
 
-	renderAllListings(title, created_at, pick_up_city, pick_up_state, desired_pick_up_date, delivery_city, delivery_state, desired_delivery_date, budget, other_notes) {
+	renderAllListings(title, created_at, pick_up_city, pick_up_state, desired_pick_up_date, delivery_city, delivery_state, desired_delivery_date, budget, other_notes, bids_count) {
 		return (
 			<ListItem
 				title={title}
@@ -56,6 +57,7 @@ class AllListings extends React.Component {
 				desired_delivery_date = {desired_delivery_date}
 				budget={budget}
 				other_notes={other_notes}
+				bids_count={bids_count}
 			/>
 		)
 	}
