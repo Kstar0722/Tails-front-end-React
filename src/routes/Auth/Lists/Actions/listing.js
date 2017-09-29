@@ -97,8 +97,6 @@ export function deleteListing(id) {
 }
 
 export function createListings(value) {
-    // console.log("dddddddddddddddddd")
-    // console.log(value.listItems)
     return function(dispatch) {
         return fetch(config.endpoints.url + config.endpoints.listings, {
             method: 'POST',

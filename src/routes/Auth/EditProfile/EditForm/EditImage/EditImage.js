@@ -13,13 +13,13 @@ class EditImage extends React.Component {
     }
 
     handleNewImage = (e) => {
+        this.setState({
+            scale: 1
+        })
         let file = e.target.files[0];
-        console.log(file)
         let _this = this;
         let reader = new FileReader();
         reader.onloadend = function() {
-            console.log("dsfsdfsdfdsffffffffffffffffffffff")
-            console.log(reader.result)
             _this.setState({ image: reader.result })
             _this.props.input.onChange(reader.result)
         }
@@ -28,17 +28,12 @@ class EditImage extends React.Component {
 
 	handleScale = (e) => {
         const scale = parseFloat(e.target.value)
+        this.props.action(scale)
         this.setState({ scale })
         this.onSave();
     }
 
     onSave(){
-        let input = this.props.input;
-        if (this.editor) {
-            console.log('this.editor',this.editor)
-            const canvasScaled = this.editor.getImageScaledToCanvas()
-            input.onChange(canvasScaled.toDataURL())
-        }
     }
 
     onLoad(info){
@@ -51,15 +46,24 @@ class EditImage extends React.Component {
                 this.setState({image: nextProps.image})
             }
         }
+        if(nextProps.scale != this.props.scale){
+            if (nextProps.scale){
+                this.setState({scale: nextProps.scale})
+            }
+        }
     }
 
     componentWillMount() {
-        console.log("----------------------------------")
-        console.log(this.props)
         if(this.props.image)
             this.setState({
                 image: this.props.image
+        })
+        if(this.props.scale)
+        {
+            this.setState({
+                scale: this.props.scale
             })
+        }
 	}
 
     setEditorRef = (editor) => this.editor = editor
@@ -114,7 +118,7 @@ class EditImage extends React.Component {
                                             min='1'
                                             max='2'
                                             step='0.01'
-                                            defaultValue='1'
+                                            value={this.state.scale}
                                         />
                                         <p>Zoom Image</p>
                                     </div>

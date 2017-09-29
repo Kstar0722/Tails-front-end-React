@@ -11,6 +11,7 @@ import {login, logout} from '../../../actions/auth'
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Popover, PopoverTitle, PopoverContent  } from 'reactstrap'
 import user from 'auth/user'
 import { browserHistory } from 'react-router'
+import AvatarEditor from 'react-avatar-editor'
 
 const fields = ['email', 'password']
 
@@ -21,16 +22,14 @@ class Login extends Component {
 		this.state = {
 			modal: false,
 			auth: user.authorized,
-			popoverOpen: false
+			popoverOpen: false,
+			profileImage: "",
+			scale:1
 		}
 
     	this.toggle = this.toggle.bind(this)
 		this.logout = this.logout.bind(this)
 	}
-
-	componentWillMount() {
-
-    }
 
     getStyles() {
 		return {
@@ -96,6 +95,7 @@ class Login extends Component {
 		const styles = this.getStyles()
 		const userid = localStorage.getItem("userId");
 		const userimg = localStorage.getItem("user_img");
+		const zoom_amount = localStorage.getItem("zoom_amount")
 		const first_name = localStorage.getItem("first_name");
 		const last_name = localStorage.getItem("last_name");
 		if(userid == undefined){
@@ -144,20 +144,31 @@ class Login extends Component {
 			);
 		} else {
 			return <li>
-				<img src={this.props.profile.avatar ? this.props.profile.avatar : userimg }  width="60" className="rounded-circle"/>
-				<Link to='/profile'>{this.props.profile.first_name ? this.props.profile.first_name : first_name} {this.props.profile.last_name ? this.props.profile.last_name : last_name}</Link>
-				<div className="dropmenu" >
-					<a id="Popover1" onClick={this.toggle.bind(this, 'popoverOpen')}><img src = {arrowDown}></img></a>
-					<Popover placement="bottom" isOpen={this.state.popoverOpen} target="Popover1" toggle={this.toggle.bind(this, 'popoverOpen')}>
-						<PopoverContent>
-							<li onClick={this.goProfile.bind(this)}>
-								<img src={this.props.profile.avatar ? this.props.profile.avatar : userimg }  width="60" className="rounded-circle"/>
-								<a>{this.props.profile.first_name ? this.props.profile.first_name : first_name} {this.props.profile.last_name ? this.props.profile.last_name : last_name}</a>
-							</li>
-							<li onClick={this.logout.bind(this)}><img src={LogOutImg}/><a>Log Out</a></li>
-						</PopoverContent>
-					</Popover>
+				<div className="avatar-wrap d-flex flex-row flex-wrap justify-content-between align-items-center">
+					<AvatarEditor
+						ref={this.setEditorRef}
+						image={this.props.profile.avatar ? this.props.profile.avatar : userimg}
+						width={60}
+						height={60}
+						border={0}
+						color={[255, 255, 255, 0.6]} // RGBA
+						scale={this.props.profile.zoom_amount? this.props.profile.zoom_amount : zoom_amount}	
+					/>
+				
+					<Link to='/profile'>{this.props.profile.first_name ? this.props.profile.first_name : first_name} {this.props.profile.last_name ? this.props.profile.last_name : last_name}</Link>
+					<div className="dropmenu" >
+						<a id="Popover1" onClick={this.toggle.bind(this, 'popoverOpen')}><img src = {arrowDown}></img></a>
+						<Popover placement="bottom" isOpen={this.state.popoverOpen} target="Popover1" toggle={this.toggle.bind(this, 'popoverOpen')}>
+							<PopoverContent>
+								
+								<li onClick={this.logout.bind(this)}><img src={LogOutImg}/><a>Log Out</a></li>
+							</PopoverContent>
+						</Popover>
+					</div>
 				</div>
+				{/* <img src={this.props.profile.avatar ? this.props.profile.avatar : userimg }  width="60" className="rounded-circle"/> */}
+				
+				
 			</li>
 		}
   	}

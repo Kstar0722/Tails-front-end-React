@@ -12,15 +12,16 @@ class Profile extends React.Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			cover_photo: StockBanner
+			cover_photo: StockBanner,
+			scale: 1
 		}
 		if(this.props.profile.avatar != undefined)
 		{
 			localStorage.setItem("user_img", this.props.profile.avatar)
 			localStorage.setItem("first_name", this.props.profile.first_name)
 			localStorage.setItem("last_name", this.props.profile.last_name)
+			localStorage.setItem("zoom_amount", this.props.profile.zoom_amount)
 		}
-
 	}
 	toEdit(){
 		browserHistory.push('/profile/edit')
@@ -30,9 +31,22 @@ class Profile extends React.Component {
         if(this.props.profile.cover_photo)
             this.setState({
                 cover_photo: this.props.profile.cover_photo
-			})
+		})
 		
 	}
+	componentWillReceiveProps(nextProps){
+        if(nextProps.profile.cover_photo != this.props.profile.cover_photo){
+            if (nextProps.profile.cover_photo){
+                this.setState({cover_photo: nextProps.profile.cover_photo})
+            }
+		}
+		if(nextProps.profile.scale != this.props.profile.scale){
+            if (nextProps.profile.scale){
+                this.setState({scale: nextProps.profile.scale})
+            }
+        }
+    }
+
 	render() {
 		const { listings } = this.props		
 		if(listings.loaded) {

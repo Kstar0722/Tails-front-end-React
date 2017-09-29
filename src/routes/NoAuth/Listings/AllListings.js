@@ -22,8 +22,7 @@ class AllListings extends React.Component {
 	getAllListings() {
 		if (this.props.listings.hasOwnProperty('data')) {
 			const listings = []
-			console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
-			console.log(this.props)
+			
 			this.props.listings.data.map((listing, i) => {
 				listings.push(this.renderAllListings(
 					listing.title,

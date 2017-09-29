@@ -4,40 +4,41 @@ import DefaultAvatar from 'assets/default_avatar.png'
 
 class EditAvatar extends React.Component {
 	constructor(props) {
-        super(props)
+		super(props)
           this.state = {
                 image: DefaultAvatar,
                 scale: 1,
-                originalImage: DefaultAvatar
-            }
+				originalImage: DefaultAvatar,
+				newImage: ""
+			}
+		
         this.onLoad = this.onLoad.bind(this);
     }
 
     handleNewImage = (e) => {
-        this.setState({ image: e.target.files[0] })
-        this.setState({ originalImage: e.target.files[0] })
-		const file = e.target.files[0]
-        let reader = new FileReader()
-        reader.onload = function(base64) {
-            localStorage["file"] = base64
+		this.setState({
+			scale:1
+		})
+		let file = e.target.files[0];
+        let _this = this;
+        let reader = new FileReader();
+        reader.onloadend = function() {
+			_this.setState({ image: reader.result })
+			_this.setState({ originalImage: reader.result })
+            _this.props.input.onChange(reader.result)
         }
         reader.readAsDataURL(file)
-        // this.onSave();
 	}
 
 	handleScale = (e) => {
-        const scale = parseFloat(e.target.value)
+		const scale = parseFloat(e.target.value)
+		this.props.action(scale)
         this.setState({ scale })
         this.onSave();
     }
 
     onSave(){
-        let input = this.props.input;
-        if (this.editor) {
-            console.log('this.editor',this.editor)
-            const canvasScaled = this.editor.getImageScaledToCanvas()
-            input.onChange(canvasScaled.toDataURL())
-        }
+
     }
 
     onLoad(info){
@@ -49,16 +50,25 @@ class EditAvatar extends React.Component {
             if (nextProps.image){
                 this.setState({image: nextProps.image})
             }
+		}
+		if(nextProps.scale != this.props.scale){
+            if (nextProps.scale){
+                this.setState({scale: nextProps.scale})
+            }
         }
     }
 
     componentWillMount() {
-        if(this.props.image)
+		
+		if(this.props.image)
             this.setState({ image: this.props.image })
         if(this.props.originalImage) {
             this.setState({ originalImage: this.props.originalImage })
-        }
-       // this.getPhoto()
+		}
+		if(this.props.scale)
+		{
+			this.setState({scale: this.props.scale})
+		}
 	}
 
     setEditorRef = (editor) => this.editor = editor
@@ -69,9 +79,8 @@ class EditAvatar extends React.Component {
         const fileFormat = base64Parts[0].split(";")[1]
         const fileContent = base64Parts[1]
         const file = new File([fileContent], "file name here", {type: fileFormat})
-    }
+	}
 	render() {
-        
 		return (
 			<div className="col-12">
 				<div className="row image-edit">
@@ -115,7 +124,7 @@ class EditAvatar extends React.Component {
 								min='1'
 								max='2'
 								step='0.01'
-								defaultValue='1'
+								value={this.state.scale}
 							/>
 							<p>Zoom Image</p>
 						</div>

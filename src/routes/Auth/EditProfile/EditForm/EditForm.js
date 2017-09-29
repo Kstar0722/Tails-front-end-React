@@ -22,7 +22,7 @@ const validate = values => {
 		if(values.password_reset !== values.confirm_password)
 			errors.confirm_password = 'Password do not match';
 	}
-	console.log('error',errors)
+	//console.log('error',errors)
 	return errors;
 };
 
@@ -30,15 +30,22 @@ class EditForm extends React.Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			saveWaitFlag : false
+			saveWaitFlag : false,
+			zoom_amount: 1,
+			cover_zoom_amount: 1
 		};
+		this.profileImageScale = this.profileImageScale.bind(this)
+		this.coverphotoScale = this.coverphotoScale.bind(this)
 	}
 
 	submit(values){
-		
+	
 		this.setState({
 			saveWaitFlag: true
 		})
+	
+		values.zoom_amount = this.state.zoom_amount
+		values.cover_zoom_amount = this.state.cover_zoom_amount
 		let self = this;
 		var flag = this.props.updateProfile(values).then(function(){
 			self.setState({
@@ -48,11 +55,28 @@ class EditForm extends React.Component {
 	
 			
 	}
-
+	
+	profileImageScale(scale) {
+		
+		if(scale)
+		{
+			this.setState({
+				zoom_amount:scale
+			})
+		}
+	}
+	coverphotoScale(scale)
+	{
+		if(scale)
+		{
+			this.setState({
+				cover_zoom_amount:scale
+			})
+		}
+	}
 	render() {
 		const {handleSubmit, submitting, profileUpdate} = this.props
-		console.log(this.state.saveWaitFlag)
-		console.log("profileUpdate==========dddddddd==>", this.props)
+	//	console.log("profileUpdate==========dddddddd==>", this.props)
 		localStorage.setItem("user_img", this.props.profileUpdate.avatar)
 		localStorage.setItem("first_name", this.props.profileUpdate.first_name)
 		localStorage.setItem("last_name", this.props.profileUpdate.last_name)
@@ -60,17 +84,20 @@ class EditForm extends React.Component {
 			this.state.saveWaitFlag ? <ProWheel/> :
 			<form onSubmit={handleSubmit(this.submit.bind(this))} className="form-profile">
 				<div className="row">
-					
 					<div className="col justify-content-center align-self-center">
 						<div className="row">
 						<Field 
+							action={this.profileImageScale}
 							name="avatar_new"
 							image={profileUpdate.avatar}
+							scale={profileUpdate.zoom_amount}
 							originalImage={profileUpdate.avatar_original}
 							component={EditAvatar}
 							label={"Profile Image"}/>       
 						<Field 
+							action={this.coverphotoScale}
 							name="cover_photo_new"
+							scale={profileUpdate.cover_zoom_amount}
 							image={profileUpdate.cover_photo}
 							component={EditImage}
 							label={"Cover Photo"}/> 
