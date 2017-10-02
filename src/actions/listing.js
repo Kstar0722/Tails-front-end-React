@@ -36,6 +36,7 @@ export function getAllListings() {
         .then(checkHttpStatus)
         .then(parseJSON)
         .then(res => {
+            console.log(res)
             dispatch({ type: 'GET_LISTINGS_SUCCESS', data: res })
         })
         .catch(error =>{

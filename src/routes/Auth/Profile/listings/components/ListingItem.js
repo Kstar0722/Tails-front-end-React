@@ -1,5 +1,5 @@
 import './ListingItem.scss'
-
+import NumberFormat from 'react-number-format'
 class ListingItem extends React.Component {
 	constructor(props) {
 		super(props)
@@ -9,7 +9,7 @@ class ListingItem extends React.Component {
 		return (
 			<tr key={this.props.id}>
 				<td>{this.props.title}</td>
-				<td className="bold">{this.props.budget}</td>
+				<td className="bold"><NumberFormat value={this.props.budget} displayType={'text'} thousandSeparator={true} prefix={'$'} /></td>
 				<td className="bold">{this.props.dateCreated}</td>
 				<td className="actions">
 					

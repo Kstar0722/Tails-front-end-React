@@ -109,9 +109,7 @@ export function createListings(value) {
         .then(checkHttpStatus)
         .then(parseJSON)
         .then(res => {
-            browserHistory.push('/profile')
-            //dispatch( createAnimalInfo(res.id, value.animalList))
-            
+            dispatch(createAnimalInfo(res.id, value.animalList))
         })
         .catch(error =>{
             dispatch(createListingsFailure(error))
@@ -120,38 +118,30 @@ export function createListings(value) {
 }
 export function createAnimalInfo(list_id, value)
 {
-    return function(dispatch){
-        for(let i = 0; i < value.length; i ++)
-        {
-            const animalInfoList = {
-                listing_id: list_id,
-                name: value[i].name,
-                breed: value[i].breed,
-                height: value[i].height,
-                weight: value[i].weight,
-                special_notes: value[i].special_notes
-            }
-            console.log(animalInfoList)
-            
-                return fetch(config.endpoints.url + config.endpoints.listings_animals, {
-                    method: 'post',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': 'Bearer ' + user.token
-                    },
-                    body: JSON/stringify(animalInfoList)
-                })
-                .then(checkHttpStatus)
-                .then(parseJSON)
-                .then(res => {
-                
-                    console.log("success")
-                    
-                })
-                .catch(error =>{
-                    dispatch(createListingsFailure(error))
-                })
-        }
+    const animalInfoList = []
+    for(let i = 0; i < value.length; i ++)
+    {
+        value[i].listing_id = list_id
     }
-
+    console.log(value)
+    return function(dispatch) {
+        return fetch(config.endpoints.url + config.endpoints.listings_animals +"/bulk", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + user.token
+            },
+            body: JSON.stringify(value)
+        })
+        .then(checkHttpStatus)
+        .then(parseJSON)
+        .then(res => {
+            console.log(res)
+            browserHistory.push('/profile')
+            // dispatch(createAnimalInfo(res.id, value.animalList))
+        })
+        .catch(error =>{
+            dispatch(createListingsFailure(error))
+        })
+    }
 }

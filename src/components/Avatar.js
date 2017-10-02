@@ -22,6 +22,7 @@ class Avatar extends React.Component {
 							image={this.props.profile.avatar ? this.props.profile.avatar : "https://placeholdit.co//i/175x175?"}
 							width={175}
 							height={175}
+							position={{x:0.5,y:0.5}}
 							border={0}
 							color={[255, 255, 255, 0.6]} // RGBA
 							scale={this.props.profile.zoom_amount}	

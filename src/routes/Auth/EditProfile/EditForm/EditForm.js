@@ -129,7 +129,7 @@ class EditForm extends React.Component {
 					</div>
 				</div>
 				<div className="row justify-content-center">	
-					<button type="submit" className="btn btn-primary save-profile" disabled={submitting}>Save</button>
+					<button type="submit" className="btn save-profile block-btn blue" disabled={submitting}>Save</button>
 				</div>
 			</form>
 		)

@@ -9,7 +9,9 @@ class EditAvatar extends React.Component {
                 image: DefaultAvatar,
                 scale: 1,
 				originalImage: DefaultAvatar,
-				newImage: ""
+				newImage: "",
+				xPosition: 0.5,
+				yPosition: 0.5
 			}
 		
         this.onLoad = this.onLoad.bind(this);
@@ -42,6 +44,11 @@ class EditAvatar extends React.Component {
     }
 
     onLoad(info){
+		console.log(info)
+		this.setState({
+			xPosition: info.x,
+			yPosition: info.y
+		})
         this.onSave()
     }
 
@@ -98,9 +105,9 @@ class EditAvatar extends React.Component {
 							rotate={0}
 							crossOrigin="anonymous"
 							borderRadius={100}
-							disableDrop={true}
 							onImageReady={this.onLoad}
 							onPositionChange={this.onLoad}
+							position={{ x: this.state.xPosition, y: this.state.yPosition }}
 							onSave={this.onLoad}
 						/>
 						</div>

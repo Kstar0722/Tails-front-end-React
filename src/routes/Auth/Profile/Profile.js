@@ -26,6 +26,9 @@ class Profile extends React.Component {
 	toEdit(){
 		browserHistory.push('/profile/edit')
 	}
+	toStepOne(){
+		browserHistory.push('/step-one')
+	}
 	componentWillMount() {
 		this.props.getListings()
         if(this.props.profile.cover_photo)
@@ -71,12 +74,12 @@ class Profile extends React.Component {
 											<ListingsContainer />
 										</div>
 										<div className="row not-listings justify-content-center align-self-center">
-											<Link className="btn btn-create-listing" to="/step-one">Create Listing</Link>
+											<button onClick={this.toStepOne} className="btn btn-create-listing block-btn blue">Create Listing</button>	
 										</div>
 									</div>									
 									: <div className="row not-listings justify-content-center align-self-center">
 										<h1>You have no listings yet...</h1>
-										<Link className="btn btn-create-listing" to="/step-one">Create Listing</Link>
+										<button onClick={this.toStepOne} className="btn btn-create-listing block-btn blue">Create Listing</button>
 									</div>
 								}													
 							</div>

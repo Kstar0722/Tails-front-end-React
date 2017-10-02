@@ -151,6 +151,8 @@ class Login extends Component {
 						width={60}
 						height={60}
 						border={0}
+						position={{x:0.5,y:0.5}}
+						disableDrop={true}
 						color={[255, 255, 255, 0.6]} // RGBA
 						scale={this.props.profile.zoom_amount? this.props.profile.zoom_amount : zoom_amount}	
 					/>

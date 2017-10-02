@@ -14,6 +14,8 @@
         margin-bottom: 60px;
         padding: 30px;
         font-family: 'PT Sans';
+        box-shadow: 0 1px 5px rgba(0,0,0,.08);
+        border-radius: 8px;
         .comment {
             font-size: 30px;
             color: #333;
@@ -125,6 +127,7 @@
     .step-two {
         padding: 30px;
         font-family: 'PT Sans';
+        
         .comment {
             color: #092b4f;
             font-size: 30px;
@@ -134,6 +137,8 @@
             background: #ffffff;
             border-radius: 5px;
             display: flex;
+            box-shadow: 0 1px 5px rgba(0,0,0,.08);
+            border-radius: 8px;
             .left-side-bar {
                 padding: 0;
                 ul {
@@ -195,7 +200,7 @@
             }
             .main-body {
                 padding: 50px;
-                background: linear-gradient(to right, #f4f4f4 1%, #f5f5f5 2%, #f6f6f6 3%, #f7f7f7 4%, #f8f8f8 5%, #f9f9f9 6%, #fcfcfc 7%, #ffffff);
+                // background: linear-gradient(to right, #f4f4f4 1%, #f5f5f5 2%, #f6f6f6 3%, #f7f7f7 4%, #f8f8f8 5%, #f9f9f9 6%, #fcfcfc 7%, #ffffff);
                 color: #b1babf;
                 label {
                     font-size: 20px;
@@ -275,6 +280,8 @@
         margin-bottom: 60px;
         padding: 30px;
         font-family: 'PT Sans';
+        box-shadow: 0 1px 5px rgba(0,0,0,.08);
+        border-radius: 8px;
         .comment {
             font-size: 30px;
             text-align: center;
@@ -336,6 +343,8 @@
         margin-top: 60px;
         margin-bottom: 60px;
         padding: 90px 70px 90px 70px;
+        box-shadow: 0 1px 5px rgba(0,0,0,.08);
+        border-radius: 8px;
         font-family: 'PT Sans';
         .comment {
             font-size: 30px;

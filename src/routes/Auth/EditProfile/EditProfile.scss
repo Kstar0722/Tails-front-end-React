@@ -4,10 +4,15 @@ h1.profile-setting{
 }
 .profile-edit{
     background-color: white;
+    box-shadow: 0 1px 5px rgba(0,0,0,.08);
+    border-radius: 8px;
     margin-bottom: 60px;
     .active.nav-link{
       border-color: #fff #fff #ddd;
       border-radius: 0;
+    }
+    .nav{
+      padding-left: 5px;
     }
 
     .nav-link {
