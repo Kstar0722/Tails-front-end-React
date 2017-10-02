@@ -1,10 +1,43 @@
 import './ListingSidebar.scss'
+import DatePicker from 'react-datepicker';
+import moment from 'moment';
+import 'assets/DatePicker.scss'
 
 class ListingSidebar extends React.Component {
 	constructor(props) {
-		super(props)
+        super(props)
+        this.state = ({
+            from_drop_off_date: moment(),
+            to_drop_off_date: moment(),
+            from_pick_up_date: moment(),
+            to_pick_up_date: moment(),
+        })
 	}
+    onChangeFromDrop(date)
+    {
+        this.setState({
+            from_drop_off_date:date
+        })
+    }
+    onChangeToDrop(date)
+    {
+        this.setState({
+            to_drop_off_date:date
+        })
+    }
 
+    onChangeFromPick(date)
+    {
+        this.setState({
+            from_pick_up_date:date
+        })
+    }
+    onChangeToPick(date)
+    {
+        this.setState({
+            to_pick_up_date:date
+        })
+    }
 	render() {
 		return (
             <div id="filters" className="">
@@ -160,50 +193,40 @@ class ListingSidebar extends React.Component {
                         <label className="filter-label">Pickup Dates Range</label>
 
                         <div className="input-group">
-                            <label className="select">
-                                <select>
-                                    <option value="Any">Any</option>
-                                    <option value="7 / 10 / 2017">7 / 10 / 2017</option>
-                                    <option value="8 / 10 / 2017">8 / 10 / 2017</option>
-                                    <option value="9 / 10 / 2017">9 / 10 / 2017</option>
-                                    <option value="10 / 10 / 2017">10 / 10 / 2017</option>
-                                </select>
-                            </label>
-                            <em>to</em>
-                            <label className="select">
-                                <select>
-                                    <option value="Any">Any</option>
-                                    <option value="7 / 10 / 2017">7 / 10 / 2017</option>
-                                    <option value="8 / 10 / 2017">8 / 10 / 2017</option>
-                                    <option value="9 / 10 / 2017">9 / 10 / 2017</option>
-                                    <option value="10 / 10 / 2017">10 / 10 / 2017</option>
-                                </select>
-                            </label>
+                                <div className = "col-lg-5 datepicker">
+                                    <DatePicker
+                                        selected={this.state.from_pick_up_date}
+                                        onChange={this.onChangeFromPick.bind(this)}
+                                    />
+                                </div>
+                               
+                                <em>to</em>
+                                <div className = "col-lg-5 datepicker">
+                                <DatePicker
+                                    selected={this.state.to_pick_up_date}
+                                    onChange={this.onChangeToPick.bind(this)}
+                                />
+                                </div>
                         </div>
                     </div>
                     <div className="filter">
                         <label className="filter-label">Dropoff Dates Range</label>
 
                         <div className="input-group">
-                            <label className="select">
-                                <select>
-                                    <option value="Any">Any</option>
-                                    <option value="7 / 10 / 2017">7 / 10 / 2017</option>
-                                    <option value="8 / 10 / 2017">8 / 10 / 2017</option>
-                                    <option value="9 / 10 / 2017">9 / 10 / 2017</option>
-                                    <option value="10 / 10 / 2017">10 / 10 / 2017</option>
-                                </select>
-                            </label>
-                            <em>to</em>
-                            <label className="select">
-                                <select>
-                                    <option value="Any">Any</option>
-                                    <option value="7 / 10 / 2017">7 / 10 / 2017</option>
-                                    <option value="8 / 10 / 2017">8 / 10 / 2017</option>
-                                    <option value="9 / 10 / 2017">9 / 10 / 2017</option>
-                                    <option value="10 / 10 / 2017">10 / 10 / 2017</option>
-                                </select>
-                            </label>
+                                <div className = "col-lg-5 datepicker">
+                                    <DatePicker
+                                        selected={this.state.from_drop_off_date}
+                                        onChange={this.onChangeFromDrop.bind(this)}
+                                    />
+                                </div>
+                               
+                                <em>to</em>
+                                <div className = "col-lg-5 datepicker">
+                                <DatePicker
+                                    selected={this.state.to_drop_off_date}
+                                    onChange={this.onChangeToDrop.bind(this)}
+                                />
+                                </div>
                         </div>
                     </div>
                 </div>

@@ -281,12 +281,14 @@ class StepThree extends React.Component {
                             <div className="form-group">
                                 <div className="row">
                                     <div className="col-sm-6 col-12">
+                                        <label>Pick up Date</label>
                                         <DatePicker
                                             selected={this.state.desired_pick_up_date}
                                             onChange={this.onChangePickUpDate.bind(this)}
                                         />
                                     </div>
                                     <div className="col-sm-6 col-12">
+                                        <label>Drop off Date</label>
                                         <DatePicker
                                             selected={this.state.desired_delivery_date}
                                             onChange={this.onChangeDeliveryDate.bind(this)}

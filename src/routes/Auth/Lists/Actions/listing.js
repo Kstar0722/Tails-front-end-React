@@ -109,6 +109,7 @@ export function createListings(value) {
         .then(checkHttpStatus)
         .then(parseJSON)
         .then(res => {
+            //dispatch(createListingsSuccess(res))
             dispatch(createAnimalInfo(res.id, value.animalList))
         })
         .catch(error =>{

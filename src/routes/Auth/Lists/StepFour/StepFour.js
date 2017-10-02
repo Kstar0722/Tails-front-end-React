@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import StepHistory from '../StepHistory'
 import NextStep from '../NextStep'
-import { createListings, updateListings } from '../Actions/listing'
+import { createListings, createAnimalInfo, updateListings } from '../Actions/listing'
 import '../lists.scss'
 import { browserHistory } from 'react-router'
 class StepFour extends React.Component {
@@ -118,7 +118,8 @@ class StepFour extends React.Component {
         }
         if(this.props.location.state.id == "")
         {
-            let ddd = this.props.createListings(saveVal)
+            this.props.createListings(saveVal)
+            // this.props.createAnimalInfo("13", animalList)
             
         }else{
             var id = this.props.location.state.id
@@ -204,7 +205,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     createListings: (value) => dispatch(createListings(value)),
-    updateListings: (id, value) => dispatch(updateListings(id ,value))
+    updateListings: (id, value) => dispatch(updateListings(id ,value)),
+    createAnimalInfo: (id, value) => dispatch(createAnimalInfo(id ,value)),
 })
   
 export default connect(mapStateToProps, mapDispatchToProps)(StepFour)
