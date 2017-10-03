@@ -6,13 +6,24 @@ import Timestamp from'react-timestamp';
 import moment from 'moment';
 class ListItem extends React.Component {
 	constructor(props) {
-		super(props)
-	}
-    
+        super(props)
+        let noteString = this.props.other_notes
+        this.state={
+            notesFlag: noteString.length >= 271 ? true : false,
+            sortNote: noteString.length >= 271 ? noteString.substr(0, 271) : ""
+        }
+    }
+    showMoreNote()
+    {
+        this.setState({
+            notesFlag: false
+        })
+    }
     render() {
         // console.log(this.props)
         const {title, created_at, pick_up_city, pick_up_state, desired_pick_up_date, delivery_city, delivery_state, desired_delivery_date, budget, other_notes, bids_count} = this.props
-		return (
+        const {notesFlag, sortNote} = this.state
+        return (
             <div className="list-item">
                 <div className="top-part">
                     <div className="image-holder text-center">
@@ -42,7 +53,10 @@ class ListItem extends React.Component {
 
                         <div className="row">
                             <div className="col-md-12 listing-excerpt">
-                                <p>{other_notes}</p>
+                                {this.state.notesFlag ? 
+                                    <p>{sortNote}... <a className="showMoreText" onClick={this.showMoreNote.bind(this)}>[+ more]</a></p>
+                                    :<p>{other_notes}</p> }
+                                
                             </div>
                         </div>
                     </div>

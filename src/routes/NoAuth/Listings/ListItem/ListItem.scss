@@ -87,11 +87,20 @@
 
             .listing-excerpt {
                 p {
+                    word-wrap: break-word;
                     opacity: 0.8;
                     color: #636a71;
                     font-size: 16px;
                     line-height: 1.25;
                     margin: 0px;
+                }
+                a{
+                    cursor: pointer;
+                    font-weight: bold;
+
+                    &:hover{
+                        color: #19b9df;
+                    }
                 }
             }
         }
