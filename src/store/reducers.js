@@ -1,21 +1,24 @@
 import { combineReducers } from 'redux'
+import { reducer as formReducer } from 'redux-form'
+import { reducer as notifications } from 'react-notification-system-redux'
 import locationReducer from './location'
-import listinghReducer from './listing'
+import listingGetReducer from './listing'
 import authReducer from './auth'
 import profileReducer from './profile'
-import bidReducer from './bid'
-import { reducer as formReducer } from 'redux-form'
-import {reducer as notifications} from 'react-notification-system-redux'
-
+import bidGetReducer from './bid'
+import animalsReducer from './animals'
+import animalShipReducer from './animalShip'
 export const makeRootReducer = (asyncReducers) => {
   return combineReducers({
     form: formReducer,
     notifications,
     location: locationReducer,
     auth: authReducer,
-    listing: listinghReducer,
+    listing: listingGetReducer,
     profile: profileReducer,
-    bid: bidReducer,
+    bid: bidGetReducer,
+    animalsReducer,
+    animalShipReducer,
     ...asyncReducers
   })
 }

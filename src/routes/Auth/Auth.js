@@ -18,14 +18,10 @@ class Auth extends React.Component {
 	// Functions to check authentication - Set to false right now, 
 	// to test if the container works as planned
 	getAuthToken() {
-		// if (!this.props.profile.data.id)
-		// 	this.props.getProfile(user.id)
-
 		if(user.authorized){
 			if(parseInt(user.id) != parseInt(this.props.profile.data.id)){
 				this.props.getProfile(user.id)
 			}
-			// this.props.dispatch({type: 'LOGIN_SUCCESS', action: {userId: user.id}})
 			return true;
 		} else {
 			return false;

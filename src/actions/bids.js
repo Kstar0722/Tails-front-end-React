@@ -3,10 +3,9 @@ import { checkHttpStatus, parseJSON } from '../http.js'
 import user from 'auth/user'
 
 export function getBids() {
-    let bids = [];
-    let listing_ids = [];
     return function(dispatch) {
-        return fetch(config.endpoints.url + config.endpoints.bids+ '?include=listing', {
+        const url = config.endpoints.url + config.endpoints.bids + '?include=listing' + '?filter[user_id]=' + user.id
+        return fetch(url, {
             method: 'get',
             headers: {
                 'Content-Type': 'application/json',
@@ -16,25 +15,28 @@ export function getBids() {
         .then(checkHttpStatus)
         .then(parseJSON)
         .then(res => {
-            bids = res;
-            return fetch(config.endpoints.url + config.endpoints.listings, {
-                method: 'get',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer ' + user.token
-                },
-            })
-        }).then(checkHttpStatus)
+            dispatch({ type: 'GET_BIDS', bids: res })          
+        })
+        .catch(error =>{
+            dispatch({ type: 'ERROR_BIDS', error })
+        })
+    }
+}
+
+export function getAllBids() {
+    return function(dispatch) {
+        const url = config.endpoints.url + config.endpoints.bids + '?include=listing'
+        return fetch(url, {
+            method: 'get',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + user.token
+            },
+        })
+        .then(checkHttpStatus)
         .then(parseJSON)
         .then(res => {
-
-            let listings = {};
-            res.data.map(listing => {
-                listings[listing.id] = listing
-            })
-
-            console.log('listings', listings)
-            dispatch({ type: 'GET_BIDS', bids: bids, listings })
+            dispatch({ type: 'GET_BIDS', bids: res })          
         })
         .catch(error =>{
             dispatch({ type: 'ERROR_BIDS', error })

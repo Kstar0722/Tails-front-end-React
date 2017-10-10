@@ -1,0 +1,13 @@
+.ReactModal__Content{
+    overflow: hidden !important;
+    background: content-box !important;
+    border: 0px !important;
+    position: initial !important;
+    width: 100%;
+    height: 100%;
+    .prowheel{
+        position: fixed;    
+        top: calc(50vh - 50px);
+        left: calc(50vw - 50px);
+    }
+}

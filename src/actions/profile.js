@@ -16,7 +16,6 @@ export function getProfile() {
         .then(parseJSON)
         .then(res => {
             dispatch({ type: 'GET_PROFILE', profile: res })
-            dispatch({ type: 'LOGIN_SUCCESS', userId: user.id })
         })
         .catch(error =>{
             console.log('err', error)
@@ -40,10 +39,9 @@ export function updateProfile(_data) {
 
     if (data.ship)
         data.purpose += 'ship'
-
     delete data.ship;
     delete data.be_a_cerrier;
-    
+    console.log("sendData=========>", data)
     return function(dispatch) {
         return fetch(config.endpoints.url + config.endpoints.profile + '/', {
             method: 'put',

@@ -3,12 +3,15 @@ import './Login.scss'
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import { Field, reduxForm } from 'redux-form'
+import LogOutImg from 'assets/logout.png'
+import arrowDown from 'assets/arrow_down.png'
 import { Link } from 'react-router'
 import renderField from '../../../components/renderField'
 import {login, logout} from '../../../actions/auth'
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Dropdown, DropdownToggle, DropdownMenu, DropdownItem  } from 'reactstrap'
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Popover, PopoverTitle, PopoverContent  } from 'reactstrap'
 import user from 'auth/user'
 import { browserHistory } from 'react-router'
+import AvatarEditor from 'react-avatar-editor'
 
 const fields = ['email', 'password']
 
@@ -19,16 +22,14 @@ class Login extends Component {
 		this.state = {
 			modal: false,
 			auth: user.authorized,
-			dropdownOpen: false
+			popoverOpen: false,
+			profileImage: "",
+			scale:1
 		}
 
     	this.toggle = this.toggle.bind(this)
 		this.logout = this.logout.bind(this)
 	}
-
-	componentWillMount() {
-
-    }
 
     getStyles() {
 		return {
@@ -49,11 +50,16 @@ class Login extends Component {
 		});
 	}
 	
-	forgotPassword() {
+	goForgotPassword() {
 		
+		this.setState({
+			modal: false
+		});
+		browserHistory.push('/forgot-password');
 	}
 
 	goSignUp() {
+		
 		this.setState({
 			modal: false
 		});
@@ -65,8 +71,16 @@ class Login extends Component {
 			[type]: !this.state[type]
 		});
 	}
-
+	goProfile(){
+		browserHistory.push('/profile');
+		this.setState({
+			popoverOpen: false
+		});
+	}
 	logout() {
+		this.setState({
+			popoverOpen: false
+		});
 		user.logout()
 		this.props.dispatch(logout())
 		this.setState({
@@ -77,9 +91,14 @@ class Login extends Component {
 	}
 
   	render() {
-  		const {handleSubmit, fields: {email, password}, submitting, token, loginActive} = this.props
+  		const {handleSubmit, fields: {email, password}, submitting, token, loginActive} = this.props	
 		const styles = this.getStyles()
-		if(!this.props.auth.authorized){
+		const userid = localStorage.getItem("userId");
+		const userimg = localStorage.getItem("user_img");
+		const zoom_amount = localStorage.getItem("zoom_amount")
+		const first_name = localStorage.getItem("first_name");
+		const last_name = localStorage.getItem("last_name");
+		if(userid == undefined){
 			return (
 				<li className="sign-in" onClick={this.toggle.bind(this, 'modal')}>
 					<a>Sign In</a>
@@ -112,11 +131,12 @@ class Login extends Component {
 											Login
 										</button>
 									</div>
-									<div className="forgot-container">
-										<button className="forgot-password" onClick={this.forgotPassword.bind(this)}>Forgot password</button>
-										<button className="forgot-password" onClick={this.goSignUp.bind(this)}>Sign Up</button>
-									</div>
+									
 								</form>
+								<div className="forgot-container">
+									<a className="forgot-password" onClick={this.goForgotPassword.bind(this)}>Forgot password</a>
+									<a className="sign-up" onClick={this.goSignUp.bind(this)}>Sign Up</a>
+								</div>
 							</div> 
 						</ModalBody>
 					</Modal>
@@ -124,20 +144,33 @@ class Login extends Component {
 			);
 		} else {
 			return <li>
-				<Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle.bind(this, 'dropdownOpen')}>
-					<div
-						data-toggle="dropdown"
-						aria-haspopup="true"
-						aria-expanded={this.state.dropdownOpen}
-						className="menu-profile"
-					>
-					 {this.props.profile.avatar ? <img src={this.props.profile.avatar} width="60" className="rounded-circle"/> : null}
-					 <Link to='/profile'>{this.props.profile.first_name} {this.props.profile.last_name}</Link>
+				<div className="avatar-wrap d-flex flex-row flex-wrap justify-content-between align-items-center">
+					<AvatarEditor
+						ref={this.setEditorRef}
+						image={this.props.profile.avatar ? this.props.profile.avatar : userimg}
+						width={60}
+						height={60}
+						border={0}
+						position={{x:0.5,y:0.5}}
+						disableDrop={true}
+						color={[255, 255, 255, 0.6]} // RGBA
+						scale={this.props.profile.zoom_amount? this.props.profile.zoom_amount : zoom_amount}	
+					/>
+				
+					<Link to='/profile'>{this.props.profile.first_name ? this.props.profile.first_name : first_name} {this.props.profile.last_name ? this.props.profile.last_name : last_name}</Link>
+					<div className="dropmenu" >
+						<a id="Popover1" onClick={this.toggle.bind(this, 'popoverOpen')}><img src = {arrowDown}></img></a>
+						<Popover placement="bottom" isOpen={this.state.popoverOpen} target="Popover1" toggle={this.toggle.bind(this, 'popoverOpen')}>
+							<PopoverContent>
+								
+								<li onClick={this.logout.bind(this)}><img src={LogOutImg}/><a>Log Out</a></li>
+							</PopoverContent>
+						</Popover>
 					</div>
-					<DropdownMenu right>
-						<DropdownItem>Logout</DropdownItem>
-					</DropdownMenu>
-				</Dropdown>
+				</div>
+				{/* <img src={this.props.profile.avatar ? this.props.profile.avatar : userimg }  width="60" className="rounded-circle"/> */}
+				
+				
 			</li>
 		}
   	}

@@ -2,8 +2,10 @@
 	width: 100%;
 	height: 100%;
 	.new_file{
-		border-radius: 0;
-		background-color: #176ce8; 
+		border-radius: 4px;
+		padding-left: 10px;
+		padding-right: 10px;
+		background-color: #176ce8;
 	}
 
 	p{
@@ -12,7 +14,10 @@
 	}
 
 	label{
-		padding: 10px 5px;
+		padding: 10px 0px;
+		&.btn-primary {
+			padding: 10px;
+		}
 	}
 
 	.cover-photo{
@@ -118,6 +123,6 @@
 	input[type=range]:focus::-ms-fill-upper {
 		background: #636363;
 	}
-	
+
 
 }
