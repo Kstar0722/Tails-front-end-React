@@ -7,6 +7,7 @@ import ForgotPassword from './ForgotPassword/ForgotPassword'
 import Support from './Support/Support'
 import signup from './SignUp'
 import AllListings from './Listings/ListingsContainer'
+import ListDetails from './Listings/ListDetails/ListDetails'
 
 import NewPage from './NewPage'
 
@@ -41,6 +42,10 @@ export default {
 			path: '/listings',
 			component: AllListings
 		},
+    {
+      path: '/listing-details/:id',
+      component: ListDetails
+    },
 		signup,
 		NewPage
 	]

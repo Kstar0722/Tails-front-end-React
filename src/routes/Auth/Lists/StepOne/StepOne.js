@@ -8,14 +8,14 @@ import '../lists.scss'
 var Isvg = require('react-inlinesvg')
 
 class StepOne extends React.Component {
-    
+
     constructor(props) {
         super(props)
         console.log("fasdfsadfsadfsadfqetwfsafsd")
         console.log(this.props)
         this.state = {
             disabled: true
-        }        
+        }
     }
 
     componentWillMount() {
@@ -23,7 +23,7 @@ class StepOne extends React.Component {
     }
 
     componentDidMount() {
-        this.checkSelectedAnimals() 
+        this.checkSelectedAnimals()
     }
 
     checkSelectedAnimals() {
@@ -34,10 +34,10 @@ class StepOne extends React.Component {
     }
 
     selectImg(val) {
-                
+
         const { disabled } = this.state
         const { animalInfos } = this.props
-        
+
         val.impagePreview = []
 
         const index = _.findIndex(animalInfos.selectedAnimals, item => item.id == val.id)
@@ -53,59 +53,66 @@ class StepOne extends React.Component {
         }
     }
     nextStep = () =>{
-        
+
         browserHistory.push({
 			pathname: '/step-two',
 			state: this.props
 		});
     }
     render() {
+
+        console.log('render')
+
         const { animalInfos } = this.props
         const { selectedAnimal, disabled } = this.state
-        
-        if(animalInfos.loaded) {
+
+        console.log('animalInfos', animalInfos)
+
+        // if(animalInfos.loaded) {
+            console.log('animalInfos.loaded')
             return (
                 <div className="create-list">
                     <div className="container">
                         <StepHistory currentState="stepOne"/>
                         <div className="step-one">
                             <div className="comment">
-                                What kind of animals do you need shipped ?                
-                            </div>                           
+                                What kind of animals do you need shipped ?
+                            </div>
                             <div className="animal-list row">
-                                {                                    
-                                    _.orderBy(animalInfos.data, 'name').map((val, index) =>                                        
+                                {
+                                    _.orderBy(animalInfos.data, 'name').map((val, index) =>
                                         <div className="animal-item col-md-2 col-sm-4" key={val.id}>
-                                            <div 
+                                            <div
                                                 className={
                                                     animalInfos.selectedAnimals.length > 0 && _.find(animalInfos.selectedAnimals, item => item.id == val.id)
                                                     ? "select-animal-image animal-image"
-                                                    : "animal-image"                                          
+                                                    : "animal-image"
                                                 }
                                                 onClick={()=>this.selectImg(val)}>
-                                                <Isvg 
+                                                <Isvg
                                                     src={val.data[0].url}
-                                                    className="img-responsive"/>                                                
+                                                    className="img-responsive"/>
                                             </div>
                                             <div className="animal-name">{val.name}</div>
                                         </div>
                                     )
                                 }
                             </div>
-                            {/* <button                            
+                            {/* <button
                                 className={disabled ? "btn btn-next disabled" : "btn btn-next"  }
                                 onClick={() => this.nextStep()}
                                 disabled={disabled}
                             >Next</button> */}
                             <NextStep nextStep="/step-two" disabled={disabled}/>
-                        </div>                
-                    </div> 
-                </div>                           
+                        </div>
+                    </div>
+                </div>
             )
-        }
-        else {
-            return null
-        }     
+        // }
+        // else {
+        //     console.log('else')
+        //     return null
+        // }
     }
 }
 
@@ -117,5 +124,5 @@ const mapDispatchToProps = dispatch => ({
     getAnimalsIds: () => dispatch(getAnimalsIds()),
     selectAnimal: (value, flag) => dispatch(selectAnimal(value, flag))
 })
-  
+
 export default connect(mapStateToProps, mapDispatchToProps)(StepOne)

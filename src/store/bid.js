@@ -1,9 +1,14 @@
+import { GET_BIDS_BY_LISTING_ID } from '../config/actionTypes'
+
 // Action Handlers
 // ------------------------------------
 const ACTION_HANDLERS = {
   GET_BIDS: (state, action) => Object.assign({}, state, {
     data: action.bids,
     listings: action.listings
+  }),
+  GET_BIDS_BY_LISTING_ID: (state, action) => Object.assign({}, state, {
+    data: action.bids
   })
 }
 

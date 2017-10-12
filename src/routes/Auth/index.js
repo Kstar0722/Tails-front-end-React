@@ -7,7 +7,7 @@ import StepOne from './Lists/StepOne/StepOne'
 import StepTwo from './Lists/StepTwo/StepTwo'
 import StepThree from './Lists/StepThree/StepThree'
 import StepFour from './Lists/StepFour/StepFour'
-import ReviewItem from './profile/listings/ReviewItem'
+import ReviewItem from './Profile/listings/ReviewItem'
 export default {
 	component: AuthorizedContainer,
 	childRoutes: [
