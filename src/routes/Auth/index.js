@@ -8,6 +8,7 @@ import StepTwo from './Lists/StepTwo/StepTwo'
 import StepThree from './Lists/StepThree/StepThree'
 import StepFour from './Lists/StepFour/StepFour'
 import ReviewItem from './profile/listings/ReviewItem'
+import Messages from './Messages'
 export default {
 	component: AuthorizedContainer,
 	childRoutes: [
@@ -38,6 +39,10 @@ export default {
 		{
 			path: '/profile/item-review',
 			component: ReviewItem
+		},
+		{
+			path: '/messages',
+			component: Messages
 		}
 	]
 }
