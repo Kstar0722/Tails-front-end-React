@@ -1,5 +1,7 @@
 // PROFILE
 export const GET_PROFILE = 'GET_PROFILE';
+export const PROFILE_UPDATE = 'PROFILE_UPDATE';
+export const PROFILE_STRIPE = 'PROFILE_STRIPE';
 // ----------------------------------------------------
 
 // NOTIFICATION
