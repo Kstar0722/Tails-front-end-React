@@ -7,40 +7,61 @@ import BidItem from '../BidItem/BidItem'
 class ListBids extends Component {
   constructor(props){
     super(props)
+
+    this.state = {
+      listing_id: 0
+    }
   }
 
-  componentWillMount(){
-    this.props.getBidsByListingID({
-      filter:{
-        listing_id: 2
-      }
-    })
+  componentDidMount(){
+    if (Object.keys(this.props.listing).length > 0 && this.state.listing_id != this.props.listing.id) {
+      this.props.getBidsByListingID({
+        filter: {
+          listing_id: this.props.listing.id
+        },
+        include: ['user']
+      })
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (Object.keys(nextProps.listing).length > 0 && this.state.listing_id != nextProps.listing.id) {
+      this.setState({ listing_id: nextProps.listing.id })
+      this.props.getBidsByListingID({
+        filter: {
+          listing_id: nextProps.listing.id
+        },
+        include: ['user']
+      })
+    }
   }
 
   render() {
     const { bids } = this.props
 
     return(
-      <div>
+      <section className="list-bids">
 
         <h1>Current bids</h1>
 
-        {(bids.length > 0) ? bids.map(bid =>
+        { (bids.length > 0) ? bids.map(bid =>
 
           <BidItem
-            title={this.props.title}
-            description={bid.description}
-            cost={bid.cost}
+            avatar={ bid.user.avatar }
+            title={ bid.user.first_name + ' ' + bid.user.last_name }
+            description={ bid.description }
+            cost={ bid.cost }
           />
 
-        ) : ''}
+        ) : '' }
 
-      </div>
+      </section>
     )
   }
 }
 
 const mapStateToProps = state => ({
+  listing: state.listing.data,
   bids: state.bid.data
 })
 

@@ -75,7 +75,6 @@ export function addBid(data) {
       .then(checkHttpStatus)
       .then(parseJSON)
       .then(res => {
-        console.log('addBid res', res)
         dispatch({ type: ADD_BID_SUCCESS, bid: res })
         dispatch(Notifications.success({
           title: '',

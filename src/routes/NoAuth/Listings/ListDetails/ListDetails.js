@@ -13,6 +13,14 @@ class ListDetails extends Component {
   }
 
   componentDidMount(){
+    // this.props.getListing(this.props.params.id, {
+    //   filter:{
+    //     user_id: 1
+    //   },
+    //   include: ['user'],
+    //   include_bid_counts: 1
+    // });
+    console.log('ListDetails componentDidMount', this.props)
     this.props.getListing(this.props.params.id);
   }
 
@@ -22,57 +30,96 @@ class ListDetails extends Component {
     //   const [id, title, created_at, pick_up_city, pick_up_state, desired_pick_up_date, delivery_city, delivery_state, desired_delivery_date, budget, other_notes, bids_count] = this.props.listing.data
     // }
 
-    return(
-      <main>
-        <section id="main-content">
-          <div className="container">
-            <div className="row list-items">
-              <div className="col-md-8">
+    if (Object.keys(this.props.listing.data).length > 0 && this.props.listing.data.user_id == this.props.user.id) {
+      return(
+        <main>
+          <section id="main-content">
+            <div className="container">
+              <div className="row list-items">
+                <div className="col-md-12">
 
-                { (this.props.listing.loaded) ?
+                  { (Object.keys(this.props.listing.data).length > 0) ?
 
-                  <ListItem
-                    id={this.props.listing.data.id}
-                    title={this.props.listing.data.title}
-                    created_at={this.props.listing.data.created_at}
-                    pick_up_city={this.props.listing.data.pick_up_city}
-                    pick_up_state={this.props.listing.data.pick_up_state}
-                    desired_pick_up_date={this.props.listing.data.desired_pick_up_date}
-                    delivery_city={this.props.listing.data.delivery_city}
-                    delivery_state={this.props.listing.data.delivery_state}
-                    desired_delivery_date = {this.props.listing.data.desired_delivery_date}
-                    budget={this.props.listing.data.budget}
-                    other_notes={this.props.listing.data.other_notes}
-                    bids_count={this.props.listing.data.bids_count}
-                    listing_details={false}
-                  />
+                    <ListItem
+                      id={this.props.listing.data.id}
+                      title={this.props.listing.data.title}
+                      created_at={this.props.listing.data.created_at}
+                      pick_up_city={this.props.listing.data.pick_up_city}
+                      pick_up_state={this.props.listing.data.pick_up_state}
+                      desired_pick_up_date={this.props.listing.data.desired_pick_up_date}
+                      delivery_city={this.props.listing.data.delivery_city}
+                      delivery_state={this.props.listing.data.delivery_state}
+                      desired_delivery_date = {this.props.listing.data.desired_delivery_date}
+                      budget={this.props.listing.data.budget}
+                      other_notes={this.props.listing.data.other_notes}
+                      bids_count={this.props.listing.data.bids_count}
+                      listing_details={false}
+                    />
 
-                : '' }
+                    : '' }
 
-                <ListBids
-                  listing_id={this.props.listing.data.id}
-                  title={this.props.listing.data.title}
-                />
+                  <ListBids />
 
-              </div>
+                </div>
 
-              <div className="col-md-4 sidebar">
-                <ListingDetailsSidebar
-                  id={this.props.listing.data.id}
-                  title={this.props.listing.data.title}
-                  budget={this.props.listing.data.budget}
-                />
               </div>
             </div>
-          </div>
-        </section>
-      </main>
-    )
+          </section>
+        </main>
+      )
+    } else {
+      return(
+        <main>
+          <section id="main-content">
+            <div className="container">
+              <div className="row list-items">
+                <div className="col-md-8">
+
+                  { (Object.keys(this.props.listing.data).length > 0) ?
+
+                    <ListItem
+                      id={this.props.listing.data.id}
+                      title={this.props.listing.data.title}
+                      created_at={this.props.listing.data.created_at}
+                      pick_up_city={this.props.listing.data.pick_up_city}
+                      pick_up_state={this.props.listing.data.pick_up_state}
+                      desired_pick_up_date={this.props.listing.data.desired_pick_up_date}
+                      delivery_city={this.props.listing.data.delivery_city}
+                      delivery_state={this.props.listing.data.delivery_state}
+                      desired_delivery_date = {this.props.listing.data.desired_delivery_date}
+                      budget={this.props.listing.data.budget}
+                      other_notes={this.props.listing.data.other_notes}
+                      bids_count={this.props.listing.data.bids_count}
+                      listing_details={false}
+                    />
+
+                    : '' }
+
+                  <ListBids />
+
+                </div>
+
+                <div className="col-md-4 sidebar">
+                  <ListingDetailsSidebar
+                    id={this.props.listing.data.id}
+                    title={this.props.listing.data.title}
+                    budget={this.props.listing.data.budget}
+                  />
+                </div>
+
+              </div>
+            </div>
+          </section>
+        </main>
+      )
+    }
+
   }
 }
 
 const mapStateToProps = state => ({
-  listing: state.listing
+  listing: state.listing,
+  user: state.profile.data
 })
 
 export default connect(mapStateToProps, { getListing })(ListDetails);

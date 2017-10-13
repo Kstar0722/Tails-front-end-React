@@ -3,7 +3,7 @@ import './AddBidModal.scss'
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux';
-import { addBid } from "../../../../actions/bids";
+import { addBid, getBidsByListingID } from "../../../../actions/bids";
 
 class AddBidModal extends React.Component {
   constructor(props) {
@@ -28,10 +28,16 @@ class AddBidModal extends React.Component {
     const bid = this.props.addBidForm.values
     bid.listing_id = this.props.id
 
-    console.log(bid)
-
     this.props.addBid(bid)
       .then(this.toggle)
+      .then(
+        this.props.getBidsByListingID({
+          filter: {
+            listing_id: this.props.id
+          },
+          include: ['user']
+        })
+      )
   }
 
   render() {
@@ -81,4 +87,4 @@ const mapStateToProps = state => ({
   addBidForm: state.form.addBidForm
 })
 
-export default connect(mapStateToProps, { addBid } )(AddBidModal);
+export default connect(mapStateToProps, { addBid, getBidsByListingID } )(AddBidModal);
