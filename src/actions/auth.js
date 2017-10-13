@@ -124,6 +124,10 @@ export function logout() {
         dispatch({
             type: 'LOGOUT'
         })
+        dispatch({
+            type: 'PROFILE_UPDATE',
+            user: {}
+        })
     }
 }
 
