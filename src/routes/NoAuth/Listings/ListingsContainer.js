@@ -2,7 +2,7 @@ import AllListings from './AllListings'
 import {getAllListings} from 'actions/listing'
 
 const mapDispatchToProps = (dispatch) => ({
-     getAllListings: () => dispatch(getAllListings()),
+     getAllListings: filter => dispatch(getAllListings(filter)),
 })
 
 const mapStateToProps = (state) => ({

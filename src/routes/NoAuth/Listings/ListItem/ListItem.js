@@ -6,35 +6,46 @@ import Timestamp from'react-timestamp';
 import moment from 'moment';
 import AddBidModal from '../Modals/AddBidModal';
 import { Link } from 'react-router';
+import { connect } from 'react-redux';
+import { getListingAnimals } from '../../../../actions/listing_animals'
 
 class ListItem extends React.Component {
 	constructor(props) {
 		super(props)
-
-    this.onClickAddBid = this.onClickAddBid.bind(this)
+    this.state = {
+		  images: []
+    }
 	}
 
-  onClickAddBid(){
-	  console.log('onClickAddBid')
+	componentDidMount() {
+	  this.props.getListingAnimals({
+      filter: {
+        listing_id: 1
+      },
+      include: ['images']
+    })
   }
 
   render() {
 
     const {id, title, created_at, pick_up_city, pick_up_state, desired_pick_up_date, delivery_city, delivery_state, desired_delivery_date, budget, other_notes, bids_count, listing_details} = this.props
 
-    console.log('listing_details', listing_details)
-
     return (
       <div className="list-item">
           <div className="top-part">
-              <div className="image-holder text-center">
-                  <img src={CowImage} className="main-image" />
-                  <div className="thumbs">
-                      <a href="#"><img src={CowImage} alt=""/></a>
-                      <a href="#"><img src={CowImage} alt=""/></a>
-                      <a href="#"><img src={CowImage} alt=""/></a>
-                  </div>
+
+            <div className="image-holder text-center">
+
+              <img src={ (Object.keys(this.props.listingAnimals)).length > 0 ? this.props.listingAnimals['0'].images['0'].url : '' } className="main-image" />
+
+              <div className="thumbs">
+                <a href="#"><img src={CowImage} alt=""/></a>
+                <a href="#"><img src={CowImage} alt=""/></a>
+                <a href="#"><img src={CowImage} alt=""/></a>
               </div>
+
+            </div>
+
               <div className="right-content-holder">
                   <div className="row">
                       <div className="col-lg-7"><h3>{title}</h3></div>
@@ -55,7 +66,7 @@ class ListItem extends React.Component {
                             <div className="bid-count pull-right" onClick={this.toggle}><span className="count">{bids_count}</span> bids</div>
                           </Link>
 
-                          : <div className="bid-count pull-right" onClick={this.toggle}><span className="count">{bids_count}</span> bids</div>
+                          : <div className="bid-count pull-right" onClick={this.toggle}><span className="count">{Object.keys(this.props.bid.data).length}</span> bids</div>
                         }
 
                       </div>
@@ -81,4 +92,9 @@ class ListItem extends React.Component {
   }
 }
 
-export default ListItem
+const mapStateToProps = state => ({
+  bid: state.bid,
+  listingAnimals: state.listingAnimals.listing_details
+})
+
+export default connect(mapStateToProps, { getListingAnimals })(ListItem)

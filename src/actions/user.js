@@ -7,6 +7,7 @@ export function getUser(filter = {}) {
   return function (dispatch) {
     return apiService.find('users/' + userId , filter)
       .then(res => {
+        console.log('getUser res', error)
         dispatch({ type: GET_USER, data: res })
       })
       .catch(error => {

@@ -17,7 +17,9 @@ class AllListings extends React.Component {
 	}
 
 	componentWillMount() {
-		this.props.getAllListings()
+		this.props.getAllListings({
+      include_bid_counts: 1
+    })
 	}
 
 	getAllListings() {

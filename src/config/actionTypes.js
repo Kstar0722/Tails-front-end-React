@@ -21,4 +21,12 @@ export const UPDATE_LISTING_BID = 'UPDATE_LISTING_BID';
 export const GET_USER = 'GET_USER';
 // -----------------------------------------------------
 
+// LISTINGS
+export const GET_COMPLETED_SHIPPING = 'GET_COMPLETED_SHIPPING';
+// -----------------------------------------------------
+
+// LISTING ANIMALS
+export const GET_LISTING_ANIMALS_BY_ID = 'GET_LISTING_ANIMALS_BY_ID';
+// -----------------------------------------------------
+
 export default {};

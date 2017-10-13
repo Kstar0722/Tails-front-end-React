@@ -10,6 +10,7 @@ import animalsReducer from './animals'
 import animalShipReducer from './animalShip'
 import userReducer from './user'
 import listingBidReducer from './listing_bid'
+import listingAnimalsReducer from './listingAnimals'
 
 export const makeRootReducer = (asyncReducers) => {
   return combineReducers({
@@ -24,6 +25,7 @@ export const makeRootReducer = (asyncReducers) => {
     animalShipReducer,
     user: userReducer,
     listing_bid: listingBidReducer,
+    listingAnimals: listingAnimalsReducer,
     ...asyncReducers
   })
 }
