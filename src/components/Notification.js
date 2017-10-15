@@ -1,4 +1,3 @@
-import { Alert, AlertList, AlertContainer } from "react-bs-notifier"
 import {connect} from 'react-redux'
 import React, { Component } from 'react'
 import classNames from 'classnames'

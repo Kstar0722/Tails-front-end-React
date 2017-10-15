@@ -13,18 +13,19 @@ export function getAnimalsIdsSuccess(res) {
     return {
         type: GET_ANIMALS_IDS_SUCCESS,
         data: res
-    } 
+    }
 }
 
 export function getAnimalsIdsFailure(error) {
     return {
         type: GET_ANIMALS_IDS_FAILURE,
         error: error
-    } 
+    }
 }
 
 export function getAnimalsIds() {
     return function(dispatch) {
+      console.log(config.endpoints.url + config.endpoints.listings_animals)
         return fetch(config.endpoints.url + config.endpoints.listings_animals, {
             method: 'get',
             headers: {
@@ -35,6 +36,7 @@ export function getAnimalsIds() {
         .then(checkHttpStatus)
         .then(parseJSON)
         .then(res => {
+            console.log(res)
             dispatch(getAnimalImage(res.data))
         })
         .catch(error =>{
@@ -60,18 +62,18 @@ export function getAnimalImage(listings) {
             .then(res => {
                 const animalInfo = Object.assign({}, res, element)
                 animalInfos.push(animalInfo)
-                dispatch(getAnimalsIdsSuccess(animalInfos))            
+                dispatch(getAnimalsIdsSuccess(animalInfos))
             })
             .catch(error =>{
                 dispatch(getAnimalsIdsFailure(error))
             })
         });
-    }    
+    }
 }
 export function selectAnimal(value, flag) {
     return {
         type: SELECTED_ANIMALS,
         data: value,
         flag: flag
-    } 
+    }
 }

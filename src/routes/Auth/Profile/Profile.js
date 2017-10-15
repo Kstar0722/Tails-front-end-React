@@ -5,6 +5,7 @@ import { Link } from 'react-router';
 import Avatar from 'components/Avatar'
 import ListingsContainer from './listings/ListingsContainer'
 import BidsContainer from './bids/BidsContainer'
+import ListingBidsContainer from './listing_bids/BidsContainer'
 import { browserHistory } from 'react-router'
 import { getListings } from 'actions/listing'
 class Profile extends React.Component {
@@ -35,7 +36,6 @@ class Profile extends React.Component {
             this.setState({
                 cover_photo: this.props.profile.cover_photo
 		})
-		
 	}
 	componentWillReceiveProps(nextProps){
         if(nextProps.profile.cover_photo != this.props.profile.cover_photo){
@@ -87,6 +87,12 @@ class Profile extends React.Component {
 								<p className="title">My Bids</p>
 								<div className="table-responsive">
 									<BidsContainer />
+								</div>
+							</div>
+							<div className="block-section my-bids">
+								<p className="title">Bids to my listings</p>
+								<div className="table-responsive">
+									{<ListingBidsContainer />}
 								</div>
 							</div>
 						</div>
