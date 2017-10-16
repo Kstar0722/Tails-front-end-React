@@ -13,7 +13,9 @@ export default {
         profile: '/users',
         bids: '/bids',
         listings_animals: '/listing_animals',
-        animal_image: '/animal_images',
-        conversations: '/conversations'
+        animal_image: '/animal_images'
+    },
+    stripe: {
+        public_key: process.env.STRIPE_PUBLIC || ''
     }
 }

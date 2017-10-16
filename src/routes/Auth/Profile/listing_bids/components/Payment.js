@@ -2,6 +2,7 @@ import './BidItem.scss'
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import {StripeProvider} from 'react-stripe-elements';
 import Checkout from './Checkout'
+import config from 'config'
 
 class Payment extends React.Component {
 	constructor(props) {
@@ -27,7 +28,7 @@ class Payment extends React.Component {
         <Modal isOpen={this.state.modal} toggle={this.toggle}>
           <ModalHeader toggle={this.toggle}>Payment</ModalHeader>
           <ModalBody>
-            <StripeProvider apiKey="pk_test_qTO5U0NlOMwzO99Db9XSBZPJ">
+            <StripeProvider apiKey={config.stripe.public_key}>
               <Checkout bid={this.props.bid} toggle={this.toggle}/>
             </StripeProvider>
           </ModalBody>

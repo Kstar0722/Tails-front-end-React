@@ -20,15 +20,6 @@ const BidItem = props => {
             </div>
           </div>
 
-          <div className="row">
-            <div className="col-md-12 listing-excerpt">
-              <p>
-                <Button color="primary">Message User</Button>
-                <Button color="primary">Award Job</Button>
-              </p>
-            </div>
-          </div>
-
         </div>
       </div>
 
