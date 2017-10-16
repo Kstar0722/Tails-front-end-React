@@ -16,11 +16,7 @@ const ACTION_HANDLERS = {
   [LOGIN_SUCCESS]: (state, action) => Object.assign({}, state, {
     authorized: true,
     userId: action.userId
-  }),
-  ['LOGOUT']: (state, action) => Object.assign({}, state, {
-    authorized: false,
-    userId: null
-  }),
+  })
 }
 
 // ------------------------------------

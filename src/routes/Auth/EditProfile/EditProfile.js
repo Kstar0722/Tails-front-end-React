@@ -2,6 +2,7 @@ import './EditProfile.scss'
 import { TabContent, TabPane, Nav, NavItem, NavLink, Row, Col } from 'reactstrap'
 import classnames from 'classnames'
 import EditForm from './EditForm/EditForm'
+import StripeForm from './StripeForm/StripeForm'
 
 class EditProfile extends React.Component {
 	constructor(props) {
@@ -22,27 +23,37 @@ class EditProfile extends React.Component {
 
 	render() {
 		return (
-
+			
 			<section id="profile">
+				
 				<div className="container">
 					<h1 className="profile-setting">Setting</h1>
 					<div className="profile-edit">
 						<Nav tabs>
-						<NavItem>
-							<NavLink className={classnames({ active: this.state.activeTab === '1' })}
-								onClick={() => { this.toggle('1'); }}
-							>
-								My Profile
-							</NavLink>
-						</NavItem>
-						<NavItem>
-							<NavLink
-							className={classnames({ active: this.state.activeTab === '2' })}
-							onClick={() => { this.toggle('2'); }}
-							>
-								Billing Setting
-							</NavLink>
-						</NavItem>
+							<NavItem>
+								<NavLink className={classnames({ active: this.state.activeTab === '1' })}
+									onClick={() => { this.toggle('1'); }}
+								>
+									My Profile
+								</NavLink>
+							</NavItem>
+							
+							<NavItem>
+								<NavLink
+								className={classnames({ active: this.state.activeTab === '2' })}
+								onClick={() => { this.toggle('2'); }}
+								>
+									Billing Setting
+								</NavLink>
+							</NavItem>
+							<NavItem>
+								<NavLink
+								className={classnames({ active: this.state.activeTab === '3' })}
+								onClick={() => { this.toggle('3'); }}
+								>
+									Stripe
+								</NavLink>
+							</NavItem>
 						</Nav>
 						<TabContent activeTab={this.state.activeTab}>
 						<TabPane tabId="1">
@@ -50,6 +61,11 @@ class EditProfile extends React.Component {
 						</TabPane>
 						<TabPane tabId="2">
 							Billing setting
+						</TabPane>
+						<TabPane tabId="3">
+							<div>
+								{<StripeForm/>}
+							</div>
 						</TabPane>
 						</TabContent>
 					</div>

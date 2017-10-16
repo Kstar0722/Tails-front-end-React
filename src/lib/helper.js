@@ -1,6 +1,6 @@
 export function validationFields(fields, values){
   let errors = {};
-  console.log('sdsd')
+  console.log('helper')
   if (Array.isArray(fields)){
     fields.map(field => {
       if (Array.isArray(field.rules)){
@@ -58,7 +58,6 @@ export function validationFields(fields, values){
             case 'numeric':
               if(values[field.name]){
                 if (!(!isNaN(parseFloat(values[field.name])) && isFinite(values[field.name]))) {
-                  console.log('sdsd')
                   errors[field.name] = 'Not a valid numeric'
                 }
               }

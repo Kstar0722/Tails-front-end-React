@@ -13,6 +13,7 @@ section#profile {
 			width: 360px;
 			margin: 20px 0; 
 			padding: 10px 0; 
+			border-radius: 5px;
 		}
 	}
 	background-color: #e6e6e6;
@@ -56,26 +57,15 @@ section#profile {
 				font-size: 22px;
 				font-weight: bold;
 			}
-			.table-wrap {
+			.table-responsive {
 				background-color: #fff;
-				overflow-x: scroll;
+				box-shadow: 0 1px 5px rgba(0,0,0,.08);
+				border-radius: 8px;
 				table.bids, table.listings{
-					width: 100%;
 					font-family: 'Lato', sans-serif;
-					border-collapse: collapse;
-					border: 1px solid $tableBorder;
-					min-width: 1000px;
-					th, tr, td {
-						border: 1px solid $tableBorder;
-					}
-					tbody {
+					min-width: 767px;
+					tbody, thead {
 						tr {
-							&:first-child {
-								background-color: #fff !important;
-							}
-							&:nth-child(odd) {
-								background-color: rgba(0, 0, 0, 0.03);
-							}
 							th {
 								padding: 20px;
 								color: #cfcfcf;
@@ -83,7 +73,6 @@ section#profile {
 								text-transform: uppercase;
 								text-align: center;
 								&:first-child {
-									width: 45%;
 									text-align: left;
 								}
 							}
@@ -93,7 +82,6 @@ section#profile {
 								font-size: 16px;
 								text-align: center;
 								&:first-child {
-									width: 45%;
 									text-align: left;
 								}
 							}

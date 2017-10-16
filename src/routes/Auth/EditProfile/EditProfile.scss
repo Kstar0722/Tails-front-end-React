@@ -1,11 +1,21 @@
 h1.profile-setting{
-    padding: 10px 0;
+    padding: 40px 0px 20px 0px;
     color: #565656;
 }
 .profile-edit{
     background-color: white;
+    box-shadow: 0 1px 5px rgba(0,0,0,.08);
+    border-radius: 8px;
+    margin-bottom: 60px;
     .active.nav-link{
-            border-color: #fff #fff #ddd;
-            border-radius: 0;
+      border-color: #fff #fff #ddd;
+      border-radius: 0;
+    }
+    .nav{
+      padding-left: 5px;
+    }
+
+    .nav-link {
+      padding: 0.9em 1em;
     }
 }

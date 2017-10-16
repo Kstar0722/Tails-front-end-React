@@ -1,0 +1,17 @@
+   .step-view {
+        color: #6d6d6d;
+        background: #ffffff;
+        margin-top: 60px;
+        margin-bottom: 60px;
+        padding: 30px;
+        font-family: 'PT Sans';
+        box-shadow: 0 1px 5px rgba(0,0,0,.08);
+        border-radius: 8px;
+        .comment {            
+            font-size: 30px;
+            text-align: center;
+        }
+        .main-content {
+            margin-top: 30px;
+        }
+    }

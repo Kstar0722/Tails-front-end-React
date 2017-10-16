@@ -1,8 +1,9 @@
-import { GET_PROFILE } from 'config/actionTypes'
+import { GET_PROFILE, PROFILE_UPDATE, PROFILE_STRIPE } from 'config/actionTypes'
 
 const initialState = {
   data: {
-  }
+  },
+  stripe: {}
 }
 
 export default (state = initialState, action = {}) => {
@@ -21,6 +22,14 @@ export default (state = initialState, action = {}) => {
 
       return Object.assign({}, state, {
         data: profile
+      });
+    case PROFILE_UPDATE:
+      return Object.assign({}, state, {
+        data: action.user
+      });
+    case PROFILE_STRIPE:
+      return Object.assign({}, state, {
+        stripe: action.stripe
       });
     default:
       return state;
