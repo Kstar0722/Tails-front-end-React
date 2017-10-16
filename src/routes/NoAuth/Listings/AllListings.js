@@ -28,7 +28,7 @@ class AllListings extends React.Component {
 
 			this.props.listings.data.map((listing, i) => {
 				listings.push(this.renderAllListings(
-          listing.id,
+					listing.id,
 					listing.title,
 					listing.created_at,
 					listing.pick_up_city,
@@ -50,7 +50,7 @@ class AllListings extends React.Component {
 	renderAllListings(id, title, created_at, pick_up_city, pick_up_state, desired_pick_up_date, delivery_city, delivery_state, desired_delivery_date, budget, other_notes, bids_count) {
 		return (
 			<ListItem
-        id={id}
+				id={id}
 				title={title}
 				created_at={created_at}
 				pick_up_city={pick_up_city}
@@ -62,7 +62,7 @@ class AllListings extends React.Component {
 				budget={budget}
 				other_notes={other_notes}
 				bids_count={bids_count}
-        listing_details={true}
+				listing_details={true}
 			/>
 		)
 	}

@@ -1,6 +1,6 @@
 import AuthorizedContainer from 'containers/AuthorizedContainer'
 
-// import Mock from './MockBackend/Mock'
+import Mock from './MockBackend/Mock'
 import Profile from './Profile/Profile'
 import EditProfile from './EditProfile/EditProfile'
 import StepOne from './Lists/StepOne/StepOne'
@@ -8,7 +8,7 @@ import StepTwo from './Lists/StepTwo/StepTwo'
 import StepThree from './Lists/StepThree/StepThree'
 import StepFour from './Lists/StepFour/StepFour'
 import ReviewItem from './profile/listings/ReviewItem'
-import Messages from './Messages'
+import Messages from './Messages/messages'
 export default {
 	component: AuthorizedContainer,
 	childRoutes: [
@@ -43,6 +43,10 @@ export default {
 		{
 			path: '/messages',
 			component: Messages
+		},
+		{
+			path: '/mock',
+			component: Mock
 		}
 	]
 }
