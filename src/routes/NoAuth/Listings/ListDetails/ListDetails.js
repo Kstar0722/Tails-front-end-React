@@ -95,8 +95,6 @@ class ListDetails extends Component {
 
                     : '' }
 
-                  <ListBids />
-
                 </div>
 
                 <div className="col-md-4 sidebar">

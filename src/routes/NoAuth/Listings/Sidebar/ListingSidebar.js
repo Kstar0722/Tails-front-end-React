@@ -14,8 +14,16 @@ class ListingSidebar extends React.Component {
       from_pick_up_date: null,
       to_pick_up_date: null,
       animals_count: 0,
-      pick_up_state: '',
-      delivery_state: ''
+      pick_up_state: 'Any State',
+      delivery_state: 'Any State',
+      animal_type: {
+        Dog: false,
+        Horse: false,
+        Cow: false,
+        Goat: false,
+        Cat: false,
+        Bird: false
+      }
     })
 	}
 
@@ -61,6 +69,12 @@ class ListingSidebar extends React.Component {
     }, this.filterListings)
   }
 
+  handleAnimalType(type) {
+    this.setState({
+      animal_type: Object.assign({}, this.state.animal_type, { [type]: !this.state.animal_type[type] })
+    }, this.filterListings)
+  }
+
   filterListings(){
     const filter = {}
 
@@ -68,32 +82,38 @@ class ListingSidebar extends React.Component {
       filter.animals_count = this.state.animals_count
     }
 
-    if (this.pick_up_state != '') {
+    if (this.state.pick_up_state != 'Any State') {
       filter.pick_up_state = this.state.pick_up_state
     }
 
-    if (this.delivery_state != '') {
+    if (this.state.delivery_state != 'Any State') {
       filter.delivery_state = this.state.delivery_state
     }
 
-    if (this.state.to_pick_up_date && this.state.from_pick_up_date) {
-      filter.desired_pick_up_date = {
-        lte: moment(this.state.to_pick_up_date).format('YYYY-MM-DD'),
-        gte: moment(this.state.from_pick_up_date).format('YYYY-MM-DD')
-      }
-    }
+    const types = this.state.animal_type
+    let values = Object.keys(types).filter(type => types[type]).join(',')
 
-    if (this.state.to_drop_off_date && this.state.from_drop_off_date) {
-      filter.desired_delivery_date = {
-        lte: moment(this.state.to_drop_off_date).format('YYYY-MM-DD'),
-        gte: moment(this.state.from_drop_off_date).format('YYYY-MM-DD')
-      }
-    }
+    if (values.length) filter.breeds = values
 
-    this.props.getAllListings({ filter })
+    const desired_pick_up_date = {}
+    if (this.state.to_pick_up_date) desired_pick_up_date.lte = moment(this.state.to_pick_up_date).endOf('day').toJSON();
+    if (this.state.from_pick_up_date) desired_pick_up_date.gte = moment(this.state.from_pick_up_date).startOf('day').toJSON();
+    if (Object.keys(desired_pick_up_date).length) filter['desired_pick_up_date'] = desired_pick_up_date
+
+    const desired_delivery_date = {}
+    if (this.state.to_drop_off_date) desired_delivery_date.lte = moment(this.state.to_drop_off_date).endOf('day').toJSON();
+    if (this.state.from_drop_off_date) desired_delivery_date.gte = moment(this.state.from_drop_off_date).startOf('day').toJSON();
+    if (Object.keys(desired_delivery_date).length) filter['desired_delivery_date'] = desired_delivery_date;
+
+    console.log('filters', filter)
+
+    this.props.getAllListings({ filter: filter, include_bid_counts: 1 })
   }
 
 	render() {
+
+    console.log(this.state.animal_type)
+
 		return (
       <div id="filters" className="">
         <div className="filters-toggle">Filters</div>
@@ -105,7 +125,7 @@ class ListingSidebar extends React.Component {
           <div className="filter">
             <label className="filter-label">Pickup State</label>
             <label className="select select-state">
-              <select onChange={this.onChangePickUpState.bind(this)} value={ (this.state.pick_up_state == '') ? "Any State" : this.state.pick_up_state}>
+              <select onChange={this.onChangePickUpState.bind(this)} value={ this.state.pick_up_state }>
                   <option value="Any State">Any State</option>
                   <option value="AL">Alabama</option>
                   <option value="AK">Alaska</option>
@@ -164,7 +184,7 @@ class ListingSidebar extends React.Component {
           <div className="filter">
             <label className="filter-label">Destination State</label>
             <label className="select select-state">
-                <select onChange={this.onChangeDeliveryState.bind(this)} value={ (this.state.delivery_state == '') ? "Any State" : this.state.delivery_state}>
+                <select onChange={this.onChangeDeliveryState.bind(this)} value={ this.state.delivery_state }>
                     <option value="Any State">Any State</option>
                     <option value="AL">Alabama</option>
                     <option value="AK">Alaska</option>
@@ -234,12 +254,12 @@ class ListingSidebar extends React.Component {
           <div className="filter">
             <label className="filter-label">Animal Type</label>
             <ul className="check-list">
-                <li><label><input type="checkbox" checked /><span>Dog</span></label></li>
-                <li><label><input type="checkbox" /><span>Horse</span></label></li>
-                <li><label><input type="checkbox" checked /><span>Cow</span></label></li>
-                <li><label><input type="checkbox" /><span>Goat</span></label></li>
-                <li><label><input type="checkbox" /><span>Cat</span></label></li>
-                <li><label><input type="checkbox" /><span>Bird</span></label></li>
+                <li><label><input type="checkbox" checked={ this.state.animal_type.Dog } onChange={this.handleAnimalType.bind(this, 'Dog')} /><span>Dog</span></label></li>
+                <li><label><input type="checkbox" checked={ this.state.animal_type.Horse } onChange={this.handleAnimalType.bind(this, 'Horse')} /><span>Horse</span></label></li>
+                <li><label><input type="checkbox" checked={ this.state.animal_type.Cow } onChange={this.handleAnimalType.bind(this, 'Cow')} /><span>Cow</span></label></li>
+                <li><label><input type="checkbox" checked={ this.state.animal_type.Goat } onChange={this.handleAnimalType.bind(this, 'Goat')} /><span>Goat</span></label></li>
+                <li><label><input type="checkbox" checked={ this.state.animal_type.Cat } onChange={this.handleAnimalType.bind(this, 'Cat')} /><span>Cat</span></label></li>
+                <li><label><input type="checkbox" checked={ this.state.animal_type.Bird } onChange={this.handleAnimalType.bind(this, 'Bird')} /><span>Bird</span></label></li>
                 <li><label><input type="checkbox" /><span>Other</span></label></li>
             </ul>
           </div>
