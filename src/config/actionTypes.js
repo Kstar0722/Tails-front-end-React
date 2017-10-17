@@ -25,6 +25,11 @@ export const GET_USER = 'GET_USER';
 export const GET_COMPLETED_SHIPPING = 'GET_COMPLETED_SHIPPING';
 // -----------------------------------------------------
 
+// ALL LISTINGS
+export const GET_ALL_LISTINGS = 'GET_ALL_LISTINGS';
+// -----------------------------------------------------
+
+
 // LISTING ANIMALS
 export const GET_LISTING_ANIMALS_BY_ID = 'GET_LISTING_ANIMALS_BY_ID';
 // -----------------------------------------------------

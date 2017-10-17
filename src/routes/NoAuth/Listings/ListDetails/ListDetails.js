@@ -13,22 +13,10 @@ class ListDetails extends Component {
   }
 
   componentDidMount(){
-    // this.props.getListing(this.props.params.id, {
-    //   filter:{
-    //     user_id: 1
-    //   },
-    //   include: ['user'],
-    //   include_bid_counts: 1
-    // });
-    console.log('ListDetails componentDidMount', this.props)
     this.props.getListing(this.props.params.id);
   }
 
   render() {
-
-    // if (this.props.listing.loaded) {
-    //   const [id, title, created_at, pick_up_city, pick_up_state, desired_pick_up_date, delivery_city, delivery_state, desired_delivery_date, budget, other_notes, bids_count] = this.props.listing.data
-    // }
 
     if (Object.keys(this.props.listing.data).length > 0 && this.props.listing.data.user_id == this.props.user.id) {
       return(

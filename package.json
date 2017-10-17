@@ -45,6 +45,7 @@
     "react-dropzone": "^4.1.0",
     "react-icons": "^2.2.5",
     "react-inlinesvg": "^0.6.2",
+    "react-input-range": "^1.2.1",
     "react-measure": "^2.0.2",
     "react-modal": "^2.3.2",
     "react-notification-system": "^0.2.15",
