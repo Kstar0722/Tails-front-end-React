@@ -4,11 +4,13 @@ import moment from 'moment';
 import 'assets/DatePicker.scss';
 import { connect } from 'react-redux'
 import { getAllListings } from '../../../../actions/listing'
+import InputRange from 'react-input-range'
 
 class ListingSidebar extends React.Component {
 	constructor(props) {
     super(props)
     this.state = ({
+      price: { min: 1, max: 1000 },
       from_drop_off_date: null,
       to_drop_off_date: null,
       from_pick_up_date: null,
@@ -16,6 +18,7 @@ class ListingSidebar extends React.Component {
       animals_count: 0,
       pick_up_state: 'Any State',
       delivery_state: 'Any State',
+      status: 'open',
       animal_type: {
         Dog: false,
         Horse: false,
@@ -28,55 +31,48 @@ class ListingSidebar extends React.Component {
 	}
 
   onChangePickUpState(event) {
-    this.setState({
-      pick_up_state: event.target.value
-    }, this.filterListings)
+    this.setState({ pick_up_state: event.target.value }, this.filterListings)
   }
 
   onChangeDeliveryState(event) {
-    this.setState({
-      delivery_state: event.target.value
-    }, this.filterListings)
+    this.setState({ delivery_state: event.target.value }, this.filterListings)
   }
 
   onChangeNumberAnimals(event) {
-    this.setState({
-      animals_count: event.target.value
-    }, this.filterListings)
+    this.setState({ animals_count: event.target.value }, this.filterListings)
   }
 
   onChangeFromDrop(date) {
-    this.setState({
-      from_drop_off_date:date
-    }, this.filterListings)
+    this.setState({ from_drop_off_date: date }, this.filterListings)
   }
 
   onChangeToDrop(date) {
-    this.setState({
-      to_drop_off_date:date
-    }, this.filterListings)
+    this.setState({ to_drop_off_date: date }, this.filterListings)
   }
 
   onChangeFromPick(date) {
-    this.setState({
-      from_pick_up_date: date
-    }, this.filterListings)
+    this.setState({ from_pick_up_date: date }, this.filterListings)
   }
 
   onChangeToPick(date){
-    this.setState({
-      to_pick_up_date: date
-    }, this.filterListings)
+    this.setState({ to_pick_up_date: date }, this.filterListings)
   }
 
   handleAnimalType(type) {
-    this.setState({
-      animal_type: Object.assign({}, this.state.animal_type, { [type]: !this.state.animal_type[type] })
-    }, this.filterListings)
+    this.setState({ animal_type: Object.assign({}, this.state.animal_type, { [type]: !this.state.animal_type[type] }) }, this.filterListings)
+  }
+
+  onChangePrice(value) {
+    this.setState({ price: value })
   }
 
   filterListings(){
     const filter = {}
+
+    const price = {}
+    if (this.state.price.min != 1) price.gte = this.state.price.min
+    if (this.state.price.max != 1000) price.lte = this.state.price.max
+    if (Object.keys(price).length) filter['budget'] = price
 
     if (this.state.animals_count > 0) {
       filter.animals_count = this.state.animals_count
@@ -105,21 +101,23 @@ class ListingSidebar extends React.Component {
     if (this.state.from_drop_off_date) desired_delivery_date.gte = moment(this.state.from_drop_off_date).startOf('day').toJSON();
     if (Object.keys(desired_delivery_date).length) filter['desired_delivery_date'] = desired_delivery_date;
 
-    console.log('filters', filter)
-
-    this.props.getAllListings({ filter: filter, include_bid_counts: 1 })
+    this.props.getAllListings({ filter: filter, include_bid_counts: 1, include: ['animals'] })
   }
 
 	render() {
-
-    console.log(this.state.animal_type)
 
 		return (
       <div id="filters" className="">
         <div className="filters-toggle">Filters</div>
         <div className="filters-body">
           <div className="filter">
-            <label className="filter-label">Price</label>
+            <label className="filter-label price">Price</label>
+            <InputRange
+              maxValue={1000}
+              minValue={1}
+              value={this.state.price}
+              onChange={value => this.onChangePrice(value)}
+              onChangeComplete={value => this.filterListings()} />
             <div id="price-slider" data-from="0" data-to="5000" data-currency="$"></div>
             </div>
           <div className="filter">

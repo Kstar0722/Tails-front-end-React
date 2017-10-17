@@ -3,28 +3,14 @@ import { checkHttpStatus, parseJSON } from '../http.js'
 import user from 'auth/user'
 import { browserHistory } from 'react-router'
 import apiService from '../lib/api'
+import { breeds } from '../config'
 
-import { GET_COMPLETED_SHIPPING } from '../config/actionTypes'
-
-// export function getListing(listing_id, filter) {
-//   return function (dispatch) {
-//     return apiService.find('listings' + '/' + listing_id, filter)
-//       .then(res => {
-//
-//         console.log('getListing res', res)
-//         // dispatch({ type: GET_BIDS_BY_LISTING_ID, bids: res.data })
-//       })
-//       .catch(error => {
-//         console.log('getBids err', error)
-//       })
-//   }
-// }
+import { GET_COMPLETED_SHIPPING, GET_ALL_LISTINGS } from '../config/actionTypes'
 
 export function getCompletedShipping(filter) {
   return function (dispatch) {
     return apiService.find('listings', filter)
       .then(res => {
-        console.log('getCompletedShipping res', res)
         dispatch({ type: GET_COMPLETED_SHIPPING, total: res.total })
       })
       .catch(error => {
@@ -46,7 +32,6 @@ export function getListing(listing_id) {
       .then(checkHttpStatus)
       .then(parseJSON)
       .then(res => {
-        console.log('getListing res', res)
         dispatch({ type: 'GET_LISTINGS_SUCCESS', data: res })
       })
       .catch(error =>{
@@ -79,39 +64,92 @@ export function getListings() {
 
 export function getAllListings(filter) {
   return function (dispatch) {
+
+    let listings = []
+
     return apiService.find('listings', filter)
       .then(res => {
-        console.log('getAllListings res', res)
-        dispatch({ type: 'GET_LISTINGS_SUCCESS', data: res })
+        let ids = []
+        if(res.total > 0) {
+
+          listings = res.data;
+          listings.forEach(listing => {
+            if (listing.animals.length) {
+              ids = ids.concat(listing.animals.map(animal => animal.id))
+            }
+
+            listing.images = [];
+          })
+
+          return ids
+        }
+
+        return []
+      })
+      .then(animals_ids => {
+
+        if (animals_ids.length) {
+          const listing_animal_id = {}
+          listing_animal_id.in = animals_ids.join(',')
+
+          return apiService.find('animal_images', {
+            filter: { listing_animal_id }
+          })
+            .then(res => {
+              return res.data
+            })
+            .catch(error => {
+              console.log('getListingAnimals err', error)
+              return []
+            })
+        }
+
+        return []
+      })
+      .then(images => {
+
+        let imagesObj = {};
+        images.forEach(image => {
+          if (!imagesObj[image.listing_animal_id]){
+            imagesObj[image.listing_animal_id] = [];
+          }
+
+          imagesObj[image.listing_animal_id].push(image);
+        })
+
+        let tmp = []
+        listings.forEach(listing => {
+
+          let counts = {}
+
+          if (listing.animals.length) {
+            listing.animals.forEach(animal => {
+              if (imagesObj[animal.id]) {
+                listing.images = listing.images.concat( imagesObj[animal.id] )
+              }
+
+              if (breeds.indexOf(animal.breed) > -1){
+                if (!counts[animal.breed]){
+                  counts[animal.breed] = 0;
+                }
+                counts[animal.breed]++;
+              }
+
+            })
+
+            listing.countBreeds = Object.keys(counts)
+              .map(type => counts[type]+' '+ type + ((counts[type]>1) ? 's' : ''))
+              .join(',');
+          }
+        })
+
+        dispatch({ type: GET_ALL_LISTINGS, data: listings })
       })
       .catch(error => {
         console.log('getAllListings err', error)
-        dispatch({ type: 'GET_LISTINGS_FAILURE', error })
       })
   }
 }
-
-// export function getAllListings() {
-//     return function(dispatch) {
-//         const url = config.endpoints.url + config.endpoints.listings + "?include_bid_counts=1"
-//         return fetch(url, {
-//             method: 'get',
-//             headers: {
-//                 'Content-Type': 'application/json',
-//                 'Authorization': 'Bearer ' + user.token
-//             },
-//         })
-//         .then(checkHttpStatus)
-//         .then(parseJSON)
-//         .then(res => {
-//             console.log(res)
-//             dispatch({ type: 'GET_LISTINGS_SUCCESS', data: res })
-//         })
-//         .catch(error =>{
-//             dispatch({ type: 'GET_LISTINGS_FAILURE', error })
-//         })
-//     }
-// }
 
 export function deleteListing(id) {
     return function(dispatch) {
@@ -130,8 +168,6 @@ export function deleteListing(id) {
         })
         .catch(error =>{
             dispatch({ type: 'ERROR_LISTING', error })
-
-
         })
     }
 }
