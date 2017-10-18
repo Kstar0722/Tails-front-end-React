@@ -5,6 +5,7 @@ import { Component } from 'react'
 import { connect } from 'react-redux'
 import { getUser } from '../../../../actions/user'
 import { getCompletedShipping } from '../../../../actions/listing'
+import { getProfile } from 'actions/profile'
 import moment from 'moment'
 
 class ListingDetailsSidebar extends Component {
@@ -13,6 +14,7 @@ class ListingDetailsSidebar extends Component {
   }
 
   componentWillMount() {
+    const userId = window.localStorage.getItem("userId")
     this.props.getUser()
     this.props.getCompletedShipping()
   }
@@ -56,10 +58,10 @@ class ListingDetailsSidebar extends Component {
 }
 
 const mapStateToProps = state => ({
-  user: state.user.data,
+  user: state.profile.data,
   listing: state.listing.data,
   bid: state.bid,
   completedShipping: state.listing.completedShipping
 })
 
-export default connect(mapStateToProps, { getUser, getCompletedShipping } )(ListingDetailsSidebar)
+export default connect(mapStateToProps, { getProfile, getUser, getCompletedShipping } )(ListingDetailsSidebar)

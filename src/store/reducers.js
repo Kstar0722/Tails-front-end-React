@@ -12,6 +12,7 @@ import userReducer from './user'
 import notificationsBidGetReducer from './notifications_bid'
 import listingBidReducer from './listing_bid'
 import listingAnimalsReducer from './listingAnimals'
+import allListingsGetReducer from './listings'
 
 export const makeRootReducer = (asyncReducers) => {
   return combineReducers({
@@ -28,6 +29,7 @@ export const makeRootReducer = (asyncReducers) => {
     user: userReducer,
     listing_bid: listingBidReducer,
     listingAnimals: listingAnimalsReducer,
+    listings: allListingsGetReducer,
     ...asyncReducers
   })
 }

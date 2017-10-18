@@ -5,6 +5,7 @@ import CowImage from 'assets/cow.jpg'
 import DogImage from 'assets/dog.jpg'
 import ListItem from './ListItem/ListItem'
 import ListingSidebar from './Sidebar/ListingSidebar'
+import ListItems from './ListItems/ListItems'
 
 
 class AllListings extends React.Component {
@@ -13,12 +14,12 @@ class AllListings extends React.Component {
 		this.state = {
 			getAllListings: []
 		}
-		console.log('AllListings const')
 	}
 
 	componentWillMount() {
 		this.props.getAllListings({
-      include_bid_counts: 1
+      include_bid_counts: 1,
+      include: ['animals']
     })
 	}
 
@@ -39,17 +40,19 @@ class AllListings extends React.Component {
 					listing.desired_delivery_date,
 					listing.budget,
 					listing.other_notes,
-					listing.bids_count
-				))
+					listing.bids_count,
+          listing.images,
+          listing.countBreeds
+      ))
 			})
 
 			return listings
 		}
 	}
 
-	renderAllListings(id, title, created_at, pick_up_city, pick_up_state, desired_pick_up_date, delivery_city, delivery_state, desired_delivery_date, budget, other_notes, bids_count) {
+	renderAllListings(id, title, created_at, pick_up_city, pick_up_state, desired_pick_up_date, delivery_city, delivery_state, desired_delivery_date, budget, other_notes, bids_count, images, animals) {
 		return (
-			<ListItem
+			<ListItems
         id={id}
 				title={title}
 				created_at={created_at}
@@ -63,40 +66,45 @@ class AllListings extends React.Component {
 				other_notes={other_notes}
 				bids_count={bids_count}
         listing_details={true}
+        images={images}
+        animals={animals}
 			/>
 		)
 	}
 
 	render() {
+
 		const { listings } = this.props
+
 		return (
-            <main>
-                <section id="main-banner">
-                    <div className="container text-center">
-                        <div className="row">
-                            <div className="col-md-12">
-                                <h1>Current <span>Listings</span></h1>
-                                <p>Check back often, our users are always adding new listings</p>
-                            </div>
-                        </div>
-                    </div>
-                </section>
+      <main>
+        <section id="main-banner">
+          <div className="container text-center">
+            <div className="row">
+              <div className="col-md-12">
+                <h1>Current <span>Listings</span></h1>
+                <p>Check back often, our users are always adding new listings</p>
+              </div>
+            </div>
+          </div>
+        </section>
 
-                <section id="main-content">
-                    <div className="container">
-                        <div className="row list-items">
-                            <div className="col-md-8">
-								{this.getAllListings()}
-								{/* <ListItem /> */}
-                            </div>
+        <section id="main-content">
+            <div className="container">
+                <div className="row list-items">
+                    <div className="col-md-8">
 
-                            <div className="col-md-4 sidebar">
-								<ListingSidebar />
-                            </div>
-                        </div>
+                      {this.getAllListings()}
+
                     </div>
-                </section>
-            </main>
+
+                    <div className="col-md-4 sidebar">
+                      <ListingSidebar />
+                    </div>
+                </div>
+            </div>
+        </section>
+      </main>
 		)
 	}
 }
