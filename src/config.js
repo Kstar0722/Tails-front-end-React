@@ -17,5 +17,6 @@ export default {
     },
     stripe: {
         public_key: process.env.STRIPE_PUBLIC || ''
-    }
+    },
+    breeds: ['Dog', 'Horse', 'Cow', 'Goat', 'Cat', 'Bird']
 }

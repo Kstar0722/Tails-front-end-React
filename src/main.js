@@ -4,6 +4,7 @@ import createStore from './store/createStore'
 import './styles/main.scss'
 import config from './config'
 import apiService from './lib/api'
+import { getProfile } from 'actions/profile'
 
 // Initialise basic application info
 let token = localStorage.getItem('authToken')
@@ -17,9 +18,14 @@ apiService.config({
   }
 })
 
+
 // Store Initialization
 // ------------------------------------
 const store = createStore(window.__INITIAL_STATE__)
+
+if(token){
+  store.dispatch(getProfile());
+}
 
 // Render Setup
 // ------------------------------------
