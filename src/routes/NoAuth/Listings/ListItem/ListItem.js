@@ -8,23 +8,15 @@ import AddBidModal from '../Modals/AddBidModal';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { getListingAnimals } from '../../../../actions/listing_animals'
+import { breeds } from '../../../../config'
 
 class ListItem extends React.Component {
 	constructor(props) {
 		super(props)
     this.state = {
 		  images: [],
-      count: {
-        Horse: false,
-        Dog: false,
-        Cow: false,
-        Goat: false,
-        Cat: false,
-        Bird: false
-      },
       countBreeds: ''
     }
-    this.getCountBreeds = this.getCountBreeds.bind(this)
 	}
 
 	componentDidMount() {
@@ -34,38 +26,40 @@ class ListItem extends React.Component {
       },
       include: ['images']
     })
+  }
 
-     if (Object.keys(this.props.listingAnimals).length > 0) {
+  componentWillReceiveProps(nextProps){
+    this.prepareData(nextProps)
+  }
 
-      this.props.listingAnimals.forEach(animal => {
-        switch (animal.breed) {
-          case "Horse": this.setState({ Horse: this.state.count.Horse++ })
-            break;
-          case "Dog": this.setState({ Dog: this.state.count.Dog++ })
-            break;
-          case "Cow": this.setState({ Cow: this.state.count.Cow++ })
-            break;
-          case "Goat": this.setState({ Goat: this.state.count.Goat++ })
-            break;
-          case "Cat": this.setState({ Cat: this.state.count.Cat++ })
-            break;
-          case "Bird": this.setState({ Goat: this.state.count.Bird++ })
-            break;
+  prepareData(props) {
+    if (Object.keys(props.listingAnimals).length > 0) {
+
+      let images = []
+      let counts = {}
+
+      props.listingAnimals.forEach(animal => {
+
+        if (breeds.indexOf(animal.breed) > -1){
+          if (!counts[animal.breed]){
+            counts[animal.breed] = 0;
+          }
+          counts[animal.breed]++;
+        }
+
+        if (animal.images.length) {
+          animal.images.forEach(image => {
+            images.push(image)
+          })
         }
       })
 
-       this.getCountBreeds()
+      const countBreeds = Object.keys(counts)
+        .map(type => counts[type]+' '+ type + ((counts[type]>1) ? 's' : ''))
+        .join(',');
+
+      this.setState({ images, countBreeds })
     }
-
-  }
-
-  getCountBreeds(){
-    const countBreeds = Object.keys(this.state.count)
-      .filter(type => this.state.count[type])
-      .map(type => this.state.count[type]+' '+ type + ((this.state.count[type]>1) ? 's' : ''))
-      .join(',');
-
-    this.setState({ countBreeds })
   }
 
   render() {
@@ -78,12 +72,20 @@ class ListItem extends React.Component {
 
             <div className="image-holder text-center">
 
-              <img src={ (Object.keys(this.props.listingAnimals)).length > 0 ? this.props.listingAnimals['0'].images['0'].url : '' } className="main-image" />
+              <img src={ (this.state.images.length) ? this.state.images['0'].url : '' } className="main-image" />
 
               <div className="thumbs">
-                <a href="#"><img src={CowImage} alt=""/></a>
-                <a href="#"><img src={CowImage} alt=""/></a>
-                <a href="#"><img src={CowImage} alt=""/></a>
+
+                { (this.state.images.length > 1) ? this.state.images.map((image, index) => {
+
+                    if (index < 3) {
+                      return <a href="#"><img src={image.url} alt=""/></a>
+                    }
+
+                  }
+
+                ) : '' }
+
               </div>
 
             </div>
