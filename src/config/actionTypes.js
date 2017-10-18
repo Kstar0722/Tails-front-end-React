@@ -8,6 +8,13 @@ export const PROFILE_STRIPE = 'PROFILE_STRIPE';
 export const GET_NOTIFICATION = 'GET_NOTIFICATION';
 export const CLEAR_NOTIFICATION = 'CLEAR_NOTIFICATION';
 // -----------------------------------------------------
+//
+// NOTIFICATION BITS
+export const GET_NOTIFICATION_BIDS = 'GET_NOTIFICATION_BIDS';
+export const GET_NOTIFICATION_BIDS_UPDATE = 'GET_NOTIFICATION_BIDS_UPDATE';
+
+
+// -----------------------------------------------------
 
 // BIDS
 export const ADD_BID_SUCCESS = 'ADD_BID_SUCCESS';

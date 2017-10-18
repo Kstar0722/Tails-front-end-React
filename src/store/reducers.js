@@ -9,6 +9,7 @@ import bidGetReducer from './bid'
 import animalsReducer from './animals'
 import animalShipReducer from './animalShip'
 import userReducer from './user'
+import notificationsBidGetReducer from './notifications_bid'
 import listingBidReducer from './listing_bid'
 import listingAnimalsReducer from './listingAnimals'
 
@@ -20,6 +21,7 @@ export const makeRootReducer = (asyncReducers) => {
     auth: authReducer,
     listing: listingGetReducer,
     profile: profileReducer,
+    notifications_bid: notificationsBidGetReducer,
     bid: bidGetReducer,
     animalsReducer,
     animalShipReducer,

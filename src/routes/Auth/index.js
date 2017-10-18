@@ -2,6 +2,7 @@ import AuthorizedContainer from 'containers/AuthorizedContainer'
 
 // import Mock from './MockBackend/Mock'
 import Profile from './Profile/Profile'
+import Notification from './Notification/Notification'
 import EditProfile from './EditProfile/EditProfile'
 import StepOne from './Lists/StepOne/StepOne'
 import StepTwo from './Lists/StepTwo/StepTwo'
@@ -12,9 +13,13 @@ export default {
 	component: AuthorizedContainer,
 	childRoutes: [
 		{
-			path: '/profile',
-			component: Profile
-		},
+      path: '/profile',
+      component: Profile
+    },
+    {
+      path: '/notification/:id',
+      component: Notification
+    },
 		{
 			path: '/profile/edit',
 			component: EditProfile
