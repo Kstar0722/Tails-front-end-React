@@ -3,7 +3,6 @@ import { checkHttpStatus, parseJSON } from '../http.js'
 import user from 'auth/user'
 import { browserHistory } from 'react-router'
 import apiService from '../lib/api'
-import { breeds } from '../config'
 
 import { GET_COMPLETED_SHIPPING, GET_ALL_LISTINGS } from '../config/actionTypes'
 
@@ -32,6 +31,7 @@ export function getListing(listing_id) {
       .then(checkHttpStatus)
       .then(parseJSON)
       .then(res => {
+        console.log('getListing res', res)
         dispatch({ type: 'GET_LISTINGS_SUCCESS', data: res })
       })
       .catch(error =>{
@@ -128,7 +128,7 @@ export function getAllListings(filter) {
                 listing.images = listing.images.concat( imagesObj[animal.id] )
               }
 
-              if (breeds.indexOf(animal.breed) > -1){
+              if (config.breeds.indexOf(animal.breed) > -1){
                 if (!counts[animal.breed]){
                   counts[animal.breed] = 0;
                 }

@@ -8,7 +8,7 @@ import AddBidModal from '../Modals/AddBidModal';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { getListingAnimals } from '../../../../actions/listing_animals'
-import { breeds } from '../../../../config'
+import config from '../../../../config'
 
 class ListItem extends React.Component {
 	constructor(props) {
@@ -40,7 +40,7 @@ class ListItem extends React.Component {
 
       props.listingAnimals.forEach(animal => {
 
-        if (breeds.indexOf(animal.breed) > -1){
+        if (config.breeds.indexOf(animal.breed) > -1) {
           if (!counts[animal.breed]){
             counts[animal.breed] = 0;
           }

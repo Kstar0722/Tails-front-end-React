@@ -87,7 +87,7 @@ class ListDetails extends Component {
 
                 <div className="col-md-4 sidebar">
                   <ListingDetailsSidebar
-                    id={this.props.listing.data.id}
+                    id={this.props.params.id}
                     title={this.props.listing.data.title}
                     budget={this.props.listing.data.budget}
                   />

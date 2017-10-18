@@ -3,20 +3,33 @@ import './ListingDetailsSidebar.scss'
 import AddBidModal from '../Modals/AddBidModal'
 import { Component } from 'react'
 import { connect } from 'react-redux'
-import { getUser } from '../../../../actions/user'
 import { getCompletedShipping } from '../../../../actions/listing'
+import { getBidsByListingID } from '../../../../actions/bids'
 import { getProfile } from 'actions/profile'
 import moment from 'moment'
 
 class ListingDetailsSidebar extends Component {
   constructor(props) {
     super(props)
+    this.state = {
+      visibleNewBidBtn: true
+    }
   }
 
   componentWillMount() {
-    const userId = window.localStorage.getItem("userId")
-    this.props.getUser()
     this.props.getCompletedShipping()
+    this.props.getBidsByListingID({
+      filter: {
+        listing_id: this.props.id
+      }, include: ['user']
+    })
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.bid.data.length){
+      const checkBids = nextProps.bid.data.filter(bid => bid.user_id == this.props.user.id)
+      if (checkBids.length > 0) this.state.visibleNewBidBtn = false
+    }
   }
 
   render() {
@@ -43,13 +56,19 @@ class ListingDetailsSidebar extends Component {
           <div className="filter">
             <label className="filter-label">Bids: { Object.keys(this.props.bid.data).length }</label>
           </div>
-          <div className="filter">
-            <AddBidModal
-              id={this.props.id}
-              title={this.props.title}
-              budget={this.props.budget}
-            />
-          </div>
+
+          { (this.state.visibleNewBidBtn) ?
+
+            <div className="filter">
+              <AddBidModal
+                id={this.props.id}
+                title={this.props.title}
+                budget={this.props.budget}
+              />
+            </div>
+
+            : ''}
+
         </div>
       </div>
     )
@@ -64,4 +83,4 @@ const mapStateToProps = state => ({
   completedShipping: state.listing.completedShipping
 })
 
-export default connect(mapStateToProps, { getProfile, getUser, getCompletedShipping } )(ListingDetailsSidebar)
+export default connect(mapStateToProps, { getProfile, getCompletedShipping, getBidsByListingID } )(ListingDetailsSidebar)

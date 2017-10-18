@@ -9,7 +9,8 @@ class AddBidModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      modal: false
+      modal: false,
+      visibleButton: true
     };
 
     this.toggle = this.toggle.bind(this);
@@ -38,13 +39,14 @@ class AddBidModal extends React.Component {
           include: ['user']
         })
       )
+      .then(this.setState({ visibleButton: false }))
   }
 
   render() {
 
     return (
       <div>
-        <Button color="danger" onClick={this.toggle}><span className="bid-now-btn">BID NOW</span></Button>
+        { (this.state.visibleButton) ? <Button color="danger" onClick={this.toggle}><span className="bid-now-btn">BID NOW</span></Button> : '' }
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
           <form onSubmit={this.handleSubmit} className="form-add-bid" >
             <ModalHeader toggle={this.toggle}>{this.props.title} - $ {this.props.budget} Budget</ModalHeader>
