@@ -14,7 +14,7 @@
 	}
 
 	label{
-		padding: 10px 0px;
+		padding: 0px 0px 10px;
 		&.btn-primary {
 			padding: 10px;
 		}
@@ -125,4 +125,8 @@
 	}
 
 
+}
+.bottom-style{
+	position: relative;
+	bottom: 35px;
 }

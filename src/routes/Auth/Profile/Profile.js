@@ -68,7 +68,7 @@ class Profile extends React.Component {
 							<div className="block-section my-listings">
 								<p className="title">My Listings</p>
 								{
-									listings.data.data.length > 0 
+									listings.data.data.length > 0
 									? <div>
 										<div className="table-responsive">
 											<ListingsContainer />
@@ -108,7 +108,7 @@ class Profile extends React.Component {
 
 const mapStateToProps = state => ({
     profile: state.profile.data,
-	listings: state.listing
+	  listings: state.listing.data ? state.listing.data.data ? state.listing : {data: []} : {data: []}
 })
 
 const mapDispatchToProps = dispatch => ({
