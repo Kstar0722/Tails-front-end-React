@@ -1,39 +1,125 @@
 import './BidItem.scss'
 import { Button } from 'reactstrap'
+import { Component } from 'react'
+import { getCountTransferedBids, getBidsByListingID, updateStatusBid } from '../../../../actions/bids'
+import { connect } from 'react-redux'
+import moment from 'moment'
 
-const BidItem = props => {
-  return(
-    <div className="list-item">
-      <div className="top-part">
-        <div className="image-holder text-center">
-          <img src={props.avatar} className="main-image" />
-        </div>
+class BidItem extends Component  {
 
-        <div className="right-content-holder">
-          <div className="row">
-            <div className="col-lg-7"><h5>{props.title} - $ {props.cost}</h5></div>
-          </div>
+  constructor(props){
+    super(props)
 
-          <div className="row">
-            <div className="col-md-12 listing-excerpt">
-              <p>{props.description}</p>
+    this.state = {
+      more: false
+    }
+
+    this.onClickAwardJob = this.onClickAwardJob.bind(this)
+  }
+
+  onClickReadMore(user_id) {
+    this.props.getCountTransferedBids({ filter: { user_id } })
+    this.setState({ more: true })
+  }
+
+  onClickAwardJob() {
+    this.props.updateStatusBid({
+
+      listing_id: this.props.listing_id,
+      bid_id: this.props.bid_id
+
+    }).then(
+      this.props.getBidsByListingID({
+        filter: {
+          listing_id: this.props.listing_id
+        },
+        include: ['user']
+      })
+    )
+  }
+
+  renderBtnByStatus(){
+    console.log('status', this.props.status)
+    switch (this.props.status){
+      case "accepted": return <div className="accepted">Accepted</div>
+        break
+      case "rejected": return <div className="rejected">Rejected</div>
+        break
+      default: return <Button onClick={this.onClickAwardJob}>Award Job</Button>
+    }
+  }
+
+  render(){
+
+    if (!this.state.more) {
+      return(
+        <div className="list-item">
+          <div className="top-part">
+            <div className="image-holder-min text-center">
+              <img src={this.props.avatar} className="main-image" />
+            </div>
+
+            <div className="right-content-holder">
+              <div className="row">
+                <div className="col-lg-10"><h3>{this.props.title}</h3></div>
+                <div className="col-lg-2"><h3>$ {this.props.cost}</h3></div>
+              </div>
+
+              <div className="row">
+                <div className="col-md-12 listing-excerpt">
+                  <p>{this.props.description.substr(0,400)}</p>
+                </div>
+              </div>
+
+              <div className="row">
+                <div className="col-md-12 read-more" onClick={this.onClickReadMore.bind(this, this.props.user_id)} >... read more</div>
+              </div>
+
             </div>
           </div>
 
-          <div className="row">
-            <div className="col-md-12 listing-excerpt">
-              <p>
-                <Button color="primary">Message User</Button>
-                <Button color="primary">Award Job</Button>
-              </p>
+        </div>
+      )
+    } else {
+      return(
+        <div className="list-item">
+          <div className="top-part">
+            <div className="image-holder-max text-center">
+              <img src={this.props.avatar} className="main-image" />
+              <div>Member Since: { (this.props.bidder_details.hasOwnProperty(this.props.user_id)) ? moment(this.props.bidder_details[this.props.user_id].created_at).format('YYYY') : '' }</div>
+              <div>{ (this.props.bidder_details.hasOwnProperty(this.props.user_id))  ? this.props.bidder_details[this.props.user_id].transfered : '' } Shipments</div>
+            </div>
+
+            <div className="right-content-holder">
+              <div className="row">
+                <div className="col-lg-10"><h3>{this.props.title}</h3></div>
+                <div className="col-lg-2"><h3>$ {this.props.cost}</h3></div>
+              </div>
+
+              <div className="row">
+                <div className="col-md-12 listing-excerpt">
+                  <p>{this.props.description}</p>
+                </div>
+              </div>
+
+              <div className="row">
+                <Button>Message User</Button>
+
+                {this.renderBtnByStatus()}
+
+              </div>
+
             </div>
           </div>
 
         </div>
-      </div>
-
-    </div>
-  )
+      )
+    }
+  }
 }
 
-export default BidItem
+const mapstateToProps = (state) => ({
+  bidder_details: state.bid.bidder_details
+})
+
+export default connect(mapstateToProps, { getCountTransferedBids, updateStatusBid, getBidsByListingID })(BidItem)

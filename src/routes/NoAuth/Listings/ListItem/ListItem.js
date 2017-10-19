@@ -8,22 +8,58 @@ import AddBidModal from '../Modals/AddBidModal';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { getListingAnimals } from '../../../../actions/listing_animals'
+import config from '../../../../config'
 
 class ListItem extends React.Component {
 	constructor(props) {
 		super(props)
     this.state = {
-		  images: []
+		  images: [],
+      countBreeds: ''
     }
 	}
 
 	componentDidMount() {
 	  this.props.getListingAnimals({
       filter: {
-        listing_id: 1
+        listing_id: this.props.id
       },
       include: ['images']
     })
+  }
+
+  componentWillReceiveProps(nextProps){
+    this.prepareData(nextProps)
+  }
+
+  prepareData(props) {
+    if (Object.keys(props.listingAnimals).length > 0) {
+
+      let images = []
+      let counts = {}
+
+      props.listingAnimals.forEach(animal => {
+
+        if (config.breeds.indexOf(animal.breed) > -1) {
+          if (!counts[animal.breed]){
+            counts[animal.breed] = 0;
+          }
+          counts[animal.breed]++;
+        }
+
+        if (animal.images.length) {
+          animal.images.forEach(image => {
+            images.push(image)
+          })
+        }
+      })
+
+      const countBreeds = Object.keys(counts)
+        .map(type => counts[type]+' '+ type + ((counts[type]>1) ? 's' : ''))
+        .join(',');
+
+      this.setState({ images, countBreeds })
+    }
   }
 
   render() {
@@ -36,12 +72,20 @@ class ListItem extends React.Component {
 
             <div className="image-holder text-center">
 
-              <img src={ (Object.keys(this.props.listingAnimals)).length > 0 ? this.props.listingAnimals['0'].images['0'].url : '' } className="main-image" />
+              <img src={ (this.state.images.length) ? this.state.images['0'].url : '' } className="main-image" />
 
               <div className="thumbs">
-                <a href="#"><img src={CowImage} alt=""/></a>
-                <a href="#"><img src={CowImage} alt=""/></a>
-                <a href="#"><img src={CowImage} alt=""/></a>
+
+                { (this.state.images.length > 1) ? this.state.images.map((image, index) => {
+
+                    if (index < 3) {
+                      return <a href="#"><img src={image.url} alt=""/></a>
+                    }
+
+                  }
+
+                ) : '' }
+
               </div>
 
             </div>
@@ -81,7 +125,7 @@ class ListItem extends React.Component {
           </div>
 
           <div className="bottom-details">
-              <div className="animal-tags bottom-detail">2 Cows, 1 Dog</div>
+              <div className="animal-tags bottom-detail">{ this.state.countBreeds }</div>
               <div className="budget-details bottom-detail">
                   <NumberFormat value={budget} displayType={'text'} thousandSeparator={true} prefix={'$'} />
               </div>

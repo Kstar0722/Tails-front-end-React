@@ -47,10 +47,14 @@ class ListBids extends Component {
         { (bids.length > 0) ? bids.map(bid =>
 
           <BidItem
+            user_id={ bid.user.id }
+            bid_id={ bid.id }
+            listing_id={ this.props.listing.id }
             avatar={ bid.user.avatar }
             title={ bid.user.first_name + ' ' + bid.user.last_name }
             description={ bid.description }
             cost={ bid.cost }
+            status={ bid.status }
           />
 
         ) : '' }

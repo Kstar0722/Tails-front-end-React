@@ -14,5 +14,9 @@ export default {
         bids: '/bids',
         listings_animals: '/listing_animals',
         animal_image: '/animal_images'
-    }
+    },
+    stripe: {
+        public_key: process.env.STRIPE_PUBLIC || ''
+    },
+    breeds: ['Dog', 'Horse', 'Cow', 'Goat', 'Cat', 'Bird']
 }
