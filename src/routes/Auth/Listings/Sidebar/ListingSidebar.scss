@@ -172,7 +172,11 @@
 
             select {
                 padding-left: 27px;
-                color: #fff
+                color: #fff;
+
+            }
+            select option{
+                color: black;
             }
         }
 
@@ -251,5 +255,8 @@
                 }
             }
         }
+    }
+    select option{
+        color: black;
     }
 }
