@@ -20,12 +20,14 @@ class ListItem extends React.Component {
 	}
 
 	componentDidMount() {
-	  this.props.getListingAnimals({
-      filter: {
-        listing_id: this.props.id
-      },
-      include: ['images']
-    })
+	  if (this.props.id) {
+      this.props.getListingAnimals({
+        filter: {
+          listing_id: this.props.id
+        },
+        include: ['images']
+      })
+    }
   }
 
   componentWillReceiveProps(nextProps){

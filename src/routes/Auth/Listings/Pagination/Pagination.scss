@@ -1,0 +1,10 @@
+.pagination-list {
+  display: flex;
+  justify-content: center;
+  .page-item.active .page-link {
+    z-index: 2;
+    color: #fff;
+    background-color: #23acd5;
+    border-color: #23acd5;
+  }
+}
