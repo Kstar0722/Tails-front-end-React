@@ -11,7 +11,6 @@ export function getBidsByListingID(filter) {
   return function (dispatch) {
     return apiService.find('bids', filter)
       .then(res => {
-        //console.log('getBidsByListingID res', res)
         dispatch({ type: GET_BIDS_BY_LISTING_ID, bids: res.data })
       })
       .catch(error => {

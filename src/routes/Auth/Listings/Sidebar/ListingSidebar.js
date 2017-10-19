@@ -5,7 +5,6 @@ import 'assets/DatePicker.scss';
 import { connect } from 'react-redux'
 import { getAllListings, setFilter } from '../../../../actions/listing'
 import InputRange from 'react-input-range'
-import config from '../../../../config'
 import { setCurrentPage } from '../../../../actions/pagination'
 
 class ListingSidebar extends React.Component {
@@ -114,7 +113,7 @@ class ListingSidebar extends React.Component {
       include_bid_counts: 1,
       include: ['animals'],
       page: {
-        size: config.pagination.defaultPageSize
+        size: this.props.pagination.defaultPageSize
       }
     })
   }
@@ -322,4 +321,8 @@ class ListingSidebar extends React.Component {
 	}
 }
 
-export default connect(null, { getAllListings, setFilter, setCurrentPage } )(ListingSidebar)
+const mapStateToProps = (state) => ({
+  pagination: state.pagination
+})
+
+export default connect(mapStateToProps, { getAllListings, setFilter, setCurrentPage } )(ListingSidebar)

@@ -1,3 +1,4 @@
+import './Pagination.scss'
 import React from 'react';
 import { Pagination, PaginationItem, PaginationLink } from 'reactstrap';
 import { connect } from 'react-redux'
@@ -58,17 +59,19 @@ class Paginations extends React.Component {
   render() {
     if (this.props.pagination.countPages > 1) {
       return(
-        <Pagination size="lg">
-          <PaginationItem>
-            <PaginationLink previous onClick={this.onClickPrevious.bind(this)} />
-          </PaginationItem>
+        <div className="pagination-list">
+          <Pagination size="lg">
+            <PaginationItem>
+              <PaginationLink previous onClick={this.onClickPrevious.bind(this)} />
+            </PaginationItem>
 
-          { this.renderPaginationItems() }
+            { this.renderPaginationItems() }
 
-          <PaginationItem>
-            <PaginationLink next onClick={this.onClickNext.bind(this)} />
-          </PaginationItem>
-        </Pagination>
+            <PaginationItem>
+              <PaginationLink next onClick={this.onClickNext.bind(this)} />
+            </PaginationItem>
+          </Pagination>
+        </div>
       )
     } else return null
   }
