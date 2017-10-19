@@ -6,7 +6,8 @@ const mapDispatchToProps = (dispatch) => ({
 })
 
 const mapStateToProps = (state) => ({
-  listings: state.listings
+  listings: state.listings,
+  pagination: state.pagination
 })
 
 export default ReactRedux.connect(mapStateToProps, mapDispatchToProps)(AllListings)

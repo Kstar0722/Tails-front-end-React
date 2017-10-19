@@ -4,7 +4,7 @@ import user from 'auth/user'
 import { browserHistory } from 'react-router'
 import apiService from '../lib/api'
 
-import { GET_COMPLETED_SHIPPING, GET_ALL_LISTINGS } from '../config/actionTypes'
+import { GET_COMPLETED_SHIPPING, GET_ALL_LISTINGS, SET_FILTER_LISTINGS } from '../config/actionTypes'
 
 export function getCompletedShipping(filter) {
   return function (dispatch) {
@@ -66,11 +66,15 @@ export function getAllListings(filter) {
   return function (dispatch) {
 
     let listings = []
+    let data = {}
 
     return apiService.find('listings', filter)
       .then(res => {
         let ids = []
         if(res.total > 0) {
+          data.total = res.total
+          data.limit = res.limit
+          data.skip = res.skip
 
           listings = res.data;
           listings.forEach(listing => {
@@ -80,9 +84,8 @@ export function getAllListings(filter) {
 
             listing.images = [];
           })
-
           return ids
-        }
+        } else data.total = 0
 
         return []
       })
@@ -143,11 +146,21 @@ export function getAllListings(filter) {
           }
         })
 
-        dispatch({ type: GET_ALL_LISTINGS, data: listings })
+        data.data = listings
+
+        //console.log('data', data)
+
+        dispatch({ type: GET_ALL_LISTINGS, data: data })
       })
       .catch(error => {
         console.log('getAllListings err', error)
       })
+  }
+}
+
+export function setFilter(filter) {
+  return function (dispatch) {
+    dispatch({ type: SET_FILTER_LISTINGS, filter })
   }
 }
 

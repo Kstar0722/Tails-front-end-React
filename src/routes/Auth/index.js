@@ -9,6 +9,10 @@ import StepTwo from './Lists/StepTwo/StepTwo'
 import StepThree from './Lists/StepThree/StepThree'
 import StepFour from './Lists/StepFour/StepFour'
 import ReviewItem from './Profile/listings/ReviewItem'
+import AllListings from './Listings/ListingsContainer'
+import ListDetails from './Listings/ListDetails/ListDetails'
+
+
 export default {
 	component: AuthorizedContainer,
 	childRoutes: [
@@ -43,6 +47,14 @@ export default {
 		{
 			path: '/profile/item-review',
 			component: ReviewItem
-		}
+		},
+    {
+      path: '/listings',
+      component: AllListings
+    },
+    {
+      path: '/listing-details/:id',
+      component: ListDetails
+    },
 	]
 }
