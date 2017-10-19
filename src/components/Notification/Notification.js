@@ -31,13 +31,21 @@ class Notification extends Component {
   }
 
   toggle (type) {
-    this.setState({
-      [type]: !this.state[type]
+    let count = 0;
+    this.props.notifications.map(notification => {
+      if (!notification.my_bid[0].details.approved_by_bidder) {
+        count++;
+      }
     })
+    if (count > 0 ){
+      this.setState({
+        [type]: !this.state[type]
+      })
+    }
+
   }
 
   componentWillMount () {
-    console.log('componentWillMount 123', this.props.user.id)
     if(this.props.user.id) {
       this.props.getNotification(
         {
@@ -96,7 +104,7 @@ class Notification extends Component {
               )}
             </PopoverContent>
           </Popover>
-          <label className="labelCount" style={{background: count > 0 ? '#27d6ff' : 'black' }}>{count}</label>
+          <label className="labelCount" style={{display: count > 0 ? 'inline-block' : 'none' }}>{count}</label>
         </div>
       </div>
     )

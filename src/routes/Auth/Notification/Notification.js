@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import './Notification.scss'
 import { connect } from 'react-redux'
+import moment from 'moment'
 import { approveBid } from 'actions/notifications_bid'
 
 class Notification extends Component {
@@ -8,25 +9,24 @@ class Notification extends Component {
 
     super(props)
     this.state = {
-        isChecked: ''
+      isToggleOn: false
     }
     this.approve = this.approve.bind(this)
-    this.isChecked = this.isChecked.bind(this)
+    this.handleClick = this.handleClick.bind(this);
   }
 
   approve (id) {
     this.props.approveBid(id)
   }
 
-  isChecked (this_true) {
-    console.log('param',this_true)
-    this.setState({
-      isChecked: {this_true}
-    })
+  handleClick() {
+    this.setState(prevState => ({
+      isToggleOn: !prevState.isToggleOn
+    }));
   }
 
+
   render () {
-    console.log('params', this.props.params)
     return (
       <div className="container">
         <div className="Notificaton">
@@ -37,17 +37,17 @@ class Notification extends Component {
               return <div key={index}>
                 <h3 className="titleNotification"> {notification.user.first_name} has ofer the
                   job {notification.title}</h3>
-                <p>This shipment must be picked up by {notification.created_at} and dropper off
-                  by {notification.update_at}</p>
+                <p>This shipment must be picked up by  {moment(new Date(notification.created_at)).format('MMMM Do YYYY')} and dropper off
+                  by {moment(new Date(notification.updated_at)).format('MMMM Do YYYY')}</p>
                 <p>The client has proposed this shipment for {notification.budget} </p>
                 <b>Other Notes:</b>
+                <p>{notification.my_bid[0].description}</p>
                 <p>Please ready the full terms here</p>
-                <input onClick={this.isChecked.bind(this,'this_true')} type="checkbox"/>
+                <input onClick={this.handleClick} type="checkbox" />
                 <a>I agree to the full terms</a>
                 <div className="button_accept">
-                  {console.log('fdghhhhhhhhhh',this.state.isChecked)}
                   <button onClick={this.approve.bind(this, notification.my_bid[0].id)}
-                          disabled={notification.my_bid[0].details.approved_by_bidder || !this.state.isChecked }>I accept this shipment
+                          disabled={notification.my_bid[0].details.approved_by_bidder || this.state.isToggleOn == false  }>I accept this shipment
                   </button>
                 </div>
               </div>
