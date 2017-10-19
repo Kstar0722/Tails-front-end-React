@@ -13,6 +13,7 @@ import notificationsBidGetReducer from './notifications_bid'
 import listingBidReducer from './listing_bid'
 import listingAnimalsReducer from './listingAnimals'
 import allListingsGetReducer from './listings'
+import paginationReducer from './pagination.js'
 
 export const makeRootReducer = (asyncReducers) => {
   return combineReducers({
@@ -30,6 +31,7 @@ export const makeRootReducer = (asyncReducers) => {
     listing_bid: listingBidReducer,
     listingAnimals: listingAnimalsReducer,
     listings: allListingsGetReducer,
+    pagination: paginationReducer,
     ...asyncReducers
   })
 }

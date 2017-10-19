@@ -31,6 +31,7 @@ export const GET_USER = 'GET_USER';
 
 // LISTINGS
 export const GET_COMPLETED_SHIPPING = 'GET_COMPLETED_SHIPPING';
+export const SET_FILTER_LISTINGS = 'SET_FILTER_LISTINGS';
 // -----------------------------------------------------
 
 // ALL LISTINGS
@@ -40,6 +41,12 @@ export const GET_ALL_LISTINGS = 'GET_ALL_LISTINGS';
 
 // LISTING ANIMALS
 export const GET_LISTING_ANIMALS_BY_ID = 'GET_LISTING_ANIMALS_BY_ID';
+// -----------------------------------------------------
+
+// PAGINATION
+export const SET_CURRENT_PAGE_PAGINATION = 'SET_CURRENT_PAGE_PAGINATION';
+export const SET_PAGES_PAGINATION = 'SET_PAGES_PAGINATION';
+export const SET_TOTAL_PAGINATION = 'SET_TOTAL_PAGINATION';
 // -----------------------------------------------------
 
 export default {};
