@@ -6,7 +6,7 @@ const mapDispatchToProps = (dispatch) => ({
 })
 
 const mapStateToProps = (state) => ({
-    listings: state.listing.data,
+    listings: state.listing.data ? state.listing.data.data ? state.listing.data : { data: [] } : { data: [] },
     viewitem: state.params
 })
 
