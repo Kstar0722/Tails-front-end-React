@@ -7,6 +7,7 @@ import ListItem from './ListItem/ListItem'
 import ListingSidebar from './Sidebar/ListingSidebar'
 import ListItems from './ListItems/ListItems'
 import Paginations from './Pagination/Pagination'
+import {BID_CLEAR} from 'config/actionTypes'
 
 class AllListings extends React.Component {
 	constructor(props) {
@@ -27,6 +28,7 @@ class AllListings extends React.Component {
         size: this.props.pagination.defaultPageSize,
       }
     })
+		this.props.dispatch({type: BID_CLEAR})
 	}
 
 	getItems(indexPage) {

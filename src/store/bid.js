@@ -1,4 +1,4 @@
-import { GET_BIDS_BY_LISTING_ID, GET_COUNT_TRANSFERED_BIDS } from '../config/actionTypes'
+import {ADD_BID_SUCCESS, BID_CLEAR, GET_BIDS_BY_LISTING_ID, GET_COUNT_TRANSFERED_BIDS } from '../config/actionTypes'
 
 // Action Handlers
 // ------------------------------------
@@ -12,7 +12,14 @@ const ACTION_HANDLERS = {
   }),
   GET_COUNT_TRANSFERED_BIDS: (state, action) => Object.assign({}, state, {
     bidder_details: Object.assign({}, state.bidder_details, action.data )
+  }),
+  ADD_BID_SUCCESS: (state, action) => Object.assign({}, state, {
+    data:  [...state.data, action.bid]
+  }),
+  BID_CLEAR: (state, action) => Object.assign({}, state, {
+    data:  []
   })
+
 }
 
 // ------------------------------------

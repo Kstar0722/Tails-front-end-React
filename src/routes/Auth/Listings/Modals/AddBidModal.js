@@ -29,24 +29,22 @@ class AddBidModal extends React.Component {
     const bid = this.props.addBidForm.values
     bid.listing_id = this.props.id
 
-    this.props.addBid(bid)
-      .then(this.toggle)
-      .then(
-        this.props.getBidsByListingID({
-          filter: {
-            listing_id: this.props.id
-          },
-          include: ['user']
-        })
-      )
-      .then(this.setState({ visibleButton: false }))
+    this.props.addBid(bid).then(() => {
+        this.toggle();
+    })
   }
 
   render() {
-
+    let {user, bids} = this.props;
+    let visibleBt = true;
+    bids.map(bid => {
+      if(user.id == bid.user_id){
+        visibleBt=false;
+      }
+    })
     return (
       <div>
-        { (this.state.visibleButton) ? <Button color="danger" onClick={this.toggle}><span className="bid-now-btn">BID NOW</span></Button> : '' }
+        { visibleBt ? <Button color="danger" onClick={this.toggle}><span className="bid-now-btn">BID NOW</span></Button> : '' }
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
           <form onSubmit={this.handleSubmit} className="form-add-bid" >
             <ModalHeader toggle={this.toggle}>{this.props.title} - $ {this.props.budget} Budget</ModalHeader>
@@ -86,7 +84,9 @@ AddBidModal = reduxForm({
 })(AddBidModal)
 
 const mapStateToProps = state => ({
-  addBidForm: state.form.addBidForm
+  addBidForm: state.form.addBidForm,
+  bids: state.bid.data ? Array.isArray(state.bid.data) ? state.bid.data : [] : [],
+  user: state.profile.data
 })
 
 export default connect(mapStateToProps, { addBid, getBidsByListingID } )(AddBidModal);

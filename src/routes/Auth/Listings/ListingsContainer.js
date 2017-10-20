@@ -3,6 +3,7 @@ import {getAllListings} from 'actions/listing'
 
 const mapDispatchToProps = (dispatch) => ({
      getAllListings: filter => dispatch(getAllListings(filter)),
+    dispatch: dispatch
 })
 
 const mapStateToProps = (state) => ({

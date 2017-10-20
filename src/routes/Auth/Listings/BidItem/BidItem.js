@@ -66,7 +66,7 @@ class BidItem extends Component  {
               </div>
 
               <div className="row">
-                <div className="col-md-12 listing-excerpt">
+                <div className="col-md-12 listing-excerpt" style={{overflow: 'hidden'}}>
                   <p>{this.props.description.substr(0,400)}</p>
                 </div>
               </div>

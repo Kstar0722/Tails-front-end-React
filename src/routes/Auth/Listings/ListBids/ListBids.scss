@@ -43,8 +43,9 @@ section.list-bids {
             color: red;
           }
           .listing-excerpt {
-            overflow-y: scroll;
-            max-height: 200px;
+            overflow: auto;
+            max-height: 215px;
+            min-height: 215px;
             p {
               opacity: 0.8;
               color: #636a71;

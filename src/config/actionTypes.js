@@ -23,6 +23,7 @@ export const GET_BIDS_BY_LISTING_ID = 'GET_BIDS_BY_LISTING_ID';
 export const GET_LISTING_BIDS = 'GET_LISTING_BIDS';
 export const GET_COUNT_TRANSFERED_BIDS= 'GET_COUNT_TRANSFERED_BIDS';
 export const UPDATE_LISTING_BID = 'UPDATE_LISTING_BID';
+export const BID_CLEAR = 'BID_CLEAR';
 // ----------------------------------------------------
 
 // USER
