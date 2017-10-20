@@ -1,4 +1,4 @@
-import Dropzone from 'react-dropzone'
+ import Dropzone from 'react-dropzone'
 import _ from 'lodash'
 import uploadBtnImage from 'assets/upload.png'
 import cameraImage from 'assets/camera.png'
@@ -27,7 +27,7 @@ export default class FileUpload extends React.Component {
         {
             for(let i = 0; i < impagePreview.length; i ++)
             {
-                imagesShow.push(<div className = "img-show col-sm-3"><button type="button" onClick={this.animalImageDel.bind(this, i)} className="close">X</button><img src={impagePreview[i]} className="image-preview img-responsive img-thumbnail"/></div>);
+                imagesShow.push(<div className = "img-show col-sm-3"><button type="button" onClick={this.animalImageDel.bind(this, i)} className="close">X</button> <div className="preview-img" style={{'background-image': 'url(' + impagePreview[i]+ ')'}}></div></div>);
             }
         }
        

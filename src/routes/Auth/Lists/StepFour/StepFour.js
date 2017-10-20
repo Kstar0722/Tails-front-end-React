@@ -83,9 +83,7 @@ class StepFour extends React.Component {
 
     saveAll = () => {
         const { animalShipReducer, animalInfos } = this.props
-        console.log("testslkjlsfjkasl;dfasdklf;d")
-        console.log(this.props)
-        const listVal = {
+        const listing = {
             title: this.state.title,
             pick_up_address: animalShipReducer.shipInfo.pick_up_address,
             pick_up_city: animalShipReducer.shipInfo.pick_up_city,
@@ -100,32 +98,30 @@ class StepFour extends React.Component {
             other_notes: this.state.summary,        
             budget: this.state.budget
         }
-        const animalList = []
-        for(let i = 0; i < animalInfos.selectedAnimals.length; i ++)
-        {
+        let animals = [];
+        let animals_images = [];
+
+        for(let i = 0; i < animalInfos.selectedAnimals.length; i ++){
+            
             let animalInfo= {
                 name: animalInfos.selectedAnimals[i].name,
                 breed:animalInfos.selectedAnimals[i].breed,
                 height:animalInfos.selectedAnimals[i].height,
                 weight:animalInfos.selectedAnimals[i].weight,
-                special_notes:animalInfos.selectedAnimals[i].special_notes
+                special_notes:animalInfos.selectedAnimals[i].special_notes,
+                images: animalInfos.selectedAnimals[i].impagePreview.length > 0 ? animalInfos.selectedAnimals[i].impagePreview : null
             }
-            animalList.push(animalInfo)
+            animals.push(animalInfo)
         }
-        const saveVal = {
-            listItems: listVal,
-            animalList: animalList
-        }
-        if(this.props.location.state.id == "")
-        {
-            this.props.createListings(saveVal)
+        let data = {listing, animals};
+        if(this.props.location.state.id == ""){
+            this.props.createListings(data)
             // this.props.createAnimalInfo("13", animalList)
             
         }else{
             var id = this.props.location.state.id
             this.props.updateListings(id, listVal)
         }
-        
     }
 
     render() {

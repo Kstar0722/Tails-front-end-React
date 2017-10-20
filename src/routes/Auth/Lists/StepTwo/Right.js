@@ -22,7 +22,9 @@ export default class Right extends React.Component {
             showPreview,
             impagePreview,
             animal_breed
-        } = this.props
+        } = this.props;
+
+        console.log('impagePreview', impagePreview);
 		return (
             <div className="main-body col-sm-8 col-12">
                 <div className="form-group">
@@ -89,10 +91,10 @@ export default class Right extends React.Component {
                         value={special_notes}
                         onChange={this.setAnimalProperty.bind(this, "special_notes")} />  
                 </div>
-                <FileUpload
+                {<FileUpload
                     onDrop={this.props.onDrop}
                     animalImageDel={this.props.animalImageDel}
-                    impagePreview={impagePreview} />
+                    impagePreview={impagePreview} /> }
             </div>
 		)
 	}
