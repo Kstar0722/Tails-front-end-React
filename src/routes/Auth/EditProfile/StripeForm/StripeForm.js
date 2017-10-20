@@ -1,7 +1,7 @@
 import './StripeForm.scss'
 import { connect } from 'react-redux'
 import {validationFields} from 'lib/helper'
-import { Field, reduxForm } from 'redux-form'
+import { Field, reduxForm, SubmissionError } from 'redux-form'
 import renderField from 'components/fieldFormLine'
 import classNames from 'classnames'
 import {createAccount, fetchStripeAccountInfo, verifyAccount} from 'actions/stripe'
@@ -13,9 +13,12 @@ const validate = values => {
 		{name: 'first_name', rules: ['required']},
 		{name: 'last_name', rules: ['required']},
 	];
-	let legal_entity = validationFields(fields.legal_entity, values);
+	let legal_entity = validationFields(fields, values.legal_entity);
 	
-	errors.legal_entity = legal_entity; 
+	if(Object.keys(legal_entity).length > 0){
+		errors.legal_entity = legal_entity; 
+	}
+
 	return errors;
 };
 
@@ -26,7 +29,10 @@ const renderFieldOne = ({
 	classField,
   meta: { touched, error, warning }
 }) => (
-  <input {...input} className={"form-control " + classField} placeholder={label} type={type} />
+	<span className={classNames('' + classField, {'has-danger': touched && error})}>
+  	<input {...input} className={"form-control "} placeholder={label} type={type} />
+		{touched && ((error && <small className="form-control-feedback">{error}</small>) || (warning && <span>{warning}</span>))}
+	</span>
 )
 
 class StripeForm extends React.Component {
@@ -40,7 +46,6 @@ class StripeForm extends React.Component {
 	}
 
 	componentWillReceiveProps(nextProps){
-		
 	}
 
 	createAccountStripe(){
@@ -48,7 +53,7 @@ class StripeForm extends React.Component {
 	}
 
 	submit(values){
-		console.log(values);
+
 		values.legal_entity.type = 'individual';
 		let data = {legal_entity : values.legal_entity };
 		delete data.legal_entity.verification;
@@ -56,11 +61,106 @@ class StripeForm extends React.Component {
 		delete data.legal_entity.personal_id_number_provided;
 		delete data.legal_entity.ssn_last_4_provided;
 
-		values.external_account.object='bank_account';
-		data.external_account = values.external_account;
-		data.external_account.currency = 'usd';
-		data.external_account.country = data.legal_entity.address.country;
-		this.props.verifyAccount(data);
+
+		if (values.external_account){
+			values.external_account.object='bank_account';
+			data.external_account = values.external_account;
+			data.external_account.currency = 'usd';
+			data.external_account.country = data.legal_entity.address.country;
+		}	
+
+		let isSubmissionError = false;
+	
+		return this.props.verifyAccount(data).then(res => {
+			let errors = {};
+			let tmpObj;
+			if (res.verification){
+				if(res.verification.fields_needed){
+					if(Array.isArray(res.verification.fields_needed)){
+						
+						res.verification.fields_needed.map(item => {
+							if(item == 'external_account'){
+								if(!values.external_account){
+									errors.external_account = {
+										account_number: "Requred",
+										routing_number: "Requred"
+									}
+								} else {
+									errors.external_account = {}
+									if(!values.external_account.account_number){
+										errors.external_account.account_number = "Requred";
+									}
+									if(!values.external_account.routing_number){
+										errors.external_account.routing_number = "Requred";
+									}
+									if(Object.keys(errors.external_account).length < 1){
+										errors = {};
+									}
+								}
+							} else {
+								let mas = item.split('.');
+								tmpObj = errors;
+								if(mas){
+									mas.some((item, index)=>{
+										if (index >= mas.length-1){
+											tmpObj[item] = "Requred";
+											return true;
+										}
+										if (!tmpObj[item]){
+											tmpObj[item] = {};
+										} 
+										tmpObj = tmpObj[item];
+									});
+								}
+							}
+						});
+	
+						if(errors.tos_acceptance){
+							delete errors.tos_acceptance;
+						}
+						
+						
+					}
+				}
+			}
+
+			if(Object.keys(errors).length > 0){
+				isSubmissionError = true;
+				throw new SubmissionError(errors)
+			} else {
+				return null;
+			}
+		}).catch(err => {
+			if (isSubmissionError){
+				throw err
+			}
+			return err.response.json().then(errBody => {
+
+				let errors = {};
+				let tmpObj;
+
+				errBody.errors.map(error => {
+					let param = error.param.replace('[','.').replace(']','');
+					let mas = param.split('.');
+					tmpObj = errors;
+					if(mas){
+						mas.some((item, index)=>{
+							if (index >= mas.length-1){
+								tmpObj[item] = 	error.description;
+								return true;
+							}
+							if (!tmpObj[item]){
+								tmpObj[item] = {};
+							} 
+							tmpObj = tmpObj[item];
+						});
+					}
+
+				})
+
+				throw new SubmissionError(errors)
+			})
+		});
 	}
 
 	render() {
@@ -73,7 +173,7 @@ class StripeForm extends React.Component {
 				</div>
 			)
 		} else {
-			if (!user.stripe_charges_enabled){
+			if (!stripe.charges_enabled || !stripe.payouts_enabled){
 				return (
 					<form onSubmit={handleSubmit(this.submit.bind(this))} className="form-stripe">
 						<h5>Charges: {stripe.charges_enabled ? <span className="text-success">Enable</span> : <span className="text-danger">Disable</span>}</h5>
@@ -83,16 +183,16 @@ class StripeForm extends React.Component {
 					
 						<Field name="legal_entity[last_name]" type="text" component={renderField} label="Last Name"/>
 						
-						{returnForm.legal_entity ? returnForm.legal_entity.ssn_last_4_provided ? null : <Field name="legal_entity[ssn_last_4]" type="text" component={renderField} label="Social Security Number"/> : null }
-						{returnForm.legal_entity ? returnForm.legal_entity.personal_id_number_provided ? null : 	<Field name="legal_entity[personal_id_number]" type="text" component={renderField} label="Personal number"/> : null }
+						{stripe.legal_entity ? stripe.legal_entity.ssn_last_4_provided ? null : <Field name="legal_entity[ssn_last_4]" type="text" component={renderField} label="Social Security Number"/> : null }
+						{stripe.legal_entity ? stripe.legal_entity.personal_id_number_provided ? null : 	<Field name="legal_entity[personal_id_number]" type="text" component={renderField} label="Personal number"/> : null }
 					
 						<div className={classNames("form-group row")}>
 							<label className="col-sm-4 col-form-label">Date of birth</label>
-							<div className="col-sm-8">
+							<div className="col-sm-6">
 								<div className='row dod'>
-									<Field name="legal_entity[dob][day]" type="number" classField='col-sm-2' component={renderFieldOne} label="dd"/>
-									<Field name="legal_entity[dob][month]" type="number" classField='col-sm-2' component={renderFieldOne} label="mm"/>
-									<Field name="legal_entity[dob][year]" type="number" classField='col-sm-2' component={renderFieldOne} label="yyyy"/>
+									<Field name="legal_entity[dob][day]" type="number" classField='col-sm-4' component={renderFieldOne} label="dd"/>
+									<Field name="legal_entity[dob][month]" type="number" classField='col-sm-4' component={renderFieldOne} label="mm"/>
+									<Field name="legal_entity[dob][year]" type="number" classField='col-sm-4' component={renderFieldOne} label="yyyy"/>
 								</div>
 							</div>
 						</div>
@@ -112,7 +212,7 @@ class StripeForm extends React.Component {
 						
 						<hr/>
 
-						<button>Save</button>
+						<button className="btn save-profile block-btn blue">Save</button>
 
 					</form>
 				);

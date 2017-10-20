@@ -32,10 +32,10 @@ export function verifyAccount(data) {
     return function(dispatch) {
       return apiService.post('stripe/verify_account', data).then(res => {
       //  dispatch({ type: PROFILE_STRIPE, stripe: res.stripeData ? res.stripeData : {} })
-      console.log('verifyAccount', res)
-      })
-      .catch(error => {
-        console.log('getBids err', error)
+        return apiService.post('users/fetch_stripe_account_info');
+      }).then((res) => {
+        dispatch({ type: PROFILE_STRIPE, stripe: res.stripeData ? res.stripeData : {} })
+        return res.stripeData ? res.stripeData : {}
       })
     }
 }

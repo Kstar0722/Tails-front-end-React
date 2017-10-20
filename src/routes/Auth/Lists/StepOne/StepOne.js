@@ -5,16 +5,18 @@ import StepHistory from '../StepHistory'
 import NextStep from '../NextStep'
 import { browserHistory } from 'react-router'
 import '../lists.scss'
+import config from 'config'
 var Isvg = require('react-inlinesvg')
 
 class StepOne extends React.Component {
 
     constructor(props) {
         super(props)
-        console.log("fasdfsadfsadfsadfqetwfsafsd")
-        console.log(this.props)
         this.state = {
-            disabled: true
+            disabled: true,
+            animals: config.animals.map((animal, index) => {
+                return Object.assign({}, animal, {id: index + 1, height: '', weight: '', special_notes: null, impagePreview: [] });
+            })
         }
     }
 
@@ -70,6 +72,7 @@ class StepOne extends React.Component {
 
         // if(animalInfos.loaded) {
             console.log('animalInfos.loaded')
+            console.log('animals', this.state.animals)
             return (
                 <div className="create-list">
                     <div className="container">
@@ -80,7 +83,7 @@ class StepOne extends React.Component {
                             </div>
                             <div className="animal-list row">
                                 {
-                                    _.orderBy(animalInfos.data, 'name').map((val, index) =>
+                                    this.state.animals.map((val, index) =>
                                         <div className="animal-item col-md-2 col-sm-4" key={val.id}>
                                             <div
                                                 className={
@@ -90,8 +93,9 @@ class StepOne extends React.Component {
                                                 }
                                                 onClick={()=>this.selectImg(val)}>
                                                 <Isvg
-                                                    src={val.data[0].url}
+                                                    src={val.url}
                                                     className="img-responsive"/>
+                                    
                                             </div>
                                             <div className="animal-name">{val.name}</div>
                                         </div>
