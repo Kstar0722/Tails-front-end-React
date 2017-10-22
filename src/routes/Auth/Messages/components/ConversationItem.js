@@ -16,6 +16,10 @@ class ConversationItem extends React.Component {
 		return names.join(', ');
 	}
 
+	shortenMessage(message) {
+		return message.length > 15 ? `${message.slice(0, 17)}...` : message;
+	}
+
 	render() {
   	const {id, name} = this.props
 		return (
@@ -24,7 +28,11 @@ class ConversationItem extends React.Component {
                 <img src="{FakeAvatar}" alt="" />
             </div>
             <h4 className="name"><span>{this.stringifyNames(this.props.conversation.users)}</span></h4>
-            {/*<p className="excerpt">Start a conversation</p>*/}
+						<p className="excerpt">{
+							this.props.conversation.message ? this.shortenMessage(this.props.conversation.message) : (
+								<i>This conversation is empty</i>
+							)
+						}</p>
         </li>
         )
     }

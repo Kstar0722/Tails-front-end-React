@@ -10,32 +10,38 @@ class Messages extends React.Component {
 		this.state = {
 			conversations: [],
 			messages: [],
+			message: '',
 			selected: null
 		};
 	}
 
 	selectConversation(conversation) {
+		if(this.state.selected == conversation) {
+			return;
+		}
 		this.setState({
 			selected: conversation,
 			messages: []
 		});
+		console.log(conversation);
 		apiService.find('messages', {
 			filter: {
-				conversation_id: 1
+				conversation_id: conversation.id
 			}
 		}).then(res => {
 			this.setState({
 				messages: res.data
 			});
+			this.scrollBottom();
 		});
 	}
 
 	componentDidMount() {
-		apiService.find('conversations', {
+		return apiService.find('conversations', {
 			include: ['users', 'listing']
 		}).then(res => {
 			this.setState({
-				conversations: res.data
+				conversations: this.addKeys(res.data)
 			});
 			if(res.data.length > 0) {
 				this.selectConversation(res.data[0]);
@@ -45,8 +51,38 @@ class Messages extends React.Component {
 		});
 	}
 
+	addKeys(array) {
+		for(let i = 0; i < array.length; i++) {
+			array[i].key = array[i].id;
+		}
+		return array;
+	}
+
+	changeMessage(event) {
+		this.setState({
+			message: event.target.value
+		});
+	}
+
+	scrollBottom() {
+		const panel = document.getElementById('chat-window');
+		panel.scrollTop = panel.scrollHeight;
+	}
+
+	sendMessage() {
+		return apiService.post('messages', {
+			message: this.state.message,
+			conversation_id: this.state.selected.id
+		}).then(res => {
+			this.state.messages.push(res);
+			this.setState({
+				message: '',
+			});
+			this.scrollBottom();
+		});
+	}
+
 	render() {
-  	const { conversations } = this.props
 		return (
             <div className="container">
         		<div id="messages">
@@ -64,8 +100,8 @@ class Messages extends React.Component {
         						</div>
         						<div className="scroller">
 											<ul className="messages-list">
-												{this.state.conversations.map(conversation =>
-													<ConversationItem key={conversation.id} conversation={conversation} Messages={this} selectEvent={this.selectConversation}/>
+												{this.state.conversations.map((conversation, key) =>
+													<ConversationItem key={key} conversation={conversation} Messages={this} selectEvent={this.selectConversation}/>
 												)}
 											</ul>
         						</div>
@@ -86,7 +122,7 @@ class Messages extends React.Component {
 												</div>
 											</div>
 
-											<div className="chat-window">
+											<div id="chat-window" className="chat-window">
 					                <div className="scroller">
 					                    <ul className="chat-messages">
 																	{this.state.messages.map(message =>
@@ -98,8 +134,8 @@ class Messages extends React.Component {
 
 											<div className="write-message">
 												<div className="wrap">
-													<input type="text" className="field-message" placeholder="Type your message..." />
-													<div className="buttons">
+													<input type="text" className="field-message" value={this.state.message} onChange={this.changeMessage.bind(this)} placeholder="Type your message..." />
+													<div className="buttons" onClick={this.sendMessage.bind(this)}>
 														<button className="btn-send"><i className="btm bt-paper-plane"></i></button>
 													</div>
 												</div>
@@ -123,4 +159,4 @@ class Messages extends React.Component {
 	}
 }
 
-export default Messages
+export default Messages;
