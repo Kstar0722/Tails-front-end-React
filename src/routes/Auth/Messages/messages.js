@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 import ConversationItem from './components/ConversationItem'
 import apiService from '../../../lib/api'
 import user from 'auth/user'
+import socket from 'auth/socket'
 
 class Messages extends React.Component {
 	constructor(props) {
@@ -13,6 +14,25 @@ class Messages extends React.Component {
 			message: '',
 			selected: null
 		};
+		/*socket._socket.on('conversation', conversation => {
+			this.state.conversations.push(conversation);
+			this.setState({
+				conversation: this.state.conversations
+			});
+		});*/
+		socket._socket.on('message', message => {
+			if(this.state.selected.id == message.conversation_id) {
+				this.state.messages.push(message);
+			}
+			let conversation;
+			for(let i = 0; i < this.state.conversations.length; i++) {
+				if(message.conversation_id == (conversation = this.state.conversations[i]).id) {
+					conversation.message = message.message;
+					break;
+				}
+			}
+			this.setState(this.state);
+		});
 	}
 
 	selectConversation(conversation) {
@@ -73,7 +93,6 @@ class Messages extends React.Component {
 			message: this.state.message,
 			conversation_id: this.state.selected.id
 		}).then(res => {
-			this.state.messages.push(res);
 			this.setState({
 				message: '',
 			});
