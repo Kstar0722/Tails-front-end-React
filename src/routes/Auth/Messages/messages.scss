@@ -343,6 +343,12 @@
 			ul.chat-messages {
 				list-style: none;
 
+				&:after {
+					content: '';
+				  display: table;
+				  clear: both;
+				}
+
 				li {
 					float: left;
 					clear: both;

@@ -23,14 +23,13 @@ class Messages extends React.Component {
 			selected: conversation,
 			messages: []
 		});
-		console.log(conversation);
 		apiService.find('messages', {
 			filter: {
 				conversation_id: conversation.id
 			}
 		}).then(res => {
 			this.setState({
-				messages: res.data
+				messages: res.data.reverse()
 			});
 			this.scrollBottom();
 		});
