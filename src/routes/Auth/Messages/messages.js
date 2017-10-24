@@ -44,19 +44,35 @@ class Messages extends React.Component {
 			messages: []
 		});
 		apiService.find('messages', {
+			page: {
+				size: this.infinite.size,
+				number: this.infinite.messages.page
+			},
 			filter: {
 				conversation_id: conversation.id
 			}
 		}).then(res => {
+			if(res.data.length < this.infinite.size) {
+				this.infinite.messages.done = true;
+			}
 			this.setState({
 				messages: res.data.reverse()
 			});
 			this.scrollBottom();
+			this.infinite.messages = {
+				loading: false,
+				done: false,
+				page: 1
+			};
 		});
 	}
 
 	componentDidMount() {
 		return apiService.find('conversations', {
+			page: {
+				size: this.infinite.size,
+				number: this.infinite.conversations.page
+			},
 			include: ['users', 'listing']
 		}).then(res => {
 			this.setState({
@@ -100,6 +116,86 @@ class Messages extends React.Component {
 		});
 	}
 
+	infinite = {
+		size: 10,
+		messages: {
+			loading: false,
+			done: false,
+			page: 1
+		},
+		conversations: {
+			loading: false,
+			done: false,
+			page: 1
+		}
+	}
+
+	loadConversations(e) {
+		const event = e.nativeEvent;
+		if(event.target.scrollHeight - event.target.scrollTop == event.target.clientHeight) {
+			if(this.infinite.conversations.done) {
+				return;
+			}
+			if(this.infinite.conversations.loading) {
+				return;
+			}
+			this.infinite.conversations.page++;
+			this.infinite.conversations.loading = true;
+			const height = event.target.scrollTop;
+			apiService.find('conversations', {
+				page: {
+					size: this.infinite.size,
+					number: this.infinite.conversations.page
+				},
+				include: ['users', 'listing']
+			}).then(res => {
+				if(res.data.length < this.infinite.size) {
+					this.infinite.conversations.done = true;
+				}
+				for(let i = 0; i < res.data.length; i++) {
+					this.state.conversations.push(res.data[i]);
+				}
+				this.infinite.conversations.loading = false;
+				this.setState(this.state);
+				event.target.scrollTop = height;
+			});
+		}
+	}
+
+	loadMessages(e) {
+		const event = e.nativeEvent;
+		if(event.target.scrollTop == 0) {
+			if(this.infinite.messages.done) {
+				return;
+			}
+			if(this.infinite.messages.loading) {
+				return;
+			}
+			this.infinite.messages.page++;
+			this.infinite.messages.loading = true;
+			const height = event.target.scrollHeight;
+			apiService.find('messages', {
+				page: {
+					size: this.infinite.size,
+					number: this.infinite.messages.page
+				},
+				filter: {
+					conversation_id: this.state.selected.id
+				}
+			}).then(res => {
+				if(res.data.length < this.infinite.size) {
+					this.infinite.messages.done = true;
+				}
+				for(let i = 0; i < res.data.length; i++) {
+					this.state.messages.unshift(res.data[i]);
+				}
+				this.infinite.messages.loading = false;
+				this.setState(this.state);
+				event.target.scrollTop = event.target.scrollHeight - height;
+			});
+		}
+	}
+
 	render() {
 		return (
             <div className="container">
@@ -116,7 +212,7 @@ class Messages extends React.Component {
         						<div className="title">
         							<h4>Recent{/*<span className="count">2</span>*/}</h4>
         						</div>
-        						<div className="scroller">
+        						<div className="scroller" onScroll={this.loadConversations.bind(this)}>
 											<ul className="messages-list">
 												{this.state.conversations.map((conversation, key) =>
 													<ConversationItem key={key} conversation={conversation} Messages={this} selectEvent={this.selectConversation}/>
@@ -140,7 +236,7 @@ class Messages extends React.Component {
 												</div>
 											</div>
 
-											<div id="chat-window" className="chat-window">
+											<div id="chat-window" className="chat-window" onScroll={this.loadMessages.bind(this)}>
 					                <div className="scroller">
 					                    <ul className="chat-messages">
 																	{this.state.messages.map(message =>

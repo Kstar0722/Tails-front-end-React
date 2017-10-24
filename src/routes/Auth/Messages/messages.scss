@@ -97,8 +97,7 @@
 		border-radius: 8px;
 		box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
 		overflow: hidden;
-		height: calc(100vh - 330px);
-		min-height: 300px;
+		height: 550px;
 
 		.wrap {
 			height: 100%;
@@ -151,12 +150,14 @@
 
 			.scroller {
 				height: calc(100% - 80px);
-				overflow: auto;
+				//overflow: auto;
+				overflow-y: scroll;
 			}
 
 			ul.messages-list {
 				list-style: none;
 				padding: 10px 0;
+				height: 100%;
 
 				& > li {
 					position: relative;
