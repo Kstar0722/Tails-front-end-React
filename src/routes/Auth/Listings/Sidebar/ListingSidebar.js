@@ -3,8 +3,9 @@ import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import 'assets/DatePicker.scss';
 import { connect } from 'react-redux'
-import { getAllListings } from '../../../../actions/listing'
+import { getAllListings, setFilter } from '../../../../actions/listing'
 import InputRange from 'react-input-range'
+import { setCurrentPage } from '../../../../actions/pagination'
 
 class ListingSidebar extends React.Component {
 	constructor(props) {
@@ -69,6 +70,8 @@ class ListingSidebar extends React.Component {
   filterListings(){
     const filter = {}
 
+    filter.status = this.state.status
+
     const price = {}
     if (this.state.price.min != 1) price.gte = this.state.price.min
     if (this.state.price.max != 1000) price.lte = this.state.price.max
@@ -101,7 +104,18 @@ class ListingSidebar extends React.Component {
     if (this.state.from_drop_off_date) desired_delivery_date.gte = moment(this.state.from_drop_off_date).startOf('day').toJSON();
     if (Object.keys(desired_delivery_date).length) filter['desired_delivery_date'] = desired_delivery_date;
 
-    this.props.getAllListings({ filter: filter, include_bid_counts: 1, include: ['animals'] })
+    // console.log('filter', filter);
+
+    this.props.setCurrentPage(1)
+    this.props.setFilter({ filter })
+    this.props.getAllListings({
+      filter: filter,
+      include_bid_counts: 1,
+      include: ['animals'],
+      page: {
+        size: this.props.pagination.defaultPageSize
+      }
+    })
   }
 
 	render() {
@@ -307,4 +321,8 @@ class ListingSidebar extends React.Component {
 	}
 }
 
-export default connect(null, { getAllListings } )(ListingSidebar)
+const mapStateToProps = (state) => ({
+  pagination: state.pagination
+})
+
+export default connect(mapStateToProps, { getAllListings, setFilter, setCurrentPage } )(ListingSidebar)

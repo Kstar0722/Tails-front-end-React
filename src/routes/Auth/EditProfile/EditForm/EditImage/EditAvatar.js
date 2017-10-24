@@ -91,10 +91,11 @@ class EditAvatar extends React.Component {
 		return (
 			<div className="col-12">
 				<div className="row image-edit">
-					<div className="col justify-content-center align-self-center">
+					<div className="col justify-content-center align-self-center bottom-style">
 						<label>Profile Image</label>
 						<div className="justify-content-left align-self-center">
-						<AvatarEditor
+							{console.log('Img=====>',this.state.image)}
+							<AvatarEditor
 							ref={this.setEditorRef}
 							image={this.state.image ? this.state.image : this.state.originalImage}
 							width={175}

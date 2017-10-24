@@ -9,9 +9,11 @@ import bidGetReducer from './bid'
 import animalsReducer from './animals'
 import animalShipReducer from './animalShip'
 import userReducer from './user'
+import notificationsBidGetReducer from './notifications_bid'
 import listingBidReducer from './listing_bid'
 import listingAnimalsReducer from './listingAnimals'
 import allListingsGetReducer from './listings'
+import paginationReducer from './pagination.js'
 
 export const makeRootReducer = (asyncReducers) => {
   return combineReducers({
@@ -21,6 +23,7 @@ export const makeRootReducer = (asyncReducers) => {
     auth: authReducer,
     listing: listingGetReducer,
     profile: profileReducer,
+    notifications_bid: notificationsBidGetReducer,
     bid: bidGetReducer,
     animalsReducer,
     animalShipReducer,
@@ -28,6 +31,7 @@ export const makeRootReducer = (asyncReducers) => {
     listing_bid: listingBidReducer,
     listingAnimals: listingAnimalsReducer,
     listings: allListingsGetReducer,
+    pagination: paginationReducer,
     ...asyncReducers
   })
 }

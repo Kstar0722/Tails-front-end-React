@@ -12,6 +12,7 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Dropdown, DropdownT
 import user from 'auth/user'
 import { browserHistory } from 'react-router'
 import AvatarEditor from 'react-avatar-editor'
+import Notification from '../../../components/Notification/Notification'
 
 const fields = ['email', 'password']
 
@@ -143,20 +144,20 @@ class Login extends Component {
 				</li>
 			);
 		} else {
-			return <li>
+			return <li className='style-li'>
 				<div className="avatar-wrap d-flex flex-row flex-wrap justify-content-between align-items-center">
-					<AvatarEditor
-						ref={this.setEditorRef}
-						image={this.props.profile.avatar ? this.props.profile.avatar : userimg}
-						width={60}
-						height={60}
-						border={0}
-						position={{x:0.5,y:0.5}}
-						disableDrop={true}
-						color={[255, 255, 255, 0.6]} // RGBA
-						scale={this.props.profile.zoom_amount? this.props.profile.zoom_amount : zoom_amount}	
-					/>
-				
+					<img className="styleImgAvatarLogin" src={this.props.profile.avatar ? this.props.profile.avatar : userimg} alt=''/>
+					{/*<AvatarEditor*/}
+						{/*ref={this.setEditorRef}*/}
+						{/*image={this.props.profile.avatar ? this.props.profile.avatar : userimg}*/}
+						{/*width={60}*/}
+						{/*height={60}*/}
+						{/*border={0}*/}
+						{/*position={{x:0.5,y:0.5}}*/}
+						{/*disableDrop={true}*/}
+						{/*color={[255, 255, 255, 0.6]} // RGBA*/}
+						{/*scale={this.props.profile.zoom_amount? this.props.profile.zoom_amount : zoom_amount}*/}
+					{/*/>*/}
 					<Link to='/profile'>{this.props.profile.first_name ? this.props.profile.first_name : first_name} {this.props.profile.last_name ? this.props.profile.last_name : last_name}</Link>
 					<div className="dropmenu" >
 						<a id="Popover1" onClick={this.toggle.bind(this, 'popoverOpen')}><img src = {arrowDown}></img></a>
@@ -167,6 +168,7 @@ class Login extends Component {
 							</PopoverContent>
 						</Popover>
 					</div>
+					<Notification/>
 				</div>
 				{/* <img src={this.props.profile.avatar ? this.props.profile.avatar : userimg }  width="60" className="rounded-circle"/> */}
 				

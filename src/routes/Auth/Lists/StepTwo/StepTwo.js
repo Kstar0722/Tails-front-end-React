@@ -32,6 +32,7 @@ class StepTwo extends React.Component {
             impagePreview: [],
             isOpen: false,
             selectedAnimals: [],
+            activeAnimalItem: -1,
             dimensions: {
                 width: -1,
                 height: -1
@@ -49,27 +50,63 @@ class StepTwo extends React.Component {
         this.setState({ animal_types: animalInfos.data }) 
         
         const currentAnimal = selectedAnimals[0]
-        if(currentAnimal == undefined)
-        {
+        if(currentAnimal == undefined){
             browserHistory.push({
                 pathname: '/step-one',
             });
             return;
         }
+
+        console.log('currentAnimal++++++++', currentAnimal)
+
+        this.setState({ activeAnimalItem: 0 })
         this.setState({ animal_id: currentAnimal.id })
         this.setState({ breed: currentAnimal.breed })
         this.setState({ name: currentAnimal.name })
+        this.setState({ height: currentAnimal.height })
+        this.setState({ weight: currentAnimal.weight })
+        this.setState({ special_notes: currentAnimal.special_notes })
         this.setState({ impagePreview: currentAnimal.impagePreview })
-        this.getImageSize(currentAnimal.data[0].url)        
+        this.getImageSize(currentAnimal.url)        
     }
-    componentDidMount() {
-        const { impagePreview } = this.state
-        let img = new Image();
-        img.src = impagePreview;
-        this.setState({dimensions: {
-            width: img.width,
-            height: img.height
-        }})
+
+    // componentDidMount() {
+    //     const { impagePreview } = this.state
+    //     let img = new Image();
+    //     img.src = impagePreview;
+    //     this.setState({dimensions: {
+    //         width: img.width,
+    //         height: img.height
+    //     }})
+    // }
+
+    componentWillReceiveProps(nextProps){
+        const { animalInfos } = nextProps
+        const selectedAnimals = animalInfos.selectedAnimals
+        this.setState({ selectedAnimals })
+        this.setState({ animal_types: animalInfos.data }) 
+        
+        
+
+        
+        if(selectedAnimals.length == 0){
+            browserHistory.push({
+                pathname: '/step-one',
+            });
+            return;
+        }
+
+        const currentAnimal = selectedAnimals[selectedAnimals.length-1];
+
+        this.setState({ activeAnimalItem: selectedAnimals.length-1 })
+        this.setState({ animal_id: currentAnimal.id })
+        this.setState({ breed: currentAnimal.breed })
+        this.setState({ name: currentAnimal.name })
+        this.setState({ height: currentAnimal.height })
+        this.setState({ weight: currentAnimal.weight })
+        this.setState({ special_notes: currentAnimal.special_notes })
+        this.setState({ impagePreview: currentAnimal.impagePreview })
+        this.getImageSize(currentAnimal.url) 
     }
 
     getImageSize(image) {
@@ -82,7 +119,6 @@ class StepTwo extends React.Component {
     }
 
     setAnimalProperty(field, value) {
-        console.log(this.state)
         const { selectedAnimals, animal_id } = this.state
         this.setState({[field]: value.target.value})
         let currentAnimal = _.find(selectedAnimals, item => item.id == animal_id)
@@ -131,15 +167,17 @@ class StepTwo extends React.Component {
         this.setState({ isOpen: !this.state.isOpen });  
     }
 
-    currentSelectedAnimal(val) {
+    currentSelectedAnimal(val, index = -1) {
+
         this.setState({ animal_id: val.id })
+        this.setState({ activeAnimalItem: index })
         this.setState({ breed: val.breed })
         this.setState({ height: val.height })
         this.setState({ weight: val.weight })
         this.setState({ special_notes: val.special_notes })
         this.setState({ name: val.name })
         this.setState({ impagePreview: val.impagePreview})
-        this.getImageSize(val.data[0].url)
+        this.getImageSize(val.url)
     }
 
 	render() {
@@ -155,7 +193,8 @@ class StepTwo extends React.Component {
             impagePreview,
             selectedAnimals,
             animal_breed,
-            dimensions
+            dimensions,
+            activeAnimalItem
         } = this.state
         
 		return (
@@ -177,12 +216,13 @@ class StepTwo extends React.Component {
                         </div>
                         <div className="dashboard row">
                             <div className="left-side-bar col-sm-4 col-12">
-                                <Left 
-                                    selectedAnimals={selectedAnimals}
-                                    currentSelectedAnimal={this.currentSelectedAnimal.bind(this)}
-                                    toggleModal={this.toggleModal.bind(this)}
-                                    animal_id={animal_id}
-                                      />                           
+                            <Left 
+                                selectedAnimals={selectedAnimals}
+                                currentSelectedAnimal={this.currentSelectedAnimal.bind(this)}
+                                toggleModal={this.toggleModal.bind(this)}
+                                animal_id={animal_id}
+                                activeAnimalItem={activeAnimalItem}
+                                />                           
                             </div>
                             <Right 
                                 animal_types={animal_types}

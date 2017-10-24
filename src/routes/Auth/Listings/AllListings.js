@@ -6,7 +6,8 @@ import DogImage from 'assets/dog.jpg'
 import ListItem from './ListItem/ListItem'
 import ListingSidebar from './Sidebar/ListingSidebar'
 import ListItems from './ListItems/ListItems'
-
+import Paginations from './Pagination/Pagination'
+import {BID_CLEAR} from 'config/actionTypes'
 
 class AllListings extends React.Component {
 	constructor(props) {
@@ -19,14 +20,32 @@ class AllListings extends React.Component {
 	componentWillMount() {
 		this.props.getAllListings({
       include_bid_counts: 1,
-      include: ['animals']
+      include: ['animals'],
+      filter: {
+        status: 'open'
+      },
+      page: {
+        size: this.props.pagination.defaultPageSize,
+      }
     })
+		this.props.dispatch({type: BID_CLEAR})
 	}
+
+	getItems(indexPage) {
+    this.props.getAllListings({
+      filter: (this.props.listings.filter) ? this.props.listings.filter : { status: 'open' } ,
+      include_bid_counts: 1,
+      include: ['animals'],
+      page: {
+        size: this.props.pagination.defaultPageSize,
+        number: indexPage
+      }
+    })
+  }
 
 	getAllListings() {
 		if (this.props.listings.hasOwnProperty('data')) {
 			const listings = []
-
 			this.props.listings.data.map((listing, i) => {
 				listings.push(this.renderAllListings(
 					listing.id,
@@ -51,9 +70,14 @@ class AllListings extends React.Component {
 	}
 
 	renderAllListings(id, title, created_at, pick_up_city, pick_up_state, desired_pick_up_date, delivery_city, delivery_state, desired_delivery_date, budget, other_notes, bids_count, images, animals) {
-		return (
-			<ListItem
-				id={id}
+
+	  let bitLabel = ''
+    if (bids_count > 1) bitLabel = bids_count + ' bids'
+    else bitLabel = bids_count + ' bid'
+
+	  return (
+			<ListItems
+		        id={id}
 				title={title}
 				created_at={created_at}
 				pick_up_city={pick_up_city}
@@ -64,7 +88,7 @@ class AllListings extends React.Component {
 				desired_delivery_date = {desired_delivery_date}
 				budget={budget}
 				other_notes={other_notes}
-				bids_count={bids_count}
+				bids_count={bitLabel}
 		        listing_details={true}
 		        images={images}
 		        animals={animals}
@@ -95,6 +119,12 @@ class AllListings extends React.Component {
                     <div className="col-md-8">
 
                       {this.getAllListings()}
+
+                      <Paginations
+                        items={this.props.listings.data}
+                        total={this.props.listings.total}
+                        getItems={this.getItems.bind(this)}
+                      />
 
                     </div>
 

@@ -1,0 +1,18 @@
+.button_accept{
+  width: 100%;
+}
+.button_accept button{
+  background-color: #092b4f;
+  color: #fff;
+  border-radius: 0;
+  width: 360px;
+  margin: 20px 0;
+  padding: 10px 0;
+  border-radius: 5px;
+}
+.titleNotification{
+  margin-top: 30px;
+}
+.button_accept button:disabled{
+  background-color: grey;
+}

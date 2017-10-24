@@ -166,7 +166,11 @@
                         align-items: center;
                         border-bottom: 1px solid #e1e5ea;
                         justify-content: space-between;
-
+                        &.active{
+                            color: #fff;
+                            background: linear-gradient(90deg,#4b709f,#4e73a1,#547ca7,#5b86ae,#5e8ab1,#608eb3,#6493b7);
+                            cursor: pointer;
+                        }
                     }
                     .close{
                         float: left;

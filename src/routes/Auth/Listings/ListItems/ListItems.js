@@ -49,7 +49,7 @@ const ListItems = props => {
               <span className="start">{pick_up_city}, {pick_up_state}</span> <i className="btl bt-long-arrow-right"></i> <span className="finish">{delivery_city}, {delivery_state}</span>
 
                 <Link to={`listing-details/` + id}>
-                  <div className="bid-count pull-right" onClick={this.toggle}><span className="count">{bids_count}</span> bids</div>
+                  <div className="bid-count pull-right" onClick={this.toggle}><span className="count">{bids_count}</span></div>
                 </Link>
 
             </div>

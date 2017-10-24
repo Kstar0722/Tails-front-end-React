@@ -1,0 +1,62 @@
+.NotificationBell{
+   border: 1px solid black;
+  border-radius: 50%;
+  padding: 18px 13px;
+ }
+.NotificationBell svg {
+  font-size: 33px;
+}
+
+.labelCount{
+  border-radius: 50%;
+  background: #27d6ff;
+  color: wheat;
+  position: relative;
+  bottom: 30px;
+  right:20px;
+  padding: 1px 8px;
+}
+.dropmenu{
+  cursor: pointer;
+  float: right;
+  margin-left: 10px;
+  img{
+    width: 30px;
+  }
+}
+.popover{
+  cursor: pointer;
+  font-size: 18px;
+  max-width: 300px !important;
+  top: 3% !important;
+
+  .popover-content{
+    width: 275px !important;
+    li{
+      display: inherit;
+      padding: 10px;
+      border: 2px #fff solid;
+      a{
+        color: #7c6e6a;
+        text-decoration: none;
+      }
+      img{
+        width: 35px;
+        height: 35px;
+      }
+    }
+    li:hover{
+      border: 2px #28d6ff solid;
+    }
+  }
+}
+.popover .popover-content {
+  max-height: 300px!important;
+  overflow: auto;
+}
+.popover {
+  max-width: 370px!important;
+}
+.popover .popover-content {
+  width: 370px!important;
+}

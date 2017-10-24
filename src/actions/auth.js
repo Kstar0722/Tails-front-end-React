@@ -6,6 +6,7 @@ import { browserHistory } from 'react-router'
 // import { dashboardUrl } from '../routes/urlGenerators'
 import user from 'auth/user'
 import Notifications from 'react-notification-system-redux'
+import { getProfile } from 'actions/profile'
 
 const LOGIN_REQUEST = 'LOGIN_REQUEST'
 const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
@@ -107,6 +108,7 @@ export function login(email, password) {
         .then(res => {
             dispatch(loginSuccess(res))
             browserHistory.push('/profile')
+            dispatch(getProfile())
         })
         .catch(error =>{
            dispatch(Notifications.error({
@@ -157,6 +159,7 @@ export function register(username, email, password, purpose) {
         .then(parseJSON)
         .then(res => {
             dispatch(signupSuccess(res))
+            dispatch(getProfile())
             browserHistory.push('/profile')
             console.log("signup success")
         })
