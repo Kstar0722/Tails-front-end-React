@@ -41,9 +41,9 @@ class ListingDetailsSidebar extends Component {
           <div className="filter">
             <label className="filter-label"><b>About this Client</b></label>
           </div>
-          <div className="filter">
-            <label className="filter-label">{ this.props.completedShipping } Completed shipping</label>
-          </div>
+          {/*<div className="filter">*/}
+            {/*<label className="filter-label">{ this.props.completedShipping } Completed shipping</label>*/}
+          {/*</div>*/}
           <div className="filter">
             <label className="filter-label">Member Since: { (this.props.user) ? moment(this.props.user.created_at).format('LL') : '' }</label>
           </div>

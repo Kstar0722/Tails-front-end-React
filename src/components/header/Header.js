@@ -31,9 +31,10 @@ class Header extends React.Component {
 						<nav className="hide-on-mobile">
 							{user.authorized ? 
 								<ul className="d-flex flex-row flex-wrap align-items-center justify-content-around">
+									<li className='menu-li-width'></li>
 									<li><Link to='/listings'>Browse Listings</Link></li>
 									{/* <li><Link to='#'>My Listings</Link></li> */}
-									{/* <li><Link to='#'>Messages</Link></li> */}
+									 <li><Link to='/messages'>Messages</Link></li>
 									<Login /> 
 								</ul>
 							:
@@ -50,9 +51,10 @@ class Header extends React.Component {
 					<nav className="mobile-nav">
 					{user.authorized ? 
 						<ul className="d-flex flex-row flex-wrap align-items-center justify-content-around">
+							<li></li>
 							<li><Link to='/listings'>Browse Listings</Link></li>
 							{/* <li><Link to='#'>My Listings</Link></li> */}
-							{/* <li><Link to='#'>Messages</Link></li> */}
+							 <li><Link to='/messages'>Messages</Link></li>
 							<Login /> 
 						</ul> : 
 						<ul className="d-flex flex-row flex-wrap align-items-center justify-content-around">

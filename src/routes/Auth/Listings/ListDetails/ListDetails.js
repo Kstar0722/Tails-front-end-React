@@ -6,13 +6,19 @@ import ListingDetailsSidebar from '../Sidebar/ListingDetailsSidebar'
 import { connect } from 'react-redux'
 import { getListing } from '../../../../actions/listing'
 import ListBids from "../ListBids/ListBids"
+import  {CLEAR_DATA_LISTING} from 'config/actionTypes'
 
 class ListDetails extends Component {
   constructor(props){
     super(props)
   }
 
+  componentWillMount(){
+    this.props.dispatch({type: CLEAR_DATA_LISTING})
+  }
+
   componentDidMount(){
+    this.props.dispatch({type: CLEAR_DATA_LISTING});
     this.props.getListing(this.props.params.id);
   }
 
@@ -56,7 +62,8 @@ class ListDetails extends Component {
         </main>
       )
     } else {
-      return(
+      if(Object.keys(this.props.listing.data).length > 0 && this.props.listing.data.user_id != this.props.user.id)
+        return(
         <main>
           <section id="main-content">
             <div className="container">
@@ -97,7 +104,9 @@ class ListDetails extends Component {
             </div>
           </section>
         </main>
-      )
+        )
+      else
+        return null;
     }
 
   }
@@ -108,4 +117,9 @@ const mapStateToProps = state => ({
   user: state.profile.data
 })
 
-export default connect(mapStateToProps, { getListing })(ListDetails);
+const mapDispatchToProps = dispatch => ({
+  dispatch: dispatch,
+  getListing: (id) => dispatch(getListing(id))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(ListDetails);

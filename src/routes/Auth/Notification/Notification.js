@@ -47,7 +47,7 @@ class Notification extends Component {
                 <a>I agree to the full terms</a>
                 <div className="button_accept">
                   <button onClick={this.approve.bind(this, notification.my_bid[0].id)}
-                          disabled={notification.my_bid[0].details.approved_by_bidder || this.state.isToggleOn == false  }>I accept this shipment
+                          disabled={ !(!notification.my_bid[0].details || !notification.my_bid[0].details.approved_by_bidder) || this.state.isToggleOn == false  }>I accept this shipment
                   </button>
                 </div>
               </div>

@@ -33,6 +33,7 @@ export const GET_USER = 'GET_USER';
 // LISTINGS
 export const GET_COMPLETED_SHIPPING = 'GET_COMPLETED_SHIPPING';
 export const SET_FILTER_LISTINGS = 'SET_FILTER_LISTINGS';
+export const CLEAR_DATA_LISTING = 'CLEAR_DATA_LISTING';
 // -----------------------------------------------------
 
 // ALL LISTINGS
