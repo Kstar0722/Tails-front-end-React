@@ -12,7 +12,7 @@ class ModalAnimals extends React.Component {
         this.state = {
             disabled: true,
             animals: config.animals.map((animal, index) => {
-                return Object.assign({}, animal, {id: index + 1, height: '', weight: '', special_notes: null, impagePreview: [] });
+                return Object.assign({}, animal, {id: index + 1, height: '', weight: '', special_notes: '', impagePreview: [] });
             })
         }
     }

@@ -21,7 +21,8 @@ class Listings extends React.Component {
 		const { listings } = this.props
 	}
 
-	getListings() {		
+	getListings() {
+    console.log('-------->',this.props.listings.data)
 		const listings = []
 		this.props.listings.data.map((listing, i) => {
 			listings.push(this.renderListings(
@@ -29,6 +30,7 @@ class Listings extends React.Component {
 				listing.title,
 				listing.budget,
 				moment(new Date(listing.created_at)).format('MM/DD/YYYY'),
+				listing.status,
 				{delete: this.delete.bind(this, listing.id)},
 				{review: this.review.bind(this, listing.id)},
 				{editStep: this.editStep.bind(this, listing.id)}
@@ -87,7 +89,7 @@ class Listings extends React.Component {
 	}
 
 	// This will be called for each listing based on how many there are
-	renderListings(id, title, budget, date, optionActions, showActions, editStapActions) {
+	renderListings(id, title, budget, date, status, optionActions, showActions, editStapActions) {
 		return (
 			<ListingItem
 				key={id}
@@ -95,6 +97,7 @@ class Listings extends React.Component {
 				title={title}
 				budget={budget}
 				dateCreated={date}
+				status={status}
 				optionActions={optionActions}
 				showActions = {showActions}
 				editStapActions = {editStapActions}
@@ -129,8 +132,9 @@ class Listings extends React.Component {
 						<th>Title</th>
 						<th>Budget</th>
 						<th>Date</th>
+						<th>Status</th>
 						<th>Action</th>
-					</tr>					
+					</tr>
 				</thead>
 				<tbody>
 					{this.getListings()}

@@ -3,6 +3,7 @@ import './Notification.scss'
 import { connect } from 'react-redux'
 import moment from 'moment'
 import { approveBid } from 'actions/notifications_bid'
+import { Link } from 'react-router'
 
 class Notification extends Component {
   constructor (props) {
@@ -37,7 +38,7 @@ class Notification extends Component {
               return <div key={index}>
                 <h3 className="titleNotification"> {notification.user.first_name} has ofer the
                   job {notification.title}</h3>
-                <p>This shipment must be picked up by  {moment(new Date(notification.created_at)).format('MMMM Do YYYY')} and dropper off
+                <p>This shipment must be picked up by  {moment(new Date(notification.created_at)).format('MMMM Do YYYY')} and dropped off
                   by {moment(new Date(notification.updated_at)).format('MMMM Do YYYY')}</p>
                 <p>The client has proposed this shipment for {notification.budget} </p>
                 <b>Other Notes:</b>
@@ -46,9 +47,9 @@ class Notification extends Component {
                 <input onClick={this.handleClick} type="checkbox" />
                 <a>I agree to the full terms</a>
                 <div className="button_accept">
-                  <button onClick={this.approve.bind(this, notification.my_bid[0].id)}
-                          disabled={ !(!notification.my_bid[0].details || !notification.my_bid[0].details.approved_by_bidder) || this.state.isToggleOn == false  }>I accept this shipment
-                  </button>
+                  <Link to='profile'> <button onClick={this.approve.bind(this, notification.my_bid[0].id)}
+                                              disabled={ !(!notification.my_bid[0].details || !notification.my_bid[0].details.approved_by_bidder) || this.state.isToggleOn == false  }>I accept this shipment
+                  </button></Link>
                 </div>
               </div>
             }

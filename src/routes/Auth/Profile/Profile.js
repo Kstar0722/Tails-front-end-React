@@ -51,7 +51,8 @@ class Profile extends React.Component {
     }
 
 	render() {
-		const { listings } = this.props		
+		const { listings } = this.props
+		const { bids } = this.props
 		if(listings.loaded) {
 			return ( 
 				<section id="profile">
@@ -85,16 +86,24 @@ class Profile extends React.Component {
 							</div>
 							<div className="block-section my-bids">
 								<p className="title">My Bids</p>
+              {
+                bids.length > 0
+                  ?
 								<div className="table-responsive">
 									<BidsContainer />
 								</div>
+                  : <div className="row not-listings justify-content-center align-self-center">
+										<h1>You have no bids yet...</h1>
+									</div>
+              }
 							</div>
-							<div className="block-section my-bids">
-								<p className="title">Bids to my listings</p>
-								<div className="table-responsive">
-									{<ListingBidsContainer />}
-								</div>
-							</div>
+
+							{/*<div className="block-section my-bids">*/}
+								{/*<p className="title">Bids to my listings</p>*/}
+								{/*<div className="table-responsive">*/}
+									{/*{<ListingBidsContainer />}*/}
+								{/*</div>*/}
+							{/*</div>*/}
 						</div>
 					</div>
 				</section>
@@ -108,7 +117,8 @@ class Profile extends React.Component {
 
 const mapStateToProps = state => ({
     profile: state.profile.data,
-	  listings: state.listing.data ? state.listing.data.data ? state.listing : {data: []} : {data: []}
+	  listings: state.listing.data ? state.listing.data.data ? state.listing : {data: []} : {data: []},
+  	bids : state.bid.data ? state.bid.data.data ? state.bid.data : { data: [] } : { data: [] },
 })
 
 const mapDispatchToProps = dispatch => ({

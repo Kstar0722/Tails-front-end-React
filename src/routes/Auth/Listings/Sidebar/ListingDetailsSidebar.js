@@ -7,6 +7,7 @@ import { getCompletedShipping } from '../../../../actions/listing'
 import { getBidsByListingID } from '../../../../actions/bids'
 import { getProfile } from 'actions/profile'
 import moment from 'moment'
+import Timestamp from'react-timestamp';
 
 class ListingDetailsSidebar extends Component {
   constructor(props) {
@@ -33,6 +34,7 @@ class ListingDetailsSidebar extends Component {
   }
 
   render() {
+    console.log('---->this.props.listing.created_at',this.props.listing.created_at)
 
     return(
       <div id="filters" className="">
@@ -51,7 +53,7 @@ class ListingDetailsSidebar extends Component {
             <label className="filter-label"><b>About this Listing</b></label>
           </div>
           <div className="filter">
-            <label className="filter-label">Posted: { (this.props.listing) ? moment(this.props.listing.created_at).startOf('day').fromNow() : '' }</label>
+            <label className="filter-label">Posted: { (this.props.listing) ? <Timestamp time={this.props.listing.created_at} precision={1} /> : '' }</label>
           </div>
           <div className="filter">
             <label className="filter-label">Bids: { Object.keys(this.props.bid.data).length }</label>

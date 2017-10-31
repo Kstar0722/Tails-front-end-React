@@ -1,5 +1,7 @@
 import './Avatar.scss'
 import AvatarEditor from 'react-avatar-editor'
+import DefaultAvatar from 'assets/default_avatar.png'
+
 class Avatar extends React.Component {
 	constructor(props) {
 		super(props);
@@ -17,7 +19,7 @@ class Avatar extends React.Component {
 		if (this.props.type == "large") {
 			return (
 				<div className="avatar-wrap d-flex flex-row flex-wrap justify-content-between align-items-center">
-					<img className="styleImgAvatar" src={this.props.profile.avatar ? this.props.profile.avatar : "https://placeholdit.co//i/175x175?"} alt=''/>
+					<img className="styleImgAvatar" src={this.props.profile.avatar ? this.props.profile.avatar : DefaultAvatar} alt=''/>
 					{/*<AvatarEditor*/}
 							{/*ref={this.setEditorRef}*/}
 							{/*image={this.props.profile.avatar ? this.props.profile.avatar : "https://placeholdit.co//i/175x175?"}*/}
