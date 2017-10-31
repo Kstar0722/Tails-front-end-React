@@ -5,17 +5,21 @@ import user from 'auth/user'
 import { connect } from 'react-redux'
 import { getProfile } from 'actions/profile'
 import { browserHistory } from 'react-router'
+import socket from 'auth/socket'
 
-// This will check to see if the user is authenticated, and then display the 
+// This will check to see if the user is authenticated, and then display the
 // back end side of the website if they are
 
 class Auth extends React.Component {
 	constructor(props) {
 		super(props)
 		this.getAuthToken = this.getAuthToken.bind(this)
+		if(user.authorized) {
+			socket.connect();
+		}
 	}
 
-	// Functions to check authentication - Set to false right now, 
+	// Functions to check authentication - Set to false right now,
 	// to test if the container works as planned
 	getAuthToken() {
 		if(user.authorized){

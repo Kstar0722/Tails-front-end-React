@@ -5,7 +5,7 @@ export function getNotification (filter) {
   let bids;
   return function (dispatch) {
     return apiService.find('bids', filter).then(res => {
-      bids = res.data.filter(items => items.details.approved_by_bidder != true);
+      bids = res.data.filter(item => !item.details || !item.details.approved_by_bidder);
 
       let listing_ids = bids.map(listing => listing.listing_id);
       if(listing_ids.length < 1){

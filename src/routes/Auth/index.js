@@ -1,6 +1,6 @@
 import AuthorizedContainer from 'containers/AuthorizedContainer'
 
-// import Mock from './MockBackend/Mock'
+import Mock from './MockBackend/Mock'
 import Profile from './Profile/Profile'
 import Notification from './Notification/Notification'
 import EditProfile from './EditProfile/EditProfile'
@@ -9,6 +9,7 @@ import StepTwo from './Lists/StepTwo/StepTwo'
 import StepThree from './Lists/StepThree/StepThree'
 import StepFour from './Lists/StepFour/StepFour'
 import ReviewItem from './Profile/listings/ReviewItem'
+import Messages from './Messages/messages'
 import AllListings from './Listings/ListingsContainer'
 import ListDetails from './Listings/ListDetails/ListDetails'
 
@@ -48,13 +49,21 @@ export default {
 			path: '/profile/item-review',
 			component: ReviewItem
 		},
-    {
-      path: '/listings',
-      component: AllListings
-    },
-    {
-      path: '/listing-details/:id',
-      component: ListDetails
-    },
+	    {
+	      path: '/listings',
+	      component: AllListings
+	    },
+	    {
+	      path: '/listing-details/:id',
+	      component: ListDetails
+	    },
+		{
+			path: '/messages',
+			component: Messages
+		},
+		{
+			path: '/mock',
+			component: Mock
+		}
 	]
 }

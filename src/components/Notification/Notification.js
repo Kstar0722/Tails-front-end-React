@@ -31,12 +31,7 @@ class Notification extends Component {
   }
 
   toggle (type) {
-    let count = 0;
-    this.props.notifications.map(notification => {
-      if (!notification.my_bid[0].details.approved_by_bidder) {
-        count++;
-      }
-    })
+    let count = this.props.notifications.length;
     if (count > 0 ){
       this.setState({
         [type]: !this.state[type]
@@ -81,7 +76,7 @@ class Notification extends Component {
   render () {
     let count = 0;
     this.props.notifications.map(notification => {
-      if(!notification.my_bid[0].details.approved_by_bidder){
+      if(!notification.my_bid[0].details || !notification.my_bid[0].details.approved_by_bidder){
         count++;
       }
     })
@@ -94,7 +89,7 @@ class Notification extends Component {
                    toggle={this.toggle.bind(this, 'popoverOpen')}>
             <PopoverContent>
               {this.props.notifications.map((notification, index) => {
-                if(!notification.my_bid[0].details.approved_by_bidder){
+                  if(!notification.my_bid[0].details || !notification.my_bid[0].details.approved_by_bidder){
                   return <li key={index}>
                     <Link onClick={this.onclose}  to={`/notification/${notification.id}` }>{notification.user.first_name} has offered a shipment to you. Click here to accept</Link>
                   </li>
