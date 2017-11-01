@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import moment from 'moment'
 import { approveBid } from 'actions/notifications_bid'
 import { Link } from 'react-router'
+import Payment from './Payment';
 
 class Notification extends Component {
   constructor (props) {
@@ -66,7 +67,7 @@ class Notification extends Component {
                   <p>{notification.bid.description}</p>
                   <p>Please ready the full terms here</p>
                   <div className="button_accept">
-                    <Link to='profile'> <button >Pay</button></Link>
+                    <Payment bid={{id: notification.bid.id}}/>
                   </div>
                 </div>
               }
