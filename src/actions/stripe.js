@@ -10,6 +10,7 @@ export function createAccount() {
       return apiService.post('users/create_stripe_account', {}).then(res => {
        console.log('create_stripe_account',res)
        dispatch({ type: PROFILE_UPDATE, user: res.user })
+       return null;
       })
       .catch(error => {
         console.log('getBids err', error)
@@ -20,7 +21,8 @@ export function createAccount() {
 export function fetchStripeAccountInfo() {
     return function(dispatch) {
       return apiService.post('users/fetch_stripe_account_info').then(res => {
-       dispatch({ type: PROFILE_STRIPE, stripe: res.stripeData ? res.stripeData : {} })
+        dispatch({ type: PROFILE_STRIPE, stripe: res.stripeData ? res.stripeData : {} })
+        return null;
       })
       .catch(error => {
         console.log('getBids err', error)
@@ -33,6 +35,7 @@ export function verifyAccount(data) {
       return apiService.post('stripe/verify_account', data).then(res => {
       //  dispatch({ type: PROFILE_STRIPE, stripe: res.stripeData ? res.stripeData : {} })
         return apiService.post('users/fetch_stripe_account_info');
+        return null;
       }).then((res) => {
         dispatch({ type: PROFILE_STRIPE, stripe: res.stripeData ? res.stripeData : {} })
         return res.stripeData ? res.stripeData : {}

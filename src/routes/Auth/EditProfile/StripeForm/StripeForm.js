@@ -49,7 +49,9 @@ class StripeForm extends React.Component {
 	}
 
 	createAccountStripe(){
-		this.props.createAccount();
+		this.props.createAccount().then(() => {
+			this.props.fetchStripeAccountInfo();
+		});
 	}
 
 	submit(values){
@@ -190,9 +192,9 @@ class StripeForm extends React.Component {
 							<label className="col-sm-4 col-form-label">Date of birth</label>
 							<div className="col-sm-6">
 								<div className='row dod'>
-									<Field name="legal_entity[dob][day]" type="number" classField='col-sm-4' component={renderFieldOne} label="dd"/>
-									<Field name="legal_entity[dob][month]" type="number" classField='col-sm-4' component={renderFieldOne} label="mm"/>
-									<Field name="legal_entity[dob][year]" type="number" classField='col-sm-4' component={renderFieldOne} label="yyyy"/>
+									<Field name="legal_entity[dob][month]" type="number" classField='col-sm-4' component={renderFieldOne} label="MM"/>
+									<Field name="legal_entity[dob][day]" type="number" classField='col-sm-4' component={renderFieldOne} label="DD"/>
+									<Field name="legal_entity[dob][year]" type="number" classField='col-sm-4' component={renderFieldOne} label="YYYY"/>
 								</div>
 							</div>
 						</div>
