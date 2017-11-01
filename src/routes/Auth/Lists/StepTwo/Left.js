@@ -21,6 +21,7 @@ class Left extends React.Component {
     }
 
 	render() {
+    console.log('this.props',this.props)
         const { selectedAnimals, animal_id } = this.props
         return (                           
             <ul>

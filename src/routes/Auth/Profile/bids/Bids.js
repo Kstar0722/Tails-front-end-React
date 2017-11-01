@@ -8,12 +8,11 @@ class Bids extends React.Component {
 	}
 
 	componentWillMount() {
-		this.props.getBids()
+      this.props.getBids()
 	}
 
 	getBids() {
 		const bids = []
-		
 		this.props.bids.data.map((bid, i) => {
 			if(bid.listing != undefined){
 				bids.push(this.renderBids(
@@ -23,7 +22,6 @@ class Bids extends React.Component {
 					bid.status
 				))
 			}
-			
 		})
 		return bids
 	}

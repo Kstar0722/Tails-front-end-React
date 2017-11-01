@@ -41,32 +41,9 @@ class Notification extends Component {
   }
 
   componentWillMount () {
-    if(this.props.user.id) {
-      this.props.getNotification(
-        {
-          filter: {
-            status: 'accepted',
-            user_id: this.props.user.id
-          },
-          include: ['user']
-        }
-      )
-    }
+    this.props.getNotification()
   }
 
-  componentWillReceiveProps(nextProps){
-    if(this.props.user.id != nextProps.user.id) {
-      this.props.getNotification(
-        {
-          filter: {
-            status: 'accepted',
-            user_id: nextProps.user.id
-          },
-          include: ['user']
-        }
-      )
-    }
-  }
   onclose(){
     this.setState({
       popoverOpen: false
@@ -76,7 +53,7 @@ class Notification extends Component {
   render () {
     let count = 0;
     this.props.notifications.map(notification => {
-      if(!notification.my_bid[0].details || !notification.my_bid[0].details.approved_by_bidder){
+      if(notification.bid){
         count++;
       }
     })
@@ -89,11 +66,19 @@ class Notification extends Component {
                    toggle={this.toggle.bind(this, 'popoverOpen')}>
             <PopoverContent>
               {this.props.notifications.map((notification, index) => {
-                  if(!notification.my_bid[0].details || !notification.my_bid[0].details.approved_by_bidder){
+                if(notification.notification_type == "offer_sent") {
                   return <li key={index}>
-                    <Link onClick={this.onclose}  to={`/notification/${notification.id}` }>{notification.user.first_name} has offered a shipment to you. Click here to accept</Link>
+                    <Link onClick={this.onclose}
+                          to={`/notification/${notification.id}`}>{notification.listing.user.first_name} has offered a
+                      shipment to you. Click here to accept</Link>
                   </li>
                 }
+                  if(notification.notification_type == "pending_peyment") {
+                    return <li key={index}>
+                      <Link onClick={this.onclose}
+                            to={`/notification/${notification.id}`}>{notification.bid.user.first_name} has accepted your offer! Click here to fund the shipment now'</Link>
+                    </li>
+                  }
               }
 
               )}
@@ -107,7 +92,7 @@ class Notification extends Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  getNotification: (filter) => dispatch(getNotification(filter)),
+  getNotification: () => dispatch(getNotification()),
 })
 
 const mapStateToProps = (state) => ({

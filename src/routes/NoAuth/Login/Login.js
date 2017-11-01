@@ -13,6 +13,8 @@ import user from 'auth/user'
 import { browserHistory } from 'react-router'
 import AvatarEditor from 'react-avatar-editor'
 import Notification from '../../../components/Notification/Notification'
+import DefaultAvatar from 'assets/default_avatar.png'
+
 
 const fields = ['email', 'password']
 
@@ -146,7 +148,7 @@ class Login extends Component {
 		} else {
 			return <li className='style-li'>
 				<div className="avatar-wrap d-flex flex-row flex-wrap justify-content-between align-items-center">
-					<img className="styleImgAvatarLogin" src={this.props.profile.avatar ? this.props.profile.avatar : userimg} alt=''/>
+					<img className="styleImgAvatarLogin" src={this.props.profile.avatar ? this.props.profile.avatar : DefaultAvatar} alt=''/>
 					{/*<AvatarEditor*/}
 						{/*ref={this.setEditorRef}*/}
 						{/*image={this.props.profile.avatar ? this.props.profile.avatar : userimg}*/}

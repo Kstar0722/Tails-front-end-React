@@ -8,6 +8,7 @@ import BidsContainer from './bids/BidsContainer'
 import ListingBidsContainer from './listing_bids/BidsContainer'
 import { browserHistory } from 'react-router'
 import { getListings } from 'actions/listing'
+import {getBids} from 'actions/bids'
 class Profile extends React.Component {
 	
 	constructor(props) {
@@ -36,7 +37,8 @@ class Profile extends React.Component {
             this.setState({
                 cover_photo: this.props.profile.cover_photo
 		})
-	}
+    this.props.getBids()
+  }
 	componentWillReceiveProps(nextProps){
         if(nextProps.profile.cover_photo != this.props.profile.cover_photo){
             if (nextProps.profile.cover_photo){
@@ -51,8 +53,9 @@ class Profile extends React.Component {
     }
 
 	render() {
-		const { listings } = this.props		
-		if(listings.loaded) {
+		const { listings } = this.props
+    const { bids } = this.props
+    if(listings.loaded) {
 			return ( 
 				<section id="profile">
 					<div className="banner-wrap" style={{backgroundImage: 'url('+ this.state.cover_photo +')'}}>
@@ -85,16 +88,24 @@ class Profile extends React.Component {
 							</div>
 							<div className="block-section my-bids">
 								<p className="title">My Bids</p>
+              {
+                bids.data.length > 0
+                  ?
 								<div className="table-responsive">
 									<BidsContainer />
 								</div>
+                  : <div className="row not-listings justify-content-center align-self-center">
+										<h1>You have no bids yet...</h1>
+									</div>
+              }
 							</div>
-							<div className="block-section my-bids">
-								<p className="title">Bids to my listings</p>
-								<div className="table-responsive">
-									{<ListingBidsContainer />}
-								</div>
-							</div>
+
+							{/*<div className="block-section my-bids">*/}
+								{/*<p className="title">Bids to my listings</p>*/}
+								{/*<div className="table-responsive">*/}
+									{/*{<ListingBidsContainer />}*/}
+								{/*</div>*/}
+							{/*</div>*/}
 						</div>
 					</div>
 				</section>
@@ -108,11 +119,13 @@ class Profile extends React.Component {
 
 const mapStateToProps = state => ({
     profile: state.profile.data,
-	  listings: state.listing.data ? state.listing.data.data ? state.listing : {data: []} : {data: []}
+	  listings: state.listing.data ? state.listing.data.data ? state.listing : {data: []} : {data: []},
+  	bids : state.bid.data ? state.bid.data.data ? state.bid.data : { data: [] } : { data: [] },
 })
 
 const mapDispatchToProps = dispatch => ({
-    getListings: () => dispatch(getListings())
+    getListings: () => dispatch(getListings()),
+	  getBids: (filter) => dispatch(getBids(filter))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Profile)

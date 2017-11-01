@@ -38,20 +38,20 @@ class EditProfile extends React.Component {
 								</NavLink>
 							</NavItem>
 							
-							<NavItem>
-								<NavLink
-								className={classnames({ active: this.state.activeTab === '2' })}
-								onClick={() => { this.toggle('2'); }}
-								>
-									Billing Setting
-								</NavLink>
-							</NavItem>
+							{/*<NavItem>*/}
+								{/*<NavLink*/}
+								{/*className={classnames({ active: this.state.activeTab === '2' })}*/}
+								{/*onClick={() => { this.toggle('2'); }}*/}
+								{/*>*/}
+									{/*Billing Setting*/}
+								{/*</NavLink>*/}
+							{/*</NavItem>*/}
 							<NavItem>
 								<NavLink
 								className={classnames({ active: this.state.activeTab === '3' })}
 								onClick={() => { this.toggle('3'); }}
 								>
-									Stripe
+									Payout Settings
 								</NavLink>
 							</NavItem>
 						</Nav>
@@ -59,9 +59,9 @@ class EditProfile extends React.Component {
 						<TabPane tabId="1">
 							<EditForm/>
 						</TabPane>
-						<TabPane tabId="2">
-							Billing setting
-						</TabPane>
+						{/*<TabPane tabId="2">*/}
+							{/*Billing setting*/}
+						{/*</TabPane>*/}
 						<TabPane tabId="3">
 							<div>
 								{<StripeForm/>}

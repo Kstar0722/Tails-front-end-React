@@ -1,6 +1,7 @@
 import Dropzone from 'react-dropzone'
 import _ from 'lodash'
 import FileUpload from './FileUpload'
+import config from '../../../../config'
 export default class Right extends React.Component {
 	
 	constructor(props) {
@@ -12,10 +13,11 @@ export default class Right extends React.Component {
     }
 
 	render() {
+	    console.log('this.props',this.props.breeds)
         const {
             animal_types,
             name,
-            breed, 
+            breed,
             height, 
             weight, 
             special_notes, 
@@ -37,7 +39,7 @@ export default class Right extends React.Component {
                                 value={breed}
                                 onChange={this.setAnimalProperty.bind(this, "breed")}>
                                 {
-                                _.map(animal_types, (item) => 
+                                _.map(config.animals, (item) =>
                                         <option 
                                            // key={item.id}
                                             value={item.breed}>{item.breed}</option>

@@ -221,7 +221,7 @@ class StripeForm extends React.Component {
 			}else{
 				return(
 					<div className="row justify-content-center stripe-content">
-						<h3>Stripe account is verified</h3>
+						<h3>Payout info saved</h3>
 					</div>
 					)
 			}

@@ -41,7 +41,7 @@ class BidItem extends Component  {
   renderBtnByStatus(){
     console.log('status', this.props.status)
     switch (this.props.status){
-      case "accepted": return <div className="accepted">Accepted</div>
+      case "accepted": return <div className="accepted">Offer sent</div>
         break
       case "rejected": return <div className="rejected">Rejected</div>
         break
@@ -66,14 +66,19 @@ class BidItem extends Component  {
               </div>
 
               <div className="row">
-                <div className="col-md-12 listing-excerpt" style={{overflow: 'hidden'}}>
+                <div className="col-md-12 listing-excerpt" style={{overflow: 'overflow'}}>
                   <p>{this.props.description.substr(0,400)}</p>
                 </div>
               </div>
-
               <div className="row">
-                <div className="col-md-12 read-more" onClick={this.onClickReadMore.bind(this, this.props.user_id)} >... read more</div>
+                <Button>Message User</Button>
+
+                {this.renderBtnByStatus()}
+
               </div>
+              {/*<div className="row">*/}
+                {/*<div className="col-md-12 read-more" onClick={this.onClickReadMore.bind(this, this.props.user_id)} >... read more</div>*/}
+              {/*</div>*/}
 
             </div>
           </div>
