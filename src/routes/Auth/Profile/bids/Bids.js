@@ -8,7 +8,7 @@ class Bids extends React.Component {
 	}
 
 	componentWillMount() {
-		this.props.getBids()
+      this.props.getBids()
 	}
 
 	getBids() {

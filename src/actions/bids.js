@@ -49,7 +49,7 @@ export function getCountTransferedBids(filter) {
 
 export function getBids() {
     return function(dispatch) {
-        const url = config.endpoints.url + config.endpoints.bids + '?include=listing' + '?filter[user_id]=' + user.id
+         const url = config.endpoints.url + config.endpoints.bids  + '?filter%5Buser_id%5D=' + user.id + '&include=listing'
         return fetch(url, {
             method: 'get',
             headers: {

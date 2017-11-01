@@ -2,7 +2,7 @@ import Bids from './Bids'
 import {getBids} from 'actions/bids'
 
 const mapDispatchToProps = (dispatch) => ({
-     getBids: () => dispatch(getBids()),
+     getBids: () => dispatch(getBids())
 })
 
 const mapStateToProps = (state) => ({

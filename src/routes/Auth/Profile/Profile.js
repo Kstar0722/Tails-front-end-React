@@ -8,6 +8,7 @@ import BidsContainer from './bids/BidsContainer'
 import ListingBidsContainer from './listing_bids/BidsContainer'
 import { browserHistory } from 'react-router'
 import { getListings } from 'actions/listing'
+import {getBids} from 'actions/bids'
 class Profile extends React.Component {
 	
 	constructor(props) {
@@ -36,7 +37,8 @@ class Profile extends React.Component {
             this.setState({
                 cover_photo: this.props.profile.cover_photo
 		})
-	}
+    this.props.getBids()
+  }
 	componentWillReceiveProps(nextProps){
         if(nextProps.profile.cover_photo != this.props.profile.cover_photo){
             if (nextProps.profile.cover_photo){
@@ -52,8 +54,8 @@ class Profile extends React.Component {
 
 	render() {
 		const { listings } = this.props
-		const { bids } = this.props
-		if(listings.loaded) {
+    const { bids } = this.props
+    if(listings.loaded) {
 			return ( 
 				<section id="profile">
 					<div className="banner-wrap" style={{backgroundImage: 'url('+ this.state.cover_photo +')'}}>
@@ -87,7 +89,7 @@ class Profile extends React.Component {
 							<div className="block-section my-bids">
 								<p className="title">My Bids</p>
               {
-                bids.length > 0
+                bids.data.length > 0
                   ?
 								<div className="table-responsive">
 									<BidsContainer />
@@ -122,7 +124,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    getListings: () => dispatch(getListings())
+    getListings: () => dispatch(getListings()),
+	  getBids: (filter) => dispatch(getBids(filter))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Profile)
