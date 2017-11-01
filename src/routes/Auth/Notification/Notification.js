@@ -28,30 +28,49 @@ class Notification extends Component {
 
 
   render () {
+    console.log('notifications=========>',this.props.notifications)
     return (
       <div className="container">
         <div className="Notificaton">
           {this.props.notifications.map((notification, index) => {
-              if (notification.id != this.props.params.id) {
-                return null
+              if (notification.id == this.props.params.id) {
+                if(notification.notification_type == "offer_sent"){
+                  return<div key={index}>
+                    <h3 className="titleNotification"> {notification.listing.user.first_name} has ofer the
+                      job {notification.title}</h3>
+                    <p>This shipment must be picked up by  {moment(new Date(notification.bid.created_at)).format('MMMM Do YYYY')} and dropped off
+                      by {moment(new Date(notification.bid.updated_at)).format('MMMM Do YYYY')}</p>
+                    <p>The client has proposed this shipment for {notification.bid.budget} </p>
+                    <b>Other Notes:</b>
+                    <p>{notification.bid.description}</p>
+                    <p>Please ready the full terms here</p>
+                    <input onClick={this.handleClick} type="checkbox" />
+                    <a>I agree to the full terms</a>
+                    <div className="button_accept">
+                      <Link to='profile'> <button onClick={this.approve.bind(this, notification.bid.id)}
+                                                  disabled={ !(!notification.bid.details || !notification.bid.details.approved_by_bidder) || this.state.isToggleOn == false  }>I accept this shipment
+                      </button></Link>
+                    </div>
+                  </div>
+                }
               }
-              return <div key={index}>
-                <h3 className="titleNotification"> {notification.user.first_name} has ofer the
-                  job {notification.title}</h3>
-                <p>This shipment must be picked up by  {moment(new Date(notification.created_at)).format('MMMM Do YYYY')} and dropped off
-                  by {moment(new Date(notification.updated_at)).format('MMMM Do YYYY')}</p>
-                <p>The client has proposed this shipment for {notification.budget} </p>
-                <b>Other Notes:</b>
-                <p>{notification.my_bid[0].description}</p>
-                <p>Please ready the full terms here</p>
-                <input onClick={this.handleClick} type="checkbox" />
-                <a>I agree to the full terms</a>
-                <div className="button_accept">
-                  <Link to='profile'> <button onClick={this.approve.bind(this, notification.my_bid[0].id)}
-                                              disabled={ !(!notification.my_bid[0].details || !notification.my_bid[0].details.approved_by_bidder) || this.state.isToggleOn == false  }>I accept this shipment
-                  </button></Link>
+            if (notification.id == this.props.params.id) {
+              if(notification.notification_type == "pending_peyment"){
+                return<div key={index}>
+                  <h3 className="titleNotification"> {notification.bid.user.first_name} has ofer the
+                    job {notification.title}</h3>
+                  <p>This shipment must be picked up by  {moment(new Date(notification.bid.created_at)).format('MMMM Do YYYY')} and dropped off
+                    by {moment(new Date(notification.bid.updated_at)).format('MMMM Do YYYY')}</p>
+                  <p>The client has proposed this shipment for {notification.bid.budget} </p>
+                  <b>Other Notes:</b>
+                  <p>{notification.bid.description}</p>
+                  <p>Please ready the full terms here</p>
+                  <div className="button_accept">
+                    <Link to='profile'> <button >Pay</button></Link>
+                  </div>
                 </div>
-              </div>
+              }
+            } return null
             }
           )}
         </div>
