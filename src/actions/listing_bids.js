@@ -50,12 +50,13 @@ export function PayBid(bid_id, token, new_card) {
       })
       .catch(error => {
         console.log('err', error)
-        dispatch(Notifications.error({
-          title: '',
-          message: 'Error',
-          position: 'br',
-          autoDismiss: 2,
-        }));
+        // dispatch(Notifications.error({
+        //   title: '',
+        //   message: 'Error',
+        //   position: 'br',
+        //   autoDismiss: 2,
+        // }));
+        return Promise.reject(error)
       })
     }
 }

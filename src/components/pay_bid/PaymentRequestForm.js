@@ -26,11 +26,16 @@ class CheckoutForm extends React.Component {
     console.log('this.state', this.state)
 
     if (this.state.card == 'new'){
-      this.props.stripe.createToken({name: user.first_name + ' ' + user.last_name}).then(({token}) => {
+      this.props.stripe.createToken({name: user.first_name + ' ' + user.last_name}).then(({token, error}) => {
+        console.log('token', token);
+        console.log('createToken error', error);
         if(token.id){
           this.props.PayBid(this.props.bid.id, token.id, true).then(() => {
             this.props.toggle();
             browserHistory.push('/profile');
+          }).catch(err => {
+            console.log('err action',err)
+            this.setState({error_cart: 'Something went wrong. Repeat again!'})
           })
         } else {
           this.setState({error_cart: 'Something went wrong. Repeat again!'})
@@ -40,6 +45,9 @@ class CheckoutForm extends React.Component {
       this.props.PayBid(this.props.bid.id, this.state.card, false).then(() => {
         this.props.toggle();
         browserHistory.push('/profile');
+      }).catch(err => {
+        console.log('err action',err)
+        this.setState({error_cart: 'Something went wrong. Repeat again!'})
       })
     }
   }
@@ -56,15 +64,15 @@ class CheckoutForm extends React.Component {
     let cards = user.cards ? (user.cards.cards && Array.isArray(user.cards.cards)) ? user.cards.cards : [] : [];
     return (
       <form onSubmit={this.handleSubmit} className='pay-bid'>
-
+          <label>Pay with</label>
           <select className="form-control select-card" onChange={this.selectCard}>
             <option value="">Select card...</option>
-            <option value="new">Create new card</option>
-            {cards.map(card => <option value={card.id}>**** **** **** {card.last4}</option>)}
+            <option value="new">Add card</option>
+            {cards.map(card => <option value={card.id}>**** **** **** {card.last4} ({card.brand})</option>)}
           </select>
 
 				  {this.state.card == 'new' ? <CardElement style={{base: {fontSize: '18px'}}} /> : null}
-    
+          {this.state.error_cart ? <p className='error-message'>{this.state.error_cart}</p> : null}
 				<hr/>
 				<button className='btn btn-create-listing block-btn blue'>Pay</button>
       </form>
