@@ -5,7 +5,7 @@ class Checkout extends React.Component {
     return (
       <div className="Checkout">
         <Elements>
-          <CheckoutForm bid={this.props.bid} toggle={this.toggle}/>
+          <CheckoutForm bid={this.props.bid} toggle={this.props.toggle}/>
         </Elements>
       </div>
     )
