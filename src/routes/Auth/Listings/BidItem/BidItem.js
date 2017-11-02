@@ -2,7 +2,9 @@ import './BidItem.scss'
 import { Button } from 'reactstrap'
 import { Component } from 'react'
 import { getCountTransferedBids, getBidsByListingID, updateStatusBid } from '../../../../actions/bids'
+import { getConversations } from '../../../../actions/conversations'
 import { connect } from 'react-redux'
+import { Link } from 'react-router'
 import moment from 'moment'
 
 class BidItem extends Component  {
@@ -15,6 +17,7 @@ class BidItem extends Component  {
     }
 
     this.onClickAwardJob = this.onClickAwardJob.bind(this)
+    this.Conversations = this.Conversations.bind(this)
   }
 
   onClickReadMore(user_id) {
@@ -48,9 +51,10 @@ class BidItem extends Component  {
       default: return <Button onClick={this.onClickAwardJob}>Award Job</Button>
     }
   }
-
+  Conversations(){
+    this.props.getConversations(this.props.listing_id, this.props.user_id)
+  }
   render(){
-
     if (!this.state.more) {
       return(
         <div className="list-item">
@@ -71,9 +75,7 @@ class BidItem extends Component  {
                 </div>
               </div>
               <div className="row">
-                <Button>Message User</Button>
-
-                {this.renderBtnByStatus()}
+                   <Button  onClick={this.Conversations}>Message User</Button>
 
               </div>
               {/*<div className="row">*/}
@@ -108,7 +110,7 @@ class BidItem extends Component  {
               </div>
 
               <div className="row">
-                <Button>Message User</Button>
+                <Link to='messages'><Button>Message User</Button></Link>
 
                 {this.renderBtnByStatus()}
 
@@ -127,4 +129,4 @@ const mapstateToProps = (state) => ({
   bidder_details: state.bid.bidder_details
 })
 
-export default connect(mapstateToProps, { getCountTransferedBids, updateStatusBid, getBidsByListingID })(BidItem)
+export default connect(mapstateToProps, { getCountTransferedBids, updateStatusBid, getBidsByListingID ,getConversations})(BidItem)
