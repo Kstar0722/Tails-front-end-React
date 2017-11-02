@@ -4,6 +4,7 @@ import user from 'auth/user'
 import Notifications from 'react-notification-system-redux'
 import apiService from '../lib/api'
 import { GET_LISTING_BIDS, UPDATE_LISTING_BID } from '../config/actionTypes'
+import {getNotification} from './notifications_bid'
 
 export function getListingBids(user_id) {
     return function(dispatch) {
@@ -30,11 +31,11 @@ export function getListingBids(user_id) {
     }
 }
 
-export function PayBid(bid_id, token) {
-    return function(dispatch) {
-      
+export function PayBid(bid_id, token, new_card) {
+    return function(dispatch) {      
       return apiService.post('bids/' + bid_id +'/pay', {
-          card_token: token
+          card_token: token,
+          new_card
       }).then((res) => {
         console.log('res pay', res)
         dispatch({ type: UPDATE_LISTING_BID, bid: res.bid });
@@ -44,15 +45,18 @@ export function PayBid(bid_id, token) {
           position: 'br',
           autoDismiss: 2,
         }));
+        dispatch(getNotification())
+        return null;
       })
       .catch(error => {
         console.log('err', error)
-        dispatch(Notifications.error({
-          title: '',
-          message: 'Error',
-          position: 'br',
-          autoDismiss: 2,
-        }));
+        // dispatch(Notifications.error({
+        //   title: '',
+        //   message: 'Error',
+        //   position: 'br',
+        //   autoDismiss: 2,
+        // }));
+        return Promise.reject(error)
       })
     }
 }

@@ -3,6 +3,7 @@ import { TabContent, TabPane, Nav, NavItem, NavLink, Row, Col } from 'reactstrap
 import classnames from 'classnames'
 import EditForm from './EditForm/EditForm'
 import StripeForm from './StripeForm/StripeForm'
+import MyCards from './EditCard/MyCards'
 
 class EditProfile extends React.Component {
 	constructor(props) {
@@ -54,6 +55,14 @@ class EditProfile extends React.Component {
 									Payout Settings
 								</NavLink>
 							</NavItem>
+							<NavItem>
+								<NavLink
+								className={classnames({ active: this.state.activeTab === '3' })}
+								onClick={() => { this.toggle('4'); }}
+								>
+									My cards
+								</NavLink>
+							</NavItem>
 						</Nav>
 						<TabContent activeTab={this.state.activeTab}>
 						<TabPane tabId="1">
@@ -65,6 +74,11 @@ class EditProfile extends React.Component {
 						<TabPane tabId="3">
 							<div>
 								{<StripeForm/>}
+							</div>
+						</TabPane>
+						<TabPane tabId="4">
+							<div>
+								{<MyCards/>}
 							</div>
 						</TabPane>
 						</TabContent>
