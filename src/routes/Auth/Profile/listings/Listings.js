@@ -31,6 +31,7 @@ class Listings extends React.Component {
 				listing.budget,
 				moment(new Date(listing.created_at)).format('MM/DD/YYYY'),
 				listing.status,
+				listing.bids,
 				{delete: this.delete.bind(this, listing.id)},
 				{review: this.review.bind(this, listing.id)},
 				{editStep: this.editStep.bind(this, listing.id)}
@@ -89,7 +90,7 @@ class Listings extends React.Component {
 	}
 
 	// This will be called for each listing based on how many there are
-	renderListings(id, title, budget, date, status, optionActions, showActions, editStapActions) {
+	renderListings(id, title, budget, date, status, bids, optionActions, showActions, editStapActions) {
 		return (
 			<ListingItem
 				key={id}
@@ -98,9 +99,11 @@ class Listings extends React.Component {
 				budget={budget}
 				dateCreated={date}
 				status={status}
+				bids={bids}
 				optionActions={optionActions}
 				showActions = {showActions}
 				editStapActions = {editStapActions}
+				Shipped={this.props.Shipped}
 			/>
 		)
 	}

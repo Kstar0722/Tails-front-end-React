@@ -1,8 +1,10 @@
 import Listings from './Listings'
 import { getListings, deleteListing } from 'actions/listing'
+import {Shipped} from 'actions/listing_bids'
 
 const mapDispatchToProps = (dispatch) => ({
     deleteListing: id => dispatch(deleteListing(id)),
+    Shipped: (id) => dispatch(Shipped(id))
 })
 
 const mapStateToProps = (state) => ({
