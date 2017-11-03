@@ -43,7 +43,7 @@ export function getListing(listing_id) {
 
 export function getListings() {
     return function(dispatch) {
-        const url = config.endpoints.url + config.endpoints.listings + '?filter[user_id]=' + user.id + "&include_bid_counts=1"
+        const url = config.endpoints.url + config.endpoints.listings + '?filter[user_id]=' + user.id + "&include_bid_counts=1&include=bids"
         return fetch(url, {
             method: 'get',
             headers: {

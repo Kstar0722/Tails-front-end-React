@@ -60,7 +60,7 @@ class EditProfile extends React.Component {
 								className={classnames({ active: this.state.activeTab === '3' })}
 								onClick={() => { this.toggle('4'); }}
 								>
-									My cards
+									Payment methods
 								</NavLink>
 							</NavItem>
 						</Nav>

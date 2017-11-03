@@ -21,8 +21,9 @@ class FieldForm extends Component {
         input_component = <textarea {...input} className="form-control"></textarea>;
         break;
       case 'select':
-        input_component = <select className="form-control">
-          {options.map(item => <option value={item.value}>{item.label}</option>)}
+        console.log('select')
+        input_component = <select {...input} className="form-control">
+          {options.map(item => <option value={item.value}>{item.text}</option>)}
         </select>;
         break;
       default: 

@@ -5,6 +5,7 @@ import { Field, reduxForm, SubmissionError } from 'redux-form'
 import renderField from 'components/fieldFormLine'
 import classNames from 'classnames'
 import {createAccount, fetchStripeAccountInfo, verifyAccount} from 'actions/stripe'
+import config from 'config'
 
 const validate = values => {
 	let errors = {}
@@ -29,10 +30,26 @@ const renderFieldOne = ({
 	classField,
   meta: { touched, error, warning }
 }) => (
-	<span className={classNames('' + classField, {'has-danger': touched && error})}>
+	<span className={classNames('form-group ' + classField, {'has-danger': touched && error})}>
   	<input {...input} className={"form-control "} placeholder={label} type={type} />
 		{touched && ((error && <small className="form-control-feedback">{error}</small>) || (warning && <span>{warning}</span>))}
 	</span>
+)
+
+const renderFieldSelect = ({
+  input,
+  label,
+	classField,
+	meta: { touched, error, warning },
+	options
+}) => (
+	<div className={classNames('' + classField, {'has-danger': touched && error})}>
+		<label className="label-control control-label" >{label}</label>
+  	<select {...input} className={"form-control "}>
+			{options.map(option => <option value={option.value}>{option.text}</option>)}
+		</select>
+		{touched && ((error && <small className="form-control-feedback">{error}</small>) || (warning && <span>{warning}</span>))}
+	</div>
 )
 
 class StripeForm extends React.Component {
@@ -168,6 +185,8 @@ class StripeForm extends React.Component {
 	render() {
 		const {handleSubmit, submitting, user, returnForm, stripe} = this.props;
 
+		let address = returnForm.legal_entity ? returnForm.legal_entity.address ? returnForm.legal_entity.address : {} : {}
+
 		if(!user.stripe_account_created){
 			return (
 				<div className="row justify-content-center stripe-content">
@@ -202,9 +221,17 @@ class StripeForm extends React.Component {
 						<h3>Account details</h3>
 						<Field name="legal_entity[address][line1]" type="text" component={renderField} label="Address 1"/>
 						<Field name="legal_entity[address][line2]" type="text" component={renderField} label="Address 2"/>
-						<Field name="legal_entity[address][country]" type="text" component={renderField} label="Country"/>
+						<Field 
+							name="legal_entity[address][country]" 
+							type="select" 
+							options={config.countries} 
+							component={renderField} 
+							label="Country"/>
 						<Field name="legal_entity[address][city]" type="text" component={renderField} label="City"/>
-						<Field name="legal_entity[address][state]" type="text" component={renderField} label="State"/>
+						{  address.country != 'US' ? 
+							<Field name="legal_entity[address][state]" type="text" component={renderField} label="State"/>: 
+							<Field name="legal_entity[address][state]" type="select" options={config.states} component={renderField} label="State"/>
+						}
 						<Field name="legal_entity[address][postal_code]" type="text" component={renderField} label="ZIP"/>
 
 						<hr/>
@@ -252,7 +279,7 @@ StripeForm = connect(
 			})(state) : {},
 			user: state.profile.data,
 			stripe: state.profile.stripe,
-			returnForm: state.form.stripeForm ? state.form.stripeForm ? state.form.stripeForm.values : {} : {}
+			returnForm: state.form.stripeForm ? state.form.stripeForm.values ? state.form.stripeForm.values : {} : {}
 	}),
 	{createAccount, fetchStripeAccountInfo, verifyAccount}
 )(StripeForm)
