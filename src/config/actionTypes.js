@@ -45,6 +45,10 @@ export const GET_ALL_LISTINGS = 'GET_ALL_LISTINGS';
 export const GET_LISTING_ANIMALS_BY_ID = 'GET_LISTING_ANIMALS_BY_ID';
 // -----------------------------------------------------
 
+// CONVERSATIONS
+export const GET_CONVERSATIONS = 'GET_CONVERSATIONS';
+// -----------------------------------------------------
+
 // PAGINATION
 export const SET_CURRENT_PAGE_PAGINATION = 'SET_CURRENT_PAGE_PAGINATION';
 export const SET_PAGES_PAGINATION = 'SET_PAGES_PAGINATION';

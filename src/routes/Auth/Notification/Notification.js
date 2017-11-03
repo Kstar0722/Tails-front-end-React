@@ -29,7 +29,6 @@ class Notification extends Component {
 
 
   render () {
-    console.log('notifications=========>',this.props.notifications)
     return (
       <div className="container">
         <div className="Notificaton">

@@ -65,7 +65,6 @@ class ListItem extends React.Component {
   }
 
   render() {
-    console.log('this.props.listing.created_at',this.props.created_at)
     const {id, title, created_at, pick_up_city, pick_up_state, desired_pick_up_date, delivery_city, delivery_state, desired_delivery_date, budget, other_notes, bids_count, listing_details} = this.props
 
     return (

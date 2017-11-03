@@ -31,14 +31,7 @@ class BidItem extends Component  {
       listing_id: this.props.listing_id,
       bid_id: this.props.bid_id
 
-    }).then(
-      this.props.getBidsByListingID({
-        filter: {
-          listing_id: this.props.listing_id
-        },
-        include: ['user']
-      })
-    )
+    })
   }
 
   renderBtnByStatus(){
@@ -76,7 +69,7 @@ class BidItem extends Component  {
               </div>
               <div className="row">
                    <Button  onClick={this.Conversations}>Message User</Button>
-
+                {this.renderBtnByStatus()}
               </div>
               {/*<div className="row">*/}
                 {/*<div className="col-md-12 read-more" onClick={this.onClickReadMore.bind(this, this.props.user_id)} >... read more</div>*/}

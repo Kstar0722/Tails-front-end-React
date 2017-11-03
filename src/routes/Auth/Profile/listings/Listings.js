@@ -22,7 +22,6 @@ class Listings extends React.Component {
 	}
 
 	getListings() {
-    console.log('-------->',this.props.listings.data)
 		const listings = []
 		this.props.listings.data.map((listing, i) => {
 			listings.push(this.renderListings(

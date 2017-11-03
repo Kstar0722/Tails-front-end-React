@@ -49,7 +49,7 @@ class Header extends React.Component {
 						</nav>
 					</div>
 					<nav className="mobile-nav">
-					{user.authorized ? 
+					{user.authorized ?
 						<ul className="d-flex flex-row flex-wrap align-items-center justify-content-around">
 							<li></li>
 							<li><Link to='/listings'>Browse Listings</Link></li>

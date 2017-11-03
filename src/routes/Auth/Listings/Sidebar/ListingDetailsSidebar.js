@@ -34,8 +34,6 @@ class ListingDetailsSidebar extends Component {
   }
 
   render() {
-    console.log('---->this.props.listing.created_at',this.props.listing.created_at)
-
     return(
       <div id="filters" className="">
         <div className="filters-toggle">LISTING DETAILS</div>

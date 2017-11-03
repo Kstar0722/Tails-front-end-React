@@ -134,7 +134,12 @@ export function updateStatusBid(filter) {
           position: 'br',
           autoDismiss: 3,
         }));
-
+        dispatch(getBidsByListingID({
+          filter: {
+            listing_id: filter.listing_id
+          },
+          include: ['user']
+        }))
         return null
       })
       .catch(error => {
