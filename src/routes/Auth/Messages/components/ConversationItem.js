@@ -5,6 +5,17 @@ class ConversationItem extends React.Component {
 		super(props)
 	}
 
+	getAvatar(users) {
+		let id = parseInt(user.id), avatar = '';
+		let current;
+		for(let i = 0; i < users.length; i++) {
+			if(id != (current = users[i]).id) {
+				avatar = current.avatar;
+			}
+		}
+		return avatar;
+	}
+
 	stringifyNames(users) {
 		const id = parseInt(user.id), names = [];
 		let current;
@@ -21,11 +32,12 @@ class ConversationItem extends React.Component {
 	}
 
 	render() {
+	console.log('props', this.props);
   	const {id, name} = this.props
 		return (
         <li onClick={this.props.selectEvent.bind(this.props.Messages, this.props.conversation)}>
             <div className="avatar">
-                <img src="{FakeAvatar}" alt="" />
+                <img src={this.getAvatar(this.props.conversation.users)} alt="" />
             </div>
             <h4 className="name"><span>{this.stringifyNames(this.props.conversation.users)}</span></h4>
 						<p className="excerpt">{

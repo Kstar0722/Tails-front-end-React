@@ -1,4 +1,5 @@
 import './BidItem.scss'
+import { Link } from 'react-router'
 
 class BidItem extends React.Component {
 	constructor(props) {
@@ -15,14 +16,14 @@ class BidItem extends React.Component {
     }
   }
 	render() {
-		const { id, title, dateBidded, status } = this.props
+		const { id, title, dateBidded, status, listing_id } = this.props
 		return (
 			<tr key={id}>
 				<td>{title}</td>
 				<td className="bold">{dateBidded}</td>
         {this.renderBtnByStatus()}
 				<td className="actions">
-					<i className="fa fa-eye" aria-hidden="true"></i>
+					<Link to={"/listing-details/" + listing_id} className="link-color-eye"><i className="fa fa-eye" aria-hidden="true"></i></Link>
 					<i className="fa fa-pencil" aria-hidden="true"></i>
 				</td>
 			</tr>

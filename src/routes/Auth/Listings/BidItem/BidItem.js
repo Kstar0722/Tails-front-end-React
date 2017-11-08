@@ -6,6 +6,7 @@ import { getConversations } from '../../../../actions/conversations'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import moment from 'moment'
+import DefaultAvatar from 'assets/default_avatar.png'
 
 class BidItem extends Component  {
 
@@ -53,7 +54,7 @@ class BidItem extends Component  {
         <div className="list-item">
           <div className="top-part">
             <div className="image-holder-min text-center">
-              <img src={this.props.avatar} className="main-image" />
+              <img src={this.props.avatar || DefaultAvatar} className="main-image" />
             </div>
 
             <div className="right-content-holder">

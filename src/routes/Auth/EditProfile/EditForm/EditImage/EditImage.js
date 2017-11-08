@@ -86,7 +86,7 @@ class EditImage extends React.Component {
                                         color={[255, 255, 255, 0.6]} // RGBA
                                         scale={this.state.scale}
                                         rotate={0}
-                                        crossOrigin="anonymous"
+                                        
                                         borderRadius={0}
                                         disableDrop={true}
                                         onImageReady={this.onLoad}

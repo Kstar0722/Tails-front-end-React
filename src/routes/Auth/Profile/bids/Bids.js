@@ -19,14 +19,15 @@ class Bids extends React.Component {
 					bid.id,
 					bid.listing.title,
 					moment(new Date(bid.created_at)).format('MM/DD/YYYY'),
-					bid.status
+					bid.status,
+					bid.listing_id
 				))
 			}
 		})
 		return bids
 	}
 
-	renderBids(id, title, date, status) {
+	renderBids(id, title, date, status, listing_id) {
 		return (
 			<BidItem
 				key={id}
@@ -34,6 +35,7 @@ class Bids extends React.Component {
 				title={title}
 				dateBidded={date}
 				status={status}
+				listing_id={listing_id}
 			/>
 		)
 	}

@@ -4,6 +4,8 @@ import ConversationItem from './components/ConversationItem'
 import apiService from '../../../lib/api'
 import user from 'auth/user'
 import socket from 'auth/socket'
+import DefaultAvatar from 'assets/default_avatar.png'
+import { connect } from 'react-redux'
 
 class Messages extends React.Component {
 	constructor(props) {
@@ -50,7 +52,8 @@ class Messages extends React.Component {
 			},
 			filter: {
 				conversation_id: conversation.id
-			}
+			},
+			include: ['user']
 		}).then(res => {
 			if(res.data.length < this.infinite.size) {
 				this.infinite.messages.done = true;
@@ -181,8 +184,10 @@ class Messages extends React.Component {
 				},
 				filter: {
 					conversation_id: this.state.selected.id
-				}
+				},
+				include: ['user']
 			}).then(res => {
+				console.log('messages');
 				if(res.data.length < this.infinite.size) {
 					this.infinite.messages.done = true;
 				}
@@ -197,6 +202,18 @@ class Messages extends React.Component {
 	}
 
 	render() {
+
+		let my_avatar = this.props.profile.avatar ? this.props.profile.avatar : DefaultAvatar;
+		let user_avatar = DefaultAvatar;
+
+		if (this.state.selected && this.state.selected.users && Array.isArray(this.state.selected.users)){
+			this.state.selected.users.forEach((item) => {
+				if(user.id != item.id){
+					user_avatar = item.avatar || DefaultAvatar;
+				}	
+			});
+		}
+
 		return (
             <div className="container">
         		<div id="messages">
@@ -240,7 +257,11 @@ class Messages extends React.Component {
 					                <div className="scroller">
 					                    <ul className="chat-messages">
 																	{this.state.messages.map(message =>
-																			<li className={message.user_id == user.id ? 'me' : ''}><p>{message.message}</p></li>
+																			<li className={message.user_id == user.id ? 'me' : ''}>
+																			<div className="avatar avatar-message">
+																					<img src={ message.user ? message.user.avatar : message.user_id == user.id ? my_avatar : user_avatar } alt="" />
+																			</div>
+																			<p>{message.message}</p></li>
 																	)}
 					                    </ul>
 					                </div>
@@ -273,4 +294,12 @@ class Messages extends React.Component {
 	}
 }
 
-export default Messages;
+const mapStateToProps = state => ({
+	profile: state.profile.data,
+})
+
+const mapDispatchToProps = dispatch => ({
+
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Messages)

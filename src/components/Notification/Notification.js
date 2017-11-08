@@ -24,13 +24,14 @@ class Notification extends Component {
     super(props)
     this.state = {
       popoverOpen: false,
+      dropdownOpen: false,
     }
 
     this.toggle = this.toggle.bind(this)
     this.onclose = this.onclose.bind(this)
   }
 
-  toggle (type) {
+  toggle (type = 'dropdownOpen') {
     let count = this.props.notifications.length;
     if (count > 0 ){
       this.setState({
@@ -59,13 +60,21 @@ class Notification extends Component {
     })
     return (
       <div>
-        <div className="dropmenu">
-          <a id="Popover2" className="NotificationBell"
-             onClick={this.toggle.bind(this, 'popoverOpen')}><FaIconNotification/></a>
-          <Popover placement="bottom" isOpen={this.state.popoverOpen} target="Popover2"
-                   toggle={this.toggle.bind(this, 'popoverOpen')}>
-            <PopoverContent>
-              {this.props.notifications.map((notification, index) => {
+        
+          <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
+						<DropdownToggle
+							tag="span"
+							onClick={this.toggle}
+							data-toggle="dropdown"
+							aria-expanded={this.state.dropdownOpen}
+						>
+            <a id="Popover2" className="NotificationBell"
+             onClick={this.toggle}><FaIconNotification/></a>
+             <label className="labelCount" style={{display: count > 0 ? 'inline-block' : 'none' }}>{count}</label>
+						</DropdownToggle>
+          <DropdownMenu right style={{'top': '56px'}}>
+          <div className="afte-rec"></div>
+          {this.props.notifications.map((notification, index) => {
                 if(notification.notification_type == "offer_sent") {
                   return <li key={index}>
                     <Link onClick={this.onclose}
@@ -82,10 +91,9 @@ class Notification extends Component {
               }
 
               )}
-            </PopoverContent>
-          </Popover>
-          <label className="labelCount" style={{display: count > 0 ? 'inline-block' : 'none' }}>{count}</label>
-        </div>
+          </DropdownMenu>
+        </Dropdown>
+
       </div>
     )
   }

@@ -35,16 +35,23 @@ class AddBidModal extends React.Component {
   }
 
   render() {
-    let {user, bids} = this.props;
+    let {user, bids, stripe} = this.props;
     let visibleBt = true;
     bids.map(bid => {
       if(user.id == bid.user_id){
         visibleBt=false;
       }
     })
+
+    let charges_enabled = false;
+
+    if(stripe.charges_enabled){
+      charges_enabled=true
+    }
+
     return (
       <div>
-        { visibleBt ? <Button color="danger" onClick={this.toggle}><span className="bid-now-btn">BID NOW</span></Button> : '' }
+        { visibleBt ? charges_enabled ? <Button color="danger" onClick={this.toggle}><span className="bid-now-btn">BID NOW</span></Button> : 'You must complete your payout info before bidding' : '' }
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
           <form onSubmit={this.handleSubmit} className="form-add-bid" >
             <ModalHeader toggle={this.toggle}>{this.props.title} - $ {this.props.budget} Budget</ModalHeader>
@@ -86,7 +93,8 @@ AddBidModal = reduxForm({
 const mapStateToProps = state => ({
   addBidForm: state.form.addBidForm,
   bids: state.bid.data ? Array.isArray(state.bid.data) ? state.bid.data : [] : [],
-  user: state.profile.data
+  user: state.profile.data,
+  stripe: state.profile.stripe
 })
 
 export default connect(mapStateToProps, { addBid, getBidsByListingID } )(AddBidModal);

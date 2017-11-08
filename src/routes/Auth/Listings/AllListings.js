@@ -13,7 +13,8 @@ class AllListings extends React.Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			getAllListings: []
+			getAllListings: [],
+			showMessage: false
 		}
 	}
 
@@ -118,7 +119,8 @@ class AllListings extends React.Component {
                 <div className="row list-items">
                     <div className="col-md-8">
 
-                      {this.getAllListings()}
+											{this.getAllListings()}
+											{this.props.listings.data ? this.props.listings.data.length < 1 ? <div>No listings found that match that criteria...</div> : null : null}
 
                       <Paginations
                         items={this.props.listings.data}

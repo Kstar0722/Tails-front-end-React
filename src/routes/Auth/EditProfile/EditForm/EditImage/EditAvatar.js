@@ -15,6 +15,7 @@ class EditAvatar extends React.Component {
 			}
 		
         this.onLoad = this.onLoad.bind(this);
+        this.onSave = this.onSave.bind(this);
     }
 
     handleNewImage = (e) => {
@@ -27,9 +28,10 @@ class EditAvatar extends React.Component {
         reader.onloadend = function() {
 			_this.setState({ image: reader.result })
 			_this.setState({ originalImage: reader.result })
-            _this.props.input.onChange(reader.result)
+			_this.props.input.onChange(reader.result)
+			_this.props.rootChange('avatar_original', reader.result)
         }
-        reader.readAsDataURL(file)
+		reader.readAsDataURL(file)
 	}
 
 	handleScale = (e) => {
@@ -40,15 +42,27 @@ class EditAvatar extends React.Component {
     }
 
     onSave(){
-
+		if (this.editor) {
+			// This returns a HTMLCanvasElement, it can be made into a data URL or a blob,
+			// drawn on another canvas, or added to the DOM.
+			const canvas = this.editor.getImage()
+	  
+			// If you want the image resized to the canvas size (also a HTMLCanvasElement)
+			const canvasScaled = this.editor.getImageScaledToCanvas()
+			// console.log('canvas', canvasScaled.toDataURL())
+			this.props.input.onChange(canvasScaled.toDataURL())
+		  }
+		
     }
 
     onLoad(info){
-		console.log(info)
+		console.log('info',info)
 		this.setState({
-			xPosition: info.x,
-			yPosition: info.y
+			xPosition: info ? info.x : 0.5,
+			yPosition: info ? info.y : 0.5
 		})
+		this.props.rootChange('position_x', this.state.xPosition)
+		this.props.rootChange('position_y', this.state.yPosition)
         this.onSave()
     }
 
@@ -62,7 +76,13 @@ class EditAvatar extends React.Component {
             if (nextProps.scale){
                 this.setState({scale: nextProps.scale})
             }
-        }
+		}
+		if(nextProps.position_x != this.props.position_x){
+        	this.setState({xPosition: nextProps.position_x})  
+		}
+		if(nextProps.position_y != this.props.position_y){
+            this.setState({yPosition: nextProps.position_y})
+        }		
     }
 
     componentWillMount() {
@@ -94,7 +114,6 @@ class EditAvatar extends React.Component {
 					<div className="col justify-content-center align-self-center bottom-style">
 						<label>Profile Image</label>
 						<div className="justify-content-left align-self-center">
-							{console.log('Img=====>',this.state.image)}
 							<AvatarEditor
 							ref={this.setEditorRef}
 							image={this.state.image ? this.state.image : this.state.originalImage}
