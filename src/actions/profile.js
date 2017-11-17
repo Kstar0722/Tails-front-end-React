@@ -2,6 +2,7 @@ import config from '../config.js'
 import { checkHttpStatus, parseJSON } from '../http.js'
 import user from 'auth/user'
 import Notifications from 'react-notification-system-redux'
+import {fetchStripeAccountInfo} from './stripe'
 
 export function getProfile() {
     return function(dispatch) {
@@ -16,6 +17,8 @@ export function getProfile() {
         .then(parseJSON)
         .then(res => {
             dispatch({ type: 'GET_PROFILE', profile: res })
+            dispatch(fetchStripeAccountInfo())
+
         })
         .catch(error =>{
             console.log('err', error)
@@ -53,13 +56,13 @@ export function updateProfile(_data) {
         })
         .then(checkHttpStatus)
         .then(parseJSON)
-        .then(res => {
-            dispatch({ type: 'GET_PROFILE', profile: res })
+        .then(res => {      
+            dispatch({ type: 'GET_PROFILE', profile: res })           
             dispatch(Notifications.success({
                 title: '',
                 message: 'Profile saved',
                 position: 'br',
-                autoDismiss: 0,
+                autoDismiss: 2,
            }));
         })
         .catch(error =>{
