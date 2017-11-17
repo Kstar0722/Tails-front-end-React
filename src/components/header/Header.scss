@@ -1,19 +1,15 @@
 $textGray: #7c6e6a;
 $textOrange: #ff6f51;
-$textBlue: #0FCBF0;
 
 section#header {
 	background: #fff;
 	min-height: 100px;
 	padding: 10px 0px;
 	.header-content {
-		#image-logo{
-			@media (max-width: 1000px) {				
+		#logo {
+			flex: 1;
+			@media(max-width: 1000px) {
 				text-align: center;
-				margin: 0 auto;
-				img {
-					margin: 0 auto;
-				}
 			}
 		}
 		nav.hide-on-mobile {
@@ -34,11 +30,10 @@ section#header {
 						text-decoration: none;
 					}
 					&.sign-in {
-						cursor: pointer;
 						a {
-							border: 2px solid $textBlue;
+							border: 2px solid $textOrange;
 							border-radius: 25px;
-							color: $textBlue;
+							color: $textOrange;
 							padding: 10px 25px;
 						}
 					}
@@ -67,11 +62,10 @@ section#header {
 					text-decoration: none;
 				}
 				&.sign-in {
-					cursor: pointer;
 					a {
-						border: 2px solid $textBlue;
+						border: 2px solid $textOrange;
 						border-radius: 25px;
-						color: $textBlue;
+						color: $textOrange;
 						padding: 10px 25px;
 					}
 				}

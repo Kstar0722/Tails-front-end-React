@@ -165,6 +165,7 @@ Serve the application with a web server such as nginx by pointing it at your `./
 
 This project wouldn't be possible without help from the community, so I'd like to highlight some of its biggest contributors. Thank you all for your hard work, you've made my life a lot easier and taught me a lot in the process.
 
+* [King Star](https://github.com/Kstar0722) - Head Developer
 * [Justin Greenberg](https://github.com/justingreenberg) - For all of your PR's, getting us to Babel 6, and constant work improving our patterns.
 * [Roman Pearah](https://github.com/neverfox) - For your bug reports, help in triaging issues, and PR contributions.
 * [Spencer Dixon](https://github.com/SpencerCDixon) - For your creation of [redux-cli](https://github.com/SpencerCDixon/redux-cli).
