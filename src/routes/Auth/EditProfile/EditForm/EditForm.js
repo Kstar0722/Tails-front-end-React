@@ -89,18 +89,23 @@ class EditForm extends React.Component {
 						<Field 
 							action={this.profileImageScale}
 							name="avatar_new"
-							image={profileUpdate.avatar}
+							image={profileUpdate.avatar_original}
 							scale={profileUpdate.zoom_amount}
 							originalImage={profileUpdate.avatar_original}
+							position_x={profileUpdate.position_x}
+							position_y={profileUpdate.position_y}
 							component={EditAvatar}
-							label={"Profile Image"}/>       
+							label={"Profile Image"}
+							rootChange={this.props.change}
+							/>       
 						<Field 
 							action={this.coverphotoScale}
 							name="cover_photo_new"
 							scale={profileUpdate.cover_zoom_amount}
 							image={profileUpdate.cover_photo}
 							component={EditImage}
-							label={"Cover Photo"}/> 
+							label={"Cover Photo"}
+							rootChange={this.props.change}/> 
 						</div>       
 					</div>
 					<div className="col justify-content-center align-self-center">
