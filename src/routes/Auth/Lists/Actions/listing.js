@@ -2,6 +2,9 @@ import config from 'config.js'
 import { checkHttpStatus, parseJSON } from 'http.js'
 import user from 'auth/user'
 import { browserHistory } from 'react-router'
+import apiService from 'lib/api'
+import Bluebird from 'bluebird'
+import Notifications from 'react-notification-system-redux'
 
 const GET_LISTINGS_SUCCESS = 'GET_LISTINGS_SUCCESS'
 const GET_LISTINGS_FAILURE = 'GET_LISTINGS_FAILURE'
@@ -96,8 +99,9 @@ export function deleteListing(id) {
     }
 }
 
-export function createListings(value) {
+export function createListings({listing, animals}) {
     return function(dispatch) {
+<<<<<<< HEAD
         return fetch(config.endpoints.url + config.endpoints.listings, {
             method: 'POST',
             headers: {
@@ -114,7 +118,45 @@ export function createListings(value) {
             //dispatch(createAnimalInfo(res.id, value.animalList))
         })
         .catch(error =>{
+=======
+        return apiService.create('listings', listing).then(careatListing => {
+            return Bluebird.map(animals, animal => {
+                animal.listing_id = careatListing.id;
+                let images = null;
+
+                if (animal.images){
+                    images = animal.images.map(image => image)
+                }
+
+                delete animal.images;
+
+                return apiService.create('listing_animals', animal).then(careatAnimal => {
+                    if(!images){
+                        return null;
+                    }
+                    return apiService.create('animal_images/bulk', {listing_animal_id: careatAnimal.id, images})
+                })
+            })
+
+            // dispatch(createAnimalInfo(res.id, value.animalList))
+        }).then(() => {
+            browserHistory.push('/profile');
+            dispatch(Notifications.success({
+                title: '',
+                message: 'Listing created',
+                position: 'br',
+                autoDismiss: 2,
+            }));
+            return null;
+        }).catch(error =>{
+>>>>>>> 2f3f900230db1e3ff0f7af491adca4c8b7125de0
             dispatch(createListingsFailure(error))
+            dispatch(Notifications.error({
+                title: '',
+                message: 'Oops, something went wrong!',
+                position: 'br',
+                autoDismiss: 3,
+           }));
         })
     }
 }
