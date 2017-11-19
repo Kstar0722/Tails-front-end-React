@@ -1,6 +1,7 @@
 import Dropzone from 'react-dropzone'
 import _ from 'lodash'
 import FileUpload from './FileUpload'
+import config from '../../../../config'
 export default class Right extends React.Component {
 	
 	constructor(props) {
@@ -12,17 +13,20 @@ export default class Right extends React.Component {
     }
 
 	render() {
+	    console.log('this.props',this.props.breeds)
         const {
             animal_types,
             name,
-            breed, 
+            breed,
             height, 
             weight, 
             special_notes, 
             showPreview,
             impagePreview,
             animal_breed
-        } = this.props
+        } = this.props;
+
+        console.log('impagePreview', impagePreview);
 		return (
             <div className="main-body col-sm-8 col-12">
                 <div className="form-group">
@@ -35,7 +39,7 @@ export default class Right extends React.Component {
                                 value={breed}
                                 onChange={this.setAnimalProperty.bind(this, "breed")}>
                                 {
-                                _.map(animal_types, (item) => 
+                                _.map(config.animals, (item) =>
                                         <option 
                                            // key={item.id}
                                             value={item.breed}>{item.breed}</option>
@@ -89,10 +93,10 @@ export default class Right extends React.Component {
                         value={special_notes}
                         onChange={this.setAnimalProperty.bind(this, "special_notes")} />  
                 </div>
-                <FileUpload
+                {<FileUpload
                     onDrop={this.props.onDrop}
                     animalImageDel={this.props.animalImageDel}
-                    impagePreview={impagePreview} />
+                    impagePreview={impagePreview} /> }
             </div>
 		)
 	}
