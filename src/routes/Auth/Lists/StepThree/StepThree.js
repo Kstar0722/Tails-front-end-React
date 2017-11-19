@@ -72,6 +72,7 @@ class StepThree extends React.Component {
             let city = "";
             let state = "";
             let resultComponents = results[0].address_components;
+            console.log("00000000000000000000000000000000")
             console.log(resultComponents)
             for (let i = 0; i < resultComponents.length; i++) {
                 if (resultComponents[i].types.indexOf('postal_code') > -1) {
