@@ -1,0 +1,61 @@
+section.list-bids {
+  .list-item {
+    .top-part {
+      .image-holder-min {
+        width: 80px;
+        margin-right: 36px;
+        .main-image {
+          display: block;
+          width: 100%;
+          height: auto;
+          margin-bottom: 8px;
+          border-radius: 80px;
+        }
+      }
+      .image-holder-max {
+        width: 150px;
+        margin-right: 26px;
+        .main-image {
+          display: block;
+          width: 100%;
+          height: auto;
+          margin-bottom: 8px;
+          border-radius: 80px;
+        }
+      }
+      .right-content-holder {
+
+        .row {
+          .read-more {
+            color: #19b9df;
+            margin-top: 10px;
+            cursor: pointer;
+          }
+          button {
+            margin: 10px;
+          }
+          .accepted {
+            margin: 15px;
+            color: green;
+          }
+          .rejected {
+            margin: 15px;
+            color: red;
+          }
+          .listing-excerpt {
+            overflow: auto;
+            max-height: 215px;
+            min-height: 20px;
+            p {
+              opacity: 0.8;
+              color: #636a71;
+              font-size: 16px;
+              line-height: 1.25;
+              margin: 0px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
