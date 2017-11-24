@@ -1,5 +1,5 @@
 import './ListingItem.scss'
-import NumberFormat from 'react-number-format'
+
 class ListingItem extends React.Component {
 	constructor(props) {
 		super(props)
@@ -7,15 +7,15 @@ class ListingItem extends React.Component {
 
 	render() {
 		return (
-			<tr key={this.props.id}>
+			<tr>
 				<td>{this.props.title}</td>
-				<td className="bold"><NumberFormat value={this.props.budget} displayType={'text'} thousandSeparator={true} prefix={'$'} /></td>
 				<td className="bold">{this.props.dateCreated}</td>
+				<td className="bold">{this.props.totalBids}</td>
+				<td className="complete bold">{this.props.status}</td>
 				<td className="actions">
-					
-					<i className="fa fa-eye" aria-hidden="true" onClick={this.props.showActions.review}></i>
-					<i className="fa fa-pencil" aria-hidden="true" onClick={this.props.editStapActions.editStep}></i>
-					<i className="fa fa-trash-o" aria-hidden="true" onClick={this.props.optionActions.delete}></i>
+					<i className="fa fa-eye" aria-hidden="true"></i>
+					<i className="fa fa-pencil" aria-hidden="true"></i>
+					<i className="fa fa-trash-o" aria-hidden="true"></i>
 				</td>
 			</tr>
 		)
