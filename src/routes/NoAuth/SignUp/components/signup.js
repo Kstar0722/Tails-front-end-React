@@ -1,20 +1,20 @@
 import './signup.scss'
-import imgTrailer from 'assets/trailer.png'
-import imgTrailerActive from 'assets/trailer-active.png'
-import imgAnimal from 'assets/animal-not-active.png'
-import imgAnimalActive from 'assets/animal.png'
 import React, {Component} from 'react';
 import { Field, reduxForm } from 'redux-form'
-import { Link, browserHistory } from 'react-router'
-import {register} from 'actions/auth'
-import renderField, { validateEmail, minLength } from 'components/renderField'
-import classNames from 'classnames'
+import { Link } from 'react-router'
+import {register} from '../../../../actions/auth'
+import renderField, { validateEmail, minLength } from '../../../../components/renderField'
+const fields = ['firstName', 'lastName', 'email', 'password']
 
 function validate(values) {
 	var errors = {}
 	var hasErrors = false
-	if(!values.username || values.username.trim() === '') {
-		errors.username = 'Enter Your Name'
+	if(!values.firstName || values.firstName.trim() === '') {
+		errors.firstName = 'Enter First Name'
+		hasErrors = true
+	}
+	if(!values.lastName || values.lastName.trim() === '') {
+		errors.lastName = 'Enter Last Name'
 		hasErrors = true
 	}
 	if(!values.password || values.password.trim() === '') {
@@ -33,20 +33,13 @@ function validate(values) {
 		errors.confirmpassword = 'Dont match password'
 		hasErrors = true
 	}
-
-	console.log('err', errors)
-	return errors
+	return hasErrors && errors
 }
 
 class signup extends Component {
 	constructor(props) {
 		super(props);
-		this.state = {
-			showForm: true,
-			btn_ship: false,
-			btn_carrier: false
-		}
-		this.showForm = this.showForm.bind(this)
+		
 	}
 
 	getStyles() {
@@ -60,105 +53,82 @@ class signup extends Component {
 		}
 	}
 
-	showForm(btn){
-		let state = {showForm: false, }
-		if(btn === 'btn_ship'){
-			state.btn_ship = true
-			state.btn_carrier = false
-			this.props.change('purpose', 'ship');
-		} else {
-			state.btn_ship = false
-			state.btn_carrier = true
-			this.props.change('purpose', 'be_a_carrier');
-		}
-		this.setState(state)
-	}
-
 	onSignUpUser(values, dispatch) {
-		dispatch(register(values.username, values.email, values.password, values.purpose))
+		dispatch(register(values.firstName, values.lastName, values.email, values.password))
 	}
 
 	render() {
-		const {handleSubmit, submitting, token, loginActive} = this.props
+		const {handleSubmit, fields: {firstName, lastName, email, password}, submitting, token, loginActive} = this.props
   		const styles = this.getStyles()
 		return (
 			<section id="signup-wrap">
 				<div className="container">
-					<div className="signup-box">
+					<div className="login-box">
+						<div className="close-wrap-signup">
+							<Link to="/" className="btn">X</Link>
+						</div>
 						<div className="label-wrap-signup">
-							<h2>Sign Up</h2>
-							<p>I want to ...</p>
+							<p>Sign Up</p>
 						</div>
-						<div className="btn-group" role="group" aria-label="...">
-							<button type="button" className={classNames("btn btn-ship", { active: this.state.btn_ship })} onClick={this.showForm.bind(this, 'btn_ship')}>
-								<img src={this.state.btn_ship ? imgAnimalActive : imgAnimal} alt=""/> Ship
-								</button>
-							<button type="button" className={classNames("btn btn-carrier", { active: this.state.btn_carrier })} onClick={this.showForm.bind(this, 'btn_carrier')}>
-								<img src={this.state.btn_carrier ? imgTrailerActive : imgTrailer} alt=""/> Be a Carrier
-								</button>
-						</div>
-						<div className={classNames('form-wrap', { hidden: this.state.showForm })}>
+						<div className="form-wrap">
 							<form onSubmit={handleSubmit(this.onSignUpUser)}>
 								<Field
-									className="form-group label-floating is-empty"
-									name="username"
+									name="firstName"
 									type="name"
 									component={renderField}
-									label="Your Name"
-									dispayLabel={true}
-									placeholder1="Your Name"
+									label="First Name"
+									placeholder="First Name"
+									validate={[minLength(3)]}
 									style={styles.input}/>
 								<Field
-									className="form-group label-floating is-empty"
+									name="lastName"
+									type="name"
+									component={renderField}
+									label="Last Name"
+									placeholder="Last Name"
+									validate={[minLength(3)]}
+									style={styles.input}/>
+								<Field
 									name="email"
 									type="email"
 									component={renderField}
 									label="Email"
-									dispayLabel={true}
-									placeholder1="Your Email"
+									placeholder="Email"
 									validate={[validateEmail]}
 									style={styles.input}/>
-								<div className='row'>
-									<div className='col-6'>
-										<Field
-										name="password"
-										type="password"
-										component={renderField}
-										label="Password"
-										dispayLabel={true}
-										className="form-group label-floating is-empty"
-										style={styles.input}/>
-									</div>
-									<div className='col-6'>
-										<Field
-										name="confirmpassword"
-										type="password"
-										dispayLabel={true}
-										component={renderField}
-										label="Confirm Password"
-										className="form-group label-floating is-empty"
-										style={styles.input}/>
-										</div>
-								</div>
+								<Field 
+									name="password"
+									type="password"
+									component={renderField}
+									label="Password"
+									placeholder="Password"
+									style={styles.input}/>
+								<Field 
+									name="confirmpassword"
+									type="password"
+									component={renderField}
+									label="Confirm Password"
+									placeholder="Confirm Password"
+									style={styles.input}/>
 								<div style={styles.button}>
 									<button
 										type="submit"
-										className="btn btn-success btn-submit"
+										className="btn btn-success"
 										disabled={submitting}>
-										SIGN UP
+										Sign Up
 									</button>
 								</div>
 							</form>
 						</div>
 					</div>
 				</div>
-			</section>
+			</section>	
 		)
 	}
 }
 
 export default reduxForm({
 	form: 'signup',
-	enableReinitialize: true,
+	fields,
 	validate
 })(signup)
