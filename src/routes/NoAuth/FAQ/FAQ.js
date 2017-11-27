@@ -1,9 +1,13 @@
 class FAQ extends React.Component {
 	constructor(props) {
 		super(props)
-    }
-    render() {
-       <h2>FAQ</h2>
-    }
+	}
+
+	render() {
+		return (
+			<h1>FAQ</h1>
+		)
+	}
 }
+
 export default FAQ
