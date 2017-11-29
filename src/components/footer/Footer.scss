@@ -1,17 +1,18 @@
-$footerBackground: #444141;
+$footerBackground: #ffffff;
 $textBlue: #0FCBF0;
-
+$textGray: #7c6e6a;
 section#footer {
 	background: $footerBackground;
 	min-height: 100px;
 	padding: 10px 0px;
+	flex: 0 0 auto;
 	.footer-content {
-		#logo {
-			flex: 1;
-			p {
-				color: white;
-				@media (max-width: 1000px) {
-					text-align: center !important;
+		#image-logo{
+			@media (max-width: 1000px) {				
+				text-align: center;
+				margin: 0 auto;
+				img {
+					margin: 0 auto;
 				}
 			}
 		}
@@ -29,7 +30,7 @@ section#footer {
 					a {
 						font-size: 18px;
 						text-decoration: none;
-						color: white;
+						color: $textGray;
 					}
 					&.sign-up {
 						a {
@@ -59,7 +60,7 @@ section#footer {
 				margin: 10px 5px;
 				width:100%;
 				a {
-					color: white;
+					color: $textGray;
 					font-size: 18px;
 					text-decoration: none;
 				}
@@ -73,5 +74,8 @@ section#footer {
 				}
 			}
 		}
+	}
+	.menu-li-width{
+		width: 40%;
 	}
 }
