@@ -13,7 +13,7 @@ class EditAvatar extends React.Component {
 				xPosition: 0.5,
 				yPosition: 0.5
 			}
-		
+
         this.onLoad = this.onLoad.bind(this);
         this.onSave = this.onSave.bind(this);
     }
@@ -46,13 +46,13 @@ class EditAvatar extends React.Component {
 			// This returns a HTMLCanvasElement, it can be made into a data URL or a blob,
 			// drawn on another canvas, or added to the DOM.
 			const canvas = this.editor.getImage()
-	  
+
 			// If you want the image resized to the canvas size (also a HTMLCanvasElement)
 			const canvasScaled = this.editor.getImageScaledToCanvas()
 			// console.log('canvas', canvasScaled.toDataURL())
 			this.props.input.onChange(canvasScaled.toDataURL())
 		  }
-		
+
     }
 
     onLoad(info){
@@ -78,15 +78,15 @@ class EditAvatar extends React.Component {
             }
 		}
 		if(nextProps.position_x != this.props.position_x){
-        	this.setState({xPosition: nextProps.position_x})  
+        	this.setState({xPosition: nextProps.position_x})
 		}
 		if(nextProps.position_y != this.props.position_y){
             this.setState({yPosition: nextProps.position_y})
-        }		
+        }
     }
 
     componentWillMount() {
-		
+
 		if(this.props.image)
             this.setState({ image: this.props.image })
         if(this.props.originalImage) {
@@ -135,7 +135,7 @@ class EditAvatar extends React.Component {
 					<div className="col justify-content-left align-self-center">
 						<div className="row justify-content-center align-self-center">
 							<label className="btn btn-primary new_file">
-								Upload New images
+								Upload New image
 								<input
 								style={{display: 'none'}}
 								name='newImage'

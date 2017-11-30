@@ -86,7 +86,7 @@ class EditImage extends React.Component {
                                         color={[255, 255, 255, 0.6]} // RGBA
                                         scale={this.state.scale}
                                         rotate={0}
-                                        
+
                                         borderRadius={0}
                                         disableDrop={true}
                                         onImageReady={this.onLoad}
@@ -98,10 +98,10 @@ class EditImage extends React.Component {
 						</div>
 
 						<div className="row col-12">
-							
+
 								<div className="col justify-content-center align-self-center">
 									<label className="btn btn-primary new_file">
-									Upload New images
+									Upload New image
 									<input
 									style={{display: 'none'}}
 									name='newImage'
@@ -123,7 +123,7 @@ class EditImage extends React.Component {
                                         <p>Zoom Image</p>
                                     </div>
 							</div>
-						
+
 					</div>
 				</div>
 			</div>
