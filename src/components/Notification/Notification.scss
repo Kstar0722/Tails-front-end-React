@@ -1,10 +1,10 @@
 .NotificationBell{
-  border: 1px solid black;
+  // border: 1px solid black;
   border-radius: 50%;
   padding: 18px 13px;
  }
 .NotificationBell svg {
-  font-size: 33px;
+  font-size: 26px;
 }
 
 .labelCount{
@@ -12,7 +12,7 @@
   background: #27d6ff;
   color: white;
   position: relative;
-  bottom: 30px;
+  bottom: 15px;
   right:20px;
   padding: 1px 10px;
 }
