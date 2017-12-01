@@ -101,24 +101,6 @@ export function deleteListing(id) {
 
 export function createListings({listing, animals}) {
     return function(dispatch) {
-<<<<<<< HEAD
-        return fetch(config.endpoints.url + config.endpoints.listings, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + user.token
-            },
-            body: JSON.stringify(value.listItems)
-        })
-        .then(checkHttpStatus)
-        .then(parseJSON)
-        .then(res => {
-            dispatch(createListingsSuccess(res))
-            browserHistory.push('/profile')
-            //dispatch(createAnimalInfo(res.id, value.animalList))
-        })
-        .catch(error =>{
-=======
         return apiService.create('listings', listing).then(careatListing => {
             return Bluebird.map(animals, animal => {
                 animal.listing_id = careatListing.id;
@@ -149,7 +131,6 @@ export function createListings({listing, animals}) {
             }));
             return null;
         }).catch(error =>{
->>>>>>> 2f3f900230db1e3ff0f7af491adca4c8b7125de0
             dispatch(createListingsFailure(error))
             dispatch(Notifications.error({
                 title: '',
