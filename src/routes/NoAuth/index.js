@@ -6,7 +6,6 @@ import Login from './Login/Login'
 import ForgotPassword from './ForgotPassword/ForgotPassword'
 import Support from './Support/Support'
 import signup from './SignUp'
-
 import NewPage from './NewPage'
 
 export default {
