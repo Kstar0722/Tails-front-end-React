@@ -1,5 +1,6 @@
 @import 'base';
 @import '~bootstrap/scss/bootstrap.scss';
+@import 'fonts.scss';
 
 // Some best-practice CSS that's useful for most apps
 // Just remove them if they're not what you want
@@ -15,11 +16,11 @@ body {
   font-family: 'Montserrat', sans-serif;
 }
 
-*,
-*:before,
-*:after {
-  box-sizing: inherit;
-}
+// *,
+// *:before,
+// *:after {
+//   box-sizing: inherit;
+// }
 
 // ------------------------------------------------------------
 // Button styling
@@ -94,8 +95,17 @@ button.block-btn {
 		background-color: #ff7355;
 		border: none;
 	}
+	&.blue {
+		background-color: #092b4f;
+		border: none;
+	}
 }
 
+.root{
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+}
 // ------------------------------------------------------------
 // End button styling
 // ------------------------------------------------------------
