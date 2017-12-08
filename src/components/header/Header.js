@@ -8,76 +8,78 @@ import { Link } from 'react-router'
 import user from 'auth/user'
 
 class Header extends React.Component {
-	constructor(props) {
-		super(props)
-		this.state = {
-			login: false
-		}
-	}
+  constructor (props) {
+    super(props)
+    this.state = {
+      login: false,
+    }
+  }
 
-	componentWillReceiveProps(nextProps){
-		this.setState({
-			login: this.state.login
-		})
-		
-	}
+  componentWillReceiveProps (nextProps) {
+    this.setState({
+      login: this.state.login,
+    })
 
-	render() {
-		return (
-			<section id="header" className="d-flex align-items-center">
-				<div className="container">
-					<div className="header-content d-flex flex-row flex-wrap justify-content-between align-items-center">
-						<ImgLogo />
-						<nav className="hide-on-mobile">
-							{user.authorized ? 
-								<ul className="d-flex flex-row flex-wrap align-items-center justify-content-around">
-									<li className='menu-li-width'></li>
-									<li><Link to='/listings'>Browse Listings</Link></li>
-									{/* <li><Link to='#'>My Listings</Link></li> */}
-									 <li><Link to='/messages'>Messages</Link></li>
-									<Login /> 
-								</ul>
-							:
-							<ul className="d-flex flex-row flex-wrap align-items-center justify-content-around">
-								<li><Link to='/browse-jobs'>Browse Jobs</Link></li>
-								<li><Link to='/how-it-works'>How it Works</Link></li>
-								<li><Link to='/faq'>FAQ</Link></li>
-								<li><Link to='/support'>Support</Link></li>
-								<Login /> 
-							</ul>
-							}
-						</nav>
-					</div>
-					<nav className="mobile-nav">
-					{user.authorized ?
-						<ul className="d-flex flex-row flex-wrap align-items-center justify-content-around">
-							<li></li>
-							<li><Link to='/listings'>Browse Listings</Link></li>
-							{/* <li><Link to='#'>My Listings</Link></li> */}
-							 <li><Link to='/messages'>Messages</Link></li>
-							<Login /> 
-						</ul> : 
-						<ul className="d-flex flex-row flex-wrap align-items-center justify-content-around">
-							<li><Link to='/browse-jobs'>Browse Jobs</Link></li>
-							<li><Link to='/how-it-works'>How it Works</Link></li>
-							<li><Link to='/faq'>FAQ</Link></li>
-							<li><Link to='/support'>Support</Link></li>
-							<Login />
-						</ul>
-					}
-					</nav>
-				</div>
-			</section>
-		)
-	}
+  }
+
+  render () {
+    return (
+      <section id="header" className="d-flex align-items-center">
+        <div className="container">
+          <div
+            className="header-content d-flex flex-row flex-wrap justify-content-between align-items-center">
+            <ImgLogo/>
+            <nav className="hide-on-mobile">
+              {user.authorized ? <ul
+                  className="d-flex flex-row flex-wrap align-items-center justify-content-around">
+                  <li className='menu-li-width'></li>
+                  <li><Link to='/listings'>Browse Listings</Link></li>
+                  {/* <li><Link to='#'>My Listings</Link></li> */}
+                  <li><Link to='/messages'>Messages</Link></li>
+                  <Login/>
+                </ul>
+                : <ul
+                  className="d-flex flex-row flex-wrap align-items-center justify-content-around">
+                  <li><Link to='/browse-jobs'>Browse Jobs</Link></li>
+                  <li><Link to='/how-it-works'>How it Works</Link></li>
+                  <li><Link to='/faq'>FAQ</Link></li>
+                  <li><Link to='/support'>Support</Link></li>
+                  <Login/>
+                </ul>
+              }
+            </nav>
+          </div>
+          <nav className="mobile-nav">
+            {user.authorized ? <ul
+              className="d-flex flex-row flex-wrap align-items-center justify-content-around">
+              <li></li>
+              <li><Link to='/listings'>Browse Listings</Link></li>
+              {/* <li><Link to='#'>My Listings</Link></li> */}
+              <li><Link to='/messages'>Messages</Link></li>
+              <Login/>
+            </ul> : <ul
+              className="d-flex flex-row flex-wrap align-items-center justify-content-around">
+              <li><Link to='/browse-jobs'>Browse Jobs</Link></li>
+              <li><Link to='/how-it-works'>How it Works</Link></li>
+              <li><Link to='/faq'>FAQ</Link></li>
+              <li><Link to='/support'>Support</Link></li>
+              <Login/>
+            </ul>
+            }
+          </nav>
+        </div>
+      </section>
+    )
+  }
 }
+
 const mapStateToProps = state => ({
-    profile: state.profile.data,
-	listings: state.listing
+  profile: state.profile.data,
+  listings: state.listing,
 })
 
 const mapDispatchToProps = dispatch => ({
-    getListings: () => dispatch(getListings())
+  getListings: () => dispatch(getListings()),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header)
