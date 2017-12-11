@@ -1,7 +1,6 @@
 .form-stripe{
   padding: 20px;
   .dod{
-    padding: 0px 10px;
     input: {
       padding: 0px 5px;
     }
@@ -13,4 +12,11 @@
   button{
     height: 40px;
   }
+}
+
+.date-of-birth {
+    .col-sm-4 {
+        &:first-child {
+        }
+    }
 }
