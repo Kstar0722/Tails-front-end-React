@@ -5,6 +5,7 @@ import NumberFormat from 'react-number-format'
 import Timestamp from'react-timestamp';
 import moment from 'moment';
 import AddBidModal from '../Modals/AddBidModal';
+import PlaceholderSmall from 'assets/placeholder2-small.png';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { getListingAnimals } from '../../../../actions/listing_animals'
@@ -65,7 +66,21 @@ class ListItem extends React.Component {
   }
 
   render() {
-    const {id, title, created_at, pick_up_city, pick_up_state, desired_pick_up_date, delivery_city, delivery_state, desired_delivery_date, budget, other_notes, bids_count, listing_details} = this.props
+    const {
+      id,
+      title,
+      created_at,
+      pick_up_city,
+      pick_up_state,
+      desired_pick_up_date,
+      delivery_city,
+      delivery_state,
+      desired_delivery_date,
+      budget,
+      other_notes,
+      bids_count,
+      listing_details
+    } = this.props
 
     return (
       <div className="list-item">
@@ -73,7 +88,7 @@ class ListItem extends React.Component {
 
             <div className="image-holder text-center">
 
-              <img src={ (this.state.images.length) ? this.state.images['0'].url : '' } className="main-image" />
+              <img src={ (this.state.images.length) ? this.state.images['0'].url : PlaceholderSmall } className="main-image" />
 
               <div className="thumbs">
 
