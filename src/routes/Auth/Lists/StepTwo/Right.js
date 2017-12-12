@@ -3,7 +3,7 @@ import _ from 'lodash'
 import FileUpload from './FileUpload'
 import config from '../../../../config'
 export default class Right extends React.Component {
-	
+
 	constructor(props) {
         super(props)
     }
@@ -18,9 +18,9 @@ export default class Right extends React.Component {
             animal_types,
             name,
             breed,
-            height, 
-            weight, 
-            special_notes, 
+            height,
+            weight,
+            special_notes,
             showPreview,
             impagePreview,
             animal_breed
@@ -40,7 +40,7 @@ export default class Right extends React.Component {
                                 onChange={this.setAnimalProperty.bind(this, "breed")}>
                                 {
                                 _.map(config.animals, (item) =>
-                                        <option 
+                                        <option
                                            // key={item.id}
                                             value={item.breed}>{item.breed}</option>
                                     )
@@ -60,13 +60,13 @@ export default class Right extends React.Component {
                         </select>
                     </div>
                     </div>
-                    
+
                 </div>
                 <div className="form-group">
                     <div className="row">
                         <div className="col-sm-6 col-12">
                             <label>Height of Animal(Feet)</label>
-                            <input 
+                            <input
                                 type="number"
                                 className="form-control"
                                 name="height"
@@ -90,8 +90,8 @@ export default class Right extends React.Component {
                         rows="3"
                         className="form-control"
                         name="special_notes"
-                        value={special_notes}
-                        onChange={this.setAnimalProperty.bind(this, "special_notes")} />  
+                        value={special_notes ? special_notes : ''}
+                        onChange={this.setAnimalProperty.bind(this, "special_notes")} />
                 </div>
                 {<FileUpload
                     onDrop={this.props.onDrop}
