@@ -10,7 +10,7 @@ import {login, forgotpass} from 'actions/auth'
 const fields = ['email', 'password']
 
 class ForgotPassword extends Component {
-	
+
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -36,19 +36,21 @@ class ForgotPassword extends Component {
 	onForgotPassword(values, dispatch) {
 		dispatch(forgotpass(values.email))
 	}
-	
+
   	render() {
   		const {handleSubmit, fields: {email, password}, submitting, token, loginActive} = this.props
   		const styles = this.getStyles()
 		return (
-			<section id="login-wrap">
+			<section id="forgot-wrap">
 				<div className="container">
 					<div className="login-box">
-						<div className="close-wrap">
-							<Link to="/" className="btn close">X</Link>
-						</div>
-						<div className="label-wrap">
-							<p>Forgot Password</p>
+						<div className="login-header">
+							<div className="label-wrap">
+								<p>Forgot Password</p>
+							</div>
+							<div className="close-wrap">
+								<Link to="/" className="btn close">X</Link>
+							</div>
 						</div>
 						<div className="form-wrap">
 							<form onSubmit={handleSubmit(this.onForgotPassword)}>
@@ -71,7 +73,7 @@ class ForgotPassword extends Component {
 						</div>
 					</div>
 				</div>
-			</section>	
+			</section>
 		);
   	}
 }
