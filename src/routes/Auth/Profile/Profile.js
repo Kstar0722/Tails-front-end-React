@@ -1,6 +1,6 @@
 import './Profile.scss'
 import { connect } from 'react-redux'
-import StockBanner from 'assets/stock-banner.png'
+import StockBanner from 'assets/trailer-on-road.jpg'
 import { Link } from 'react-router';
 import Avatar from 'components/Avatar'
 import ListingsContainer from './listings/ListingsContainer'
@@ -10,7 +10,7 @@ import { browserHistory } from 'react-router'
 import { getListings } from 'actions/listing'
 import {getBids} from 'actions/bids'
 class Profile extends React.Component {
-	
+
 	constructor(props) {
 		super(props)
 		this.state = {
@@ -56,13 +56,15 @@ class Profile extends React.Component {
 		const { listings } = this.props
     const { bids } = this.props
     if(listings.loaded) {
-			return ( 
+			return (
 				<section id="profile">
 					<div className="banner-wrap" style={{backgroundImage: 'url('+ this.state.cover_photo +')'}}>
-						<div className="container">
-							<div className="banner-content d-flex flex-row flex-wrap justify-content-between align-items-baseline">								
-								<Avatar type="large"/>	
-								<button onClick={this.toEdit} className="btn edit-profile block-btn blue">Edit Profile</button>	
+						<div className="dark-wrap">
+							<div className="container">
+								<div className="banner-content d-flex flex-row flex-wrap justify-content-between align-items-baseline">
+									<Avatar type="large"/>
+									<button onClick={this.toEdit} className="btn edit-profile block-btn blue">Edit Profile</button>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -77,14 +79,14 @@ class Profile extends React.Component {
 											<ListingsContainer />
 										</div>
 										<div className="row not-listings justify-content-center align-self-center">
-											<button onClick={this.toStepOne} className="btn btn-create-listing block-btn blue">Create Listing</button>	
+											<button onClick={this.toStepOne} className="btn btn-create-listing block-btn blue">Create Listing</button>
 										</div>
-									</div>									
+									</div>
 									: <div className="row not-listings justify-content-center align-self-center">
 										<h1>You have no listings yet...</h1>
 										<button onClick={this.toStepOne} className="btn btn-create-listing block-btn blue">Create Listing</button>
 									</div>
-								}													
+								}
 							</div>
 							<div className="block-section my-bids">
 								<p className="title">My Bids</p>
@@ -113,7 +115,7 @@ class Profile extends React.Component {
 		} else {
 			return null
 		}
-		
+
 	}
 }
 
