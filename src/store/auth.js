@@ -13,10 +13,20 @@ const SIGNUP_FAILURE = 'SIGNUP_FAILURE'
 // Action Handlers
 // ------------------------------------
 const ACTION_HANDLERS = {
+  [LOGIN_REQUEST]: (state, action) => Object.assign({}, state, {
+    loading: true,
+    error: false,
+  }),
   [LOGIN_SUCCESS]: (state, action) => Object.assign({}, state, {
     authorized: true,
-    userId: action.userId
-  })
+    userId: action.userId,
+    loading: false,
+  }),
+  [LOGIN_FAILURE]: (state, action) => Object.assign({}, state, {
+    error: true,
+    authorized: false,
+    userId: null,
+  }),
 }
 
 // ------------------------------------
@@ -24,7 +34,9 @@ const ACTION_HANDLERS = {
 // ------------------------------------
 const initialState = {
   authorized: false,
-  userId: null
+  userId: null,
+  error: false,
+  loading: false,
 }
 
 export default function userGetReducer (state = initialState, action) {
