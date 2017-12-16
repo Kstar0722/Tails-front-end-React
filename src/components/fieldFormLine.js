@@ -11,7 +11,7 @@ class FieldForm extends Component {
   }
 
   render() {
-    const { input, label, type, amount, options, meta: { touched, error, warning } } = this.props;
+    const { input, label, type,className, amount,span, options, meta: { touched, error, warning } } = this.props;
 
 
     let input_component;
@@ -27,7 +27,7 @@ class FieldForm extends Component {
         </select>;
         break;
       default: 
-        input_component = <input {...input} type={type} className={classNames("form-control", {'form-control-danger': touched && error})}/>
+        input_component = <input {...input} type={type} className={classNames("form-control",className, {'form-control-danger': touched && error})}/>
     }
 
     return (
@@ -36,6 +36,7 @@ class FieldForm extends Component {
         <div className="col-sm-6">
           { input_component }
           {touched && ((error && <small className="form-control-feedback">{error}</small>) || (warning && <span>{warning}</span>))}
+          <span className="text-danger">{span}</span>
         </div>
       </div>
     )
