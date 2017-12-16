@@ -11,12 +11,11 @@ export default {
         url: (process.env.TAILS_API_URL) ? process.env.TAILS_API_URL : (process.env.NODE_ENV == 'production') ? 'http://tails-api-dev.gpd2yfmmj5.us-west-2.elasticbeanstalk.com' : 'http://tails-api-dev.gpd2yfmmj5.us-west-2.elasticbeanstalk.com',
         login: '/auth/signin',
         signup: '/auth/signup',
-        forgot: '/api/auth/forgot_password',
-        reset: '/api/auth/reset_password',
-        userInfo: '/api/users/',
-        changePass: '/api/users/',
-        uerFood: '/api/user_diary_settings',
-        getCountry: '/api/locations',
+        forgot: '/auth/forgot_password',
+        reset: '/auth/reset_password',
+        userInfo: '/users/',
+        changePass: '/users/',
+        getCountry: '/locations',
         listings: '/listings',
         profile: '/users',
         bids: '/bids',
@@ -48,23 +47,23 @@ export default {
             breed: 'Horse',
             url: Horse
         },
-        
+
         // {
         //     name: 'Goat',
         //     breed: 'Goat',
         //     url: Goat
         // },
-        
+
         // {
         //     name: 'Bird',
         //     breed: 'Bird',
         //     url: Bird
-        // },     
+        // },
         {
             name: 'Pig',
             breed: 'Pig',
             url: Pig
-        },     
+        },
     ],
     countries: [
         {value: 'US', text: 'United States'}
