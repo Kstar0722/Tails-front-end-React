@@ -234,9 +234,11 @@ class StripeForm extends React.Component {
               ? stripe.legal_entity.ssn_last_4_provided
                 ? null
                 : <Field name="legal_entity[ssn_last_4]" type="text"
-                         component={renderField}
-                         label='Last 4 digits of Social Security Number'/>
+                         component={renderField} className="ssn"
+                         label='Last 4 digits of Social Security Number' span='What is this info needed?'/>
+                            
               : null}
+              
             {stripe.legal_entity
               ? stripe.legal_entity.personal_id_number_provided
                 ? null
