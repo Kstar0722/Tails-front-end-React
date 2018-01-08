@@ -85,7 +85,7 @@ font-size: 15px;
 /* Title */
 
 .my-cc .item .item-validity .item-valid h5 {
-  width: 100px;
+  // width: 100px;
   padding-top: 9px;
   font-size: 12px;
   line-height: 18px;
@@ -138,4 +138,9 @@ font-family: 'OCRAStd';
 .my-cc .item.item-000-bg h6,
 .my-cc .item.item-000-bg span {
 color: #fff !important;
+}
+
+.no-cards {
+  margin-top: 30px;
+  margin-bottom: 55px;
 }
