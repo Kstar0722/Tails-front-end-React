@@ -8,6 +8,9 @@ section#header {
 	padding: 10px 0px;
 	.header-content {
 		#image-logo{
+			@media (min-width: 992px) {
+				// width: 100%;
+			}
 			@media (max-width: 1000px) {
 				text-align: center;
 				margin: 0 auto;
@@ -41,6 +44,10 @@ section#header {
 							color: $textBlue;
 							padding: 10px 25px;
 						}
+					}
+
+					&.extra-right-margin {
+						margin-right: 40px;
 					}
 				}
 			}
