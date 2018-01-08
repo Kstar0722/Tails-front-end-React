@@ -5,7 +5,9 @@ class Support extends React.Component {
 
 	render() {
 		return (
-			<h1>Support</h1>
+			<div className="container">
+				<h1>Support</h1>
+			</div>
 		)
 	}
 }
