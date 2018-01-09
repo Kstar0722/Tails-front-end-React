@@ -5,7 +5,9 @@ class HowItWorks extends React.Component {
 
 	render() {
 		return (
-			<h1>HowItWorks</h1>
+			<div className="container">
+				<h1>HowItWorks</h1>
+			</div>
 		)
 	}
 }
