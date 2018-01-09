@@ -40,15 +40,12 @@ class ListItem extends React.Component {
 
       let images = []
       let counts = {}
-
       props.listingAnimals.forEach(animal => {
 
-        if (config.breeds.indexOf(animal.breed) > -1) {
-          if (!counts[animal.breed]){
-            counts[animal.breed] = 0;
-          }
-          counts[animal.breed]++;
+        if (!counts[animal.name]){
+          counts[animal.name] = 0;
         }
+        counts[animal.name]++;
 
         if (animal.images.length) {
           animal.images.forEach(image => {
@@ -58,8 +55,8 @@ class ListItem extends React.Component {
       })
 
       const countBreeds = Object.keys(counts)
-        .map(type => counts[type]+' '+ type + ((counts[type]>1) ? 's' : ''))
-        .join(',');
+        .map(type => type)
+        .join(', ');
 
       this.setState({ images, countBreeds })
     }

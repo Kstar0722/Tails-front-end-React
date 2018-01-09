@@ -71,6 +71,10 @@
                     font-weight: 300;
                     vertical-align: text-top;
                 }
+
+                @media (max-width: 991px) {
+                    margin-left: 0px;
+                }
             }
 
             .top-destination {
@@ -80,8 +84,31 @@
                 letter-spacing: -0.2px;
                 margin-bottom: 20px;
 
+                .start {
+                    @media (max-width: 991px) {
+                        font-size: 14px;
+                    }
+                }
+
+                .finish {
+                    @media (max-width: 991px) {
+                        font-size: 14px;
+                    }
+                }
+
                 i {
                     color: #1fd3ff;
+                    @media (max-width: 991px) {
+                        font-size: 14px;
+                    }
+                }
+
+                .bid-count {
+                    @media (max-width: 991px) {
+                        float: left !important;
+                        margin-top: 20px;
+                        width: 100%;
+                    }
                 }
             }
 
