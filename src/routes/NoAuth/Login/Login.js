@@ -199,9 +199,7 @@ class Login extends Component {
           {/*/>*/}
           <Link to='/profile'>{this.props.profile.first_name
             ? this.props.profile.first_name
-            : first_name} {this.props.profile.last_name
-            ? this.props.profile.last_name
-            : last_name}</Link>
+            : first_name}</Link>
           <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggleDrop}>
             <DropdownToggle
               tag="span"
@@ -214,12 +212,11 @@ class Login extends Component {
             <DropdownMenu right>
               <div className="afte-rec"></div>
               <div className="dropdown-item-menu">
-                <Link to='/profile' style={{'padding-left': '45px'}}>My
+                <Link to='/profile'>My
                   profile</Link>
               </div>
               <div onClick={this.logout.bind(this)}
-                   className="dropdown-item-menu"><img width="35"
-                                                       src={LogOutImg}/><a>Log
+                   className="dropdown-item-menu"><a>Log
                 Out</a></div>
             </DropdownMenu>
           </Dropdown>
