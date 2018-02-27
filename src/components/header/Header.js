@@ -31,19 +31,17 @@ class Header extends React.Component {
             <ImgLogo/>
             <nav className="hide-on-mobile">
               {user.authorized ? <ul
-                  className="d-flex flex-row flex-wrap align-items-center justify-content-around">
-                  <li className='menu-li-width'></li>
-                  <li><Link to='/listings'>Browse Listings</Link></li>
+                  className="d-flex flex-row flex-wrap align-items-center justify-content-flex-end pull-right">
+                  <li className="extra-right-margin"><Link to='/listings'>Browse Listings</Link></li>
                   {/* <li><Link to='#'>My Listings</Link></li> */}
-                  <li><Link to='/messages'>Messages</Link></li>
+                  <li className="extra-right-margin"><Link to='/messages'>Messages</Link></li>
                   <Login/>
                 </ul>
                 : <ul
-                  className="d-flex flex-row flex-wrap align-items-center justify-content-around">
-                  <li><Link to='/browse-jobs'>Browse Jobs</Link></li>
-                  <li><Link to='/how-it-works'>How it Works</Link></li>
-                  <li><Link to='/faq'>FAQ</Link></li>
-                  <li><Link to='/support'>Support</Link></li>
+                  className="d-flex flex-row flex-wrap align-items-center justify-content-flex-end pull-right">
+                  <li className="extra-right-margin"><Link to='/how-it-works'>How it Works</Link></li>
+                  <li className="extra-right-margin"><Link to='/faq'>FAQ</Link></li>
+                  <li className="extra-right-margin"><Link to='/support'>Support</Link></li>
                   <Login/>
                 </ul>
               }
@@ -51,15 +49,14 @@ class Header extends React.Component {
           </div>
           <nav className="mobile-nav">
             {user.authorized ? <ul
-              className="d-flex flex-row flex-wrap align-items-center justify-content-around">
+              className="d-flex flex-row flex-wrap align-items-center justify-content-flex-end pull-right">
               <li></li>
               <li><Link to='/listings'>Browse Listings</Link></li>
               {/* <li><Link to='#'>My Listings</Link></li> */}
               <li><Link to='/messages'>Messages</Link></li>
               <Login/>
             </ul> : <ul
-              className="d-flex flex-row flex-wrap align-items-center justify-content-around">
-              <li><Link to='/browse-jobs'>Browse Jobs</Link></li>
+              className="d-flex flex-row flex-wrap align-items-center justify-content-flex-end pull-right">
               <li><Link to='/how-it-works'>How it Works</Link></li>
               <li><Link to='/faq'>FAQ</Link></li>
               <li><Link to='/support'>Support</Link></li>
